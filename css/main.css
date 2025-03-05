@@ -1,0 +1,428 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    height: 100vh;
+    overflow-x: hidden;
+}
+/*FONTS*/
+@font-face{
+    font-family: "aboreto";
+    src: url(../fonts/Aboreto-Regular.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+/*END*/
+
+h1, h2, h3{
+    font-family: "aboreto";
+}
+.radius{
+    border-radius: 8px;
+}
+.align{
+    text-align: center;
+}
+
+/*COLOURS*/
+:root {
+    --light-blue: #CDD4D9;
+    --medium-blue: #A7BAC8;
+    --dark-blue: #838E97;
+    --darkest-blue: #5E5A58;
+  }
+/*END*/
+
+/*FLEX*/
+.flex{
+    display: flex;
+}
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-col{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.flex-start{
+    align-items: start;
+}
+.flex-between{
+    justify-content: space-between;
+}
+.flex-even{
+    justify-content: space-evenly;
+}
+/*END*/
+
+img{
+    object-fit: cover;
+}
+
+a {
+    position: relative;
+    text-decoration: none; 
+}
+a:hover{
+    cursor: pointer;
+}
+a::after {
+    content: ''; 
+    display: block; 
+    width: 0; 
+    height: 2px; 
+    background-color: rgb(72, 72, 72); 
+    transition: width 0.3s ease-in-out;
+    position: absolute; 
+    bottom: -2px; 
+    left: 0; 
+}
+/*expands to full width of container on hover*/
+a:hover::after {
+    width: 100%;
+}
+a {
+    padding-bottom: 2px; 
+}
+
+
+
+/*HEADER / NAV*/
+.desk-nav{
+    display: none;
+}
+.mobile-nav{
+    width: 100%;
+}
+.icons{
+    position:fixed;
+    right: 0rem;
+    top: 1rem;
+    width: 40%;
+    font-size: 1.3rem;
+}
+
+header {
+    background-color: var(--dark-blue);
+    padding: 0.8rem 1rem 0.8rem 1.2rem;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    transition: border-width 1s ease, padding 0.5s ease;
+}
+.head{
+    width: 100vw;
+    position: fixed;
+    z-index: 1000;
+}
+header h1{
+    font-size: 1.3rem;
+    font-family: "italiana";
+}
+.hamburger-container{
+    width: 2.7rem;
+    height: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+    cursor: pointer;
+}
+.hamburger{
+    width: 75%;
+    height: 75%;
+    background-color: var(--darkest-blue);
+    border-radius: 1rem;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+.hamburger-1, .hamburger-3{
+    animation-duration: 700ms;
+}
+.hamburger-2{
+    width: 50%;
+    animation-duration: 500ms;
+}
+@keyframes fadeOut{
+    100%{
+        opacity: 0;
+        transform: scale(.5);
+    }
+}
+@keyframes flipDown{
+    100%{
+        transform: rotate(45deg) translate(6px, 7px);
+    }
+}
+@keyframes flipUp{
+    100%{
+        transform: rotate(-45deg) translate(6px, -7px);
+    }
+}
+
+.navigation{
+    display: none;
+    width: 100%;
+    background-color: var(--dark-blue);
+    margin: 4rem 0rem 0rem -9rem;
+}
+
+.navigation li{
+    margin-left: -2rem;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+ul{
+    list-style: none;
+    width: 45%;
+    justify-content: space-evenly !important;
+    height: 12rem;
+    margin-left: 2rem;
+}
+li{
+    text-align: left;
+    font-family: sans-serif;
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 0.5rem 0.8rem;
+    background-position: right;
+    opacity: 0;  /* Start with hidden items */
+    transform: translateY(10px); /* Optional: add a bit of movement initially */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Animation properties */
+}
+.fade-in {
+    opacity: 1;
+    transform: translateY(0); /* Reset the transform for the fade-in effect */
+    transition: opacity 0.4s ease-in, transform 0.4s ease-in; /* Adjust duration as */
+}
+.title{
+    background-color: white;
+}
+.title h1{
+    font-family: "Aboreto";
+    padding: 0.2rem;
+    font-weight: bold;
+    margin-top: 0.3rem;
+    letter-spacing: 0.2em;
+    font-size: 1.2rem;
+}
+/*END*/
+
+/*FOOTER*/
+footer{
+    padding: 2rem;
+    background-color: var(--light-blue);
+}
+footer h6{
+    font-weight: bold;
+}
+.cards{
+    width: 12rem;
+    height: 2rem;
+    margin-bottom: 3rem;
+}
+
+.socials{
+    margin: 5rem 0rem 0.5rem 0rem;
+}
+.socials img{
+    margin: 0rem 0.7rem 0rem 0.7rem;
+}
+.footer-links{
+    margin-top: 2rem;
+}
+.ft-info{
+    padding-right: 3.5rem;
+}
+
+
+/*END*/
+
+
+
+/*HOME*/
+.banner{
+    width: 100vw;
+    height: 30rem;
+    background-image: url(../images/home-header.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.banner h1{
+    margin-top: 5rem;
+    color: white;
+    text-align: center;
+    font-size: 2.5rem;
+}
+.bs-cont{
+    margin-top: 4rem;
+    background-color: var(--light-blue);
+    padding: 2rem 0rem 2rem 0rem;
+}
+.bestsellers, .slider{
+    width: 100%;
+    padding: 0.6rem;
+}
+
+.bs-item{
+
+    text-align: center;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 8px solid white;
+}
+.bs-desc{
+    padding: 0.5rem;
+    background-color: var(--dark-blue);
+    width: 100%;
+}
+.bs-desc p{
+    font-size: 0.8rem;
+    margin-top: 0.4rem;
+}
+.bs-item img{
+    width: 8rem;
+    height: 8rem;
+}
+.bio{
+    flex-direction: column;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+.bio-about{
+    padding: 1rem 1rem 3rem 1rem;
+    background-color: var(--medium-blue);
+}
+.bio img{
+    width: 18rem;
+    z-index: 999;
+    margin-top: -3rem;
+}
+.home-cafe{
+    background-image: url(../images/cafe.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 30rem;
+    color: white;
+    position: relative;
+    margin: 2rem 0rem 2rem 0rem;
+}
+.cafe-text{
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    padding-right: 1.5rem;
+}
+.cafe-text a:hover::after{
+    all:unset;
+}
+.cafe-text em:hover, .cafe-text em:active{
+    font-style: italic;
+    text-decoration: underline;
+}
+
+
+
+
+
+/*END*/
+
+
+/*LAPTOP*/
+@media screen and (min-width: 992px){
+    header{
+        padding: 1rem 0rem 1rem 0rem;
+    }
+    .desk-nav{
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    .desk-nav ul{
+        text-align: center;
+        width: 100%;
+    }
+    .header-name{
+        position: absolute;
+        top: 1rem;
+        left: 2rem;
+    }
+    .mobile-nav{
+        display: none;
+    }
+    ul{
+        all: unset;
+    }
+    li{
+        all: unset;
+        padding: 0.4rem 0.7rem 0.4rem 0.7rem;
+        font-family: "italiana";
+        background-position: right;
+        border-radius: 25px;
+    }
+    li:hover, .hover:hover{
+        background: linear-gradient(to right, var(--light) 50%, transparent 50%);
+        background-size: 200% 100%;
+        background-position: left;
+        transition: background-position 0.2s ease-in-out;
+    }
+    .hover:hover{
+        background: linear-gradient(to right, var(--background) 50%, transparent 50%);
+        background-size: 200% 100%;
+        background-position: left;
+        transition: background-position 0.2s ease-in-out;
+    }
+    .desk-flex{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .footer-flex{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: start;
+    }
+    .footer-links{
+        margin-top: 0rem;
+    }
+    .ft-info{
+        padding: 0rem;
+    }
+    .visit{
+        margin-right: 12rem;
+    }
+    .links{
+        margin-right: 10rem;
+    }
+    .icons-desk{
+        width: 15%;
+        right: 1rem;
+    }
+    .icons-desk i{
+        font-size: 1.3rem;
+        transition: transform 0.2s ease-in-out;
+    }
+    .icons-desk i:hover{
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+
+    /*HOME*/
+    .banner h1{
+        font-size: 3rem;
+        position: absolute;
+        bottom: 2rem;
+        left: 2rem;
+    }
+    .bio{
+        flex-direction: row;
+    }
+}
