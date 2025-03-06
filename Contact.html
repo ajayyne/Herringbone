@@ -1,4 +1,3 @@
-<!-- php include -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,8 +14,6 @@
     <link href="css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/504c189bcb.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -39,7 +36,8 @@
                     <li><a href="Gallery.php">Gallery</a></li>
                     <li><a href="Contact.html">Contact Us</a></li>
                 </ul>
-                <div class="icons icons-desk flex flex-even">
+                <div class="icons flex flex-even">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
                     <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
                     <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                 </div>
@@ -52,6 +50,7 @@
                     <li><a href="Contact.html">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
                     <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
                     <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                 </div>
@@ -62,92 +61,74 @@
         </div>
     </div>
 
+
     <main>
-        <div class="banner flex flex-center">
-            <h1>HERRINGBONE</br>GIFTS</h1>
-        </div>
-
-        <!-- PHP HERE TO GRAB PRODUCTS FROM DB -->
-
-        <section class="splide" aria-label="Carousel">
-            <div class="splide__track">
-                <ul class="splide__list">
-                    <li class="splide__slide">
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/product1.jpg">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/product1.jpg">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/product1.jpg">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+        <div class="flex flex-col">
+            <div class="contact-header flex flex-center">
+                <img src="images/home-header.jpg" alt="Herringbone storefront" class="radius">
             </div>
-        </section>
-
-
-        <div class="bs-cont">
-            <div class="flex flex-col">
-                <h2><em>OUR BESTSELLERS</em></h2>
-                <div class="bestsellers flex flex-center">
-                    <div class="slider flex flex-even">
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/product1.jpg">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
-                            </div>
-                        </div>
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/Product2.png">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
-                            </div>
-                        </div>
+            <div class="flex flex-even contact-info">
+                <div class="visitUs">
+                    <h3><strong>Visit Us</strong></h3>
+                    <p>OPENING HOURS</p>
+                    <p><strong>Mon-Fri:</strong><br>10am-4pm<br><strong>Sat:</strong><br>10am-4pm<br><strong>Sun:</strong><br>Closed
+                    </p>
+                </div>
+                <div class="details flex flex-col">
+                    <div class="flex flex-even phone">
+                        <i class="fa-solid fa-phone"></i>
+                        <p>01721 749 749</p>
+                    </div>
+                    <div class="flex flex-even email">
+                        <i class="fa-solid fa-envelope"></i>
+                        <p>info@herringbone.co.uk</p>
+                    </div>
+                    <div>
+                        <p>56 High Street<br>Peebleshire<br>EH45 8SW</p>
                     </div>
                 </div>
             </div>
         </div>
 
-
-        <!-- STATIC CONTENT -->
-        <div class="flex-center bio">
-            <div class="align bio-about radius">
-                <h2>All About Us</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo dolor, varius et mauris nec,
-                    varius imperdiet nulla. Phasellus interdum interdum magna.</p>
-            </div>
-            <div>
-                <img src="images/home-header.jpg" at="Herringbone Staff" class="radius">
-            </div>
+        <div class="map flex-center">
+            <iframe id="map-canvas" class="map_part radius" width="400" height="200" frameborder="0" scrolling="no"
+                marginheight="0" marginwidth="0"
+                src="https://maps.google.com/maps?hl=en&amp;q=56 high street peebles&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
         </div>
 
-        <div class="home-cafe">
-            <div class="cafe-text">
-                <h3>No. 56 Cafe</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo dolor.</p>
-                <a>
-                    <p><em>View Our Menu</em></p>
-                </a>
+        <div class="form-cont flex-center">
+            <div class="contact">
+                <div class="contact-title">
+                    <h3 class="align">GET IN TOUCH</h3>
+                </div>
+                <form method="POST" class="flex flex-col">
+                    <div>
+                        <label for="name">Name</label>
+                        <br>
+                        <input name="name" type="text" required>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="email">Email Address</label>
+                        <br>
+                        <input name="email" type="email" required>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="message">Message</label>
+                        <br>
+                        <input name="message" type="text" required>
+                    </div>
+                    <br>
+                    <input type="submit" value="SEND">
+                </form>
             </div>
         </div>
 
 
     </main>
+
+
 
 
     <footer>
@@ -194,7 +175,7 @@
         </div>
 
         <div class=" flex flex-center socials">
-            <a href="https://www.facebook.com/Herringbonegiftspeebles/" target="_blank"><img src="images/facebook.png"
+            <a href="https://www.facebook.com/Herringbonegiftspeebles/"><img src="images/facebook.png"
                     alt="Facebook Icon" width="20px"></a>
             <a href=""><img src="images/instagram.png" alt="Instagram Icon" width="25px"></a>
         </div>
@@ -209,17 +190,6 @@
         });
     </script>
     <script src="navigation.js"></script>
-    <!-- initialize carousel slider -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var splide = new Splide('.splide', {
-                perPage: 3,
-                rewind: true,
-            });
-
-            splide.mount();
-        });
-    </script>
 </body>
 
 </html>
