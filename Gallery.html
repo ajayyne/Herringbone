@@ -1,4 +1,3 @@
-<!-- php include -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +11,7 @@
     <meta name="keywords"
         content="Gift shop, Cafe, Scottish gifts, Handmade, Locally sourced, Scottish makers, Local makers">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/504c189bcb.js" crossorigin="anonymous"></script>
@@ -63,91 +63,47 @@
     </div>
 
     <main>
-        <div class="banner flex flex-center">
-            <h1>HERRINGBONE</br>GIFTS</h1>
-        </div>
-
-        <!-- PHP HERE TO GRAB PRODUCTS FROM DB -->
-
-        <section class="splide" aria-label="Carousel">
-            <div class="splide__track">
-                <ul class="splide__list">
-                    <li class="splide__slide">
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/product1.jpg">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/product1.jpg">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/product1.jpg">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-
-        <div class="bs-cont">
-            <div class="flex flex-col">
-                <h2><em>OUR BESTSELLERS</em></h2>
-                <div class="bestsellers flex flex-center">
-                    <div class="slider flex flex-even">
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/product1.jpg">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
-                            </div>
-                        </div>
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/Product2.png">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
-                            </div>
-                        </div>
-                    </div>
+        <div class="container gallery">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 img-container">
+                    <img src="images/gallery/cafe1.jpg" alt="Image 2" class="img-fluid">
                 </div>
+                <div class="col-12 col-sm-6 col-md-12 col-lg-8 mb-4 img-container">
+                    <img src="images/gallery/shop1.jpg" alt="Image 3" class="img-fluid">
+                </div>
+                <!-- Add more images as needed -->
             </div>
-        </div>
-
-
-        <!-- STATIC CONTENT -->
-        <div class="flex-center bio">
-            <div class="align bio-about radius">
-                <h2>All About Us</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo dolor, varius et mauris nec,
-                    varius imperdiet nulla. Phasellus interdum interdum magna.</p>
-            </div>
-            <div>
-                <img src="images/home-header.jpg" at="Herringbone Staff" class="radius">
-            </div>
-        </div>
-
-        <div class="home-cafe">
-            <div class="cafe-text">
-                <h3>No. 56 Cafe</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo dolor.</p>
-                <a>
-                    <p><em>View Our Menu</em></p>
-                </a>
+            
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 img-container">
+                    <img src="images/gallery/cafe2.jpg" alt="Image 5" class="img-fluid">
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 img-container">
+                    <img src="images/gallery/cafe3.jpg" alt="Image 6" class="img-fluid">
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 img-container">
+                    <img src="images/gallery/shop5.jpg" alt="Image 6" class="img-fluid">
+                </div>
+                <div class="col-12 col-sm-6 col-md-12 col-lg-8 mb-4 img-container">
+                    <img src="images/gallery/shop3.jpg" alt="Image 7" class="img-fluid">
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 img-container">
+                    <img src="images/gallery/shop4.jpg" alt="Image 8" class="img-fluid">
+                </div>
+                <!-- Add more images as needed -->
             </div>
         </div>
 
 
     </main>
+
+
+
+
+
+
+
+
 
 
     <footer>
@@ -209,16 +165,7 @@
         });
     </script>
     <script src="navigation.js"></script>
-    <!-- initialize carousel slider -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var splide = new Splide('.splide', {
-                perPage: 3,
-                rewind: true,
-            });
-            splide.mount();
-        });
-    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

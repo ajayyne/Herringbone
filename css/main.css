@@ -450,6 +450,23 @@ form{
 /*END*/
 
 
+
+
+
+/*IMAGE GALLERY*/
+.gallery{
+    padding-top: 8rem;
+}
+.img-container{
+    height: 20rem;
+}
+.img-fluid {
+    width: 100%;
+    height: 100%;
+  }
+/*END*/
+
+
 /*LAPTOP*/
 @media screen and (min-width: 992px){
     header{
