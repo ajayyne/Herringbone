@@ -64,15 +64,50 @@
 
     <main>
         <div class="flex flex-col">
-            <div class="contact-header flex flex-center">
-                <img src="images/home-header.jpg" alt="Herringbone storefront" class="radius">
+            <div class="form-cont flex-center">
+                <div class="contact">
+                    <div class="contact-title">
+                        <h3 class="align">GET IN TOUCH</h3>
+                    </div>
+                    <form method="POST" class="flex flex-col">
+                        <div>
+                            <label for="name">Name</label>
+                            <br>
+                            <input name="name" type="text" required>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="email">Email Address</label>
+                            <br>
+                            <input name="email" type="email" required>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="message">Message</label>
+                            <br>
+                            <input name="message" type="text" required class="message">
+                        </div>
+                        <br>
+                        <input type="submit" value="SEND" class="send">
+                    </form>
+                </div>
             </div>
-            <div class="flex flex-even contact-info">
+            <div class="flex flex-col contact-info">
                 <div class="visitUs">
                     <h3><strong>Visit Us</strong></h3>
                     <p>OPENING HOURS</p>
-                    <p><strong>Mon-Fri:</strong><br>10am-4pm<br><strong>Sat:</strong><br>10am-4pm<br><strong>Sun:</strong><br>Closed
-                    </p>
+                    <div class="flex opening-times">
+                        <div class="flex-start">
+                            <p><strong>Monday-Friday:</strong></p>
+                            <p><strong>Saturday:</strong></p>
+                            <p><strong>Sunday:</strong></p>
+                        </div>
+                        <div class="flex-start times">
+                            <p>10am - 4pm</p>
+                            <p>10am - 3pm</p>
+                            <p>Closed</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="details flex flex-col">
                     <div class="flex flex-even phone">
@@ -96,34 +131,6 @@
                 src="https://maps.google.com/maps?hl=en&amp;q=56 high street peebles&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
         </div>
 
-        <div class="form-cont flex-center">
-            <div class="contact">
-                <div class="contact-title">
-                    <h3 class="align">GET IN TOUCH</h3>
-                </div>
-                <form method="POST" class="flex flex-col">
-                    <div>
-                        <label for="name">Name</label>
-                        <br>
-                        <input name="name" type="text" required>
-                    </div>
-                    <br>
-                    <div>
-                        <label for="email">Email Address</label>
-                        <br>
-                        <input name="email" type="email" required>
-                    </div>
-                    <br>
-                    <div>
-                        <label for="message">Message</label>
-                        <br>
-                        <input name="message" type="text" required>
-                    </div>
-                    <br>
-                    <input type="submit" value="SEND">
-                </form>
-            </div>
-        </div>
 
 
     </main>

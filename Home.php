@@ -1,4 +1,5 @@
 <!-- php include -->
+ <?php include 'connection.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,11 +13,13 @@
     <meta name="keywords"
         content="Gift shop, Cafe, Scottish gifts, Handmade, Locally sourced, Scottish makers, Local makers">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/504c189bcb.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="css/main.css" rel="stylesheet">
 </head>
 
 <body>
@@ -69,67 +72,62 @@
 
         <!-- PHP HERE TO GRAB PRODUCTS FROM DB -->
 
-        <section class="splide" aria-label="Carousel">
-            <div class="splide__track">
-                <ul class="splide__list">
-                    <li class="splide__slide">
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/product1.jpg">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
+        <div class="splide-cont flex-center">
+            <section class="splide" aria-label="Carousel">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <div class="bs-item flex flex-col radius">
+                                <img src="images/product1.jpg">
+                                <div class="bs-desc">
+                                    <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/product1.jpg">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="bs-item flex flex-col radius">
+                                <img src="images/product1.jpg">
+                                <div class="bs-desc">
+                                    <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="splide__slide">
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/product1.jpg">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="bs-item flex flex-col radius">
+                                <img src="images/product1.jpg">
+                                <div class="bs-desc">
+                                    <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-
-        <div class="bs-cont">
-            <div class="flex flex-col">
-                <h2><em>OUR BESTSELLERS</em></h2>
-                <div class="bestsellers flex flex-center">
-                    <div class="slider flex flex-even">
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/product1.jpg">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="bs-item flex flex-col radius">
+                                <img src="images/product1.jpg">
+                                <div class="bs-desc">
+                                    <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="bs-item flex flex-col radius">
-                            <img src="images/Product2.png">
-                            <div class="bs-desc">
-                                <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="bs-item flex flex-col radius">
+                                <img src="images/product1.jpg">
+                                <div class="bs-desc">
+                                    <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
-            </div>
+            </section>
         </div>
 
 
+
         <!-- STATIC CONTENT -->
-        <div class="flex-center bio">
+        <div class="flex-center bio" data-aos="fade-in" data-aos-duration="1000">
             <div class="align bio-about radius">
                 <h2>All About Us</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo dolor, varius et mauris nec,
-                    varius imperdiet nulla. Phasellus interdum interdum magna.</p>
+                <p>At Herringbone, we stock the best locally sources Scottish gifts. Our ranges include Candles, Bags, Home Decor, Jewellery and more! <br> You're sure to find something truly unique. <br> We also own the cafe located upstairs from the gift shop - The No. 56 Cafe, here you can find delicious savouries and sweet treats, with coffee from Forth Bridge Roasters in Fife.<br> We hope to see you in the shop soon!</p>
             </div>
             <div>
                 <img src="images/home-header.jpg" at="Herringbone Staff" class="radius">
@@ -213,12 +211,28 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var splide = new Splide('.splide', {
-                perPage: 3,
-                rewind: true,
+                perPage: 4,
+                gap: '2rem',
+                breakpoints: {
+                    640: {
+                        perPage: 2,
+                        gap: '.7rem',
+                        height: '6rem',
+                    },
+                    480: {
+                        perPage: 1,
+                        gap: '.7rem',
+                        height: '6rem',
+                    },
+                },
             });
+
             splide.mount();
         });
     </script>
+    <script>
+  AOS.init();
+</script>
 </body>
 
 </html>
