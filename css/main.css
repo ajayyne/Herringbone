@@ -267,6 +267,7 @@ li {
     letter-spacing: 0.2em;
     font-size: 1.2rem;
 }
+
 /*END*/
 
 /*FOOTER*/
@@ -366,20 +367,28 @@ footer h6 {
 .bestsellers,
 .slider {
     width: 100%;
-    padding: 0.6rem;
 }
 
-    /*SLIDER HOME PAGE SPLIDE*/
-    .splide-cont {
-        margin-top: 5rem;
-        width: 100%;
-    }
-    .splide {
-        width: 100% !important;
-        border: 1px solid red;
-        padding: 0rem 1rem 0rem 1rem;
-    }
+/*SLIDER HOME PAGE SPLIDE*/
+.splide-cont {
+    margin: 12rem 0rem 12rem 0rem;
+    width: 100%;
+    height: 12rem;
+    padding: 0rem 5rem 0rem 5rem;
+}
 
+.splide {
+    width: 100% !important;
+    padding: 0rem 1rem 0rem 1rem;
+}
+
+#splide01 {
+    margin: 5rem 0rem 5rem 0rem;
+}
+
+.splide__track {
+    height: 20rem !important;
+}
 
 .bs-item {
     text-align: center;
@@ -393,9 +402,7 @@ footer h6 {
 }
 
 .bs-desc {
-    padding: 0.5rem;
-    background-color: var(--dark-blue);
-    width: 100%;
+    display: none;
 }
 
 .bs-desc p {
@@ -404,8 +411,22 @@ footer h6 {
 }
 
 .bs-item img {
-    width: 8rem;
-    height: 8rem;
+    width: 100%;
+    height: 20rem;
+    position: relative;
+    filter: brightness(0.75);
+}
+
+.bs-item .overlay {
+    z-index: 999;
+    position: absolute;
+    bottom: -210px;
+    left: 28%;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-shadow: var(--shadow);
+    font-family: 'Aboreto';
 }
 
 .bio {
@@ -476,13 +497,16 @@ footer h6 {
     border-bottom: 1px solid black;
     width: 80%;
 }
-.opening-times{
+
+.opening-times {
     margin-top: 2rem;
 }
-.opening-times .times{
+
+.opening-times .times {
     margin-left: 1.5rem;
 }
-.details{
+
+.details {
     align-items: start;
     width: 80%;
     margin-top: 2rem;
@@ -528,28 +552,35 @@ footer h6 {
     width: 100%;
     margin-top: 10rem;
 }
+
 form {
     background-color: var(--dark-blue);
     color: white;
     padding: 1rem 0rem 1rem 0rem;
     border-radius: 0px 0px 8px 8px;
 }
-form input{
+
+form input {
     border-radius: 8px;
     outline: none;
     border: 2px solid var(--dark-blue);
     width: 15rem;
 }
-form input:hover, form input:focus, form input:active{
+
+form input:hover,
+form input:focus,
+form input:active {
     border: 2px solid var(--darkest-blue);
     border-radius: 7px;
     outline: none;
     cursor: pointer;
 }
-.message{
+
+.message {
     height: 8rem;
 }
-form .send{
+
+form .send {
     margin: 2rem 0rem 1rem 0rem;
     border-radius: 20px;
     background-color: white;
@@ -560,7 +591,10 @@ form .send{
     transition: letter-spacing 0.3s ease-in-out;
     transition: letter-spacing 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
-form .send:hover, form .send:active, form .send:focus{
+
+form .send:hover,
+form .send:active,
+form .send:focus {
     border-radius: 20px;
     letter-spacing: 0.2em;
     transform: scale(1.1);
@@ -589,6 +623,7 @@ form .send:hover, form .send:active, form .send:focus{
 .radio {
     margin: 0.3rem 0.5rem 0rem 0rem;
 }
+
 select {
     margin-top: 0.5rem;
 }
@@ -621,7 +656,9 @@ select {
     box-shadow: none;
     border-radius: 5px;
 }
-#filterButton:hover, #filterButton:focus{
+
+#filterButton:hover,
+#filterButton:focus {
     box-shadow: var(--shadow);
 }
 
@@ -658,9 +695,9 @@ select {
 .product {
     box-shadow: var(--shadow);
     /*helps product grow and shrink*/
-    flex: 1 1 calc(25% - 30px); 
-    min-width: 250px; 
-    max-width: 300px; 
+    flex: 1 1 calc(25% - 30px);
+    min-width: 250px;
+    max-width: 300px;
 }
 
 .product-img {
@@ -709,6 +746,23 @@ select {
 
 
 
+@media screen and (min-width: 481px) {
+    .bs-item img {
+        filter: unset;
+        height: 12rem;
+    }
+
+    .bs-item .overlay {
+        display: none;
+    }
+
+    .bs-desc {
+        display: block;
+        padding: 0.5rem;
+        background-color: var(--dark-blue);
+        width: 100%;
+    }
+}
 
 /*LAPTOP*/
 @media screen and (min-width: 992px) {
@@ -869,7 +923,7 @@ select {
     }
 
     /*FILTERS*/
-    #filterButton{
+    #filterButton {
         margin-left: 2rem;
     }
 
@@ -915,8 +969,8 @@ select {
         cursor: pointer;
         font-weight: 500;
     }
-  
-     .prod-display{
+
+    .prod-display {
         margin-left: 15rem;
     }
 

@@ -80,6 +80,7 @@
                         <div class="splide__slide">
                             <div class="bs-item flex flex-col radius">
                                 <img src="images/products/candles/Skye_whiskey.png">
+                                <p class="overlay"><em>SKY CANDLE CO</em></p>
                                 <div class="bs-desc">
                                     <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
                                 </div>
@@ -88,6 +89,7 @@
                         <div class="splide__slide">
                             <div class="bs-item flex flex-col radius">
                             <img src="images/products/candles/Skye_whiskey.png">
+                            <p class="overlay"><em>SKY CANDLE CO</em></p>
                                 <div class="bs-desc">
                                     <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
                                 </div>
@@ -96,6 +98,7 @@
                         <div class="splide__slide">
                             <div class="bs-item flex flex-col radius">
                             <img src="images/products/candles/Skye_whiskey.png">
+                            <p class="overlay"><em>SKY CANDLE CO</em></p>
                                 <div class="bs-desc">
                                     <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
                                 </div>
@@ -104,6 +107,7 @@
                         <div class="splide__slide">
                             <div class="bs-item flex flex-col radius">
                             <img src="images/products/candles/Skye_whiskey.png">
+                            <p class="overlay"><em>SKY CANDLE CO</em></p>
                                 <div class="bs-desc">
                                     <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
                                 </div>
@@ -111,7 +115,8 @@
                         </div>
                         <div class="splide__slide">
                             <div class="bs-item flex flex-col radius">
-                            <img src="images/products/candles/Skye_whiskey.png">
+                            <img src="images/products/candles/Skye_freshmint.png">
+                            <p class="overlay"><em>MASSAGE CANDLE</em></p>
                                 <div class="bs-desc">
                                     <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
                                 </div>
@@ -207,8 +212,13 @@
         document.addEventListener('DOMContentLoaded', function () {
             var splide = new Splide('.splide', {
                 perPage: 4,
-                gap: '2rem',
+                gap: '1.5rem',
                 breakpoints: {
+                    800: {
+                        perPage: 3,
+                        gap: '.7rem',
+                        height: '6rem',
+                    },
                     640: {
                         perPage: 2,
                         gap: '.7rem',
