@@ -369,6 +369,18 @@ footer h6 {
     padding: 0.6rem;
 }
 
+    /*SLIDER HOME PAGE SPLIDE*/
+    .splide-cont {
+        margin-top: 5rem;
+        width: 100%;
+    }
+    .splide {
+        width: 100% !important;
+        border: 1px solid red;
+        padding: 0rem 1rem 0rem 1rem;
+    }
+
+
 .bs-item {
     text-align: center;
     box-shadow: var(--shadow);
@@ -908,20 +920,5 @@ select {
         margin-left: 15rem;
     }
 
-    /*SLIDER HOME PAGE SPLIDE*/
-    .splide-cont {
-        margin-top: 2rem;
-        width: 100%;
-        padding: 2rem;
-    }
 
-    .splide {
-        width: 90%;
-        border: 1px solid black;
-        padding: 3rem;
-    }
-
-    .splide__pagination {
-        bottom: -2rem;
-    }
 }
