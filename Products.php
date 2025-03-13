@@ -72,6 +72,18 @@ include "connection.php";
 
 
     <div class="flex flex-col main-container">
+    <div class="categories-mobile">
+
+            <!-- mobile display of categories -->
+             <?php
+            $getCategories = "SELECT CategoryName FROM categories";
+            $runCategories = mysqli_query($connection, $getCategories);
+            while($listCategories = mysqli_fetch_assoc($runCategories)){
+                echo "<p class='category-mob'>{$listCategories['CategoryName']}</p>";
+            }
+             ?>
+            </div>
+
         <!-- generate filters using php/sql -->
         <div class="filter-cont flex flex-col">
             <button id="filterButton">FILTERS</button>
@@ -155,7 +167,6 @@ include "connection.php";
                 echo "<p class='category'>{$listCategories['CategoryName']}</p>";
             }
              ?>
-                
             </div>
         </div>
 
@@ -291,23 +302,39 @@ include "connection.php";
                     productDiv.appendChild(nameElement);
                     //setting product name inside of nameElement
                     nameElement.innerHTML = productList[i].Name;
+                    //create div to hold price & brand, flex these to be next to eachother
+                    const priceHolder = document.createElement('div');
+                    priceHolder.classList.add('price-holder');
+                    //append to parent
+                    productDiv.appendChild(priceHolder);
+
+            
 
                     //create brand name element
                     const brandElement = document.createElement('p');
-                    productDiv.appendChild(brandElement);
+                    priceHolder.appendChild(brandElement);
                     brandElement.innerHTML = productList[i].Brand;
+
 
                     //create description paragraph
                     const priceElement = document.createElement('p');
-                    priceElement.innerHTML = productList[i].Price;
-                    productDiv.appendChild(priceElement);
+                    priceElement.innerHTML = '£' + productList[i].Price;
+                    priceHolder.appendChild(priceElement);
+                    priceElement.classList.add('price')
+
 
                     // Create and append description
-                    const descriptionElement = document.createElement('p');
-                    descriptionElement.innerHTML = productList[i].Description;
-                    descriptionElement.classList.add('limited-lines');
-                    //appending to parent container
-                    productDiv.appendChild(descriptionElement);
+                    // const descriptionElement = document.createElement('p');
+                    // descriptionElement.innerHTML = productList[i].Description;
+                    // descriptionElement.classList.add('limited-lines');
+                    // //appending to parent container
+                    // productDiv.appendChild(descriptionElement);
+
+                    //create 'add to cart button'
+                    const cartButton = document.createElement('button');
+                    cartButton.innerHTML = "ADD TO CART";
+                    cartButton.classList.add('cart-btn')
+                    productDiv.appendChild(cartButton);
 
                     // Append the individual product div to the parent - Container
                     Container.appendChild(productDiv);
