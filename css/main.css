@@ -408,7 +408,8 @@ footer h6 {
 }
 
 .bio img {
-    width: 18rem;
+    width: 19rem;
+    height: 18rem;
     z-index: 999;
     margin-top: -3rem;
 }
@@ -696,6 +697,14 @@ select {
 
 
 
+@media screen and (min-width: 600px){
+    .bio img {
+        width: 30rem;
+    }
+    .bio-about{
+        width: 90%;
+    }
+}
 
 
 /*LAPTOP*/
