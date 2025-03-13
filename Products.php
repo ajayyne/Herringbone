@@ -247,7 +247,7 @@ include "connection.php";
                 let brand = brandInputs[i];
                 if (brand.checked) {
                     selectedBrands += brand.value + ",";
-                }
+                } 
             }
             //call loadProducts to re-load the products with applied filters
             loadProducts(selectedColours, selectedBrands, '');
