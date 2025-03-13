@@ -370,11 +370,13 @@ footer h6 {
 }
 
 /*SLIDER HOME PAGE SPLIDE*/
+.splide__pagination{
+    display: none;
+}
 .splide-cont {
-    margin: 12rem 0rem 12rem 0rem;
+    margin: 7rem 0rem 10rem 0rem;
     width: 100%;
     height: 12rem;
-    padding: 0rem 5rem 0rem 5rem;
 }
 
 .splide {
@@ -687,7 +689,6 @@ select {
 .prod-display {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 30px;
     padding: 2rem;
 }
@@ -876,11 +877,10 @@ select {
 
     .bio-about {
         width: 43rem;
-        height: 22rem;
+        height: 30rem;
         padding: 2rem;
 
     }
-
     .bio-about h2 {
         text-align: left;
     }
@@ -889,7 +889,7 @@ select {
         margin-top: 0rem;
         margin-left: -11rem;
         width: 30rem;
-        height: 20rem;
+        height: 25rem;
     }
 
     .bio-about p {
@@ -904,6 +904,10 @@ select {
 
     .cafe-text a {
         font-size: 1.3rem;
+    }
+
+    .splide-cont{
+        padding: 0rem 5rem 0rem 5rem;
     }
 
     /*CONTACT PAGE*/
