@@ -37,7 +37,7 @@ include "connection.php";
                     <li><a href="Home.php">Home</a></li>
                     <li><a href="Products.php">Shop</a></li>
                     <li><a href="Gallery.html">Gallery</a></li>
-                    <li><a href="Contact.html">Contact Us</a></li>
+                    <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
                     <div class="search-cont flex">
@@ -53,7 +53,7 @@ include "connection.php";
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
                     <li><a href="Gallery.html">GALLERY</a></li>
-                    <li><a href="Contact.html">CONTACT US</a></li>
+                    <li><a href="Contact.php">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
                     <div class="search-cont flex">
@@ -145,13 +145,17 @@ include "connection.php";
             </div>
 
 
-            <!-- CATEGORIES - IMPORT FROM PHP -->
+
             <div class="categories-desk">
-                <p class="category">CANDLES</p>
-                <p class="category">GLASSWARE</p>
-                <p class="category">ACCESSORIES</p>
-                <p class="category">HOME DECOR</p>
-                <p class="category">BATH & BODY</p>
+            <!-- CATEGORIES - IMPORT FROM PHP -->
+             <?php
+            $getCategories = "SELECT CategoryName FROM categories";
+            $runCategories = mysqli_query($connection, $getCategories);
+            while($listCategories = mysqli_fetch_assoc($runCategories)){
+                echo "<p class='category'>{$listCategories['CategoryName']}</p>";
+            }
+             ?>
+                
             </div>
         </div>
 

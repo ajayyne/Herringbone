@@ -906,6 +906,7 @@ select {
     .category {
         border-bottom: 1px solid var(--darkest-blue);
         padding-bottom: 0.5rem;
+        width: 80%;
     }
 
     .category:hover {

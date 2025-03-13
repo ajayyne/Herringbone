@@ -40,7 +40,7 @@
                     <li><a href="Home.php">Home</a></li>
                     <li><a href="Products.php">Shop</a></li>
                     <li><a href="Gallery.html">Gallery</a></li>
-                    <li><a href="Contact.html">Contact Us</a></li>
+                    <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
                     <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
@@ -52,7 +52,7 @@
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
                     <li><a href="Gallery.html">GALLERY</a></li>
-                    <li><a href="Contact.html">CONTACT US</a></li>
+                    <li><a href="Contact.php">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
                     <i class="fa-solid fa-heart" style="color: #ffffff;"></i>

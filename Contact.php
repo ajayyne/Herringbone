@@ -34,7 +34,7 @@
                     <li><a href="Home.php">Home</a></li>
                     <li><a href="Products.php">Shop</a></li>
                     <li><a href="Gallery.html">Gallery</a></li>
-                    <li><a href="Contact.html">Contact Us</a></li>
+                    <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons flex flex-even">
                     <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
@@ -47,7 +47,7 @@
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
                     <li><a href="Gallery.html">GALLERY</a></li>
-                    <li><a href="Contact.html">CONTACT US</a></li>
+                    <li><a href="Contact.php">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
                     <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
@@ -92,6 +92,37 @@
                     </form>
                 </div>
             </div>
+
+            <!-- PHP for sending emails through form -->
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // Get form data
+                $name = trim($_POST['name']);
+                $email = trim($_POST['email']);
+                $message = trim($_POST['message']);
+
+                // Set email address that mail will be delivered to
+                $to = "amber.db17@yahoo.com";
+                $subject = "Herringbone Form Enquiry";
+
+                // Create the email content
+                $email_content = "Name: $name\n";
+                $email_content .= "Email: $email\n";
+                $email_content .= "Message:\n$message\n";
+
+                // Create email headers that will show in inbox
+                $headers = "From: $name <$email>\r\n";
+                $headers .= "Reply-To: $email\r\n";
+
+                // Send the email
+                if (mail($to, $subject, $email_content, $headers)) {
+                    // echo "<script>alert('Email sent successfully')</script>";
+                } else {
+                    // echo "<script>alert('Failed to send email')</script>";
+                }
+            }
+            ?>
+
             <div class="flex flex-col contact-info">
                 <div class="visitUs">
                     <h3><strong>Visit Us</strong></h3>
