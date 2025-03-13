@@ -35,7 +35,7 @@ h3 {
 
 button {
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: 12px;
     background-color: var(--dark-blue);
     color: white;
     font-weight: bold;
@@ -205,6 +205,7 @@ header h1 {
         transform: rotate(-45deg) translate(6px, -7px);
     }
 }
+
 
 .navigation {
     display: none;
@@ -599,16 +600,24 @@ select {
 
 .filter-cont {
     align-items: end;
-    padding-top: 8rem;
 }
 
 #filterButton {
-    margin-right: 1rem;
-    transform: scale(0.8);
+    background-color: white;
+    color: var(--dark-blue);
+    border: 1.5px solid var(--medium-blue);
+    box-shadow: none;
+    border-radius: 5px;
+}
+#filterButton:hover, #filterButton:focus{
+    box-shadow: var(--shadow);
 }
 
 #filters {
     display: none;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.5s ease-in-out;
 }
 
 .categories-desk {
@@ -621,22 +630,25 @@ select {
 
 /*responsive grid layout*/
 .main-container {
-    padding-top: 6rem;
-    border: 2px solid greenyellow;
+    min-height: 1000px;
+    justify-content: start;
+    padding-top: 8rem;
 }
 
 .prod-display {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    /* 1 column - mobile */
-    grid-gap: 15px;
-    padding: 0rem 2rem 0rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 2rem;
 }
 
 .product {
     box-shadow: var(--shadow);
-    width: 20rem;
+    /*helps product grow and shrink*/
+    flex: 1 1 calc(25% - 30px); 
+    min-width: 250px; 
+    max-width: 300px; 
 }
 
 .product-img {
@@ -646,7 +658,7 @@ select {
 
 .product img {
     width: 100%;
-    height: 18rem;
+    height: auto;
     margin-bottom: 1rem;
 }
 
@@ -682,11 +694,9 @@ select {
 
 /*END*/
 
-@media screen and (min-width: 600px){
-    .prod-display {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+
+
+
 
 /*LAPTOP*/
 @media screen and (min-width: 992px) {
@@ -848,12 +858,13 @@ select {
 
     /*FILTERS*/
     #filterButton{
-        
+        margin-left: 2rem;
     }
 
     .filter-cont {
         padding: 0rem;
         width: 15rem;
+        height: 55rem;
         background-color: transparent;
         border-right: 2px solid var(--medium-blue);
         position: absolute;
@@ -861,12 +872,13 @@ select {
         bottom: 0;
         left: 0;
         right: 0;
-        margin-top: 99px;
+        margin-top: 120px;
         justify-content: start !important;
+        align-items: start;
     }
 
     #filters {
-        transform: scale(0.7);
+        transform: scale(0.8);
     }
 
     #applyFilters,
@@ -877,8 +889,9 @@ select {
 
     .categories-desk {
         display: block;
+        margin-top: 3rem;
+        margin-left: 2rem;
         width: 7rem;
-
     }
 
     .category {
@@ -890,29 +903,10 @@ select {
         cursor: pointer;
         font-weight: 500;
     }
-
-    .main-container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: start;
-        position: relative;
+  
+     .prod-display{
+        margin-left: 15rem;
     }
-
-    .prod-display {
-        grid-template-columns: repeat(3, 1fr);
-        /* 1 column - desktop */
-        padding: 3rem 0rem 1rem 20rem;
-    }
-
-    .product {
-        width: 16rem;
-    }
-
-    .product img {
-        width: 16rem;
-        height: 16rem;
-    }
-
 
     /*SLIDER HOME PAGE SPLIDE*/
     .splide-cont {

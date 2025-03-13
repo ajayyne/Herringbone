@@ -81,23 +81,23 @@ include "connection.php";
                         <p><em>COLOUR</em></p>
                     </div>
                     <div class="colours flex flex-even">
-                    <?php
+                        <?php
                         //get all current colours, brands and prices stored in database
                         $getColours = "SELECT Colour FROM product_option";
                         //render out colours where colour column has a value
                         $runColours = mysqli_query($connection, $getColours);
                         //create counter to make unique id for each input below
                         $idCounter = 0;
-                        while($displayColours = mysqli_fetch_assoc($runColours)){
-                            if($displayColours['Colour'] != ''){
-                            echo "<div class='flex colour'>
-                                    <input type='checkbox' class='radio colourCheckbox' value='{$displayColours['Colour']}' id='chkColour" .  $idCounter . "'>
+                        while ($displayColours = mysqli_fetch_assoc($runColours)) {
+                            if ($displayColours['Colour'] != '') {
+                                echo "<div class='flex colour'>
+                                    <input type='checkbox' class='radio colourCheckbox' value='{$displayColours['Colour']}' id='chkColour" . $idCounter . "'>
                                     <p>{$displayColours['Colour']}</p>
                                 </div>";
-                                $idCounter ++;
+                                $idCounter++;
                             }
                         }
-                    ?>
+                        ?>
                     </div>
                 </div>
                 <div class="filtersBrands flex flex-col">
@@ -109,12 +109,12 @@ include "connection.php";
                         $getBrands = "SELECT BrandName FROM brands";
                         $runBrands = mysqli_query($connection, $getBrands);
                         $idCounter = 0;
-                        while($displayBrands = mysqli_fetch_assoc($runBrands)){
+                        while ($displayBrands = mysqli_fetch_assoc($runBrands)) {
                             echo "<div class='flex flex colour'>
-                            <input type='checkbox' class='radio brandCheckbox' value='{$displayBrands['BrandName']}' id='chkBrand" .  $idCounter . "'>
+                            <input type='checkbox' class='radio brandCheckbox' value='{$displayBrands['BrandName']}' id='chkBrand" . $idCounter . "'>
                             <p>{$displayBrands['BrandName']}</p>
                         </div>";
-                        $idCounter ++;
+                            $idCounter++;
                         }
                         ?>
                     </div>
@@ -218,17 +218,17 @@ include "connection.php";
 
     <script>
         //function runs when 'Apply Filters' is clicked
-        function applyFilters(){
+        function applyFilters() {
             //holds all colour inputs in an array
             const colourInputs = document.getElementsByClassName('colourCheckbox');
             //create string variable to hold query string
             let selectedColours = "";
             //loop through colour inputs
             let i = 0;
-            for(i=0;i<colourInputs.length;i++){
+            for (i = 0; i < colourInputs.length; i++) {
                 let colour = colourInputs[i];
                 //if colour is selected, add it to query string
-                if(colour.checked){
+                if (colour.checked) {
                     selectedColours += colour.value + ",";
                 }
             }
@@ -239,9 +239,9 @@ include "connection.php";
 
             const brandInputs = document.getElementsByClassName('brandCheckbox');
             let selectedBrands = "";
-            for(i=0;i<brandInputs.length;i++){
+            for (i = 0; i < brandInputs.length; i++) {
                 let brand = brandInputs[i];
-                if(brand.checked){
+                if (brand.checked) {
                     selectedBrands += brand.value + ",";
                 }
             }
@@ -251,7 +251,7 @@ include "connection.php";
 
 
 
-        function loadProducts(colour, brand, price){
+        function loadProducts(colour, brand, price) {
 
             //AJAX request
             const xmlhttp = new XMLHttpRequest();
@@ -263,11 +263,12 @@ include "connection.php";
 
 
                 const Container = document.getElementById('prod-container');
+                //set container to empty every time - when fitlers are selected, this helps population of the div with the correct content - if it was not emptied, old content would still show when filtering
                 Container.innerHTML = '';
-
 
                 //loop through each product object in the array
                 for (let i = 0; i < productList.length; i++) {
+
                     // Create a div for each product
                     const productDiv = document.createElement('div');
                     productDiv.classList.add('product', 'radius');
@@ -298,11 +299,11 @@ include "connection.php";
                     productDiv.appendChild(priceElement);
 
                     // Create and append description
-                    const descriptionElement = document.createElement('p'); 
-                    descriptionElement.innerHTML = productList[i].Description; 
+                    const descriptionElement = document.createElement('p');
+                    descriptionElement.innerHTML = productList[i].Description;
                     descriptionElement.classList.add('limited-lines');
                     //appending to parent container
-                    productDiv.appendChild(descriptionElement); 
+                    productDiv.appendChild(descriptionElement);
 
                     // Append the individual product div to the parent - Container
                     Container.appendChild(productDiv);
@@ -314,29 +315,47 @@ include "connection.php";
             //example request might be something like getProducts.php?colour=red&brand=nike&price=&lt;15
             let requestUrl = 'getProducts.php';
 
-            if (colour != '' || brand != '' || price != '')
-            {
+            if (colour != '' || brand != '' || price != '') {
                 requestUrl += '?';
             }
 
-            if (colour != '')
-            {
+            if (colour != '') {
                 requestUrl += 'colour=' + colour + '&';
             }
 
-            if (brand != '')
-            {
+            if (brand != '') {
                 requestUrl += 'brand=' + brand + '&';
             }
 
-            if (price != '')
-            {
+            if (price != '') {
                 requestUrl += 'price=' + price;
             }
 
-      
+
+
+            //code that outputs a message when NO products are found that match filter criteria
+
+            // // Create XMLHttpRequest object
+            // let xmlhttp = new XMLHttpRequest();
+
+            // // Function to handle the response
+            // xmlhttp.onreadystatechange = function () {
+            //     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            //         // Parse the JSON response
+            //         let response = JSON.parse(xmlhttp.responseText);
+
+            //         // Check if there are products returned
+            //         if (response.products && response.products.length == 0) {
+            //             // Display message if no products found
+            //              alert("No products found with the specified filters.");
+            //         }
+            //     }
+            // };
+
+            //send the request
             xmlhttp.open("GET", requestUrl);
             xmlhttp.send();
+
         }
         //call function on load
         loadProducts('', '', '');

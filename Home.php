@@ -200,12 +200,11 @@
             <p>Herringbone 2025 ©</p>
         </div>
     </footer>
-    <script>
+    <!-- <script>
         document.getElementById('toggle').addEventListener('click', function () {
             const border = document.querySelector('.header');
-            border.classList.toggle('shrink'); // Add or remove the 'shrink' class
         });
-    </script>
+    </script> -->
     <script src="navigation.js"></script>
     <!-- initialize carousel slider -->
     <script>
