@@ -72,17 +72,17 @@ include "connection.php";
 
 
     <div class="flex flex-col main-container">
-    <div class="categories-mobile">
+        <div class="categories-mobile">
 
             <!-- mobile display of categories -->
-             <?php
+            <?php
             $getCategories = "SELECT CategoryName FROM categories";
             $runCategories = mysqli_query($connection, $getCategories);
-            while($listCategories = mysqli_fetch_assoc($runCategories)){
+            while ($listCategories = mysqli_fetch_assoc($runCategories)) {
                 echo "<p class='category-mob'>{$listCategories['CategoryName']}</p>";
             }
-             ?>
-            </div>
+            ?>
+        </div>
 
         <!-- generate filters using php/sql -->
         <div class="filter-cont flex flex-col">
@@ -92,7 +92,7 @@ include "connection.php";
                     <div>
                         <p><em>COLOUR</em></p>
                     </div>
-                    <div class="colours flex flex-even">
+                    <div class="colours flex flex-col">
                         <?php
                         //get all current colours, brands and prices stored in database
                         $getColours = "SELECT Colour FROM product_option";
@@ -116,7 +116,7 @@ include "connection.php";
                     <div>
                         <p><em>BRAND</em></p>
                     </div>
-                    <div class="brands flex flex-even">
+                    <div class="brands flex flex-col">
                         <?php
                         $getBrands = "SELECT BrandName FROM brands";
                         $runBrands = mysqli_query($connection, $getBrands);
@@ -159,14 +159,14 @@ include "connection.php";
 
 
             <div class="categories-desk">
-            <!-- CATEGORIES - IMPORT FROM PHP -->
-             <?php
-            $getCategories = "SELECT CategoryName FROM categories";
-            $runCategories = mysqli_query($connection, $getCategories);
-            while($listCategories = mysqli_fetch_assoc($runCategories)){
-                echo "<p class='category'>{$listCategories['CategoryName']}</p>";
-            }
-             ?>
+                <!-- CATEGORIES - IMPORT FROM PHP -->
+                <?php
+                $getCategories = "SELECT CategoryName FROM categories";
+                $runCategories = mysqli_query($connection, $getCategories);
+                while ($listCategories = mysqli_fetch_assoc($runCategories)) {
+                    echo "<p class='category'>{$listCategories['CategoryName']}</p>";
+                }
+                ?>
             </div>
         </div>
 
@@ -258,7 +258,7 @@ include "connection.php";
                 let brand = brandInputs[i];
                 if (brand.checked) {
                     selectedBrands += brand.value + ",";
-                } 
+                }
             }
             //call loadProducts to re-load the products with applied filters
             loadProducts(selectedColours, selectedBrands, '');
@@ -308,7 +308,7 @@ include "connection.php";
                     //append to parent
                     productDiv.appendChild(priceHolder);
 
-            
+
 
                     //create brand name element
                     const brandElement = document.createElement('p');
@@ -364,6 +364,7 @@ include "connection.php";
 
 
 
+
             //code that outputs a message when NO products are found that match filter criteria
 
             // // Create XMLHttpRequest object
@@ -382,6 +383,33 @@ include "connection.php";
             //         }
             //     }
             // };
+
+
+            // Define the clearFilters function
+            function clearFilters() {
+                requestUrl = 'getProducts.php';
+                // Clear filters by emptying the parameters
+                loadProducts('', '', '');
+
+                // Get all the checkboxes for colours and brands
+                const colourCheckboxes = document.querySelectorAll('.radio');
+                const brandCheckboxes = document.querySelectorAll('.radio');
+
+                // Uncheck all colour checkboxes
+                colourCheckboxes.forEach(function (checkbox) {
+                    checkbox.checked = false;
+                });
+
+                // Uncheck all brand checkboxes
+                brandCheckboxes.forEach(function (checkbox) {
+                    checkbox.checked = false;
+                });
+            }
+
+            // Attach the clearFilters function to the clearFilters button, add click event listener
+            document.getElementById('clearFilters').addEventListener('click', clearFilters)
+
+
 
             //send the request
             xmlhttp.open("GET", requestUrl);

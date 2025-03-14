@@ -633,6 +633,9 @@ select {
 }
 
 /*filters*/
+.brands{
+    align-items: start;
+}
 #applyFilters,
 #clearFilters {
     margin-top: 2rem;
@@ -671,7 +674,7 @@ select {
 #filters {
     display: none;
     height: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     transition: height 0.5s ease-in-out;
     transform: scale(0.8);
 }
@@ -1039,6 +1042,9 @@ select {
     .prod-display {
         margin-left: 15rem;
     }
-
+    .main-container {
+        padding-bottom: 10rem;
+    }
+    
 
 }
