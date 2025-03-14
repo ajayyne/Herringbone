@@ -35,10 +35,9 @@ h3 {
 
 button {
     cursor: pointer;
-    border-radius: 12px;
-    background-color: var(--dark-blue);
-    color: white;
+    border-radius: 5px;
     font-weight: bold;
+    background-color: white;
     outline: none;
     padding: 0.1rem 1rem 0.1rem 1rem;
     border: none;
@@ -656,14 +655,25 @@ select {
     align-items: end;
 }
 
+.filter-btn-container{
+    width: 100vw !important;
+    display: flex;
+    justify-content: start;
+}
+
 #filterButton {
     background-color: white;
     color: var(--dark-blue);
     border: 1.5px solid var(--medium-blue);
     box-shadow: none;
     border-radius: 5px;
-    margin-left: 12rem;
     transform: scale(0.7);
+    padding: 0.1rem 3rem 0.1rem 3rem;
+}
+.filters-mob{
+    width: 100vw !important;
+    display: flex;
+    justify-content: start;
 }
 
 #filterButton:hover,
@@ -673,9 +683,9 @@ select {
 
 #filters {
     display: none;
-    height: 0;
-    /* overflow: hidden; */
-    transition: height 0.5s ease-in-out;
+    max-height: 0; 
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
     transform: scale(0.8);
 }
 
@@ -732,6 +742,7 @@ select {
 
 .prod-display {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 30px;
     padding: 2rem;
@@ -764,12 +775,13 @@ select {
     text-overflow: ellipsis;
 }
 .product h6, .product p{
-    padding: 0rem 1rem 0rem 1rem;
+    padding: 0rem 0.5rem 0rem 0.5rem;
 }
 .price-holder{
     display: flex;
     justify-content: space-between;
 }
+
 .price{
     font-weight: bold;
 }
@@ -778,6 +790,12 @@ select {
     font-family: 'Aboreto';
     border-radius: 5px;
     width: 100%;
+    border: 2px solid var(--dark-blue);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.cart-btn:hover, .cart-btn:focus, .cart-btn:active{
+    background-color: var(--dark-blue);
+    color: white;
 }
 
 /*END*/
@@ -988,6 +1006,13 @@ select {
     }
 
     /*FILTERS*/
+    .filter-btn-container{
+        all: unset;
+    }
+    .filters-mob{
+       all: unset;
+    }
+
     #filterButton {
         margin-left: 1rem;
     }

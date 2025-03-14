@@ -5,6 +5,7 @@ class Product {
         public $Description;
         public $Image;
         public $Brand;
+    
 
         function setName($name) {
             $this -> Name = $name;
@@ -21,6 +22,7 @@ class Product {
         function setBrand($brand){
             $this -> Brand = $brand;
         }
+        
 
         function getName(){
             return $this -> Name;

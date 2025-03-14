@@ -2,22 +2,23 @@ const button = document.getElementById('filterButton');
 const filters = document.getElementById('filters');
 
 button.addEventListener('click', function() {
-    // Toggle appearance of filter div
-    if (filters.style.display === "none" || filters.style.height === "0px" || filters.style.height === "") {
+    // Check if the filter div is visible
+    if (filters.style.maxHeight === "0px" || filters.style.maxHeight === "") {
+        // Make the filter div visible
         filters.style.display = "block";
-
-        // Using requestAnimationFrame to ensure the height is set correctly after the content is displayed
-        requestAnimationFrame(function() {
-            filters.style.height = filters.scrollHeight + 'px';
-        });
-        
+        // Set overflow to visible to show content 
+        filters.style.overflow = "visible"; 
+        filters.style.maxHeight = filters.scrollHeight + 'px'; 
     } else {
-        filters.style.height = "0px";
+        // Set overflow to hidden before collapsing
+        filters.style.overflow = "hidden"; 
+        // Set to 0 to close
+        filters.style.maxHeight = "0px"; 
 
-        // Add a transition + event listener to set display to none after the collapse is done
+        // Wait for the transition to end before hiding completely
         filters.addEventListener('transitionend', function onTransitionEnd() {
-            filters.style.display = "none";
-            filters.removeEventListener('transitionend', onTransitionEnd);
+            filters.style.display = "none"; 
+            filters.removeEventListener('transitionend', onTransitionEnd); 
         });
     }
 });
