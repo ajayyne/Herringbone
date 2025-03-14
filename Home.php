@@ -71,52 +71,58 @@
         </div>
 
         <!-- PHP HERE TO GRAB PRODUCTS FROM DB -->
+         
 
         <div class="splide-cont flex-center">
             <section class="splide" aria-label="Carousel">
                 <div class="splide__track">
-                    <ul class="splide__list">
-                        <li class="splide__slide">
+                    <div class="splide__list">
+                        <div class="splide__slide">
                             <div class="bs-item flex flex-col radius">
-                                <img src="images/product1.jpg">
+                                <img src="images/products/candles/Skye_whiskey.png">
+                                <p class="overlay"><em>SKY CANDLE CO</em></p>
                                 <div class="bs-desc">
                                     <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
                                 </div>
                             </div>
-                        </li>
-                        <li class="splide__slide">
+                        </div>
+                        <div class="splide__slide">
                             <div class="bs-item flex flex-col radius">
-                                <img src="images/product1.jpg">
+                            <img src="images/products/candles/Skye_whiskey.png">
+                            <p class="overlay"><em>SKY CANDLE CO</em></p>
                                 <div class="bs-desc">
                                     <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
                                 </div>
                             </div>
-                        </li>
-                        <li class="splide__slide">
+                        </div>
+                        <div class="splide__slide">
                             <div class="bs-item flex flex-col radius">
-                                <img src="images/product1.jpg">
+                            <img src="images/products/candles/Skye_whiskey.png">
+                            <p class="overlay"><em>SKY CANDLE CO</em></p>
                                 <div class="bs-desc">
                                     <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
                                 </div>
                             </div>
-                        </li>
-                        <li class="splide__slide">
+                        </div>
+                        <div class="splide__slide">
                             <div class="bs-item flex flex-col radius">
-                                <img src="images/product1.jpg">
+                            <img src="images/products/candles/Skye_whiskey.png">
+                            <p class="overlay"><em>SKY CANDLE CO</em></p>
                                 <div class="bs-desc">
                                     <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
                                 </div>
                             </div>
-                        </li>
-                        <li class="splide__slide">
+                        </div>
+                        <div class="splide__slide">
                             <div class="bs-item flex flex-col radius">
-                                <img src="images/product1.jpg">
+                            <img src="images/products/candles/Skye_freshmint.png">
+                            <p class="overlay"><em>MASSAGE CANDLE</em></p>
                                 <div class="bs-desc">
                                     <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
                                 </div>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -200,19 +206,19 @@
             <p>Herringbone 2025 ©</p>
         </div>
     </footer>
-    <!-- <script>
-        document.getElementById('toggle').addEventListener('click', function () {
-            const border = document.querySelector('.header');
-        });
-    </script> -->
     <script src="navigation.js"></script>
     <!-- initialize carousel slider -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var splide = new Splide('.splide', {
                 perPage: 4,
-                gap: '2rem',
+                gap: '1.5rem',
                 breakpoints: {
+                    800: {
+                        perPage: 3,
+                        gap: '.7rem',
+                        height: '6rem',
+                    },
                     640: {
                         perPage: 2,
                         gap: '.7rem',

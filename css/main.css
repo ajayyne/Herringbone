@@ -268,6 +268,7 @@ li {
     font-size: 1.2rem;
 }
 
+
 /*END*/
 
 /*FOOTER*/
@@ -370,6 +371,29 @@ footer h6 {
 }
 
 /*SLIDER HOME PAGE SPLIDE*/
+.splide__pagination{
+    display: none;
+}
+.splide-cont {
+    margin: 7rem 0rem 10rem 0rem;
+    width: 100%;
+    height: 12rem;
+}
+
+.splide {
+    width: 100% !important;
+    padding: 0rem 1rem 0rem 1rem;
+}
+
+#splide01 {
+    margin: 5rem 0rem 5rem 0rem;
+}
+
+.splide__track {
+    height: 20rem !important;
+}
+
+/*SLIDER HOME PAGE SPLIDE*/
 .splide__pagination {
     display: none;
 }
@@ -406,6 +430,7 @@ footer h6 {
 
 .bs-desc {
     display: none;
+    display: none;
 }
 
 .bs-desc p {
@@ -414,6 +439,22 @@ footer h6 {
 }
 
 .bs-item img {
+    width: 100%;
+    height: 20rem;
+    position: relative;
+    filter: brightness(0.75);
+}
+
+.bs-item .overlay {
+    z-index: 999;
+    position: absolute;
+    bottom: -210px;
+    left: 28%;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-shadow: var(--shadow);
+    font-family: 'Aboreto';
     width: 100%;
     height: 20rem;
     position: relative;
@@ -502,12 +543,18 @@ footer h6 {
 }
 
 .opening-times {
+
+.opening-times {
     margin-top: 2rem;
 }
 
 .opening-times .times {
+
+.opening-times .times {
     margin-left: 1.5rem;
 }
+
+.details {
 
 .details {
     align-items: start;
@@ -556,12 +603,15 @@ footer h6 {
     margin-top: 10rem;
 }
 
+
 form {
     background-color: var(--dark-blue);
     color: white;
     padding: 1rem 0rem 1rem 0rem;
     border-radius: 0px 0px 8px 8px;
 }
+
+form input {
 
 form input {
     border-radius: 8px;
@@ -573,6 +623,10 @@ form input {
 form input:hover,
 form input:focus,
 form input:active {
+
+form input:hover,
+form input:focus,
+form input:active {
     border: 2px solid var(--darkest-blue);
     border-radius: 7px;
     outline: none;
@@ -580,8 +634,12 @@ form input:active {
 }
 
 .message {
+
+.message {
     height: 8rem;
 }
+
+form .send {
 
 form .send {
     margin: 2rem 0rem 1rem 0rem;
@@ -594,6 +652,10 @@ form .send {
     transition: letter-spacing 0.3s ease-in-out;
     transition: letter-spacing 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
+
+form .send:hover,
+form .send:active,
+form .send:focus {
 
 form .send:hover,
 form .send:active,
@@ -626,6 +688,7 @@ form .send:focus {
 .radio {
     margin: 0.3rem 0.5rem 0rem 0rem;
 }
+
 
 select {
     margin-top: 0.5rem;
@@ -667,6 +730,10 @@ select {
     border: 1.5px solid var(--medium-blue);
     box-shadow: none;
     border-radius: 5px;
+}
+
+#filterButton:hover,
+#filterButton:focus {
     transform: scale(0.7);
     padding: 0.1rem 3rem 0.1rem 3rem;
 }
@@ -742,6 +809,7 @@ select {
 
 .prod-display {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     flex-wrap: wrap;
     gap: 30px;
@@ -750,6 +818,9 @@ select {
 
 .product {
     /*helps product grow and shrink*/
+    flex: 1 1 calc(25% - 30px);
+    min-width: 250px;
+    max-width: 300px;
     flex: 1 1 calc(25% - 30px);
     min-width: 250px;
     max-width: 300px;
@@ -825,6 +896,23 @@ select {
 
 
 
+@media screen and (min-width: 481px) {
+    .bs-item img {
+        filter: unset;
+        height: 12rem;
+    }
+
+    .bs-item .overlay {
+        display: none;
+    }
+
+    .bs-desc {
+        display: block;
+        padding: 0.5rem;
+        background-color: var(--dark-blue);
+        width: 100%;
+    }
+}
 @media screen and (min-width: 481px) {
     .bs-item img {
         filter: unset;
@@ -956,10 +1044,10 @@ select {
     .bio-about {
         width: 43rem;
         height: 30rem;
+        height: 30rem;
         padding: 2rem;
 
     }
-
     .bio-about h2 {
         text-align: left;
     }
@@ -968,6 +1056,7 @@ select {
         margin-top: 0rem;
         margin-left: -11rem;
         width: 30rem;
+        height: 25rem;
         height: 25rem;
     }
 
@@ -983,6 +1072,10 @@ select {
 
     .cafe-text a {
         font-size: 1.3rem;
+    }
+
+    .splide-cont{
+        padding: 0rem 5rem 0rem 5rem;
     }
 
     .splide-cont {
@@ -1006,6 +1099,8 @@ select {
     }
 
     /*FILTERS*/
+    #filterButton {
+        margin-left: 2rem;
     .filter-btn-container{
         all: unset;
     }
@@ -1065,8 +1160,13 @@ select {
     }
 
     .prod-display {
+
+    .prod-display {
         margin-left: 15rem;
     }
+
+
+}
     .main-container {
         padding-bottom: 10rem;
     }
