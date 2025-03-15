@@ -248,22 +248,35 @@ include "connection.php";
         let selectedCategory = "";
 
         document.addEventListener('DOMContentLoaded', () => {
-            //get parent container of categories
-            const container = document.querySelector('.categories-desk');
+            //get category containers
+            const desktopContainer = document.querySelector('.categories-desk'); // Desktop container
+            const mobileContainer = document.querySelector('.categories-mobile'); // Mobile container
 
-            // Delegate the event to the container, because .category is rendered out dynamically with PHP
-            container.addEventListener('click', (event) => {
-                if (event.target.classList.contains('category')) {
-                    //get content inside of category (the value)
-                    const category = event.target.innerText.trim();
 
-                    //insert value into selectedCategory
-                    selectedCategory = category; 
+            // Desktop container event listener
+            if (desktopContainer) {
+                desktopContainer.addEventListener('click', (event) => {
+                    if (event.target.classList.contains('category')) {
+                        //get content within the category (its value)
+                        const category = event.target.innerText.trim();
+                        //assign to selectedCategory parameter
+                        selectedCategory = category;
+                        //call product load again - with no other filters attached
+                        loadProducts(selectedCategory, '', '', '');
+                    }
+                });
+            }
 
-                    // Load products for the selected category only
-                    loadProducts(selectedCategory, '', '', '');
-                }
-            });
+            // Mobile container event listener
+            if (mobileContainer) {
+                mobileContainer.addEventListener('click', (event) => {
+                    if (event.target.classList.contains('category-mob')) {
+                        const category = event.target.innerText.trim();
+                        selectedCategory = category;
+                        loadProducts(selectedCategory, '', '', '');
+                    }
+                });
+            }
         });
 
         // HANDLE FILTERS:
@@ -280,7 +293,7 @@ include "connection.php";
             }
 
             // Remove trailing comma
-            selectedColours = selectedColours.replace(/,$/, ''); 
+            selectedColours = selectedColours.replace(/,$/, '');
 
             const brandInputs = document.getElementsByClassName('brandCheckbox');
             let selectedBrands = "";
@@ -291,7 +304,7 @@ include "connection.php";
                     selectedBrands += brandInputs[i].value + ",";
                 }
             }
-            selectedBrands = selectedBrands.replace(/,$/, ''); 
+            selectedBrands = selectedBrands.replace(/,$/, '');
 
             // Call loadProducts with applied filters
             loadProducts(selectedCategory, selectedColours, selectedBrands, '');
@@ -334,7 +347,7 @@ include "connection.php";
                 const container = document.getElementById('prod-container');
 
                 // Clear the container - clears each time so that duplicate products are not shown
-                container.innerHTML = ''; 
+                container.innerHTML = '';
 
                 // Populate container with product items
                 if (productList.length > 0) {
@@ -384,14 +397,14 @@ include "connection.php";
                 console.error("Failed to load products.");
             };
 
-            xmlhttp.open("GET", requestUrl, true); 
+            xmlhttp.open("GET", requestUrl, true);
             xmlhttp.send();
         }
 
         // Function to clear filters
         function clearFilters() {
             // Reset the product list
-            loadProducts('', '', ''); 
+            loadProducts('', '', '');
 
             // Uncheck all checkboxes
             const colourCheckboxes = document.querySelectorAll('.colourCheckbox');
