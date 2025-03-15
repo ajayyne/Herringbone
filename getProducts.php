@@ -3,26 +3,32 @@ include "connection.php";
 include "Classes.php";
 
 //get query string paramters
+$category = isset($_GET['category']) ? $_GET['category'] : '';
 $colour = isset($_GET['colour']) ? $_GET['colour'] : '';
 $brand = isset($_GET['brand']) ? $_GET['brand'] : '';
 $price = isset($_GET['price']) ? $_GET['price'] : '';
-
 $getProducts = "SELECT * FROM products as p
     LEFT JOIN product_option as po ON po.ProductID = p.ProductID
     LEFT JOIN image as i ON i.ProdOptionID = po.ProdOptionID
     LEFT JOIN brands as b ON p.BrandID = b.BrandID
+    LEFT JOIN categories as c ON p.CategoryID = c.CategoryID
     WHERE po.isAvailable = 1";
 
-    //append the above select statement based on the filters in the query string
-    if ($colour != '')
-    {
-        //find_in_set checks the comma seperated list and checks for each colour in the specified column
-        $getProducts .=  " AND FIND_IN_SET(colour, '" . $colour . "')";
-    }
-    if ($brand != '')
-    {
-        $getProducts .=  " AND FIND_IN_SET(brandName, '" . $brand . "')";
-    }  
+if($category != ''){
+    $getProducts .= " AND FIND_IN_SET(CategoryName, '" . $category . "')";
+}
+if ($colour != '') {
+    // Appending the condition for colour
+    $getProducts .= " AND FIND_IN_SET(colour, '" . $colour . "')";
+}
+if ($brand != '') {
+    // Appending the condition for brand
+    $getProducts .= " AND FIND_IN_SET(brandName, '" . $brand . "')";
+}
+
+// Add GROUP BY at the end to ensure only unique products are showing (don't show their multiple options)
+$getProducts .= " GROUP BY p.ProductID";
+
     /*if ($price != '')
     {
         $getProducts .=  " AND price = '" . $price . "'";

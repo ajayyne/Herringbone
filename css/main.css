@@ -542,19 +542,18 @@ footer h6 {
     width: 80%;
 }
 
-.opening-times {
 
 .opening-times {
     margin-top: 2rem;
 }
 
-.opening-times .times {
+
 
 .opening-times .times {
     margin-left: 1.5rem;
 }
 
-.details {
+
 
 .details {
     align-items: start;
@@ -611,7 +610,7 @@ form {
     border-radius: 0px 0px 8px 8px;
 }
 
-form input {
+
 
 form input {
     border-radius: 8px;
@@ -623,23 +622,19 @@ form input {
 form input:hover,
 form input:focus,
 form input:active {
-
-form input:hover,
-form input:focus,
-form input:active {
     border: 2px solid var(--darkest-blue);
     border-radius: 7px;
     outline: none;
     cursor: pointer;
 }
 
-.message {
+
 
 .message {
     height: 8rem;
 }
 
-form .send {
+
 
 form .send {
     margin: 2rem 0rem 1rem 0rem;
@@ -653,9 +648,6 @@ form .send {
     transition: letter-spacing 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-form .send:hover,
-form .send:active,
-form .send:focus {
 
 form .send:hover,
 form .send:active,
@@ -732,15 +724,11 @@ select {
     border-radius: 5px;
 }
 
-#filterButton:hover,
-#filterButton:focus {
-    transform: scale(0.7);
-    padding: 0.1rem 3rem 0.1rem 3rem;
-}
+
 .filters-mob{
     width: 100vw !important;
     display: flex;
-    justify-content: start;
+    justify-content: start !important;
 }
 
 #filterButton:hover,
@@ -825,6 +813,9 @@ select {
     min-width: 250px;
     max-width: 300px;
     transform: scale(0.95);
+}
+.product:hover{
+    cursor: pointer;
 }
 
 .product-img {
@@ -1101,11 +1092,12 @@ select {
     /*FILTERS*/
     #filterButton {
         margin-left: 2rem;
+    }
     .filter-btn-container{
         all: unset;
     }
     .filters-mob{
-       all: unset;
+       width: unset !important;
     }
 
     #filterButton {
@@ -1160,16 +1152,12 @@ select {
     }
 
     .prod-display {
-
-    .prod-display {
         margin-left: 15rem;
     }
 
 
-}
+
     .main-container {
         padding-bottom: 10rem;
     }
-    
-
 }

@@ -78,8 +78,10 @@ include "connection.php";
             <?php
             $getCategories = "SELECT CategoryName FROM categories";
             $runCategories = mysqli_query($connection, $getCategories);
+            //used to assign unique id to each category
+            $catCounter = 0;
             while ($listCategories = mysqli_fetch_assoc($runCategories)) {
-                echo "<p class='category-mob'>{$listCategories['CategoryName']}</p>";
+                echo "<p class='category-mob' id='category" . $catCounter . "'>{$listCategories['CategoryName']}</p>";
             }
             ?>
         </div>
@@ -238,193 +240,179 @@ include "connection.php";
     </footer>
 
     <script>
-        //function runs when 'Apply Filters' is clicked
+
+        //filters and categories are independant of eachother
+
+        //HANDLE CATEGORIES FIRST:
+        // Global scope for selected category
+        let selectedCategory = "";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            //get parent container of categories
+            const container = document.querySelector('.categories-desk');
+
+            // Delegate the event to the container, because .category is rendered out dynamically with PHP
+            container.addEventListener('click', (event) => {
+                if (event.target.classList.contains('category')) {
+                    //get content inside of category (the value)
+                    const category = event.target.innerText.trim();
+
+                    //insert value into selectedCategory
+                    selectedCategory = category; 
+
+                    // Load products for the selected category only
+                    loadProducts(selectedCategory, '', '', '');
+                }
+            });
+        });
+
+        // HANDLE FILTERS:
         function applyFilters() {
-            //holds all colour inputs in an array
+            //get all checkboxes
             const colourInputs = document.getElementsByClassName('colourCheckbox');
-            //create string variable to hold query string
             let selectedColours = "";
-            //loop through colour inputs
-            let i = 0;
-            for (i = 0; i < colourInputs.length; i++) {
-                let colour = colourInputs[i];
-                //if colour is selected, add it to query string
-                if (colour.checked) {
-                    selectedColours += colour.value + ",";
+
+            // Collect selected colours, loop through and get checked boxes
+            for (let i = 0; i < colourInputs.length; i++) {
+                if (colourInputs[i].checked) {
+                    selectedColours += colourInputs[i].value + ",";
                 }
             }
 
-            //trim off ',' at the end of the query string.
-            // The comma needs trimmed off of the query string
-            selectedColours = selectedColours.replace(/,$/, '');
+            // Remove trailing comma
+            selectedColours = selectedColours.replace(/,$/, ''); 
 
             const brandInputs = document.getElementsByClassName('brandCheckbox');
             let selectedBrands = "";
-            for (i = 0; i < brandInputs.length; i++) {
-                let brand = brandInputs[i];
-                if (brand.checked) {
-                    selectedBrands += brand.value + ",";
+
+            // Collect selected brands
+            for (let i = 0; i < brandInputs.length; i++) {
+                if (brandInputs[i].checked) {
+                    selectedBrands += brandInputs[i].value + ",";
                 }
             }
-            //call loadProducts to re-load the products with applied filters
-            loadProducts(selectedColours, selectedBrands, '');
+            selectedBrands = selectedBrands.replace(/,$/, ''); 
+
+            // Call loadProducts with applied filters
+            loadProducts(selectedCategory, selectedColours, selectedBrands, '');
         }
 
-
-
-        function loadProducts(colour, brand, price) {
-
-            //AJAX request
-            const xmlhttp = new XMLHttpRequest();
-            xmlhttp.onload = function () {
-                //parse array of products
-                //productList contains an array of products + all their info
-                const productList =
-                    JSON.parse(this.responseText);
-
-
-                const Container = document.getElementById('prod-container');
-                //set container to empty every time - when fitlers are selected, this helps population of the div with the correct content - if it was not emptied, old content would still show when filtering
-                Container.innerHTML = '';
-
-                //loop through each product object in the array
-                for (let i = 0; i < productList.length; i++) {
-
-                    // Create a div for each product
-                    const productDiv = document.createElement('div');
-                    productDiv.classList.add('product', 'radius');
-
-                    //create image element
-                    const imgElement = document.createElement('img');
-                    imgElement.setAttribute('src', productList[i].Image);
-                    imgElement.setAttribute('alt', productList[i].Name);
-                    imgElement.classList.add('radius')
-
-                    //append image element to parent container (productDiv)
-                    productDiv.appendChild(imgElement);
-
-                    //create product name element
-                    const nameElement = document.createElement('h6');
-                    productDiv.appendChild(nameElement);
-                    //setting product name inside of nameElement
-                    nameElement.innerHTML = productList[i].Name;
-                    //create div to hold price & brand, flex these to be next to eachother
-                    const priceHolder = document.createElement('div');
-                    priceHolder.classList.add('price-holder');
-                    //append to parent
-                    productDiv.appendChild(priceHolder);
-
-
-
-                    //create brand name element
-                    const brandElement = document.createElement('p');
-                    priceHolder.appendChild(brandElement);
-                    brandElement.innerHTML = productList[i].Brand;
-
-
-                    //create description paragraph
-                    const priceElement = document.createElement('p');
-                    priceElement.innerHTML = '£' + productList[i].Price;
-                    priceHolder.appendChild(priceElement);
-                    priceElement.classList.add('price')
-
-
-                    // Create and append description
-                    // const descriptionElement = document.createElement('p');
-                    // descriptionElement.innerHTML = productList[i].Description;
-                    // descriptionElement.classList.add('limited-lines');
-                    // //appending to parent container
-                    // productDiv.appendChild(descriptionElement);
-
-                    //create 'add to cart button'
-                    const cartButton = document.createElement('button');
-                    cartButton.innerHTML = "ADD TO CART";
-                    cartButton.classList.add('cart-btn')
-                    productDiv.appendChild(cartButton);
-
-                    // Append the individual product div to the parent - Container
-                    Container.appendChild(productDiv);
-                }
-
-            }
-
-            //Build request URL, based on the parameters passed to this function
-            //example request might be something like getProducts.php?colour=red&brand=nike&price=&lt;15
+        // Function to load products based on parameters
+        function loadProducts(category = '', colour = '', brand = '', price = '') {
+            // Build the request URL
             let requestUrl = 'getProducts.php';
 
-            if (colour != '' || brand != '' || price != '') {
-                requestUrl += '?';
+            // Include category if clicked
+            if (category !== '') {
+                requestUrl += `?category=${encodeURIComponent(category)}`;
             }
 
-            if (colour != '') {
-                requestUrl += 'colour=' + colour + '&';
+            // Append filters to the request URL
+            if (colour !== '' || brand !== '' || price !== '') {
+                requestUrl += category !== '' ? '&' : '?'; // Add '&' if category already exists
+                if (colour !== '') {
+                    requestUrl += `colour=${encodeURIComponent(colour)}&`;
+                }
+                if (brand !== '') {
+                    requestUrl += `brand=${encodeURIComponent(brand)}&`;
+                }
+                if (price !== '') {
+                    requestUrl += `price=${encodeURIComponent(price)}`;
+                }
             }
 
-            if (brand != '') {
-                requestUrl += 'brand=' + brand + '&';
-            }
-
-            if (price != '') {
-                requestUrl += 'price=' + price;
-            }
+            // Remove trailing '&' from the URL
+            requestUrl = requestUrl.replace(/&$/, '');
 
 
+            // AJAX request to fetch products
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function () {
+                const productList = JSON.parse(this.responseText);
 
+                //get products container from HTML
+                const container = document.getElementById('prod-container');
 
-            //code that outputs a message when NO products are found that match filter criteria
+                // Clear the container - clears each time so that duplicate products are not shown
+                container.innerHTML = ''; 
 
-            // // Create XMLHttpRequest object
-            // let xmlhttp = new XMLHttpRequest();
+                // Populate container with product items
+                if (productList.length > 0) {
 
-            // // Function to handle the response
-            // xmlhttp.onreadystatechange = function () {
-            //     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            //         // Parse the JSON response
-            //         let response = JSON.parse(xmlhttp.responseText);
+                    productList.forEach((product) => {
+                        const productDiv = document.createElement('div');
+                        productDiv.classList.add('product', 'radius');
 
-            //         // Check if there are products returned
-            //         if (response.products && response.products.length == 0) {
-            //             // Display message if no products found
-            //              alert("No products found with the specified filters.");
-            //         }
-            //     }
-            // };
+                        const imgElement = document.createElement('img');
+                        imgElement.setAttribute('src', product.Image);
+                        imgElement.setAttribute('alt', product.Name);
+                        imgElement.classList.add('radius');
+                        productDiv.appendChild(imgElement);
 
+                        const nameElement = document.createElement('h6');
+                        nameElement.innerText = product.Name;
+                        productDiv.appendChild(nameElement);
 
-            // Define the clearFilters function
-            function clearFilters() {
-                requestUrl = 'getProducts.php';
-                // Clear filters by emptying the parameters
-                loadProducts('', '', '');
+                        const priceHolder = document.createElement('div');
+                        priceHolder.classList.add('price-holder');
 
-                // Get all the checkboxes for colours and brands
-                const colourCheckboxes = document.querySelectorAll('.radio');
-                const brandCheckboxes = document.querySelectorAll('.radio');
+                        const brandElement = document.createElement('p');
+                        brandElement.innerText = product.Brand;
+                        priceHolder.appendChild(brandElement);
 
-                // Uncheck all colour checkboxes
-                colourCheckboxes.forEach(function (checkbox) {
-                    checkbox.checked = false;
-                });
+                        const priceElement = document.createElement('p');
+                        priceElement.innerText = '£' + product.Price;
+                        priceElement.classList.add('price');
+                        priceHolder.appendChild(priceElement);
 
-                // Uncheck all brand checkboxes
-                brandCheckboxes.forEach(function (checkbox) {
-                    checkbox.checked = false;
-                });
-            }
+                        productDiv.appendChild(priceHolder);
 
-            // Attach the clearFilters function to the clearFilters button, add click event listener
-            document.getElementById('clearFilters').addEventListener('click', clearFilters)
+                        const cartButton = document.createElement('button');
+                        cartButton.innerText = "ADD TO CART";
+                        cartButton.classList.add('cart-btn');
+                        productDiv.appendChild(cartButton);
 
+                        container.appendChild(productDiv);
+                    });
+                } else {
+                    container.innerHTML = '<p>No products found.</p>';
+                }
+            };
 
+            //error message
+            xmlhttp.onerror = function () {
+                console.error("Failed to load products.");
+            };
 
-            //send the request
-            xmlhttp.open("GET", requestUrl);
+            xmlhttp.open("GET", requestUrl, true); 
             xmlhttp.send();
-
         }
-        //call function on load
-        loadProducts('', '', '');
+
+        // Function to clear filters
+        function clearFilters() {
+            // Reset the product list
+            loadProducts('', '', ''); 
+
+            // Uncheck all checkboxes
+            const colourCheckboxes = document.querySelectorAll('.colourCheckbox');
+            const brandCheckboxes = document.querySelectorAll('.brandCheckbox');
+
+            colourCheckboxes.forEach((checkbox) => (checkbox.checked = false));
+            brandCheckboxes.forEach((checkbox) => (checkbox.checked = false));
+        }
+
+        // Attach clearFilters function to the "clear filters" button
+        document.addEventListener('DOMContentLoaded', () => {
+            const clearButton = document.getElementById('clearFilters');
+            if (clearButton) {
+                clearButton.addEventListener('click', clearFilters);
+            }
+        });
+
+        // The first initial load of products with no filters
+        loadProducts('', '', '', '');
     </script>
+
     <!-- navigation script -->
     <script>
         document.getElementById('toggle').addEventListener('click', function () {
