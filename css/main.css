@@ -793,14 +793,14 @@ select {
 
 .product-div{
     justify-content: end !important;
-    border: 2px solid red;
     margin-left: 15rem;
     padding: 0rem 3rem 0rem 3rem;
     margin-bottom: 3rem;
+    display: none;
 }
 .product-div div:first-child{
     width: 100%;
-    background-color: var(--dark-blue);
+    background-color: var(--medium-blue);
     color: white;
 }
 .product-div-info{
@@ -1156,7 +1156,9 @@ select {
         justify-content: start !important;
         align-items: start;
         z-index: 1;
+        overflow-y: scroll;
     }
+    ::-webkit-scrollbar { display: none; }
 
     #filters {
         transform: scale(0.8);

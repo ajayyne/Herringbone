@@ -195,9 +195,7 @@ include "connection.php";
         </div>
 
         <div class="prod-display" id="prod-container">
-
-
-
+            <!-- dynamic content here -->
         </div>
 
 
@@ -266,7 +264,6 @@ include "connection.php";
             searchInput.addEventListener("keyup", function (event) {
                 if (event.key === "Enter") {
                     const search = searchInput.value;
-                    alert(search);
                     event.preventDefault();
                     loadProducts(search, '', '', '');
                 }
@@ -343,38 +340,40 @@ include "connection.php";
         }
 
         // Function to load products based on parameters
-        function loadProducts(category = '', colour = '', brand = '', price = '') {
+        function loadProducts(search = '', category = '', colour = '', brand = '', price = '') {
             // Build the request URL
             let requestUrl = 'getProducts.php';
+            let queryString = '';
 
-            // //if search bar was used
-            // if(search != ''){
-            //     requestUrl += `?search=${encodeURIComponent(search)}`;
-            // }
+            //if search bar was used
+            if(search !== ''){
+                queryString += `search=${encodeURIComponent(search)}&`;
+            }
 
             // Include category if clicked
             if (category !== '') {
-                requestUrl += `?category=${encodeURIComponent(category)}`;
+                queryString += `category=${encodeURIComponent(category)}&`;
+            }
+      
+            if (colour !== '') {
+                queryString += `colour=${encodeURIComponent(colour)}&`;
+            }
+            if (brand !== '') {
+                queryString += `brand=${encodeURIComponent(brand)}&`;
+            }
+            if (price !== '') {
+                queryString += `price=${encodeURIComponent(price)}`;
             }
 
-            // Append filters to the request URL
-            if (colour !== '' || brand !== '' || price !== '') {
-                requestUrl += category !== '' ? '&' : '?'; // Add '&' if category already exists
-                if (colour !== '') {
-                    requestUrl += `colour=${encodeURIComponent(colour)}&`;
-                }
-                if (brand !== '') {
-                    requestUrl += `brand=${encodeURIComponent(brand)}&`;
-                }
-                if (price !== '') {
-                    requestUrl += `price=${encodeURIComponent(price)}`;
-                }
-            }
+            // Remove trailing '&' from the querystring
+            queryString = queryString.replace(/&$/, '');
 
-            // Remove trailing '&' from the URL
-            requestUrl = requestUrl.replace(/&$/, '');
-
-
+             // Append filters to the request URL
+             if (queryString !== '')
+             {
+                requestUrl = requestUrl + '?' + queryString;
+             }
+             
             // AJAX request to fetch products
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function () {
