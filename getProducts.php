@@ -20,7 +20,7 @@ $getProducts = "SELECT * FROM products as p
     WHERE po.isAvailable = 1";
 
 if($search != ''){
-    $getProducts .= " AND b.BrandName LIKE '%" . $searchValue . "%'OR p.ProductName LIKE '%" . $searchValue . "%'
+    $getProducts .= " AND b.BrandName LIKE '%" . $search . "%'OR p.ProductName LIKE '%" . $search . "%'
     LIMIT 0, 25";
 }
 
@@ -36,9 +36,6 @@ if ($brand != '') {
     $getProducts .= " AND FIND_IN_SET(brandName, '" . $brand . "')";
 }
 
-
-// Add GROUP BY at the end to ensure only unique products are showing (don't show their multiple options)
-$getProducts .= " GROUP BY p.ProductID";
 
 /*if ($price != '')
 {
