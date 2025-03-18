@@ -143,15 +143,15 @@ include "connection.php";
                             </div>
                             <div class="colours flex flex-even">
                                 <div class="flex colour">
-                                    <input type="radio" class="radio" value="<20" id="userInput">
+                                    <input type="radio" class="radio" value="<20" id="userInput" name="price">
                                     <p>Under £20</p>
                                 </div>
                                 <div class="flex colour">
-                                    <input type="radio" class="radio" value="<30" id="userInput">
+                                    <input type="radio" class="radio" value="<30" id="userInput" name="price">
                                     <p>Under £30</p>
                                 </div>
                                 <div class="flex colour">
-                                    <input type="radio" class="radio" value="<50" id="userInput">
+                                    <input type="radio" class="radio" value="<50" id="userInput" name="price">
                                     <p>Under £50</p>
                                 </div>
                             </div>
@@ -263,9 +263,10 @@ include "connection.php";
 
             searchInput.addEventListener("keyup", function (event) {
                 if (event.key === "Enter") {
-                    const search = searchInput.value;
+                    let search = searchInput.value;
                     event.preventDefault();
-                    loadProducts(search, '', '', '');
+                    clearFilters();
+                    loadProducts(search);
                 }
             });
         });
@@ -291,7 +292,7 @@ include "connection.php";
                         //assign to selectedCategory parameter
                         selectedCategory = category;
                         //call product load again - with no other filters attached
-                        loadProducts(selectedCategory, '', '', '');
+                        loadProducts('', selectedCategory, '', '', '');
                     }
                 });
             }
@@ -336,7 +337,7 @@ include "connection.php";
             selectedBrands = selectedBrands.replace(/,$/, '');
 
             // Call loadProducts with applied filters
-            loadProducts(selectedCategory, selectedColours, selectedBrands, '');
+            loadProducts('', selectedCategory, selectedColours, selectedBrands, '');
         }
 
         // Function to load products based on parameters
@@ -437,11 +438,16 @@ include "connection.php";
             xmlhttp.send();
         }
 
+        function clearFiltersAndLoad()
+        {
+            clearFilters();
+            loadProducts();
+        }
+
         // Function to clear filters
         function clearFilters() {
-            // Reset the product list
-            loadProducts('', '', '');
 
+            alert('hello');
             // Uncheck all checkboxes
             const colourCheckboxes = document.querySelectorAll('.colourCheckbox');
             const brandCheckboxes = document.querySelectorAll('.brandCheckbox');
@@ -454,13 +460,14 @@ include "connection.php";
         document.addEventListener('DOMContentLoaded', () => {
             const clearButton = document.getElementById('clearFilters');
             if (clearButton) {
-                clearButton.addEventListener('click', clearFilters);
+                alert('found');
+                clearButton.addEventListener('click', clearFiltersAndLoad);
             }
         });
 
         // The first initial load of products with no filters
         //search, category, colour, brand, price parameters initially empty
-        loadProducts('', '', '', '');
+        loadProducts();
     </script>
 
     <!-- navigation script -->

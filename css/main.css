@@ -1157,6 +1157,7 @@ select {
         align-items: start;
         z-index: 1;
         overflow-y: scroll;
+        overflow-x: hidden;
     }
     ::-webkit-scrollbar { display: none; }
 
