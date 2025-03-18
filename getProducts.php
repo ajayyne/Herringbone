@@ -2,7 +2,12 @@
 include "connection.php";
 include "Classes.php";
 
+
+// statement used if search input was used on products page
+
 //get query string paramters
+// check if search is included in query string
+$search = isset($_GET['search']) ? $_GET['search'] : '';
 $category = isset($_GET['category']) ? $_GET['category'] : '';
 $colour = isset($_GET['colour']) ? $_GET['colour'] : '';
 $brand = isset($_GET['brand']) ? $_GET['brand'] : '';
@@ -14,7 +19,12 @@ $getProducts = "SELECT * FROM products as p
     LEFT JOIN categories as c ON p.CategoryID = c.CategoryID
     WHERE po.isAvailable = 1";
 
-if($category != ''){
+if($search != ''){
+    $getProducts .= " AND b.BrandName LIKE '%" . $searchValue . "%'OR p.ProductName LIKE '%" . $searchValue . "%'
+    LIMIT 0, 25";
+}
+
+if ($category != '') {
     $getProducts .= " AND FIND_IN_SET(CategoryName, '" . $category . "')";
 }
 if ($colour != '') {
@@ -26,36 +36,38 @@ if ($brand != '') {
     $getProducts .= " AND FIND_IN_SET(brandName, '" . $brand . "')";
 }
 
+
 // Add GROUP BY at the end to ensure only unique products are showing (don't show their multiple options)
 $getProducts .= " GROUP BY p.ProductID";
 
-    /*if ($price != '')
-    {
-        $getProducts .=  " AND price = '" . $price . "'";
-    }
+/*if ($price != '')
+{
+    $getProducts .=  " AND price = '" . $price . "'";
+}
 */
 
 
 
-    $runProducts = mysqli_query($connection, $getProducts);
+$runProducts = mysqli_query($connection, $getProducts);
 
-    //create array to store product objects
-    $products = [];
-    
-    //loop through the products returned from SQL statement, and put them into array by using classes.php
-    $counter = 0;
-    while ($displayProducts = mysqli_fetch_assoc($runProducts)) {
-        $product = new Product();
-        $product -> setName($displayProducts['ProductName']);
-        $product -> setPrice($displayProducts['Price']);
-        $product -> setDescription($displayProducts['Description']);
-        $product -> setImage($displayProducts['ImageURL']);
-        $product -> setBrand($displayProducts['BrandName']);
+//create array to store product objects
+$products = [];
 
-        $products[$counter] = $product;
-        $counter ++;
-    }
+//loop through the products returned from SQL statement, and put them into array by using classes.php
+$counter = 0;
+while ($displayProducts = mysqli_fetch_assoc($runProducts)) {
+    $product = new Product();
+    $product->setName($displayProducts['ProductName']);
+    $product->setPrice($displayProducts['Price']);
+    $product->setDescription($displayProducts['Description']);
+    $product->setImage($displayProducts['ImageURL']);
+    $product->setBrand($displayProducts['BrandName']);
 
-    //send array of products back to products.php through json
-    echo json_encode($products);
+    $products[$counter] = $product;
+    $counter++;
+}
+
+//send array of products back to products.php through json
+echo json_encode($products);
+
 ?>

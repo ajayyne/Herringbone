@@ -41,7 +41,7 @@ include "connection.php";
                 </ul>
                 <div class="icons icons-desk flex flex-even">
                     <div class="search-cont flex">
-                        <input type="text" id="search" class="radius">
+                        <input type="text" id="search" class="radius" name="search">
                         <i class="fa-solid fa-magnifying-glass searchIcon"></i>
                     </div>
                     <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
@@ -57,7 +57,7 @@ include "connection.php";
                 </ul>
                 <div class="icons icons-desk flex flex-even">
                     <div class="search-cont flex">
-                        <input type="text" id="search" class="radius">
+                        <input type="text" id="deskSearch" class="radius" name="search">
                         <i class="fa-solid fa-magnifying-glass searchIcon"></i>
                     </div>
                     <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
@@ -87,98 +87,116 @@ include "connection.php";
         </div>
 
         <!-- generate filters using php/sql -->
-        <div class="filter-cont flex flex-col">
-            <div class="filter-btn-container">
-                <button id="filterButton">FILTERS</button>
-            </div>
-            <div class="filters-mob">
-                <div class="filters flex flex-even" id="filters">
-                    <div class="filtersColours flex flex-col">
-                        <div>
-                            <p><em>COLOUR</em></p>
+         <div class="filter-main">
+            <div class="filter-cont flex flex-col">
+                <div class="filter-btn-container">
+                    <button id="filterButton">FILTERS</button>
+                </div>
+                <div class="filters-mob">
+                    <div class="filters flex flex-even" id="filters">
+                        <div class="filtersColours flex flex-col">
+                            <div>
+                                <p><em>COLOUR</em></p>
+                            </div>
+                            <div class="colours flex flex-col">
+                                <?php
+                                //get all current colours, brands and prices stored in database
+                                $getColours = "SELECT Colour FROM product_option";
+                                //render out colours where colour column has a value
+                                $runColours = mysqli_query($connection, $getColours);
+                                //create counter to make unique id for each input below
+                                $idCounter = 0;
+                                while ($displayColours = mysqli_fetch_assoc($runColours)) {
+                                    if ($displayColours['Colour'] != '') {
+                                        echo "<div class='flex colour'>
+                                            <input type='checkbox' class='radio colourCheckbox' value='{$displayColours['Colour']}' id='chkColour" . $idCounter . "'>
+                                            <p>{$displayColours['Colour']}</p>
+                                        </div>";
+                                        $idCounter++;
+                                    }
+                                }
+                                ?>
+                            </div>
                         </div>
-                        <div class="colours flex flex-col">
-                            <?php
-                            //get all current colours, brands and prices stored in database
-                            $getColours = "SELECT Colour FROM product_option";
-                            //render out colours where colour column has a value
-                            $runColours = mysqli_query($connection, $getColours);
-                            //create counter to make unique id for each input below
-                            $idCounter = 0;
-                            while ($displayColours = mysqli_fetch_assoc($runColours)) {
-                                if ($displayColours['Colour'] != '') {
-                                    echo "<div class='flex colour'>
-                                        <input type='checkbox' class='radio colourCheckbox' value='{$displayColours['Colour']}' id='chkColour" . $idCounter . "'>
-                                        <p>{$displayColours['Colour']}</p>
-                                    </div>";
+                        <div class="filtersBrands flex flex-col">
+                            <div>
+                                <p><em>BRAND</em></p>
+                            </div>
+                            <div class="brands flex flex-col">
+                                <?php
+                                $getBrands = "SELECT BrandName FROM brands";
+                                $runBrands = mysqli_query($connection, $getBrands);
+                                $idCounter = 0;
+                                while ($displayBrands = mysqli_fetch_assoc($runBrands)) {
+                                    echo "<div class='flex flex colour'>
+                                    <input type='checkbox' class='radio brandCheckbox' value='{$displayBrands['BrandName']}' id='chkBrand" . $idCounter . "'>
+                                    <p>{$displayBrands['BrandName']}</p>
+                                </div>";
                                     $idCounter++;
                                 }
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <div class="filtersBrands flex flex-col">
-                        <div>
-                            <p><em>BRAND</em></p>
-                        </div>
-                        <div class="brands flex flex-col">
-                            <?php
-                            $getBrands = "SELECT BrandName FROM brands";
-                            $runBrands = mysqli_query($connection, $getBrands);
-                            $idCounter = 0;
-                            while ($displayBrands = mysqli_fetch_assoc($runBrands)) {
-                                echo "<div class='flex flex colour'>
-                                <input type='checkbox' class='radio brandCheckbox' value='{$displayBrands['BrandName']}' id='chkBrand" . $idCounter . "'>
-                                <p>{$displayBrands['BrandName']}</p>
-                            </div>";
-                                $idCounter++;
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <div class="filtersColours flex flex-col">
-                        <div>
-                            <p><em>PRICE</em></p>
-                        </div>
-                        <div class="colours flex flex-even">
-                            <div class="flex colour">
-                                <input type="radio" class="radio" value="<20" id="userInput">
-                                <p>Under £20</p>
-                            </div>
-                            <div class="flex colour">
-                                <input type="radio" class="radio" value="<30" id="userInput">
-                                <p>Under £30</p>
-                            </div>
-                            <div class="flex colour">
-                                <input type="radio" class="radio" value="<50" id="userInput">
-                                <p>Under £50</p>
+                                ?>
                             </div>
                         </div>
-                    </div>
-                    <div class="filterButtons flex flex-even">
-                        <button id="clearFilters">Clear All</button>
-                        <button id="applyFilters" onclick="applyFilters()">Apply Filters</button>
+                        <div class="filtersColours flex flex-col">
+                            <div>
+                                <p><em>PRICE</em></p>
+                            </div>
+                            <div class="colours flex flex-even">
+                                <div class="flex colour">
+                                    <input type="radio" class="radio" value="<20" id="userInput">
+                                    <p>Under £20</p>
+                                </div>
+                                <div class="flex colour">
+                                    <input type="radio" class="radio" value="<30" id="userInput">
+                                    <p>Under £30</p>
+                                </div>
+                                <div class="flex colour">
+                                    <input type="radio" class="radio" value="<50" id="userInput">
+                                    <p>Under £50</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filterButtons flex flex-even">
+                            <button id="clearFilters">Clear All</button>
+                            <button id="applyFilters" onclick="applyFilters()">Apply Filters</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            
 
 
 
-            <div class="categories-desk">
-                <!-- CATEGORIES - IMPORT FROM PHP -->
-                <?php
-                $getCategories = "SELECT CategoryName FROM categories";
-                $runCategories = mysqli_query($connection, $getCategories);
-                while ($listCategories = mysqli_fetch_assoc($runCategories)) {
-                    echo "<p class='category'>{$listCategories['CategoryName']}</p>";
-                }
-                ?>
+                <div class="categories-desk">
+                    <!-- CATEGORIES - IMPORT FROM PHP -->
+                    <?php
+                    $getCategories = "SELECT CategoryName FROM categories";
+                    $runCategories = mysqli_query($connection, $getCategories);
+                    while ($listCategories = mysqli_fetch_assoc($runCategories)) {
+                        echo "<p class='category'>{$listCategories['CategoryName']}</p>";
+                    }
+                    ?>
+                </div>
             </div>
         </div>
 
 
+        <!-- header of product page -->
+        <div class="product-div flex">
+            <div class="flex-center radius">
+                <div class="product-div-info">
+                    <h1>LOCALLY SOURCED</h1>
+                    </br>
+                    <p>Herringbone takes pride in sourcing local Scottish products, some which are handmade by talented
+                        makers.<br>Herringbone takes pride in sourcing local Scottish products, some which are handmade
+                        by talented makers.</p>
+                </div>
+                <img src="images/gallery/shop3.jpg">
+            </div>
+        </div>
 
         <div class="prod-display" id="prod-container">
+
+
 
         </div>
 
@@ -186,7 +204,7 @@ include "connection.php";
 
     </div>
 
-    <footer>
+    <footer class="products-footer">
         <div class="flex-center">
             <img src="images/cards.jpg" class="cards">
         </div>
@@ -240,6 +258,20 @@ include "connection.php";
     </footer>
 
     <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            //search bar:
+            const searchInput = document.getElementById("deskSearch");
+
+            searchInput.addEventListener("keyup", function (event) {
+                if (event.key === "Enter") {
+                    const search = searchInput.value;
+                    alert(search);
+                    event.preventDefault();
+                    loadProducts(search, '', '', '');
+                }
+            });
+        });
 
         //filters and categories are independant of eachother
 
@@ -314,6 +346,11 @@ include "connection.php";
         function loadProducts(category = '', colour = '', brand = '', price = '') {
             // Build the request URL
             let requestUrl = 'getProducts.php';
+
+            // //if search bar was used
+            // if(search != ''){
+            //     requestUrl += `?search=${encodeURIComponent(search)}`;
+            // }
 
             // Include category if clicked
             if (category !== '') {
@@ -423,6 +460,7 @@ include "connection.php";
         });
 
         // The first initial load of products with no filters
+        //search, category, colour, brand, price parameters initially empty
         loadProducts('', '', '', '');
     </script>
 
