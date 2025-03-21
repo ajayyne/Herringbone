@@ -301,9 +301,9 @@ include "connection.php";
             if (mobileContainer) {
                 mobileContainer.addEventListener('click', (event) => {
                     if (event.target.classList.contains('category-mob')) {
-                        const category = event.target.innerText.trim();
-                        selectedCategory = category;
-                        loadProducts(selectedCategory, '', '', '');
+                        const categoryMob = event.target.innerText.trim();
+                        selectedCategory = categoryMob;
+                        loadProducts('', selectedCategory, '', '', '');
                     }
                 });
             }
@@ -409,6 +409,8 @@ include "connection.php";
                         const brandElement = document.createElement('p');
                         brandElement.innerText = product.Brand;
                         priceHolder.appendChild(brandElement);
+                        brandElement.classList.add('product-brand');
+
 
                         const priceElement = document.createElement('p');
                         priceElement.innerText = '£' + product.Price;
@@ -446,8 +448,6 @@ include "connection.php";
 
         // Function to clear filters
         function clearFilters() {
-
-            alert('hello');
             // Uncheck all checkboxes
             const colourCheckboxes = document.querySelectorAll('.colourCheckbox');
             const brandCheckboxes = document.querySelectorAll('.brandCheckbox');
@@ -460,7 +460,6 @@ include "connection.php";
         document.addEventListener('DOMContentLoaded', () => {
             const clearButton = document.getElementById('clearFilters');
             if (clearButton) {
-                alert('found');
                 clearButton.addEventListener('click', clearFiltersAndLoad);
             }
         });

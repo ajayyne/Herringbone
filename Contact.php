@@ -63,7 +63,7 @@
 
 
     <main>
-        <div class="flex flex-col">
+        <div class="flex flex-col contact-desktop">
             <div class="form-cont flex-center">
                 <div class="contact">
                     <div class="contact-title">
@@ -71,21 +71,21 @@
                     </div>
                     <form method="POST" class="flex flex-col">
                         <div>
-                            <label for="name">Name</label>
+                            <em><label for="name">Name</label></em>
                             <br>
-                            <input name="name" type="text" required>
+                            <input name="name" type="text" class="form-name" required placeholder="Full Name">
                         </div>
                         <br>
                         <div>
-                            <label for="email">Email Address</label>
+                            <em><label for="email">Email Address</label></em>
                             <br>
-                            <input name="email" type="email" required>
+                            <input name="email" type="email" required placeholder="email@example.com" class="form-email">
                         </div>
                         <br>
                         <div>
-                            <label for="message">Message</label>
+                            <em><label for="message">Message</label></em>
                             <br>
-                            <input name="message" type="text" required class="message">
+                            <textarea name="message" type="text" required class="message" placeholder="Write your message here..."></textarea>
                         </div>
                         <br>
                         <input type="submit" value="SEND" class="send">

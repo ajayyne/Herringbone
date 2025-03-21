@@ -1,5 +1,5 @@
 <!-- php include -->
- <?php include 'connection.php' ?>
+<?php include 'connection.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="css/main.css" rel="stylesheet">
 </head>
 
@@ -70,61 +70,39 @@
             <h1>HERRINGBONE</br>GIFTS</h1>
         </div>
 
-        <!-- PHP HERE TO GRAB PRODUCTS FROM DB -->
-         
+
+        <h2 class="bestseller-title">EXPLORE OUR BESTSELLERS</h2>
+
 
         <div class="splide-cont flex-center">
             <section class="splide" aria-label="Carousel">
                 <div class="splide__track">
                     <div class="splide__list">
-                        <div class="splide__slide">
-                            <div class="bs-item flex flex-col radius">
-                                <img src="images/products/candles/Skye_whiskey.png">
-                                <p class="overlay"><em>SKY CANDLE CO</em></p>
-                                <div class="bs-desc">
-                                    <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
+
+                    <!-- PHP HERE TO GRAB PRODUCTS FROM DB -->
+                    <?php
+                    $getBestsellers = "SELECT ProductName, BrandName, Price, ImageURL FROM products AS p
+                    LEFT JOIN brands as b ON b.BrandID = p.BrandID
+                    LEFT JOIN product_option as po ON po.ProductID = p.ProductID
+                    LEFT JOIN image as i ON po.ProdOptionID = i.ProdOptionID
+                    WHERE Bestseller = 1";
+
+                    $runBestsellers = mysqli_query($connection, $getBestsellers);
+                    while ($displayBestsellers = mysqli_fetch_array($runBestsellers)) {
+                        echo "<div class='splide__slide'>
+                                <div class='bs-item flex flex-col radius'>
+                                    <img src='{$displayBestsellers['ImageURL']}'>
+                                    <p class='overlay'><em>{$displayBestsellers['BrandName']}</em></p>
+                                    <div class='bs-desc'>
+                                        <p><strong>{$displayBestsellers['BrandName']}</strong><br><span class='bestseller-name'>{$displayBestsellers['ProductName']}</span><br>£{$displayBestsellers['Price']}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="splide__slide">
-                            <div class="bs-item flex flex-col radius">
-                            <img src="images/products/candles/Skye_whiskey.png">
-                            <p class="overlay"><em>SKY CANDLE CO</em></p>
-                                <div class="bs-desc">
-                                    <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="splide__slide">
-                            <div class="bs-item flex flex-col radius">
-                            <img src="images/products/candles/Skye_whiskey.png">
-                            <p class="overlay"><em>SKY CANDLE CO</em></p>
-                                <div class="bs-desc">
-                                    <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="splide__slide">
-                            <div class="bs-item flex flex-col radius">
-                            <img src="images/products/candles/Skye_whiskey.png">
-                            <p class="overlay"><em>SKY CANDLE CO</em></p>
-                                <div class="bs-desc">
-                                    <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="splide__slide">
-                            <div class="bs-item flex flex-col radius">
-                            <img src="images/products/candles/Skye_freshmint.png">
-                            <p class="overlay"><em>MASSAGE CANDLE</em></p>
-                                <div class="bs-desc">
-                                    <p><strong>BRAND NAME</strong><br>Product Name<br>£12.99</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                            </div>";
+                    } ?>
+               </div>
+            </div>
+        </div>
+        </section>
         </div>
 
 
@@ -133,7 +111,11 @@
         <div class="flex-center bio" data-aos="fade-in" data-aos-duration="1000">
             <div class="align bio-about radius">
                 <h2>All About Us</h2>
-                <p>At Herringbone, we stock the best locally sources Scottish gifts. Our ranges include Candles, Bags, Home Decor, Jewellery and more! <br> You're sure to find something truly unique. <br> We also own the cafe located upstairs from the gift shop - The No. 56 Cafe, here you can find delicious savouries and sweet treats, with coffee from Forth Bridge Roasters in Fife.<br> We hope to see you in the shop soon!</p>
+                <p>At Herringbone, we stock the best locally sources Scottish gifts. Our ranges include Candles, Bags,
+                    Home Decor, Jewellery and more! <br> You're sure to find something truly unique. <br> We also own
+                    the cafe located upstairs from the gift shop - The No. 56 Cafe, here you can find delicious
+                    savouries and sweet treats, with coffee from Forth Bridge Roasters in Fife.<br> We hope to see you
+                    in the shop soon!</p>
             </div>
             <div>
                 <img src="images/home-header.jpg" at="Herringbone Staff" class="radius">
@@ -170,7 +152,7 @@
                     <p>Mon-Sat: 10-4<br>Sat: 10-4<br>Sun: 10-4</p>
                 </div>
             </div>
-            <div class="flex flex-between">
+            <div class="flex flex-between ft-info2">
                 <div class="footer-links links">
                     <h6>Important Links</h6>
                     <a>
@@ -213,6 +195,7 @@
             var splide = new Splide('.splide', {
                 perPage: 4,
                 gap: '1.5rem',
+                
                 breakpoints: {
                     800: {
                         perPage: 3,
@@ -236,8 +219,8 @@
         });
     </script>
     <script>
-  AOS.init();
-</script>
+        AOS.init();
+    </script>
 </body>
 
 </html>
