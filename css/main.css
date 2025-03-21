@@ -891,6 +891,7 @@ select {
 .product h6, .product p{
     padding: 0rem 0.5rem 0rem 0.5rem;
 }
+
 .price-holder{
     display: flex;
     justify-content: space-between;

@@ -1,5 +1,5 @@
 <?php include 'connection.php';
-// $_GET = id / category of item;
+$productID = $_GET['id'];
 $itemCategory = 2;
 ?>
 <!DOCTYPE html>

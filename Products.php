@@ -390,14 +390,22 @@ include "connection.php";
                 if (productList.length > 0) {
 
                     productList.forEach((product) => {
+
+                        // wrap each item in an a tag
+                        const link = document.createElement('a');
+                        link.setAttribute('href', 'Item.php?id=' + product.productID);
+                        
+
                         const productDiv = document.createElement('div');
                         productDiv.classList.add('product', 'radius');
+                        productDiv.appendChild(link);
 
                         const imgElement = document.createElement('img');
                         imgElement.setAttribute('src', product.Image);
                         imgElement.setAttribute('alt', product.Name);
                         imgElement.classList.add('radius');
                         productDiv.appendChild(imgElement);
+                        link.appendChild(imgElement);
 
                         const nameElement = document.createElement('h6');
                         nameElement.innerText = product.Name;

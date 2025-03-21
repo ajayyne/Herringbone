@@ -5,8 +5,12 @@ class Product {
         public $Description;
         public $Image;
         public $Brand;
+        public $productID;
     
 
+        function setID($productID){
+            $this -> productID = $productID;
+        }
         function setName($name) {
             $this -> Name = $name;
         }
@@ -24,6 +28,9 @@ class Product {
         }
         
 
+        function getID(){
+            return $this -> productID;
+        }
         function getName(){
             return $this -> Name;
         }
