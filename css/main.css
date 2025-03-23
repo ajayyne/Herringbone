@@ -99,8 +99,11 @@ a {
 a:hover {
     cursor: pointer;
 }
+.desk-nav a:hover{
+    color: white;
+}
 
-a::after {
+.desk-nav a::after {
     content: '';
     display: block;
     width: 0;
@@ -110,6 +113,7 @@ a::after {
     position: absolute;
     bottom: -2px;
     left: 0;
+    letter-spacing: 1em;
 }
 
 /*expands to full width of container on hover*/
@@ -926,15 +930,10 @@ select {
 }
 .item-cont{
     padding: 1.5rem;
-    background-color: var(--light-blue);
     border-radius: 10px;
+    border: 2px solid black;
 }
-.item-img img{
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 1.5rem;
-}
+
 .item-content h1{
     font-size: 1.5rem;
 }
@@ -952,10 +951,7 @@ select {
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
 }
-/* #toggle-btn{
-    text-decoration: underline;
-    text-underline-offset: 2px;
-} */
+
 #description-wrapper {
     overflow: hidden; 
     max-height: 3.2em; 
@@ -1004,6 +1000,26 @@ select {
     padding: 0.3rem 0rem 0.3rem 0rem;
     margin-top: 0.3rem;
 }
+#slider1{
+    padding: 0rem;
+}
+#slider1 li{
+    opacity: 1 !important;
+    padding: 0rem;
+}
+#slider1 .item-list{
+    width: 100%;
+}
+#slider1 .item-img img{
+    width: 100%;
+    border-radius: 8px;
+    height: 18rem;
+}
+#slider1 .splide__pagination{
+    display: none;
+}
+
+
 .recomend{
    margin-top: 3.5rem;
    text-align: center;
@@ -1107,10 +1123,7 @@ select {
     width: 50%;
     margin-top: -2rem;
 }
-.item-img img{
-    width: 90%;
-    height: 25rem;
-}
+
 .item-content h1{
     font-size: 1.2rem;
     font-weight: bold;
@@ -1387,26 +1400,40 @@ select {
     }
     
 /* ITEM PAGE */
+#slider1{
+    width: 43% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2.5rem;
+}
+#slider1-list{
+    height: 20rem;
+}
+#slider1 .item-img img{
+    width: 100%;
+    height: 100% !important;
+}
+
+
 .item-main{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .item-cont{
-    width: 80%;
-    height: 25rem;
+    width: 100%;
+    height: fit-content;
 }
 .item-content{
     margin-top: 3rem;
+    padding: 0rem 5rem 0rem 3rem;
+    margin-left: 4rem
 }
 .item-content h1{
     font-size: 1.2rem;
 }
-.item-img img{
-    height: 20rem;
-    width: 20rem;
-    margin-right: 3rem;
-}
+
 .item-cont input{
     width: 4rem;
     padding-bottom: 0.2rem;
@@ -1417,8 +1444,12 @@ select {
     transform: scale(0.9);
 }
 
-
-
-
 /* END */
+}
+
+@media screen and (min-width: 1200px){
+
+#slider1{
+    width: 35% !important;
+}
 }

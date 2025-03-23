@@ -54,7 +54,9 @@ $products = [];
 $counter = 0;
 while ($displayProducts = mysqli_fetch_assoc($runProducts)) {
     $product = new Product();
+    $product->setProdOption($displayProducts['ProdOptionID']);
     $product->setID($displayProducts['ProductID']);
+    $product->setCategory($displayProducts['CategoryID']);
     $product->setName($displayProducts['ProductName']);
     $product->setPrice($displayProducts['Price']);
     $product->setDescription($displayProducts['Description']);

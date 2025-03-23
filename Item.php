@@ -1,6 +1,6 @@
 <?php include 'connection.php';
-$productID = $_GET['id'];
-$itemCategory = 2;
+$prodOptionID = $_GET['id'];
+$itemCategory = $_GET['category'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,51 +67,85 @@ $itemCategory = 2;
 
     <main class="item-main">
 
-        <div class="item-cont flex flex-col">
-            <div class="item-img">
-                <img src="images/products/candles/Skye_freshmint.png">
-            </div>
-            <div class="item-content">
-                <h1>Wild Mint & Thyme Container Candle</h1>
-                <h2>Skye Candle Company</h2>
-                <div id="description-wrapper">
-                    <p id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et iaculis ante.
-                        Nulla auctor turpis nec diam consectetur pulvinar. Quisque mattis ornare mauris non viverra.
-                        Nunc lobortis pellentesque lectus, vel consectetur nisl sagittis vitae. Nam vestibulum ligula a
-                        felis egestas pellentesque. Aenean dictum vel augue sed finibus. Sed sed nisi tortor.</p>
-                </div>
-                <em>
-                    <p id="toggle-btn" onclick="toggleDescription()">See More...</p>
-                </em>
-                <br>
+        <?php
+        // statement to get all data for product with matching ID
+        $getItem = "SELECT p.ProductID, p.ProductName, p.Description, p.Price, b.BrandName, i.ImageURL, po.Colour FROM product_option as po
+        LEFT JOIN products as p ON po.ProductID = p.ProductID 
+        LEFT JOIN image as i ON i.ProdOptionID = po.ProdOptionID 
+        LEFT JOIN brands as b ON p.BrandID = b.BrandID 
+        LEFT JOIN categories as c ON p.CategoryID = c.CategoryID 
+        WHERE po.ProdOptionID = $prodOptionID";
+        $runItem = mysqli_query($connection, $getItem);
+        $displayItem = mysqli_fetch_assoc($runItem);
+        if ($displayItem) {
+            echo "<div class='item-cont flex flex-col'>
+            <div id='slider1' class='splide'>
+                <div class='splide__track'>
+                    <ul class='splide__list item-list'>";
 
-                <!-- only show if there are product options -->
-                <div class="color-display flex">
-                    <p>red</p>
-                    <p>blue</p>
-                </div>
+            $imageQuery = "SELECT i.ImageURL from image as i 
+            LEFT JOIN product_option as po ON po.ProdOptionID = i.ProdOptionID 
+            WHERE po.ProdOptionID = $prodOptionID";
+            $runimages = mysqli_query($connection, $imageQuery);
+            while ($displayImages = mysqli_fetch_assoc($runimages)) {
+                // echo "<div class='item-img'>
+                echo "<li class='splide__slide item-img'>
+                        <img src='{$displayImages['ImageURL']}' alt='Product Image'>
+                    </li>";
+                // </div>
+            }
 
-                <div class="price-quant flex">
-                    <div>
-                        <p>£12.00</p>
-                    </div>
-                    <div>
-                        <label for="quantity" class="quant-label">Quantity</label>
-                        <input name="quantity" type="number" required min="1" max="5">
+            // echo "<div class='item-img'>
+            //         <img src='{$displayItem['ImageURL']}'>
+            //     </div>
+            echo "      </ul>
                     </div>
                 </div>
-                <div class="item-btn">
-                    <button>ADD TO BASKET</button>
+                    <div class='item-content'>
+                    <h1>{$displayItem['ProductName']}</h1>
+                    <h2>{$displayItem['BrandName']}</h2>
+                    <div id='description-wrapper'>
+                        <p id='description'>{$displayItem['Description']}</p>
+                    </div>
+                    <em>
+                        <p id='toggle-btn' onclick='toggleDescription()'>See More...</p>
+                    </em>
+                    <br>
+                    <div class='color-display flex'>";
+
+            $productID = $displayItem['ProductID'];
+            $getColours = "SELECT po.Colour, po.ProdOptionID from product_option as po
+                    WHERE po.ProductID = $productID";
+            $runColours = mysqli_query($connection, $getColours);
+            while($displayColours = mysqli_fetch_assoc($runColours)){
+                echo "<a href='Item.php?id={$displayColours['ProdOptionID']}&category=" . $itemCategory .  "'><p>{$displayColours['Colour']}</p></a>";
+            }
+
+            echo "</div>
+                    <div class='price-quant flex'>
+                        <div>
+                            <p>£{$displayItem['Price']}</p>
+                        </div>
+                        <div>
+                            <label for='quantity' class='quant-label'>Quantity</label>
+                            <input name='quantity' type='number' required min='1' max='5'>
+                        </div>
+                    </div>
+                    <div class='item-btn'>
+                        <button>ADD TO BASKET</button>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </div>";
+        }
+        ?>
+
 
         <em>
             <h3 class="recomend">You may also like...</h3>
         </em>
 
         <div class="splide-cont flex-center">
-            <section class="splide" aria-label="Carousel">
+            <section id="slider2" class="splide" aria-label="Carousel">
                 <div class="splide__track">
                     <div class="splide__list">
 
@@ -120,7 +154,8 @@ $itemCategory = 2;
                 LEFT JOIN brands as b ON b.BrandID = p.BrandID
                 LEFT JOIN product_option as po ON po.ProductID = p.ProductID
                 LEFT JOIN image as i ON po.ProdOptionID = i.ProdOptionID
-                WHERE p.CategoryID = $itemCategory";
+                WHERE p.CategoryID = $itemCategory
+                GROUP BY ProductName";
                         $runSimilar = mysqli_query($connection, $getSimilar);
                         while ($displaySimilar = mysqli_fetch_array($runSimilar)) {
                             echo "<div class='splide__slide'>
@@ -209,9 +244,27 @@ $itemCategory = 2;
         }
     </script>
     <script src="navigation.js"></script>
+    <!-- product images slider -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var splide = new Splide('.splide', {
+            new Splide('#slider1', {
+                type: 'loop',
+                perPage: 1,
+                arrows: true,          
+                drag: true,            
+                breakpoints: {
+                    768: { 
+                        perPage: 1,
+                        arrows: false, 
+                    },
+                }
+                }).mount();
+        });
+    </script>
+    <!-- recomennded slider -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var splide = new Splide('#slider2', {
                 perPage: 4,
                 gap: '1.5rem',
                 breakpoints: {

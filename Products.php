@@ -393,7 +393,7 @@ include "connection.php";
 
                         // wrap each item in an a tag
                         const link = document.createElement('a');
-                        link.setAttribute('href', 'Item.php?id=' + product.productID);
+                        link.setAttribute('href', 'Item.php?id=' + product.prodOptionID + '&category=' + product.Category);
                         
 
                         const productDiv = document.createElement('div');

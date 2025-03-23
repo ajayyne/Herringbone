@@ -6,10 +6,17 @@ class Product {
         public $Image;
         public $Brand;
         public $productID;
+        public $category;
+        public $prodOptionID;
     
-
+        function setProdOption($prodOptionID){
+            $this -> prodOptionID = $prodOptionID;
+        }
         function setID($productID){
             $this -> productID = $productID;
+        }
+        function setCategory($category){
+            $this -> Category = $category;
         }
         function setName($name) {
             $this -> Name = $name;
@@ -28,8 +35,14 @@ class Product {
         }
         
 
+        function getProdOption(){
+            return $this -> prodOptionID;
+        }
         function getID(){
             return $this -> productID;
+        }
+        function getCategory(){
+            return $this -> category;
         }
         function getName(){
             return $this -> Name;
