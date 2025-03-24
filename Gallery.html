@@ -68,33 +68,38 @@
     <main>
         <div class="container gallery">
             <div class="row">
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 img-container">
-                    <img src="images/gallery/coffee.png" alt="Image 2" class="img-fluid"
-                    onclick="openImageModal(this)">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 img-container">
+                    <img src="images/gallery/coffee.png" alt="Image 2" class="img-fluid" onclick="openImageModal(this)">
                 </div>
-                <div class="col-12 col-sm-6 col-md-12 col-lg-8 mb-4 img-container">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-9 mb-4 img-container">
                     <img src="images/gallery/interior.jpg" alt="Image 3" class="img-fluid"
-                    onclick="openImageModal(this)">
+                        onclick="openImageModal(this)">
                 </div>
-
             </div>
 
             <div class="row">
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 img-container">
-                    <img src="images/gallery/exterior2.jpg" alt="Image 5" class="img-fluid"
-                    onclick="openImageModal(this)">
+                <div class="col-12 col-sm-6 col-md-8 col-lg-6 mb-4 img-container">
+                    <img src="images/gallery/window.jpg" alt="Image 2" class="img-fluid" onclick="openImageModal(this)">
                 </div>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 img-container">
-                    <img src="images/gallery/window.jpg" alt="Image 6" class="img-fluid"
-                    onclick="openImageModal(this)">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 img-container">
+                    <img src="images/gallery/saws.jpg" alt="Image 4" class="img-fluid" onclick="openImageModal(this)">
                 </div>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 img-container">
-                    <img src="images/gallery/exterior.jpg" alt="Image 6" class="img-fluid"
-                    onclick="openImageModal(this)">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 img-container">
+                    <img src="images/gallery/exterior2.jpg" alt="Image 1" class="img-fluid"
+                        onclick="openImageModal(this)">
                 </div>
-
-
+                
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 img-container">
+                    <img src="images/gallery/exterior.jpg" alt="Image 3" class="img-fluid"
+                        onclick="openImageModal(this)">
+                </div>
+               
+                <div class="col-12 col-sm-6 col-md-2 col-lg-8 mb-4 img-container">
+                    <img src="images/gallery/interior2.jpg" alt="Image 5" class="img-fluid"
+                        onclick="openImageModal(this)">
+                </div>
             </div>
+        </div>
         </div>
         <!-- modal to show full size images -->
         <div id="imageModal" class="modal">
@@ -175,21 +180,21 @@
     <script src="navigation.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script>
-    // Function to open the modal and display the clicked image
-function openImageModal(image) {
-    const modal = document.getElementById("imageModal");
-    const modalImage = document.getElementById("modalImage");
+        // Function to open the modal and display the clicked image
+        function openImageModal(image) {
+            const modal = document.getElementById("imageModal");
+            const modalImage = document.getElementById("modalImage");
 
-    modal.style.display = "flex"; // Show the modal
-    modalImage.src = image.src; // Set the modal image source to the clicked image's source
-}
+            modal.style.display = "flex"; // Show the modal
+            modalImage.src = image.src; // Set the modal image source to the clicked image's source
+        }
 
-// Function to close the modal
-function closeImageModal() {
-    const modal = document.getElementById("imageModal");
-    modal.style.display = "none"; // Hide the modal
-}
-</script>
+        // Function to close the modal
+        function closeImageModal() {
+            const modal = document.getElementById("imageModal");
+            modal.style.display = "none"; // Hide the modal
+        }
+    </script>
 </body>
 
 </html>
