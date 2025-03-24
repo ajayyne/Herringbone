@@ -213,7 +213,7 @@
         </div>
 
         <div class=" flex flex-center socials">
-            <a href="https://www.facebook.com/Herringbonegiftspeebles/"><img src="images/facebook.png"
+            <a href="https://www.facebook.com/Herringbonegiftspeebles/" target="_blank"><img src="images/facebook.png"
                     alt="Facebook Icon" width="20px"></a>
             <a href=""><img src="images/instagram.png" alt="Instagram Icon" width="25px"></a>
         </div>

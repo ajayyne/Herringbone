@@ -1,6 +1,7 @@
 <?php include 'connection.php';
 $prodOptionID = $_GET['id'];
 $itemCategory = $_GET['category'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -118,7 +119,9 @@ $itemCategory = $_GET['category'];
                     WHERE po.ProductID = $productID";
             $runColours = mysqli_query($connection, $getColours);
             while($displayColours = mysqli_fetch_assoc($runColours)){
-                echo "<a href='Item.php?id={$displayColours['ProdOptionID']}&category=" . $itemCategory .  "'><p>{$displayColours['Colour']}</p></a>";
+                if($displayColours['Colour'] != '' || $displayColours['Colour'] != NULL){
+                    echo "<a href='Item.php?id={$displayColours['ProdOptionID']}&category=" . $itemCategory .  "'><p>{$displayColours['Colour']}</p></a>";
+                }
             }
 
             echo "</div>

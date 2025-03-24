@@ -17,13 +17,11 @@ $getProducts = "SELECT * FROM products as p
     LEFT JOIN image as i ON i.ProdOptionID = po.ProdOptionID
     LEFT JOIN brands as b ON p.BrandID = b.BrandID
     LEFT JOIN categories as c ON p.CategoryID = c.CategoryID
-    WHERE po.isAvailable = 1";
+    WHERE po.isAvailable = 1"; 
 
 if($search != ''){
-    $getProducts .= " AND b.BrandName LIKE '%" . $search . "%'OR p.ProductName LIKE '%" . $search . "%'
-    LIMIT 0, 25";
+    $getProducts .= " AND b.BrandName LIKE '%" . $search . "%'OR p.ProductName LIKE '%" . $search . "%'";
 }
-
 if ($category != '') {
     $getProducts .= " AND FIND_IN_SET(CategoryName, '" . $category . "')";
 }
@@ -40,11 +38,8 @@ if ($price != '')
     $getProducts .=  " AND price <= '" . $price . "'";
 }
 
-
-$getProducts .= " GROUP BY po.ProdOptionID";
-
-
-
+//ensure only the first default image shows when products are printed
+$getProducts .= " AND i.defaultImg = 1 LIMIT 0, 25";
 
 $runProducts = mysqli_query($connection, $getProducts);
 
