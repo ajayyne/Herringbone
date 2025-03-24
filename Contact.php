@@ -43,6 +43,7 @@
                 </div>
             </div>
             <div class="desk-nav">
+            <img src="images/icons/logo.jpg" class="logo">
                 <ul>
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
@@ -57,7 +58,7 @@
             </div>
         </header>
         <div class="flex flex-center title">
-            <h1>Herringbone</h1>
+        <a href="Home.php"><h1>Herringbone</h1></a>
         </div>
     </div>
 
