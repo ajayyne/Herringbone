@@ -50,7 +50,7 @@ button {
     --light-blue: #CDD4D9;
     --medium-blue: #A7BAC8;
     --dark-blue: #838E97;
-    --darkest-blue: #5E5A58;
+    --darkest-blue: #5c616c;
     --shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -930,8 +930,6 @@ select {
 }
 .item-cont{
     padding: 1.5rem;
-    border-radius: 10px;
-    border: 2px solid black;
 }
 
 .item-content h1{
@@ -969,6 +967,13 @@ select {
 .color-display p{
     margin-right: 0.5rem;
 }
+.color-display a{
+    border: 2px solid white;
+}
+.color-display a:active,
+.color-display a:focus{
+    border: white;
+}
 .price-quant{
     align-items: start;
 }
@@ -988,17 +993,20 @@ select {
     outline: none;
     border: none;
     text-align: center;
-}
-.price-quant input:focus,
-.price-quant input:active{
     border: 2px solid var(--dark-blue);
 }
+
 .item-btn button{
     background-color: var(--dark-blue);
     color: white;
     width: 100%;
     padding: 0.3rem 0rem 0.3rem 0rem;
     margin-top: 0.3rem;
+}
+.item-btn button:hover,
+.item-btn button:active,
+.item-btn button:focus{
+    background-color: var(--darkest-blue);
 }
 #slider1{
     padding: 0rem;
@@ -1010,10 +1018,12 @@ select {
 #slider1 .item-list{
     width: 100%;
 }
+
 #slider1 .item-img img{
     width: 100%;
     border-radius: 8px;
     height: 18rem;
+    object-fit: cover;
 }
 #slider1 .splide__pagination{
     display: none;
@@ -1107,6 +1117,7 @@ select {
         background-color: var(--dark-blue);
         width: 100%;
     }
+    
 }
 @media screen and (min-width: 650px) {
    .ft-info, .ft-info2{
@@ -1400,16 +1411,15 @@ select {
     }
     
 /* ITEM PAGE */
+#slider1 .splide__track{
+    height: 25rem !important;
+}
 #slider1{
-    width: 43% !important;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 2.5rem;
 }
-#slider1-list{
-    height: 20rem;
-}
+
 #slider1 .item-img img{
     width: 100%;
     height: 100% !important;
@@ -1442,6 +1452,9 @@ select {
 
 .splide-cont{
     transform: scale(0.9);
+}
+.item-img{
+    height: 25rem;
 }
 
 /* END */
