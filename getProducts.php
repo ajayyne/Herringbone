@@ -20,7 +20,7 @@ $getProducts = "SELECT * FROM products as p
     WHERE po.isAvailable = 1"; 
 
 if($search != ''){
-    $getProducts .= " AND b.BrandName LIKE '%" . $search . "%'OR p.ProductName LIKE '%" . $search . "%'";
+    $getProducts .= " AND (b.BrandName LIKE '%" . $search . "%' OR p.ProductName LIKE '%" . $search . "%')";
 }
 if ($category != '') {
     $getProducts .= " AND FIND_IN_SET(CategoryName, '" . $category . "')";

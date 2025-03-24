@@ -974,9 +974,6 @@ select {
 .color-display p{
     margin-right: 0.5rem;
 }
-.color-display a{
-    border: 2px solid white;
-}
 .color-display a:active,
 .color-display a:focus{
     border: white;
@@ -1030,7 +1027,7 @@ select {
     width: 100%;
     border-radius: 8px;
     height: 18rem;
-    object-fit: cover;
+    object-fit: contain;
 }
 #slider1 .splide__pagination{
     display: none;
@@ -1452,7 +1449,7 @@ select {
 }
 .item-content{
     margin-top: 3rem;
-    padding: 0rem 5rem 0rem 3rem;
+    /* padding: 0rem 5rem 0rem 3rem; */
     margin-left: 4rem
 }
 .item-content h1{
