@@ -463,33 +463,21 @@ footer h6 {
     filter: brightness(0.75);
 }
 
-.bs-item .overlay {
+ .bs-item .overlay {
+   position: absolute;
+    top: 50%; /* Moves overlay to the middle vertically */
+    left: 50%; /* Moves overlay to the middle horizontally */
+    transform: translate(-50%, 750%); /* Adjusts for the element's own dimensions */
     z-index: 999;
-    position: absolute;
-    bottom: -210px;
-    left: 28%;
     color: white;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     text-shadow: var(--shadow);
     font-family: 'Aboreto';
-    width: 100%;
-    height: 20rem;
-    position: relative;
-    filter: brightness(0.75);
-}
-
-.bs-item .overlay {
-    z-index: 999;
-    position: absolute;
-    bottom: -210px;
-    left: 28%;
-    color: white;
-    font-weight: bold;
-    font-size: 1.5rem;
-    text-shadow: var(--shadow);
-    font-family: 'Aboreto';
-}
+    text-align: center; /* Centers text horizontally */
+    width: 80%; /* Sets the width of the overlay text */
+    max-width: 25rem; /* Ensures the width doesn't exceed 25rem */
+} 
 
 .bio {
     flex-direction: column;
@@ -1087,6 +1075,7 @@ select {
     .bs-item img {
         filter: unset;
         height: 12rem;
+        object-fit: contain;
     }
 
     .bs-item .overlay {
