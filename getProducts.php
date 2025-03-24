@@ -35,13 +35,14 @@ if ($brand != '') {
     // Appending the condition for brand
     $getProducts .= " AND FIND_IN_SET(brandName, '" . $brand . "')";
 }
-
-
-/*if ($price != '')
+if ($price != '')
 {
-    $getProducts .=  " AND price = '" . $price . "'";
+    $getProducts .=  " AND price <= '" . $price . "'";
 }
-*/
+
+
+$getProducts .= " GROUP BY po.ProdOptionID";
+
 
 
 

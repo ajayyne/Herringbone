@@ -87,10 +87,14 @@ include "connection.php";
         </div>
 
         <!-- generate filters using php/sql -->
-         <div class="filter-main">
+        <div class="filter-main">
             <div class="filter-cont flex flex-col">
                 <div class="filter-btn-container">
-                    <button id="filterButton">FILTERS</button>
+                    <input type="checkbox" id="toggleCheckbox" style="display: none;">
+                    <label for="toggleCheckbox" id="filterButton">
+                        FILTERS
+                        <img src="images/icons/arrow-down.png" class="arrow-down" id="arrow">
+                    </label>
                 </div>
                 <div class="filters-mob">
                     <div class="filters flex flex-even" id="filters">
@@ -143,15 +147,15 @@ include "connection.php";
                             </div>
                             <div class="colours flex flex-even">
                                 <div class="flex colour">
-                                    <input type="radio" class="radio" value="<20" id="userInput" name="price">
+                                    <input type="radio" class="radio priceInput" value="20.00" id="userInput" name="price">
                                     <p>Under £20</p>
                                 </div>
                                 <div class="flex colour">
-                                    <input type="radio" class="radio" value="<30" id="userInput" name="price">
+                                    <input type="radio" class="radio priceInput" value="30.00" id="userInput" name="price">
                                     <p>Under £30</p>
                                 </div>
                                 <div class="flex colour">
-                                    <input type="radio" class="radio" value="<50" id="userInput" name="price">
+                                    <input type="radio" class="radio priceInput" value="50.00" id="userInput" name="price">
                                     <p>Under £50</p>
                                 </div>
                             </div>
@@ -162,11 +166,14 @@ include "connection.php";
                         </div>
                     </div>
                 </div>
-            
+
 
 
 
                 <div class="categories-desk">
+                    <a href="products.php">
+                        <p class="category">All Products</p>
+                    </a>
                     <!-- CATEGORIES - IMPORT FROM PHP -->
                     <?php
                     $getCategories = "SELECT CategoryName FROM categories";
@@ -336,8 +343,17 @@ include "connection.php";
             }
             selectedBrands = selectedBrands.replace(/,$/, '');
 
+            //collect selected price
+            const priceInputs = document.getElementsByClassName('priceInput');
+            let selectedPrice = "";
+            for(let i = 0; i < priceInputs.length; i++){
+                if (priceInputs[i].checked){
+                    selectedPrice += priceInputs[i].value;
+                }
+            }
+
             // Call loadProducts with applied filters
-            loadProducts('', selectedCategory, selectedColours, selectedBrands, '');
+            loadProducts('', selectedCategory, selectedColours, selectedBrands, selectedPrice);
         }
 
         // Function to load products based on parameters
@@ -347,7 +363,7 @@ include "connection.php";
             let queryString = '';
 
             //if search bar was used
-            if(search !== ''){
+            if (search !== '') {
                 queryString += `search=${encodeURIComponent(search)}&`;
             }
 
@@ -355,7 +371,7 @@ include "connection.php";
             if (category !== '') {
                 queryString += `category=${encodeURIComponent(category)}&`;
             }
-      
+
             if (colour !== '') {
                 queryString += `colour=${encodeURIComponent(colour)}&`;
             }
@@ -369,12 +385,11 @@ include "connection.php";
             // Remove trailing '&' from the querystring
             queryString = queryString.replace(/&$/, '');
 
-             // Append filters to the request URL
-             if (queryString !== '')
-             {
+            // Append filters to the request URL
+            if (queryString !== '') {
                 requestUrl = requestUrl + '?' + queryString;
-             }
-             
+            }
+
             // AJAX request to fetch products
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onload = function () {
@@ -394,7 +409,7 @@ include "connection.php";
                         // wrap each item in an a tag
                         const link = document.createElement('a');
                         link.setAttribute('href', 'Item.php?id=' + product.prodOptionID + '&category=' + product.Category);
-                        
+
 
                         const productDiv = document.createElement('div');
                         productDiv.classList.add('product', 'radius');
@@ -448,8 +463,7 @@ include "connection.php";
             xmlhttp.send();
         }
 
-        function clearFiltersAndLoad()
-        {
+        function clearFiltersAndLoad() {
             clearFilters();
             loadProducts();
         }

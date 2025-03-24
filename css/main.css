@@ -746,11 +746,24 @@ select {
 }
 
 #filterButton {
+    padding: 0rem;
     background-color: white;
-    color: var(--dark-blue);
-    border: 1.5px solid var(--medium-blue);
+    color: var(--darkest-blue);
     box-shadow: none;
-    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#arrow {
+    transition: transform 0.3s ease; 
+}
+#toggleCheckbox:checked + label #arrow {
+    transform: rotate(180deg);
+}
+.arrow-down{
+    width: 0.8rem;
+    height: 0.8rem;
+    padding-bottom: 0.2rem;
+    margin-left: 0.5rem;
 }
 
 
@@ -758,11 +771,6 @@ select {
     width: 100vw !important;
     display: flex;
     justify-content: start !important;
-}
-
-#filterButton:hover,
-#filterButton:focus {
-    box-shadow: var(--shadow);
 }
 
 #filters {
@@ -786,15 +794,14 @@ select {
     scroll-behavior: smooth;
     width: 100vw;
 }
-/* Hide scrollbar for WebKit browsers */
+
 .categories-mobile::-webkit-scrollbar {
     display: none;
 }
 
-/* Hide scrollbar for other browsers */
 .categories-mobile {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
 }
 
 .category-mob{
@@ -1347,9 +1354,8 @@ select {
     .filters-mob{
        width: unset !important;
     }
-
-    #filterButton {
-        margin-left: 1rem;
+    .filters{
+        margin-top: -3rem;
     }
 
     .filter-cont {
@@ -1368,12 +1374,12 @@ select {
         align-items: start;
         z-index: 1;
         overflow-y: scroll;
-        overflow-x: hidden;
     }
     ::-webkit-scrollbar { display: none; }
 
     #filters {
         transform: scale(0.8);
+        overflow-y: scroll;
     }
 
     #applyFilters,
