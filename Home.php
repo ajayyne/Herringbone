@@ -1,5 +1,7 @@
 <!-- php include -->
-<?php include 'connection.php' ?>
+<?php 
+session_start();
+include 'connection.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,7 +70,7 @@
     </div>
 
     <main>
-        <div class="banner flex flex-center">
+        <div class="banner flex flex-center" alt="Herringbone Cafe">
             <h1 data-aos="fade-in" data-aos-duration="2000">HERRINGBONE</br><span  data-aos-duration="4000">GIFTS & CAFE</span></h1>
         </div>
 
@@ -120,11 +122,11 @@
                     in the shop soon!</p>
             </div>
             <div>
-                <img src="images/gallery/exterior2.jpg" at="Herringbone Staff" class="radius">
+                <img src="images/gallery/exterior2.jpg" at="Herringbone on the High Street" class="radius">
             </div>
         </div>
 
-        <div class="home-cafe">
+        <div class="home-cafe" alt="No.56 Cafe">
             <div class="cafe-text" data-aos="flip-up" data-aos-duration="1000">
                 <h3>No. 56 Cafe</h3>
                 <p>A dog friendly cafe serving up delicious savouries, sweets and fresh barista made coffee from Fife's Forth Roasters</p>
@@ -155,18 +157,21 @@
                 </div>
             </div>
             <div class="flex flex-between ft-info2">
-                <div class="footer-links links">
-                    <h6>Important Links</h6>
-                    <a>
-                        <p>About Us</p>
-                    </a>
-                    <a>
-                        <p>Cookies Policy</p>
-                    </a>
-                    <a>
-                        <p>Delivery & Returns</p>
-                    </a>
-                </div>
+            <div class="footer-links links">
+                            <h6>Important Links</h6>
+                            <a>
+                                <p>About Us</p>
+                            </a>
+                            <a>
+                                <p>Cookies Policy</p>
+                            </a>
+                            <a>
+                                <p>Privacy Policy</p>
+                            </a>
+                            <a>
+                                <p>Delivery & Returns</p>
+                            </a>
+                        </div>
                 <div class="flex flex-between">
                     <div class="footer-links ft-contact">
                         <h6>Get In Touch</h6>

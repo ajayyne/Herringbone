@@ -37,7 +37,7 @@
                     <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons flex flex-even">
-                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
+                 
                     <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
                     <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                 </div>
@@ -51,7 +51,7 @@
                     <li><a href="Contact.php">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
-                    <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>
+                    
                     <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
                     <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                 </div>
@@ -61,11 +61,12 @@
         <a href="Home.php"><h1>Herringbone</h1></a>
         </div>
     </div>
-    
+
     <!-- banner img -->
      <div class="contact-banner flex">
         <div class="visit-banner">
             <h2>Visit Us</h2>
+            <p>Located next to the Crown Hotel on the High Street, we're at the heart of Peebles. Pop in for a visit to say hello, browse our gifts or enjoy a lovely coffee upstairs.</p>
         </div>
      </div>
 
@@ -193,18 +194,21 @@
                 </div>
             </div>
             <div class="flex flex-between">
-                <div class="footer-links links">
-                    <h6>Important Links</h6>
-                    <a>
-                        <p>About Us</p>
-                    </a>
-                    <a>
-                        <p>Cookies Policy</p>
-                    </a>
-                    <a>
-                        <p>Delivery & Returns</p>
-                    </a>
-                </div>
+            <div class="footer-links links">
+                            <h6>Important Links</h6>
+                            <a>
+                                <p>About Us</p>
+                            </a>
+                            <a>
+                                <p>Cookies Policy</p>
+                            </a>
+                            <a>
+                                <p>Privacy Policy</p>
+                            </a>
+                            <a>
+                                <p>Delivery & Returns</p>
+                            </a>
+                        </div>
                 <div class="flex flex-between">
                     <div class="footer-links ft-contact">
                         <h6>Get In Touch</h6>

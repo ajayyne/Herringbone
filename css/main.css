@@ -17,12 +17,26 @@ body {
     font-style: normal;
 }
 
+@font-face {
+    font-family: "quicksand";
+    src: url(../fonts/Quicksand-VariableFont_wght.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+
 /*END*/
 
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5,
+h6 {
     font-family: "aboreto";
+}
+
+p{
+    font-family: 'quicksand';
 }
 
 .radius {
@@ -141,6 +155,19 @@ a {
     width: 40%;
     font-size: 1.3rem;
 }
+.basket-icon{
+    display: flex;
+    justify-content: start;
+}
+.items-icons{
+    display: flex;
+    justify-content: end;
+    width: 80%;
+}
+.items-icons .fa-heart{
+    margin-right: 2rem;
+}
+
 .logo{
     border-radius: 50px;
     position: fixed;
@@ -155,6 +182,7 @@ header {
     align-items: start;
     justify-content: space-between;
 }
+
 
 .head {
     width: 100vw;
@@ -282,7 +310,7 @@ li {
 /*FOOTER*/
 footer {
     padding: 2rem;
-    background-color: var(--light-blue);
+    background-color: var(--medium-blue);
 }
 
 footer h6 {
@@ -439,9 +467,9 @@ footer h6 {
     margin: 5rem 0rem 5rem 0rem;
 }
 
-.splide__track {
+/* .splide__track {
     height: 20rem !important;
-}
+} */
 
 .bs-item {
     text-align: center;
@@ -538,19 +566,21 @@ footer h6 {
 /*CONTACT PAGE*/
 .contact-banner{
     height: 32rem;
-    background-image: url(../images/peebles.jpg);
+    background-image: url(../images/gallery/exterior.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
 }
 
 .visit-banner{
-    background-color: rgb(255, 255, 255);
+    padding: 1rem;
+    background-color: var(--darkest-blue);
+    color: white;
     height: 15rem;
-    width: 30rem;
-    margin: 5rem 0rem 0rem 5rem;
+    width: 65%;
     border-radius: 5px;
+    box-shadow: var(--shadow);
 }
 
 .contact-header {
@@ -753,13 +783,14 @@ select {
 .filter-cont {
     align-items: end;
 }
-
+.filters{
+    width: 100%;
+}
 .filter-btn-container{
     width: 100vw !important;
     display: flex;
     justify-content: start;
 }
-
 #filterButton {
     padding: 0rem;
     background-color: white;
@@ -767,6 +798,7 @@ select {
     box-shadow: none;
     font-weight: bold;
     cursor: pointer;
+    margin-left: 1rem;
 }
 #arrow {
     transition: transform 0.3s ease; 
@@ -914,6 +946,10 @@ select {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.product h6{
+    font-size: 0.9rem;
+    font-weight: bold;
+}
 .product h6, .product p{
     padding: 0rem 0.5rem 0rem 0.5rem;
 }
@@ -923,23 +959,26 @@ select {
     justify-content: space-between;
 }
 .product-brand{
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .price{
     font-weight: bold;
+    font-size: 0.8rem;
 }
 .cart-btn{
     font-size: smaller;
     font-family: 'Aboreto';
     border-radius: 5px;
     width: 100%;
-    border: 2px solid var(--dark-blue);
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-.cart-btn:hover, .cart-btn:focus, .cart-btn:active{
     background-color: var(--dark-blue);
     color: white;
+}
+.cart-btn:hover, .cart-btn:focus, .cart-btn:active{
+    background-color: white;
+    border: 2px solid var(--dark-blue);
+    color: var(--darkest-blue);
 }
 
 /*END*/
@@ -956,6 +995,7 @@ select {
 
 .item-content h1{
     font-size: 1.5rem;
+    margin-top: 2rem;
 }
 .item-content h2{
     font-size: 1rem;
@@ -1020,7 +1060,6 @@ select {
     color: white;
     width: 100%;
     padding: 0.3rem 0rem 0.3rem 0rem;
-    margin-top: 0.3rem;
 }
 .item-btn button:hover,
 .item-btn button:active,
@@ -1037,17 +1076,23 @@ select {
 #slider1 .item-list{
     width: 100%;
 }
-
-#slider1 .item-img img{
+#slider1 .splide__list, #slider1 .splide__track{
+    height: fit-content !important;
+    padding-bottom: 1rem;
+}
+#slider1 .item-img{
+    height: fit-content !important;
+}
+#slider1 .item-img img {
     width: 100%;
     border-radius: 8px;
-    height: 18rem;
+    /* height: 30rem; */
     object-fit: contain;
 }
+
 #slider1 .splide__pagination{
     display: none;
 }
-
 
 .recomend{
    margin-top: 3.5rem;
@@ -1084,8 +1129,11 @@ select {
     text-align: center;
 }
 .brand-sect h6{
+    font-family: 'Aboreto';
     font-size: 1.6rem;
     margin-bottom: 1rem;
+    border-bottom: 1px solid white;
+    padding-bottom: 1rem;
 }
 .brand-sect p{
     font-size: 0.9rem;
@@ -1114,6 +1162,7 @@ select {
     width: 100%;
     height: 100%;
 }
+/* image gallery modal */
 .modal {
     display: none; /* Hidden by default */
     position: fixed;
@@ -1128,7 +1177,7 @@ select {
     align-items: center; /* Center vertically */
 }
 
-/* Close button */
+/* modal close button */
 .modal .close {
     position: absolute;
     top: 20px;
@@ -1148,11 +1197,11 @@ select {
     display: block;
     max-width: 50%;
     max-height: 90%; /* Ensure the image fits the screen */
-    border: 5px solid white;
+    border: 2px solid white;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
 }
 
-/* opening animation */
+/* modal opening animation */
 .modal-content {
     animation-name: zoom;
     animation-duration: 0.4s;
@@ -1166,9 +1215,54 @@ select {
         transform: scale(1);
     }
 }
-
 /*END*/
 
+/* CAFE PAGE */
+.cafe-main{
+    padding-top: 10rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--medium-blue);
+}
+.cafe-title{
+    width: 80%;
+    padding: 0.3rem 0rem 0.3rem 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--dark-blue);
+    clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
+}
+.menu-heading{
+    padding: 1rem 0rem 1rem 0rem;
+    text-align: center;
+    height: 95%;
+    width: 95%;
+    background-color: white;
+    clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
+}
+.menu-heading h1{
+    font-size: 1.5rem;
+}
+
+
+
+/* BASKET / SHOPPING CART PROCESS */
+.basket-counter{
+    text-align: center;
+    border-radius: 50px;
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: white;
+    position: absolute;
+    top: -0.2rem;
+    right: 0.5rem;
+    font-size: 0.8rem;
+}
 
 
 
@@ -1219,14 +1313,15 @@ select {
    }
    
 /* ITEM PAGE */
+
 .item-cont{
     flex-direction: row;
-    height: 35rem;
+    height: fit-content;
 }
 .item-content{
     height: 24rem;
-    width: 50%;
-    margin-top: -2rem;
+    width: 90%;
+    padding-left: 2rem;
 }
 
 .item-content h1{
@@ -1260,6 +1355,9 @@ select {
     width: 2rem;
 }
 /* END */
+.icons-desk{
+    width: 18%;
+}
 }
 
 /*LAPTOP*/
@@ -1350,7 +1448,7 @@ select {
     }
 
     .icons-desk {
-        width: 15%;
+        width: 18%;
         right: 1rem;
     }
 
@@ -1511,19 +1609,20 @@ select {
     }
     
 /* ITEM PAGE */
-#slider1 .splide__track{
+/* #slider1 .splide__track{
     height: 25rem !important;
-}
+} */
+
 #slider1{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#slider1 .item-img img{
+/* #slider1 .item-img img{
     width: 100%;
     height: 100% !important;
-}
+} */
 
 
 .item-main{
@@ -1536,11 +1635,16 @@ select {
     height: fit-content;
 }
 .item-content{
-    margin-top: 3rem;
-    /* padding: 0rem 5rem 0rem 3rem; */
-    margin-left: 4rem
+    /* margin-top: 3rem;
+    margin-left: 4rem */
+}
+.item-content{
+    width: 60%;
+    padding-left: 5rem;
+    padding-right: 5rem;
 }
 .item-content h1{
+    margin-top: 0rem;
     font-size: 1.2rem;
 }
 
@@ -1548,6 +1652,14 @@ select {
     width: 4rem;
     padding-bottom: 0.2rem;
     height: 1.2rem;
+}
+.item-btn button{
+    margin-top: 4rem;
+}
+
+.item-content p{
+    font-size: 1rem;
+    margin-top: 2rem;
 }
 
 .splide-cont{
@@ -1577,11 +1689,15 @@ select {
     width: 60%;
 }
 
-
 /* END */
 }
 
+
 @media screen and (min-width: 1200px){
+
+.icons-desk{
+    width: 12%;
+}
 
 #slider1{
     width: 35% !important;

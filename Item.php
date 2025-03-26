@@ -1,8 +1,10 @@
-<?php include 'connection.php';
+<?php
+session_start();
+include 'connection.php';
 $prodOptionID = $_GET['id'];
 $itemCategory = $_GET['category'];
 $brandName = $_GET['brand'];
-
+$basketCount = 1;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,12 +46,19 @@ $brandName = $_GET['brand'];
                     <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
-                    <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
-                    <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                    <div class="items-icons">
+                        <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
+                        <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                        <!-- <div class="basket-counter"><p>2</p></div> -->
+                        <?php
+                        // if basket is not empty - display this
+                        echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
+                        ?>
+                    </div>
                 </div>
             </div>
             <div class="desk-nav">
-            <img src="images/icons/logo.jpg" class="logo">
+                <img src="images/icons/logo.jpg" class="logo">
                 <ul>
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
@@ -57,13 +66,22 @@ $brandName = $_GET['brand'];
                     <li><a href="Contact.php">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
-                    <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
-                    <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                <div class="items-icons">
+                        <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
+                        <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                        <!-- <div class="basket-counter"><p>2</p></div> -->
+                        <?php
+                        // if basket is not empty - display this
+                        echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
+                        ?>
+                    </div>
                 </div>
             </div>
         </header>
         <div class="flex flex-center title">
-        <a href="Home.php"><h1>Herringbone</h1></a>
+            <a href="Home.php">
+                <h1>Herringbone</h1>
+            </a>
         </div>
     </div>
 
@@ -86,21 +104,18 @@ $brandName = $_GET['brand'];
                 <div class='splide__track'>
                     <ul class='splide__list item-list'>";
 
-            $imageQuery = "SELECT i.ImageURL from image as i 
+            $imageQuery = "SELECT i.ImageURL, p.ProductName from image as i 
             LEFT JOIN product_option as po ON po.ProdOptionID = i.ProdOptionID 
+            LEFT JOIN products as p ON p.ProductID = po.ProductID
             WHERE po.ProdOptionID = $prodOptionID";
             $runimages = mysqli_query($connection, $imageQuery);
             while ($displayImages = mysqli_fetch_assoc($runimages)) {
                 // echo "<div class='item-img'>
                 echo "<li class='splide__slide item-img'>
-                        <img src='{$displayImages['ImageURL']}' alt='Product Image'>
+                        <img src='{$displayImages['ImageURL']}' alt='{$displayImages['ProductName']}'>
                     </li>";
-                // </div>
             }
 
-            // echo "<div class='item-img'>
-            //         <img src='{$displayItem['ImageURL']}'>
-            //     </div>
             echo "      </ul>
                     </div>
                 </div>
@@ -120,9 +135,9 @@ $brandName = $_GET['brand'];
             $getColours = "SELECT po.Colour, po.ProdOptionID from product_option as po
                     WHERE po.ProductID = $productID";
             $runColours = mysqli_query($connection, $getColours);
-            while($displayColours = mysqli_fetch_assoc($runColours)){
-                if($displayColours['Colour'] != '' || $displayColours['Colour'] != NULL){
-                    echo "<a href='Item.php?id={$displayColours['ProdOptionID']}&category=" . $itemCategory .  "'><p>{$displayColours['Colour']}</p></a>";
+            while ($displayColours = mysqli_fetch_assoc($runColours)) {
+                if ($displayColours['Colour'] != '' || $displayColours['Colour'] != NULL) {
+                    echo "<a href='Item.php?id={$displayColours['ProdOptionID']}&category=" . $itemCategory . "'><p>{$displayColours['Colour']}</p></a>";
                 }
             }
 
@@ -137,7 +152,7 @@ $brandName = $_GET['brand'];
                         </div>
                     </div>
                     <div class='item-btn'>
-                        <button>ADD TO BASKET</button>
+                        <a href='Basket.php?prodOptionID='{$prodOptionID}'><button>ADD TO BASKET</button></a>
                     </div>
                 </div>
             </div>";
@@ -147,21 +162,21 @@ $brandName = $_GET['brand'];
 
         <!-- brand section -->
         <section class="brand-sect flex-col radius">
-        <?php
+            <?php
             $getBrand = "SELECT * FROM brands WHERE BrandName = '$brandName'";
             $runBrand = mysqli_query($connection, $getBrand);
-            while($brandInfo = mysqli_fetch_assoc($runBrand)){
-                    echo "<div>
-                    <h6>{$brandInfo['BrandName']}</h6>
+            while ($brandInfo = mysqli_fetch_assoc($runBrand)) {
+                echo "<div>
+                    <h6>" . strtoupper($brandInfo['BrandName']) . "</h6>
                     <p>{$brandInfo['description']}</p>
                     </div>
                     <div class='brand-img'>
-                        <img src='{$brandInfo['brandImage']}' class='radius'>
+                        <img src='{$brandInfo['brandImage']}' class='radius' alt='{$brandInfo['BrandName']}'>
                     </div>
                     ";
             }
-        ?>
-       
+            ?>
+
         </section>
 
 
@@ -186,7 +201,7 @@ $brandName = $_GET['brand'];
                         while ($displaySimilar = mysqli_fetch_array($runSimilar)) {
                             echo "<div class='splide__slide'>
                                 <div class='bs-item flex flex-col radius'>
-                                    <img src='{$displaySimilar['ImageURL']}'>
+                                    <img src='{$displaySimilar['ImageURL']}' alt='{$displaySimilar['ProductName']}'>
                                     <p class='overlay'><em>{$displaySimilar['BrandName']}</em></p>
                                     <div class='bs-desc'>
                                         <p><strong>{$displaySimilar['BrandName']}</strong><br><span class='bestseller-name'>{$displaySimilar['ProductName']}</span><br>£{$displaySimilar['Price']}</p>
@@ -227,6 +242,9 @@ $brandName = $_GET['brand'];
                     </a>
                     <a>
                         <p>Cookies Policy</p>
+                    </a>
+                    <a>
+                        <p>Privacy Policy</p>
                     </a>
                     <a>
                         <p>Delivery & Returns</p>
@@ -276,15 +294,15 @@ $brandName = $_GET['brand'];
             new Splide('#slider1', {
                 type: 'loop',
                 perPage: 1,
-                arrows: true,          
-                drag: true,            
+                arrows: true,
+                drag: true,
                 breakpoints: {
-                    768: { 
+                    768: {
                         perPage: 1,
-                        arrows: false, 
+                        arrows: false,
                     },
                 }
-                }).mount();
+            }).mount();
         });
     </script>
     <!-- recomennded slider -->

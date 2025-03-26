@@ -1,5 +1,8 @@
 <?php
+session_start();
 include "connection.php";
+// number will be changing when more items added
+$basketCount = 1;
 ?>
 
 <!DOCTYPE html>
@@ -44,12 +47,21 @@ include "connection.php";
                         <input type="text" id="search" class="radius" name="search">
                         <i class="fa-solid fa-magnifying-glass searchIcon"></i>
                     </div>
+
                     <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
-                    <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                    <div class="basket-icon">
+                        <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                        <?php
+                        // if basket is not empty - display this
+                        echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
+                        ?>
+                    </div>
+
+
                 </div>
             </div>
             <div class="desk-nav">
-            <img src="images/icons/logo.jpg" class="logo">
+                <img src="images/icons/logo.jpg" class="logo">
                 <ul>
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
@@ -59,15 +71,25 @@ include "connection.php";
                 <div class="icons icons-desk flex flex-even">
                     <div class="search-cont flex">
                         <input type="text" id="deskSearch" class="radius" name="search">
-                        <i class="fa-solid fa-magnifying-glass searchIcon"></i>
+                        <i class="fa-solid fa-magnifying-glass searchIcon" id="searchIcon"></i>
                     </div>
+
                     <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
-                    <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                    <div class="basket-icon">
+                        <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                        <?php
+                        // if basket is not empty - display this
+                        echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
+                        ?>
+                    </div>
+
                 </div>
             </div>
         </header>
         <div class="flex flex-center title">
-        <a href="Home.php"><h1>Herringbone</h1></a>
+            <a href="Home.php">
+                <h1>Herringbone</h1>
+            </a>
         </div>
     </div>
 
@@ -148,15 +170,18 @@ include "connection.php";
                             </div>
                             <div class="colours flex flex-even">
                                 <div class="flex colour">
-                                    <input type="radio" class="radio priceInput" value="20.00" id="userInput" name="price">
+                                    <input type="radio" class="radio priceInput" value="20.00" id="userInput"
+                                        name="price">
                                     <p>Under £20</p>
                                 </div>
                                 <div class="flex colour">
-                                    <input type="radio" class="radio priceInput" value="30.00" id="userInput" name="price">
+                                    <input type="radio" class="radio priceInput" value="30.00" id="userInput"
+                                        name="price">
                                     <p>Under £30</p>
                                 </div>
                                 <div class="flex colour">
-                                    <input type="radio" class="radio priceInput" value="50.00" id="userInput" name="price">
+                                    <input type="radio" class="radio priceInput" value="50.00" id="userInput"
+                                        name="price">
                                     <p>Under £50</p>
                                 </div>
                             </div>
@@ -236,6 +261,9 @@ include "connection.php";
                         <p>Cookies Policy</p>
                     </a>
                     <a>
+                        <p>Privacy Policy</p>
+                    </a>
+                    <a>
                         <p>Delivery & Returns</p>
                     </a>
                 </div>
@@ -267,8 +295,18 @@ include "connection.php";
 
         document.addEventListener('DOMContentLoaded', () => {
             //search bar:
-            const searchInput = document.getElementById("deskSearch");
+            const searchInput = document.getElementById('deskSearch');
+            const searchIcon = document.getElementById('searchIcon');
 
+            // when user clicks search icon to search
+            searchIcon.addEventListener("click", function (event) {
+                let search = searchInput.value;
+                event.preventDefault();
+                clearFilters();
+                loadProducts(search);
+            });
+
+            // when user is pressing enter to search
             searchInput.addEventListener("keyup", function (event) {
                 if (event.key === "Enter") {
                     let search = searchInput.value;
@@ -347,8 +385,8 @@ include "connection.php";
             //collect selected price
             const priceInputs = document.getElementsByClassName('priceInput');
             let selectedPrice = "";
-            for(let i = 0; i < priceInputs.length; i++){
-                if (priceInputs[i].checked){
+            for (let i = 0; i < priceInputs.length; i++) {
+                if (priceInputs[i].checked) {
                     selectedPrice += priceInputs[i].value;
                 }
             }
