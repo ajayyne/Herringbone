@@ -61,8 +61,7 @@
         <a href="Home.php"><h1>Herringbone</h1></a>
         </div>
     </div>
-
-
+    
     <!-- banner img -->
      <div class="contact-banner flex">
         <div class="visit-banner">
