@@ -320,7 +320,7 @@ footer h6 {
 .banner {
     width: 100vw;
     height: 30rem;
-    background-image: url(../images/home-header.jpg);
+    background-image: url(../images/header.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
@@ -331,6 +331,11 @@ footer h6 {
     color: white;
     text-align: center;
     font-size: 2.5rem;
+    font-weight: bold;
+}
+.banner h1 span{
+    font-weight: normal;
+    font-size: 2.4rem;
 }
 
 .search-cont {
@@ -500,9 +505,10 @@ footer h6 {
 }
 
 .home-cafe {
-    background-image: url(../images/cafe.jpg);
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url(../images/cafe.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     height: 30rem;
     color: white;
     position: relative;
@@ -515,21 +521,38 @@ footer h6 {
     left: 2rem;
     padding-right: 1.5rem;
 }
-
-.cafe-text a:hover::after {
-    all: unset;
+.cafe-text em{
+    transition: underline 0.3s ease-in-out;
 }
-
 .cafe-text em:hover,
 .cafe-text em:active {
-    font-style: italic;
     text-decoration: underline;
+}
+.cafe-text p{
+    width: 30rem;
 }
 
 /*END*/
 
 
 /*CONTACT PAGE*/
+.contact-banner{
+    height: 32rem;
+    background-image: url(../images/peebles.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: start;
+    align-items: center;
+}
+
+.visit-banner{
+    background-color: rgb(255, 255, 255);
+    height: 15rem;
+    width: 30rem;
+    margin: 5rem 0rem 0rem 5rem;
+    border-radius: 5px;
+}
+
 .contact-header {
     width: 100%;
     height: 8rem;
@@ -1050,6 +1073,28 @@ select {
     padding-top: 1rem;
 }
 
+/* brand section */
+.brand-sect{
+    background-color: var(--dark-blue);
+    color: white;
+    margin-top: 4rem;
+}
+.brand-sect div:first-child{
+    padding: 1rem 2rem 1rem 2rem;
+    text-align: center;
+}
+.brand-sect h6{
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+.brand-sect p{
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+.brand-sect img{
+    width: 100%; 
+    height: 100%;
+}
 
 /* END */
 
@@ -1323,8 +1368,6 @@ select {
     .banner h1 {
         font-size: 3rem;
         position: absolute;
-        bottom: 2rem;
-        left: 2rem;
     }
 
     .bio {
@@ -1513,6 +1556,27 @@ select {
 .item-img{
     height: 25rem;
 }
+/* brand section */
+.brand-sect{
+    display: flex;
+    flex-direction: row;
+}
+.brand-sect div:first-child{
+ width: 40%;
+ text-align: left;
+}
+.brand-sect h6{
+  margin-top: -3rem;
+  margin-bottom: 3rem;
+  text-align: left;
+}
+.brand-sect p{
+    padding-right: 2.5rem;
+}
+.brand-sect .brand-img{
+    width: 60%;
+}
+
 
 /* END */
 }

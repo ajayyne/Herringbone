@@ -1,6 +1,7 @@
 <?php include 'connection.php';
 $prodOptionID = $_GET['id'];
 $itemCategory = $_GET['category'];
+$brandName = $_GET['brand'];
 
 ?>
 <!DOCTYPE html>
@@ -142,6 +143,27 @@ $itemCategory = $_GET['category'];
             </div>";
         }
         ?>
+
+
+        <!-- brand section -->
+        <section class="brand-sect flex-col radius">
+        <?php
+            $getBrand = "SELECT * FROM brands WHERE BrandName = '$brandName'";
+            $runBrand = mysqli_query($connection, $getBrand);
+            while($brandInfo = mysqli_fetch_assoc($runBrand)){
+                    echo "<div>
+                    <h6>{$brandInfo['BrandName']}</h6>
+                    <p>{$brandInfo['description']}</p>
+                    </div>
+                    <div class='brand-img'>
+                        <img src='{$brandInfo['brandImage']}' class='radius'>
+                    </div>
+                    ";
+            }
+        ?>
+       
+        </section>
+
 
 
         <em>

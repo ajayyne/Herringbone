@@ -409,7 +409,7 @@ include "connection.php";
 
                         // wrap each item in an a tag
                         const link = document.createElement('a');
-                        link.setAttribute('href', 'Item.php?id=' + product.prodOptionID + '&category=' + product.Category);
+                        link.setAttribute('href', 'Item.php?id=' + product.prodOptionID + '&category=' + product.Category + '&brand=' + product.Brand);
 
 
                         const productDiv = document.createElement('div');

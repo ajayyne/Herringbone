@@ -69,7 +69,7 @@
 
     <main>
         <div class="banner flex flex-center">
-            <h1>HERRINGBONE</br>GIFTS</h1>
+            <h1 data-aos="fade-in" data-aos-duration="2000">HERRINGBONE</br><span  data-aos-duration="4000">GIFTS & CAFE</span></h1>
         </div>
 
 
@@ -120,14 +120,14 @@
                     in the shop soon!</p>
             </div>
             <div>
-                <img src="images/home-header.jpg" at="Herringbone Staff" class="radius">
+                <img src="images/gallery/exterior2.jpg" at="Herringbone Staff" class="radius">
             </div>
         </div>
 
         <div class="home-cafe">
-            <div class="cafe-text">
+            <div class="cafe-text" data-aos="flip-up" data-aos-duration="1000">
                 <h3>No. 56 Cafe</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc justo dolor.</p>
+                <p>A dog friendly cafe serving up delicious savouries, sweets and fresh barista made coffee from Fife's Forth Roasters</p>
                 <a>
                     <p><em>View Our Menu</em></p>
                 </a>

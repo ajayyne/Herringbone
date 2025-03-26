@@ -63,6 +63,13 @@
     </div>
 
 
+    <!-- banner img -->
+     <div class="contact-banner flex">
+        <div class="visit-banner">
+            <h2>Visit Us</h2>
+        </div>
+     </div>
+
     <main>
         <div class="flex flex-col contact-desktop">
             <div class="form-cont flex-center">
