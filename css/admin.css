@@ -1,0 +1,43 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+.radius{
+    border-radius: 10px;
+}
+.text-center{
+    text-align: center;
+}
+main{
+    padding: 1rem;
+}
+a{
+    color: black;
+    text-decoration: none;
+}
+.flex{
+    display: flex;
+}
+
+
+
+
+/* admin panel */
+.admin-links{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 0rem 1rem 0rem;
+}
+.link-box{
+    padding: 2rem;
+    border: 2px solid slategray;
+    margin-bottom: 2rem;
+}

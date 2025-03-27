@@ -168,7 +168,7 @@ $basketCount = 1;
             while ($brandInfo = mysqli_fetch_assoc($runBrand)) {
                 echo "<div>
                     <h6>" . strtoupper($brandInfo['BrandName']) . "</h6>
-                    <p>{$brandInfo['description']}</p>
+                    <p>{$brandInfo['brandDescription']}</p>
                     </div>
                     <div class='brand-img'>
                         <img src='{$brandInfo['brandImage']}' class='radius' alt='{$brandInfo['BrandName']}'>
