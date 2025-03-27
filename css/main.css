@@ -533,7 +533,7 @@ footer h6 {
 }
 
 .home-cafe {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url(../images/cafe.jpg);
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url(../images/cafe.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -546,7 +546,7 @@ footer h6 {
 .cafe-text {
     position: absolute;
     bottom: 2rem;
-    left: 2rem;
+    right: 2rem;
     padding-right: 1.5rem;
 }
 .cafe-text em{
@@ -1040,6 +1040,7 @@ select {
     font-weight: bold;
     font-size: large;
     margin-right: 2rem;
+    margin-top: 0.23rem;
 }
 .quant-label{
     font-size: 1.1rem;
@@ -1122,7 +1123,8 @@ select {
 .brand-sect{
     background-color: var(--dark-blue);
     color: white;
-    margin-top: 4rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
 }
 .brand-sect div:first-child{
     padding: 1rem 2rem 1rem 2rem;
@@ -1586,6 +1588,10 @@ select {
         margin-left: 2rem;
         width: 7rem;
     }
+    .categories-desk p{
+        font-style: italic;
+        font-size: smaller;
+    }
 
     .categories-mobile {
         display: none;
@@ -1654,12 +1660,12 @@ select {
     height: 1.2rem;
 }
 .item-btn button{
-    margin-top: 4rem;
+    margin-top: 2rem;
 }
 
 .item-content p{
     font-size: 1rem;
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
 }
 
 .splide-cont{
