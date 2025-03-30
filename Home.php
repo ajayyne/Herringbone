@@ -1,5 +1,5 @@
 <!-- php include -->
-<?php 
+<?php
 session_start();
 include 'connection.php' ?>
 <!DOCTYPE html>
@@ -9,6 +9,7 @@ include 'connection.php' ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Herringbone</title>
+    <link rel="icon" type="image/x-icon" href="images/icons/favicon.png">
     <meta name="description"
         content="Herringbone is an independantly owned gift shop and cafe located in Peebleshire, stocking handmade and locally sourced unique gifts...">
     <meta name="author" content="Amber Degner-Budd">
@@ -27,7 +28,7 @@ include 'connection.php' ?>
 <body>
     <div class="head">
         <header class="header">
-            
+
             <div class="mobile-nav flex flex-between">
                 <nav>
                     <div class="hamburger-container" id="toggle">
@@ -51,7 +52,7 @@ include 'connection.php' ?>
                 </div>
             </div>
             <div class="desk-nav">
-            <img src="images/icons/logo.jpg" class="logo">
+                <!-- <img src="images/icons/logo.jpg" class="logo"> -->
                 <ul>
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
@@ -65,14 +66,45 @@ include 'connection.php' ?>
             </div>
         </header>
         <div class="flex flex-center title">
-            <a href="Home.php"><h1>Herringbone</h1></a>
+            <a href="Home.php">
+                <h1>Herringbone</h1>
+            </a>
         </div>
     </div>
 
     <main>
         <div class="banner flex flex-center" alt="Herringbone Cafe">
-            <h1 data-aos="fade-in" data-aos-duration="2000">HERRINGBONE</br><span  data-aos-duration="4000">GIFTS & CAFE</span></h1>
+            <h1 data-aos="fade-in" data-aos-duration="2000">HERRINGBONE</br><span data-aos-duration="4000">GIFTS &
+                    CAFE</span></h1>
         </div>
+
+        <!-- call to actions -->
+        <div class="flex flex-col cta-container">
+            <div>
+                <div class="background-img1 flex flex-col">
+                    <div class="cta">
+                        <h1>Candles</h1>
+                        <button>Shop Here</button>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-between cta-2">
+                <div class="background-img2 flex flex-col">
+                    <div class="cta2">
+                        <h1>Home</h1>
+                        <button>Shop Here</button>
+                    </div>
+                </div>
+                <div class="background-img3 flex flex-col">
+                    <div class="cta2">
+                        <h1>Accessories</h1>
+                        <button>Shop Here</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
 
         <h2 class="bestseller-title">EXPLORE OUR BESTSELLERS</h2>
@@ -83,17 +115,17 @@ include 'connection.php' ?>
                 <div class="splide__track">
                     <div class="splide__list">
 
-                    <!-- PHP HERE TO GRAB PRODUCTS FROM DB -->
-                    <?php
-                    $getBestsellers = "SELECT ProductName, BrandName, Price, ImageURL FROM products AS p
+                        <!-- PHP HERE TO GRAB PRODUCTS FROM DB -->
+                        <?php
+                        $getBestsellers = "SELECT ProductName, BrandName, Price, ImageURL FROM products AS p
                     LEFT JOIN brands as b ON b.BrandID = p.BrandID
                     LEFT JOIN product_option as po ON po.ProductID = p.ProductID
                     LEFT JOIN image as i ON po.ProdOptionID = i.ProdOptionID
                     WHERE Bestseller = 1";
 
-                    $runBestsellers = mysqli_query($connection, $getBestsellers);
-                    while ($displayBestsellers = mysqli_fetch_array($runBestsellers)) {
-                        echo "<div class='splide__slide'>
+                        $runBestsellers = mysqli_query($connection, $getBestsellers);
+                        while ($displayBestsellers = mysqli_fetch_array($runBestsellers)) {
+                            echo "<div class='splide__slide'>
                                 <div class='bs-item flex flex-col radius'>
                                     <img src='{$displayBestsellers['ImageURL']}'>
                                     <p class='overlay'><em>{$displayBestsellers['BrandName']}</em></p>
@@ -102,40 +134,82 @@ include 'connection.php' ?>
                                     </div>
                                 </div>
                             </div>";
-                    } ?>
-               </div>
-            </div>
+                        } ?>
+                    </div>
+                </div>
         </div>
         </section>
         </div>
 
-
-
-        <!-- STATIC CONTENT -->
-        <div class="flex-center bio" data-aos="fade-in" data-aos-duration="1000">
-            <div class="align bio-about radius">
-                <h2>All About Us</h2>
-                <p>At Herringbone, we stock the best locally sources Scottish gifts. Our ranges include Candles, Bags,
-                    Home Decor, Jewellery and more! <br> You're sure to find something truly unique. <br> We also own
-                    the cafe located upstairs from the gift shop - The No. 56 Cafe, here you can find delicious
-                    savouries and sweet treats, with coffee from Forth Bridge Roasters in Fife.<br> We hope to see you
-                    in the shop soon!</p>
+        <div class="new flex flex-col">
+            <div class="new-img-cont flex flex-col">
+                <div class="flex harris-imgs">
+                    <img src="images/products/candles/harris_seilebost.jpg">
+                    <img src="images/products/candles/harris_losgaintir.jpg">
+                    <img src="images/products/candles/harris_horgabost.jpg" class="harris-hidden">
+                    
+                </div>
+                <div>
+                    <img src="images/brands/harris2.jpg" class="harris">
+                </div>
             </div>
-            <div>
-                <img src="images/gallery/exterior2.jpg" at="Herringbone on the High Street" class="radius">
+
+            <div class="new-info align">
+                <h1><strong>New In Store</strong></h1>
+                <p>Introducing our new range from Essence of Harris<br>The original Hebridean Soy Wax Candle Company. They hand pour all of their own luxuriously scented candles and diffusers on the beautiful Isle of Harris. </p>
             </div>
         </div>
+
+
+
+        <!-- STATIC CONTENT ABOUT THE SHOP -->
+
 
         <div class="home-cafe" alt="No.56 Cafe">
             <div class="cafe-text" data-aos="flip-up" data-aos-duration="1000">
                 <h3>No. 56 Cafe</h3>
-                <p>A dog friendly cafe serving up delicious savouries, sweets and fresh barista made coffee from Fife's Forth Roasters</p>
+                <p>A dog friendly cafe serving up delicious savouries, sweets and fresh barista made coffee from Fife's
+                    Forth Roasters</p>
                 <a>
                     <p><em>View Our Menu</em></p>
                 </a>
             </div>
         </div>
 
+
+        <!-- FAQ's -->
+
+        <!-- img on the left -->
+         <div class="faq flex flex-col">
+            <img src="images/gallery/exterior2.jpg" alt="Herringbone window display and outdoor seating" class="radius">
+            <!-- accordion on the right -->
+            <div class="accordion-cont flex flex-col">
+                <div>
+                <div class="acc-border">
+                    <div class="align faq-title">
+                        <h2>FAQ's</h2>
+                    </div>
+                    
+                        <button class="accordion">Are you dog friendly?</button>
+                        <div class="panel" data-aos="flip-up" data-aos-duration="1000">
+                            <p>Yes! We allow dogs in our shop downstairs, and the No.56 cafe upstairs. We love to welcome dogs into our space while you enjoy browsing, or a coffee upstairs.</p>
+                        </div>
+                        <button class="accordion" data-aos="flip-up" data-aos-duration="1000">Are all of your products Scottish?</button>
+                        <div class="panel">
+                            <p>We try our very best to support local artists and makers. We stock some of Scotlands most well known brands such as Islander and Heathergems. </p>
+                        </div>
+                        <button class="accordion" data-aos="flip-up" data-aos-duration="1000">Do you offer vegetarian or vegan options?</button>
+                        <div class="panel">
+                            <p>Our cafe offers a wide selection of treats for vegetarians and vegans. We also have various alternative milks available.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        
 
     </main>
 
@@ -157,21 +231,21 @@ include 'connection.php' ?>
                 </div>
             </div>
             <div class="flex flex-between ft-info2">
-            <div class="footer-links links">
-                            <h6>Important Links</h6>
-                            <a>
-                                <p>About Us</p>
-                            </a>
-                            <a>
-                                <p>Cookies Policy</p>
-                            </a>
-                            <a>
-                                <p>Privacy Policy</p>
-                            </a>
-                            <a>
-                                <p>Delivery & Returns</p>
-                            </a>
-                        </div>
+                <div class="footer-links links">
+                    <h6>Important Links</h6>
+                    <a>
+                        <p>About Us</p>
+                    </a>
+                    <a>
+                        <p>Cookies Policy</p>
+                    </a>
+                    <a>
+                        <p>Privacy Policy</p>
+                    </a>
+                    <a>
+                        <p>Delivery & Returns</p>
+                    </a>
+                </div>
                 <div class="flex flex-between">
                     <div class="footer-links ft-contact">
                         <h6>Get In Touch</h6>
@@ -201,8 +275,9 @@ include 'connection.php' ?>
         document.addEventListener('DOMContentLoaded', function () {
             var splide = new Splide('.splide', {
                 perPage: 4,
+                loop: true,
                 gap: '1.5rem',
-                
+
                 breakpoints: {
                     800: {
                         perPage: 3,
@@ -226,7 +301,28 @@ include 'connection.php' ?>
         });
     </script>
     <script>
-        AOS.init();
+      AOS.init({
+    offset: 100, 
+    easing: 'ease-in-out',
+    once: true 
+});
+    </script>
+    <!-- script for accordion -->
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
     </script>
 </body>
 

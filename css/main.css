@@ -297,11 +297,10 @@ li {
 
 .title h1 {
     font-family: "Aboreto";
-    padding: 0.2rem;
     font-weight: bold;
     margin-top: 0.3rem;
     letter-spacing: 0.2em;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 
@@ -364,6 +363,56 @@ footer h6 {
 .banner h1 span{
     font-weight: normal;
     font-size: 2.4rem;
+}
+.cta-container{
+    margin-top: 3rem;
+}
+.cta button, .cta2 button{
+    background-color: var(--darkest-blue);
+    color: white;
+    font-weight: normal;
+}
+.cta{
+ padding: 1.5rem;
+ color: white;
+ font-weight: bold;
+}
+.cta2{
+    color: white;
+    padding: 0.5rem;
+}
+.cta2 h1{
+    font-size: 1rem;
+}
+.cta2 button{
+    font-size: 0.7rem;
+}
+.cta-2{
+    width: 23rem;
+}
+.background-img1, .background-img2, .background-img3{
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    align-items: start;
+    justify-content: end;
+}
+.background-img1{
+    background-image: url(../images/candle.jpg);
+    height: 25rem;
+    width: 23rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+.background-img2{
+    background-image: url(../images/basket.png);
+    height: 12rem;
+    width: 11rem;
+}
+.background-img3{
+    background-image: url(../images/bag.png);
+    height: 12rem;
+    width: 11rem;
 }
 
 .search-cont {
@@ -515,21 +564,92 @@ footer h6 {
     width: 80%; /* Sets the width of the overlay text */
     max-width: 25rem; /* Ensures the width doesn't exceed 25rem */
 } 
-
-.bio {
-    flex-direction: column;
-    padding: 0rem 2rem 2rem 2rem;
-}
-
-.bio-about {
-    padding: 1rem 1rem 3rem 1rem;
+.accordion {
+    background-color: var(--light-blue);
+    color: black;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+  }
+  .active, .accordion:hover {
     background-color: var(--medium-blue);
-}
+  }
 
-.bio img {
-    width: 18rem;
-    z-index: 999;
-    margin-top: -3rem;
+  .panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    margin-bottom: 2rem;
+    transition: opacity 0.3s ease-in-out; /* Optional smooth fade */
+  }
+  .panel p{
+    padding-top: 0.6rem;
+  }
+  .accordion:after {
+    content: '\25BC'; 
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+  }
+  .active:after {
+    content: "\25B2"; 
+  }
+  .faq{
+    padding: 2rem;
+  }
+  .faq-title{
+    padding: 0rem 0rem 3rem 2rem;
+  }
+  .faq-title h2{
+    font-size: 3rem;
+  }
+
+  .faq img{
+    display: none;
+  }
+
+.acc-border{
+    padding-top: 1rem;
+    border-top: 2px solid var(--medium-blue);
+    border-bottom: 2px solid var(--medium-blue);
+    overflow: visible;
+}
+.new{
+    padding: 2rem;
+}
+.new-img-cont{
+    width: 100%;
+}
+.new-info{
+    padding: 2rem 0rem 2rem 0rem;
+}
+.new-info strong{
+    border-top: 1.5px solid var(--dark-blue);
+    border-bottom: 1.5px solid var(--dark-blue);
+    padding: 0.3rem;
+}
+.new-info h1{
+    margin-bottom: 2rem;
+}
+.harris-imgs img{
+    width: 50%;
+}
+.harris-imgs img:first-child{
+    padding-right: 0.3rem;
+}
+.harris{
+    width: 100%;
+    padding-top: 0.3rem;
+}
+.harris-hidden{
+    display: none;
 }
 
 .home-cafe {
@@ -543,22 +663,39 @@ footer h6 {
     margin: 2rem 0rem 2rem 0rem;
 }
 
-.cafe-text {
+ .cafe-text {
     position: absolute;
     bottom: 2rem;
-    right: 2rem;
-    padding-right: 1.5rem;
+    text-align: right;
+    right: 1rem;
 }
+.cafe-text h3{
+    font-weight: bold;
+}
+
 .cafe-text em{
+    background-color: rgba(255, 255, 255, 0.772);
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+    border-radius: 10px;
+    color: var(--darkest-blue);
     transition: underline 0.3s ease-in-out;
+    font-weight: bold;
 }
+.cafe-text p{
+    padding: 0rem 0rem 0rem 6rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+/*
 .cafe-text em:hover,
 .cafe-text em:active {
     text-decoration: underline;
 }
 .cafe-text p{
     width: 30rem;
-}
+    font-size: 0.7rem;
+    padding: 0rem 4rem 0rem 4rem;
+} */
 
 /*END*/
 
@@ -1360,12 +1497,35 @@ select {
 .icons-desk{
     width: 18%;
 }
+.background-img1{
+    margin: 0rem;
+    height: 35rem;
+}
+.cta-container{
+    flex-direction: row;
+    justify-content: center !important;
+    align-items: center;
+    border: 2px solid red;
+}
+.cta-2{
+    flex-direction: column;
+    border: 2px solid green;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    height: 35rem;
+}
+.background-img2, .background-img3{
+    height: 17rem;
+    width: 20rem;
+}
 }
 
 /*LAPTOP*/
 @media screen and (min-width: 992px) {
     header {
-        padding: 1rem 0rem 1rem 0rem;
+        padding: 0.3rem 0rem 0.3rem 0rem;
     }
 
     .desk-nav {
@@ -1377,6 +1537,7 @@ select {
     .desk-nav ul {
         text-align: center;
         width: 100%;
+        font-size: 0.9rem;
     }
 
     .header-name {
@@ -1452,6 +1613,7 @@ select {
     .icons-desk {
         width: 18%;
         right: 1rem;
+        top: 0.5rem;
     }
 
     .icons-desk i {
@@ -1470,34 +1632,6 @@ select {
         position: absolute;
     }
 
-    .bio {
-        flex-direction: row;
-    }
-
-    .bio-about {
-        width: 43rem;
-        height: 30rem;
-        height: 30rem;
-        padding: 2rem;
-
-    }
-    .bio-about h2 {
-        text-align: left;
-    }
-
-    .bio img {
-        margin-top: 0rem;
-        margin-left: -11rem;
-        width: 30rem;
-        height: 25rem;
-        height: 25rem;
-    }
-
-    .bio-about p {
-        width: 70%;
-        text-align: left;
-        margin-top: 2rem;
-    }
 
     .cafe-text h3 {
         font-size: 3rem;
@@ -1506,6 +1640,48 @@ select {
     .cafe-text a {
         font-size: 1.3rem;
     }
+    .faq{
+        flex-direction: row;
+    }
+    .faq img{
+        display: block;
+        width: 40%;
+      }
+      .accordion-cont{
+        width: 60%;
+        padding: 0% 5% 0% 5%;
+    }
+
+.harris{
+    display: none;
+}
+.harris-hidden{
+    display: block;
+}
+.new{
+    padding: 1rem;
+    flex-direction: column-reverse;
+}
+.new-info{
+    padding: 3rem 1rem 3rem 1rem;
+}
+.new-info p{
+    padding: 0rem 10rem 0rem 10rem;
+}
+.harris-imgs{
+    display: flex;
+    justify-content: space-evenly;
+}
+.harris-imgs img{
+    width: 30%;
+}
+
+.cafe-text {
+    right: 2rem;
+    padding-right: 1.5rem;
+}
+
+
 
     /*CONTACT PAGE*/
  
@@ -1694,8 +1870,9 @@ select {
 .brand-sect .brand-img{
     width: 60%;
 }
-
 /* END */
+
+
 }
 
 

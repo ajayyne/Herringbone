@@ -11,6 +11,7 @@ $prodOptionID = $_GET['prodOptionID'];
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Herringbone</title>
+        <link rel="icon" type="image/x-icon" href="images/icons/favicon.png">
         <meta name="description"
             content="Herringbone is an independantly owned gift shop and cafe located in Peebleshire, stocking handmade and locally sourced unique gifts...">
         <meta name="author" content="Amber Degner-Budd">

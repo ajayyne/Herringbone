@@ -12,8 +12,9 @@ $basketCount = 1;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Herringbone</title>
+    <link rel="icon" type="image/x-icon" href="images/icons/favicon.png">
     <meta name="description"
-        content="Herringbone is an independantly owned gift shop and cafe located in Peebleshire, stocking handmade and locally sourced unique gifts...">
+        content="Herringbone stocks a unique range of handmade and locally sourced gifts. Browse our candles, glassware, and home decor.">
     <meta name="author" content="Amber Degner-Budd">
     <meta name="keywords"
         content="Gift shop, Cafe, Scottish gifts, Handmade, Locally sourced, Scottish makers, Local makers">
@@ -539,6 +540,13 @@ $basketCount = 1;
     </script>
     <script src="navigation.js"></script>
     <script src="filters.js"></script>
+    <script>
+      AOS.init({
+    offset: 100, 
+    easing: 'ease-in-out',
+    once: true 
+});
+    </script>
 </body>
 
 </html>

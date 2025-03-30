@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Herringbone</title>
+    <link rel="icon" type="image/x-icon" href="images/icons/favicon.png">
     <meta name="description"
-        content="Herringbone is an independantly owned gift shop and cafe located in Peebleshire, stocking handmade and locally sourced unique gifts...">
+        content="Get in touch with us with any queries, we are happy to help!">
     <meta name="author" content="Amber Degner-Budd">
     <meta name="keywords"
         content="Gift shop, Cafe, Scottish gifts, Handmade, Locally sourced, Scottish makers, Local makers">
@@ -239,6 +240,13 @@
         });
     </script>
     <script src="navigation.js"></script>
+    <script>
+      AOS.init({
+    offset: 100, 
+    easing: 'ease-in-out',
+    once: true 
+});
+    </script>
 </body>
 
 </html>

@@ -8,3 +8,5 @@ $_SESSION['adminID'] = $adminID;
 $_SESSION['userType'] = 'Admin';
 
 ?>
+
+<!-- <link rel="icon" type="image/x-icon" href="images/icons/favicon.png"> -->
