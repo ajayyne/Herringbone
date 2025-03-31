@@ -1,0 +1,239 @@
+<?php
+session_start();
+include "connection.php";
+
+// get item id
+$itemID = $_GET['ProductID'];
+
+if (isset($_POST['update'])) {
+    $update = "UPDATE products AS p
+    INNER JOIN product_option AS po ON p.ProductID = po.ProductID
+    INNER JOIN brands AS b ON b.BrandID = p.BrandID
+    INNER JOIN categories AS c ON c.CategoryID = p.CategoryID
+    SET 
+        p.ProductName = '$_POST[productName]',
+        p.Description = '$_POST[Description]',
+        po.Colour = '$_POST[Colour]',
+        po.isAvailable = '$_POST[Availability]',
+        p.DefaultDisplay = '$_POST[Default]',
+        p.Bestseller = '$_POST[Bestseller]',
+        p.BrandID = '$_POST[Brand]',  
+        p.CategoryID = '$_POST[Category]' 
+    WHERE po.ProdOptionID = '$_POST[ProdOptionID]';";
+
+    $runUpdate = mysqli_query($connection, $update);
+    if ($runUpdate) {
+        echo '<script>alert("Product Successfully Updated")</script>';
+        header("Refresh:0");
+    } else {
+        echo '<script>alert("Update Failed")</script>';
+    }
+}
+
+if (isset($_POST['delete'])) {
+    $delete = "DELETE FROM product_option WHERE ProdOptionID ='$_POST[ProdOptionID]'";
+    $runDelete = mysqli_query($connection, $delete);
+    if ($runDelete) {
+        echo '<script>alert("Product Successfully Deleted")</script>';
+        header("Refresh:0");
+    } else {
+        echo '<script>alert("Deletion Failed")</script>';
+    }
+}
+
+// deleting images
+// delete image from server AND database
+if (isset($_POST['deleteImage'])) {
+
+    // delete from server (file directory)
+    $filepath = $_POST['hidden2'];
+    if (file_exists($file_path)) {
+        // Delete the file
+        if (unlink($file_path)) {
+            echo "Image deleted from server successfully.";
+        } else {
+            echo "Error deleting the Image.";
+        }
+    } else {
+        echo "The Image does not exist.";
+    }
+
+    // delete from database
+    $deleteimg = "DELETE FROM image WHERE ImageID = $_POST[hidden]";
+    $runDeleteImg = mysqli_query($connection, $deleteimg);
+    if ($runDeleteImg) {
+        echo '<script>alert("Image Successfully Deleted")</script>';
+        header("Refresh:0");
+    } else {
+        echo '<script>alert("Deletion Failed")</script>';
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herringbone</title>
+    <link rel="icon" type="image/x-icon" href="images/icons/favicon.png">
+    <link rel="icon" type="image/x-icon" href="images/icons/favicon.png">
+    <meta name="description"
+        content="Herringbone is an independantly owned gift shop and cafe located in Peebleshire, stocking handmade and locally sourced unique gifts...">
+    <meta name="author" content="Amber Degner-Budd">
+    <meta name="keywords"
+        content="Gift shop, Cafe, Scottish gifts, Handmade, Locally sourced, Scottish makers, Local makers">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/admin.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/504c189bcb.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <?php
+    // get item details from db
+    $getItem = "SELECT b.BrandName, b.BrandID, c.CategoryID, c.CategoryName, p.ProductID, po.ProdOptionID, p.ProductName, p.Description, po.Colour, po.isAvailable, p.Price, p.DefaultDisplay, p.Bestseller FROM product_option as po
+LEFT JOIN products as p ON po.ProductID = p.ProductID
+LEFT JOIN categories as c ON c.CategoryID = p.CategoryID
+LEFT JOIN brands as b ON b.BrandID = p.BrandID
+WHERE p.ProductID = $itemID";
+    $runItem = mysqli_query($connection, $getItem);
+    while ($displayItem = mysqli_fetch_assoc($runItem)) {
+        echo "<div>
+        <form method='POST'>
+            <input type='hidden' value='{$displayItem['ProdOptionID']}' name='ProdOptionID'>
+            <div>
+                <label for='productName'>Product Name</label>
+                <input type='text' placeholder='{$displayItem['ProductName']}' name='productName' value='{$displayItem['ProductName']}'>
+            </div>
+            <div>
+                <label for='description'>Product Description</label>
+                <input type='text' placeholder='{$displayItem['Description']}' name='Description' value='{$displayItem['Description']}'>
+            </div>
+            <div>
+                <label for='colour'>Colour</label>
+                <input type='text' placeholder='{$displayItem['Colour']}' name='Colour' value='{$displayItem['Colour']}'>
+            </div>
+            <div>
+                <label for='Availability'>Is this product Available?</label>
+                <input type='checkbox' id='Available0' name='Availability' value='0'";
+        if ($displayItem['isAvailable'] == 0)
+            echo 'checked>';
+        echo "<label for='Availale0'>No</label>
+                <input type='checkbox' id='Available1' name='Availability' value='1'";
+        if ($displayItem['isAvailable'] == 1)
+            echo 'checked>';
+        echo "<label for='Available1'>Yes</label>
+            </div>
+            <div>
+                <label for='Price'>Price</label>
+                <input type='text' placeholder='{$displayItem['Price']}' name='Price' value='{$displayItem['Price']}'>
+            </div>
+            <div>
+                <label for='Default'>Display as Default?</label>
+                <input type='checkbox' id='Default0' name='Default' value='0'";
+        if ($displayItem['DefaultDisplay'] == 0)
+            echo 'checked>';
+        echo "<label for='Default0'>No</label>
+                <input type='checkbox' id='Default1' name='Default' value='1'";
+        if ($displayItem['DefaultDisplay'] == 1)
+            echo 'checked>';
+        echo "<label for='Default1'>Yes</label>
+            </div>
+            <div>
+                <label for='Bestseller'>Bestseller?</label>
+                <input type='checkbox' id='Bestseller0' name='Bestseller' value='0'";
+        if ($displayItem['Bestseller'] == 0)
+            echo 'checked>';
+        echo "<label for='Bestseller0'>No</label>
+                <input type='checkbox' id='Bestseller1' name='Bestseller' value='1'";
+        if ($displayItem['Bestseller'] == 1)
+            echo 'checked>';
+        echo "<label for='Bestseller1'>Yes</label>
+            </div>
+            <div>
+                <label for='Category'>Category</label>
+                <select type='text' placeholder='{$displayItem['CategoryName']}' name='Category' value='{$displayItem['CategoryID']}'>";
+        $getCategories = "SELECT * FROM categories";
+        $runCategories = mysqli_query($connection, $getCategories);
+        while ($displayCategories = mysqli_fetch_assoc($runCategories)) {
+            $selected = ($displayCategories['CategoryID'] == $displayItem['CategoryID']) ? 'selected' : ''; // Check if this category is currently selected
+            echo "<option value='{$displayCategories['CategoryID']}' $selected>{$displayCategories['CategoryName']}</option>";
+        }
+        echo "
+            </select>
+            </div>
+            <div>
+                <label for='Brand'>Brand</label>
+                <select type='text' placeholder='{$displayItem['BrandName']}' name='Brand' value='{$displayItem['BrandID']}'>";
+        $getBrands = "SELECT * FROM brands";
+        $runBrands = mysqli_query($connection, $getBrands);
+        while ($displayBrands = mysqli_fetch_assoc($runBrands)) {
+            $selected = ($displayBrands['BrandID'] == $displayItem['BrandID']) ? 'selected' : ''; // Check if this brand is currently selected
+            echo "<option value='{$displayBrands['BrandID']}' $selected>{$displayBrands['BrandName']}</option>";
+        }
+        echo "
+             </select>
+            </div>
+            <div>
+                <input name='update' type='submit' id='updateItem' value='Update Item'>
+            </div>
+             <div>
+                <input name='delete' type='submit' id='deleteItem' value='Delete Item'>
+            </div>
+            <div>
+                <input name='showImages' type='submit' id='showImages' value='Show Images'>
+            </div>
+        </form>
+    </div>
+    <br>
+    <br>
+    ";
+
+        // images: upload, delete
+        // cycle through and print images
+        if (isset($_POST['showImages']) && $_POST['ProdOptionID'] == $displayItem['ProdOptionID']) {
+
+            // upload image
+            echo "
+        <div>
+                <form method='post' enctype='multipart/form-data'>
+                <label for='imageUpload'>
+                    <input type='file' accept='.jpg, .jpeg, .png' name='newImg' id='imageUpload'>
+                </form>
+            </div>";
+
+            $getImages = "SELECT i.ImageID, i.ImageURL, i.ProdOptionID, po.ProdOptionID, p.ProductID FROM image as i
+        LEFT JOIN product_option as po ON i.ProdOptionID = po.ProdOptionID
+        LEFT JOIN products as p ON p.ProductID = po.ProductID
+        WHERE po.ProdOptionID = $_POST[ProdOptionID]";
+            $runImage = mysqli_query($connection, $getImages);
+            while ($images = mysqli_fetch_assoc($runImage)) {
+                echo "<div class='item-imgs'>
+                <img src='{$images['ImageURL']}'>
+                <form method='POST'>
+                    <input type='hidden' name='hidden' value='{$images['ImageID']}'>
+                    <input type='hidden' name='hidden2' value='{$images['ImageURL']}'>
+                    <input type='submit' value='delete' id='deleteImage' name='deleteImage'>
+                </form>
+            </div>";
+            }
+        }
+
+
+        //make image clickable - with attribute 'selected' if selected
+        // delete selected image from image database
+        // handle default image selector OR every image that is first one uploaded IS the default image
+    
+        //upload image (one at a time)
+        // refresh page to show new image
+    
+    }
+
+
+    ?>
+
+</body>
+
+</html>

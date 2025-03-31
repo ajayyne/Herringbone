@@ -41,3 +41,29 @@ a{
     border: 2px solid slategray;
     margin-bottom: 2rem;
 }
+
+
+
+/* admin products */
+.product-tile{
+    align-items: center;
+}
+.product-tile div:first-child{
+    align-items: center;
+    justify-content: center;
+}
+.product-tile img{
+    width: 10%;
+    height: 10%;
+}
+.product-tile p{
+    font-size: 0.8rem;
+}
+
+
+
+
+/* edit products */
+.item-imgs img{
+    width: 2rem;
+}
