@@ -19,6 +19,9 @@
 
 <body>
     <main>
+
+        <a href="NewProduct.php"><button>Add New Product</button></a>
+
         <?php
         session_start();
         include 'connection.php';

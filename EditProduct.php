@@ -42,7 +42,6 @@ if (isset($_POST['delete'])) {
 }
 
 // deleting images
-// delete image from server AND database
 if (isset($_POST['deleteImage'])) {
 
     // delete from server (file directory)
@@ -195,20 +194,25 @@ WHERE p.ProductID = $itemID";
         // cycle through and print images
         if (isset($_POST['showImages']) && $_POST['ProdOptionID'] == $displayItem['ProdOptionID']) {
 
-            // upload image
+            // upload new image
             echo "
-        <div>
+            <div>
                 <form method='post' enctype='multipart/form-data'>
                 <label for='imageUpload'>
                     <input type='file' accept='.jpg, .jpeg, .png' name='newImg' id='imageUpload'>
+                    <input type='submit' name='uploadImg' value='Upload Image'>
                 </form>
             </div>";
 
-            $getImages = "SELECT i.ImageID, i.ImageURL, i.ProdOptionID, po.ProdOptionID, p.ProductID FROM image as i
+            $getImages = "SELECT c.CategoryID, c.CategoryName, i.ImageID, i.ImageURL, i.ProdOptionID, po.ProdOptionID, p.ProductID FROM image as i
         LEFT JOIN product_option as po ON i.ProdOptionID = po.ProdOptionID
         LEFT JOIN products as p ON p.ProductID = po.ProductID
+        LEFT JOIN categories as c ON c.CategoryID = p.CategoryID
         WHERE po.ProdOptionID = $_POST[ProdOptionID]";
             $runImage = mysqli_query($connection, $getImages);
+
+
+
             while ($images = mysqli_fetch_assoc($runImage)) {
                 echo "<div class='item-imgs'>
                 <img src='{$images['ImageURL']}'>
@@ -219,16 +223,46 @@ WHERE p.ProductID = $itemID";
                 </form>
             </div>";
             }
+
+            if (isset($_POST['uploadImg'])) {
+                // upload image to server and db:
+                // set the directory for the uploaded image
+                $targetDir = "images/products/" . $images['CategoryName'] . "/";
+                $file = $_FILES['newImg'];
+    
+                // check that uploaded file matches the allowed types
+                $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+                if (!in_array($file['type'], $allowedTypes)) {
+                    die("Invalid file type. Only JPG, JPEG, and PNG are allowed.");
+                }
+
+                // set maximum file size (2mb)
+                $maxFileSize = 2 * 1024 * 1024;
+                if ($file['size'] > $maxFileSize) {
+                    die("File size exceeds 2MB limit, please upload a smaller file.");
+                }
+
+                // specify the target file path
+                $fileName = basename($file['name']);
+                $targetFile = $targetDir . $fileName;
+
+                // upload image file to the database AFTER it has been uploaded to server
+                if (move_uploaded_file($file['tmp_name'], $targetFile)) {
+                    // Prepare the SQL insert statement
+                    $insert = "INSERT INTO image (ImageURL, ProdOptionID, defaultImg) VALUES ('$targetFile', '{$images['ProdOptionID']}', 0)";
+
+                    if ($connection->query($insert)) {
+                        echo "Image successfully added.";
+                    } else {
+                        echo "Error saving Image to database: " . $connection->error;
+                    }
+                } else {
+                    die("Failed to move the uploaded file.");
+                }
+            }
+
+
         }
-
-
-        //make image clickable - with attribute 'selected' if selected
-        // delete selected image from image database
-        // handle default image selector OR every image that is first one uploaded IS the default image
-    
-        //upload image (one at a time)
-        // refresh page to show new image
-    
     }
 
 

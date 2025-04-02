@@ -82,7 +82,17 @@ include 'connection.php';
     ?>
     </main>
 
-
+ <!-- limits the number of images allowed to upload -->
+ <script>
+         $(function(){
+            $("input[type = 'submit']").click(function(){
+               var $fileUpload = $("input[type='file']");
+               if (parseInt($fileUpload.get(0).files.length) > 1){
+                  alert("You are only allowed to upload a maximum of 1 file");
+               }
+            });
+         });
+      </script>
 </body>
 
 </html>
