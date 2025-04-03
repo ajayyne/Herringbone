@@ -59,6 +59,9 @@ a{
 .product-tile p{
     font-size: 0.8rem;
 }
+.desktop-searchbar{
+    display: none;
+}
 
 
 
@@ -67,3 +70,19 @@ a{
 .item-imgs img{
     width: 2rem;
 }
+
+
+/* desktop */
+@media screen and (min-width: 992px) {
+
+    .desktop-searchbar{
+        display: block;
+    }
+    .mobile-searchbar{
+        display: none;
+    }
+}
+
+
+
+

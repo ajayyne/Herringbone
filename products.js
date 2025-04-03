@@ -1,7 +1,8 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
-    //search bar:
+    //mobile elements
+    const mobileSearch = document.getElementById('search');
+    const mobileIcon = document.getElementById('mobileSearch');
+    // desktop elements
     const searchInput = document.getElementById('deskSearch');
     const searchIcon = document.getElementById('searchIcon');
 
@@ -12,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         clearFilters();
         loadProducts(search);
     });
-
     // when user is pressing enter to search
     searchInput.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
@@ -22,6 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
             loadProducts(search);
         }
     });
+
+    if (mobileSearch && mobileIcon) {
+        mobileIcon.addEventListener("click", function (event) {
+            let search2 = mobileSearch.value;
+            event.preventDefault();
+            clearFilters();
+            loadProducts(search2);
+        });
+    
+        mobileSearch.addEventListener("keyup", function (event) {
+            if (event.key === "Enter") {
+                let search2 = mobileSearch.value;
+                event.preventDefault();
+                clearFilters();
+                loadProducts(search2);
+            }
+        });
+    }
 });
 
 //filters and categories are independant of eachother
@@ -101,113 +119,44 @@ function applyFilters() {
     // Call loadProducts with applied filters
     loadProducts('', selectedCategory, selectedColours, selectedBrands, selectedPrice);
 }
+function generateGetproductsURL(search = '', category = '', colour = '', brand = '', price = '')
+{
+   // Build the request URL
+   let requestUrl = 'getProducts.php';
+   let queryString = '';
 
-// Function to load products based on parameters
-function loadProducts(search = '', category = '', colour = '', brand = '', price = '') {
-    // Build the request URL
-    let requestUrl = 'getProducts.php';
-    let queryString = '';
+   //if search bar was used
+   if (search !== '') {
+       queryString += `search=${encodeURIComponent(search)}&`;
+   }
 
-    //if search bar was used
-    if (search !== '') {
-        queryString += `search=${encodeURIComponent(search)}&`;
-    }
+   // Include category if clicked
+   if (category !== '') {
+       queryString += `category=${encodeURIComponent(category)}&`;
+   }
 
-    // Include category if clicked
-    if (category !== '') {
-        queryString += `category=${encodeURIComponent(category)}&`;
-    }
+   if (colour !== '') {
+       queryString += `colour=${encodeURIComponent(colour)}&`;
+   }
+   if (brand !== '') {
+       queryString += `brand=${encodeURIComponent(brand)}&`;
+   }
+   if (price !== '') {
+       queryString += `price=${encodeURIComponent(price)}`;
+   }
 
-    if (colour !== '') {
-        queryString += `colour=${encodeURIComponent(colour)}&`;
-    }
-    if (brand !== '') {
-        queryString += `brand=${encodeURIComponent(brand)}&`;
-    }
-    if (price !== '') {
-        queryString += `price=${encodeURIComponent(price)}`;
-    }
+   // Remove trailing '&' from the querystring
+   queryString = queryString.replace(/&$/, '');
 
-    // Remove trailing '&' from the querystring
-    queryString = queryString.replace(/&$/, '');
+   // Append filters to the request URL
+   if (queryString !== '') {
+       requestUrl = requestUrl + '?' + queryString;
+   }
 
-    // Append filters to the request URL
-    if (queryString !== '') {
-        requestUrl = requestUrl + '?' + queryString;
-    }
+   return requestUrl;
 
-    // AJAX request to fetch products
-    const xmlhttp = new XMLHttpRequest();
-    xmlhttp.onload = function () {
-        const productList = JSON.parse(this.responseText);
-
-        //get products container from HTML
-        const container = document.getElementById('prod-container');
-
-        // Clear the container - clears each time so that duplicate products are not shown
-        container.innerHTML = '';
-
-        // Populate container with product items
-        if (productList.length > 0) {
-
-            productList.forEach((product) => {
-
-                // wrap each item in an a tag
-                const link = document.createElement('a');
-                link.setAttribute('href', 'Item.php?id=' + product.prodOptionID + '&category=' + product.Category + '&brand=' + product.Brand);
-
-
-                const productDiv = document.createElement('div');
-                productDiv.classList.add('product', 'radius');
-                productDiv.appendChild(link);
-
-                const imgElement = document.createElement('img');
-                imgElement.setAttribute('src', product.Image);
-                imgElement.setAttribute('alt', product.Name);
-                imgElement.classList.add('radius');
-                productDiv.appendChild(imgElement);
-                link.appendChild(imgElement);
-
-                const nameElement = document.createElement('h6');
-                nameElement.innerText = product.Name;
-                productDiv.appendChild(nameElement);
-
-                const priceHolder = document.createElement('div');
-                priceHolder.classList.add('price-holder');
-
-                const brandElement = document.createElement('p');
-                brandElement.innerText = product.Brand;
-                priceHolder.appendChild(brandElement);
-                brandElement.classList.add('product-brand');
-
-
-                const priceElement = document.createElement('p');
-                priceElement.innerText = '£' + product.Price;
-                priceElement.classList.add('price');
-                priceHolder.appendChild(priceElement);
-
-                productDiv.appendChild(priceHolder);
-
-                const cartButton = document.createElement('button');
-                cartButton.innerText = "ADD TO CART";
-                cartButton.classList.add('cart-btn');
-                productDiv.appendChild(cartButton);
-
-                container.appendChild(productDiv);
-            });
-        } else {
-            container.innerHTML = '<p>No products found.</p>';
-        }
-    };
-
-    //error message
-    xmlhttp.onerror = function () {
-        console.error("Failed to load products.");
-    };
-
-    xmlhttp.open("GET", requestUrl, true);
-    xmlhttp.send();
 }
+
 
 function clearFiltersAndLoad() {
     clearFilters();
@@ -232,6 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// The first initial load of products with no filters
-//search, category, colour, brand, price parameters initially empty
-loadProducts();
+
+
+// if query string has something in it, run loadProducts with the params

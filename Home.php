@@ -84,7 +84,7 @@ include 'connection.php' ?>
                 <div class="background-img1 flex flex-col">
                     <div class="cta">
                         <h1>Candles</h1>
-                        <a href="Products.php"><button>Shop Here</button></a>
+                        <a href="Products.php?category=candles"><button>Shop Here</button></a>
                     </div>
                 </div>
             </div>

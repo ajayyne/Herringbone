@@ -5,6 +5,7 @@ include "connection.php";
 // get item id
 $itemID = $_GET['ProductID'];
 
+// update product - WORKING
 if (isset($_POST['update'])) {
     $update = "UPDATE products AS p
     INNER JOIN product_option AS po ON p.ProductID = po.ProductID
@@ -30,6 +31,7 @@ if (isset($_POST['update'])) {
     }
 }
 
+// delete product - WORKING
 if (isset($_POST['delete'])) {
     $delete = "DELETE FROM product_option WHERE ProdOptionID ='$_POST[ProdOptionID]'";
     $runDelete = mysqli_query($connection, $delete);
@@ -41,7 +43,7 @@ if (isset($_POST['delete'])) {
     }
 }
 
-// deleting images
+// deleting images - WORKING
 if (isset($_POST['deleteImage'])) {
 
     // delete from server (file directory)
@@ -190,7 +192,7 @@ WHERE p.ProductID = $itemID";
     <br>
     ";
 
-        // images: upload, delete
+        // images: upload
         // cycle through and print images
         if (isset($_POST['showImages']) && $_POST['ProdOptionID'] == $displayItem['ProdOptionID']) {
 
@@ -199,6 +201,8 @@ WHERE p.ProductID = $itemID";
             <div>
                 <form method='post' enctype='multipart/form-data'>
                 <label for='imageUpload'>
+                    <input type='hidden' name='category' value='{$displayItem['CategoryName']}'>
+                    <input type='hidden' name='prodOptionID' value='{$displayItem['ProdOptionID']}'>
                     <input type='file' accept='.jpg, .jpeg, .png' name='newImg' id='imageUpload'>
                     <input type='submit' name='uploadImg' value='Upload Image'>
                 </form>
@@ -222,49 +226,52 @@ WHERE p.ProductID = $itemID";
                     <input type='submit' value='delete' id='deleteImage' name='deleteImage'>
                 </form>
             </div>";
-            }
-
-            if (isset($_POST['uploadImg'])) {
-                // upload image to server and db:
-                // set the directory for the uploaded image
-                $targetDir = "images/products/" . $images['CategoryName'] . "/";
-                $file = $_FILES['newImg'];
-    
-                // check that uploaded file matches the allowed types
-                $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-                if (!in_array($file['type'], $allowedTypes)) {
-                    die("Invalid file type. Only JPG, JPEG, and PNG are allowed.");
-                }
-
-                // set maximum file size (2mb)
-                $maxFileSize = 2 * 1024 * 1024;
-                if ($file['size'] > $maxFileSize) {
-                    die("File size exceeds 2MB limit, please upload a smaller file.");
-                }
-
-                // specify the target file path
-                $fileName = basename($file['name']);
-                $targetFile = $targetDir . $fileName;
-
-                // upload image file to the database AFTER it has been uploaded to server
-                if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-                    // Prepare the SQL insert statement
-                    $insert = "INSERT INTO image (ImageURL, ProdOptionID, defaultImg) VALUES ('$targetFile', '{$images['ProdOptionID']}', 0)";
-
-                    if ($connection->query($insert)) {
-                        echo "Image successfully added.";
-                    } else {
-                        echo "Error saving Image to database: " . $connection->error;
-                    }
-                } else {
-                    die("Failed to move the uploaded file.");
-                }
-            }
-
-
-        }
+            }     
     }
 
+
+    if (isset($_POST['uploadImg'])) {
+        // Upload image to server and database:
+        $targetDir = "images/products/" . strtolower($_POST['category']) . "/";
+    
+        $file = $_FILES['newImg'];
+        $fileName = basename($file['name']);
+        $targetFile = $targetDir . $fileName;
+    
+        // Check if the image already exists in the database
+        $checkQuery = "SELECT * FROM image WHERE ImageURL = '$targetFile'";
+        $result = $connection->query($checkQuery);
+    
+        if ($result->num_rows > 0) {
+            $fileName = uniqid() . "_" . $fileName; // Append unique identifier
+            $targetFile = $targetDir . $fileName;
+        }
+    
+        // Check that uploaded file matches the allowed types
+        $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+        if (!in_array($file['type'], $allowedTypes)) {
+            die("Invalid file type. Only JPG, JPEG, and PNG are allowed.");
+        }
+    
+        // Set maximum file size (2MB)
+        $maxFileSize = 2 * 1024 * 1024;
+        if ($file['size'] > $maxFileSize) {
+            die("File size exceeds 2MB limit. Please upload a smaller file.");
+        }
+    
+        // Upload image file to the database AFTER it has been uploaded to server
+        if (move_uploaded_file($file['tmp_name'], $targetFile)) {
+            $insert = "INSERT INTO image (ImageURL, ProdOptionID, defaultImg) VALUES ('$targetFile', '$_POST[prodOptionID]', 0)";
+            if ($connection->query($insert)) {
+                echo "Image successfully added.";
+            } else {
+                echo "Error saving image to the database: " . $connection->error;
+            }
+        } else {
+            die("Failed to move the uploaded file.");
+        }
+    }
+}
 
     ?>
 

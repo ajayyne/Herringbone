@@ -46,7 +46,7 @@ $basketCount = 1;
                 <div class="icons icons-desk flex flex-even">
                     <div class="search-cont flex">
                         <input type="text" id="search" class="radius" name="search">
-                        <i class="fa-solid fa-magnifying-glass searchIcon"></i>
+                        <i class="fa-solid fa-magnifying-glass mobileSearch" id="mobileSearch"></i>
                     </div>
 
                     <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
@@ -214,6 +214,7 @@ $basketCount = 1;
         </div>
 
 
+    
         <!-- header of product page -->
         <div class="product-div flex">
             <div class="flex-center radius">
@@ -224,7 +225,7 @@ $basketCount = 1;
                         makers.<br>Herringbone takes pride in sourcing local Scottish products, some which are handmade
                         by talented makers.</p>
                 </div>
-                <img src="images/gallery/shop3.jpg">
+                <img src="images/bag.png">
             </div>
         </div>
 
@@ -308,6 +309,99 @@ $basketCount = 1;
     easing: 'ease-in-out',
     once: true 
 });
+    </script>
+    <script>
+        
+// Function to load products based on parameters
+function loadProducts(search = '', category = '', colour = '', brand = '', price = '') {
+ 
+ let requestUrl = generateGetproductsURL(search, category, colour, brand, price);
+
+ // AJAX request to fetch products
+ const xmlhttp = new XMLHttpRequest();
+ xmlhttp.onload = function () {
+     const productList = JSON.parse(this.responseText);
+
+     //get products container from HTML
+     const container = document.getElementById('prod-container');
+
+     // Clear the container - clears each time so that duplicate products are not shown
+     container.innerHTML = '';
+
+     // Populate container with product items
+     if (productList.length > 0) {
+
+         productList.forEach((product) => {
+
+             // wrap each item in an a tag
+         
+             const link = document.createElement('a');
+             link.setAttribute('href', 'Item.php?id=' + product.prodOptionID + '&category=' + product.Category + '&brand=' + product.Brand);
+
+
+             const productDiv = document.createElement('div');
+             productDiv.classList.add('product', 'radius');
+             productDiv.appendChild(link);
+
+             const imgElement = document.createElement('img');
+             imgElement.setAttribute('src', product.Image);
+             imgElement.setAttribute('alt', product.Name);
+             imgElement.classList.add('radius');
+             productDiv.appendChild(imgElement);
+             link.appendChild(imgElement);
+
+             const nameElement = document.createElement('h6');
+             nameElement.innerText = product.Name;
+             productDiv.appendChild(nameElement);
+
+             const priceHolder = document.createElement('div');
+             priceHolder.classList.add('price-holder');
+
+             const brandElement = document.createElement('p');
+             brandElement.innerText = product.Brand;
+             priceHolder.appendChild(brandElement);
+             brandElement.classList.add('product-brand');
+
+
+             const priceElement = document.createElement('p');
+             priceElement.innerText = '£' + product.Price;
+             priceElement.classList.add('price');
+             priceHolder.appendChild(priceElement);
+
+             productDiv.appendChild(priceHolder);
+
+             const cartButton = document.createElement('button');
+             cartButton.innerText = "ADD TO CART";
+             cartButton.classList.add('cart-btn');
+             productDiv.appendChild(cartButton);
+
+             container.appendChild(productDiv);
+         });
+     } else {
+         container.innerHTML = '<p>No products found.</p>';
+     }
+ };
+
+ //error message
+ xmlhttp.onerror = function () {
+     console.error("Failed to load products.");
+ };
+
+ xmlhttp.open("GET", requestUrl, true);
+ xmlhttp.send();
+}
+// search query string for 'category', if it doesnt exist -> call loadProducts with no params
+const url = window.location.href;
+const urlObj = new URL(url);
+const params = new URLSearchParams(urlObj.search);
+const paramValue = params.get('category');
+
+console.log(paramValue);
+if(paramValue === null){
+    loadProducts();
+}else{
+    loadProducts('', paramValue);
+}
     </script>
 </body>
 
