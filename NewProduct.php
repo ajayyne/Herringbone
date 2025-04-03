@@ -38,6 +38,10 @@ include "connection.php";
                     <label for="Price">Price</label>
                     <input type='text' name='ProductPrice' placeholder='£00.00' required>
                 </div>
+                <div>
+                    <label for="Colour">Colour</label>
+                    <input type='text' name='Colour' placeholder='Red'>
+                </div>
                 <?php
                 // get brands and categories for drop downs
                 $getList = "SELECT c.CategoryName, c.CategoryID, b.BrandName, b.BrandID, po.isAvailable, p.Bestseller, p.DefaultDisplay FROM Categories as c
@@ -68,12 +72,12 @@ include "connection.php";
                 $getCategories = "SELECT * FROM categories";
                 $runCategories = mysqli_query($connection, $getCategories);
                 $selectedCategory = '';
-                
+
                 while ($displayCategories = mysqli_fetch_assoc($runCategories)) {
                     // Check if this category is the selected one
                     if ($displayCategories['CategoryID'] == $List['CategoryID']) {
                         // Save the selected CategoryName for later use
-                        $selectedCategory = $displayCategories['CategoryName']; 
+                        $selectedCategory = $displayCategories['CategoryName'];
                         echo "<option value='{$displayCategories['CategoryID']}' selected>{$displayCategories['CategoryName']}</option>";
                     } else {
                         echo "<option value='{$displayCategories['CategoryID']}'>{$displayCategories['CategoryName']}</option>";
@@ -119,50 +123,89 @@ include "connection.php";
                 echo "<label for='Bestseller1'>Yes</label>
             </div>";
 
-                // handle image upload for new product AND insert new product to DB
-                if (isset($_POST['submitProduct'])) {
-                    // set the directory for the uploaded image
-                    $targetDir = "images/products/{$selectedCategory}/";
-                    $file = $_FILES['files'];
-
-                    // check that uploaded file matches the allowed types
-                    $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-                    if (!in_array($file['type'], $allowedTypes)) {
-                        die("Invalid file type. Only JPG, JPEG, and PNG are allowed.");
-                    }
-
-                    // set maximum file size (2mb)
-                    $maxFileSize = 2 * 1024 * 1024;
-                    if ($file['size'] > $maxFileSize) {
-                        die("File size exceeds 2MB limit, please upload a smaller file.");
-                    }
-
-                    // specify the target file path
-                    $fileName = basename($file['name']);
-                    $targetFile = $targetDir . $fileName;
-
-                   // upload image file to the database after it has been uploaded to server
-                    // if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-                    //     // Prepare the SQL insert statement
-                    //     $insert = "INSERT INTO image (ImageURL, defaultImg) VALUES ('$targetFile', '{$images['ProdOptionID']}', 0)";
-
-                    //     if ($connection->query($insert)) {
-                    //         echo "Brand successfully added.";
-                    //     } else {
-                    //         echo "Error saving brand to database: " . $connection->error;
-                    //     }
-                    // } else {
-                    //     die("Failed to move the uploaded file.");
-                    // }
-                }
 
                 ?>
 
                 <br>
-                <input type='file' required multiple accept='.jpg, .jpeg, .png' name='files' id='imageUpload'>
+                <input type='file' required multiple accept='.jpg, .jpeg, .png' name='files[]' id='imageUpload'>
                 <input type='submit' name='submitProduct' value="Add Product">
             </form>
         </div>
+
+        <?php
+        // handle image upload for new product AND insert new product to DB
+        if (isset($_POST['submitProduct'])) {
+
+                 // insert product to products table:
+                 $productInsert = "INSERT INTO products (CategoryID, BrandID, ProductName, Description, Price, DefaultDisplay, Bestseller) VALUES ($_POST[Category], $_POST[Brand], '$_POST[ProductName]', '$_POST[ProductDescription]', '$_POST[ProductPrice]', $_POST[Default], $_POST[Bestseller])";
+                 $runProductInsert = mysqli_query($connection, $productInsert);
+                 $ProductID = $connection->insert_id;
+     
+                 // insert into product options table
+                 $productOptionInsert = "INSERT INTO product_option (ProductID, Colour, isAvailable) VALUES ($ProductID, '$_POST[Colour]', $_POST[Availability])";
+                 $runProductOptionInsert = mysqli_query($connection, $productOptionInsert);
+                 $prodOptionID = $connection->insert_id;
+                 
+            // set the directory for the uploaded image
+            $targetDir = "images/products/" . strtolower($selectedCategory) . "/";
+            $file = $_FILES['files'];
+            $fileCount = count($file['name']);
+
+            for ($i = 0; $i < $fileCount; $i++) {
+                $fileName = basename($file['name'][$i]);
+                $fileType = $file['type'][$i];
+                $fileSize = $file['size'][$i];
+                $tmpName = $file['tmp_name'][$i];
+                $targetDir = "images/products/";
+                $targetFile = $targetDir . $fileName;
+
+                // Check file type
+                $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+                if (!in_array($fileType, $allowedTypes)) {
+                    die("Invalid file type for $fileName. Only JPG, JPEG, and PNG are allowed.");
+                }
+
+                // set maximum file size (2mb)
+                $maxFileSize = 2 * 1024 * 1024; // 2 MB
+                if ($fileSize > $maxFileSize) {
+                    die("File size exceeds 2MB limit for $fileName.");
+                }
+
+
+                // specify the target file path
+                $fileName = basename($file['name'][$i]);
+                $targetFile = $targetDir . $fileName;
+                // Query the database to check if the file already exists
+                $checkQuery = "SELECT * FROM image WHERE ImageURL = '$targetFile'";
+                $result = $connection->query($checkQuery);
+
+                if ($result->num_rows > 0) {
+                    $fileName = uniqid() . "_" . $fileName; 
+                    $targetFile = $targetDir . $fileName;
+                }
+            
+            // insert into images
+            if (move_uploaded_file($file['tmp_name'][$i], $targetFile)) {
+                   // defaultImg = 1 for the first file,defaultImg = 0 for the rest of the images
+                   if($i === 0){
+                    $defaultImg = 1;
+            }else{
+                $defaultImg = 0;
+            }
+                // Prepare the SQL insert statement
+                $insertImage = "INSERT INTO image (ImageURL, ProdOptionID, defaultImg) VALUES ('$targetFile', $prodOptionID, $defaultImg)";
+                $runInsertImage = mysqli_query($connection, $insertImage);
+            } else {
+                die("Failed to move the uploaded file.");
+            }
+        }
+        
+    }
+
+
+        ?>
+
+
     </main>
     <!-- limits the number of images allowed to upload -->
     <script>

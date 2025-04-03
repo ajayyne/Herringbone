@@ -229,7 +229,6 @@ WHERE p.ProductID = $itemID";
             }     
     }
 
-
     if (isset($_POST['uploadImg'])) {
         // Upload image to server and database:
         $targetDir = "images/products/" . strtolower($_POST['category']) . "/";
@@ -263,9 +262,9 @@ WHERE p.ProductID = $itemID";
         if (move_uploaded_file($file['tmp_name'], $targetFile)) {
             $insert = "INSERT INTO image (ImageURL, ProdOptionID, defaultImg) VALUES ('$targetFile', '$_POST[prodOptionID]', 0)";
             if ($connection->query($insert)) {
-                echo "Image successfully added.";
+                echo "<script>alert('Image successfully added.')</script>";
             } else {
-                echo "Error saving image to the database: " . $connection->error;
+                echo "<script>alert('Error saving image to the database.')</script> ";
             }
         } else {
             die("Failed to move the uploaded file.");
