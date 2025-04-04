@@ -1,6 +1,12 @@
 <?php
 session_start();
 include "connection.php";
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    header("Location: Home.php");
+}
+if($_SESSION['userType'] != $user['admin'] || empty($_SESSION['userType']) || $_SESSION['userType'] === null){
+    header("Location: Home.php");
+}
 
 // get item id
 $itemID = $_GET['ProductID'];
@@ -32,12 +38,22 @@ if (isset($_POST['update'])) {
 }
 
 // delete product - WORKING
+// delete from products, product_option, and image tables
 if (isset($_POST['delete'])) {
     $delete = "DELETE FROM product_option WHERE ProdOptionID ='$_POST[ProdOptionID]'";
     $runDelete = mysqli_query($connection, $delete);
-    if ($runDelete) {
-        echo '<script>alert("Product Successfully Deleted")</script>';
-        header("Refresh:0");
+
+    $deleteProduct = "DELETE FROM products WHERE ProductID = '$_POST[ProductID]'";
+    $runDeleteProduct =  mysqli_query($connection, $deleteProduct);
+
+    $deleteImages = "DELETE FROM image WHERE ProdOptionID = '$_POST[ProdOptionID]'";
+    $runDeleteImages = mysqli_query($connection, $deleteImages);
+    if ($runDeleteProduct && $runDelete && $runDeleteImages) {
+        // using js allows alert to appear before page re-direct
+        echo"<script>
+            alert('Product Successfully Deleted');
+            window.location.href = 'AdminProducts.php';
+        </script>";
     } else {
         echo '<script>alert("Deletion Failed")</script>';
     }
@@ -92,6 +108,21 @@ if (isset($_POST['deleteImage'])) {
 
 <body>
 
+    <!-- Delete Modal for Products -->
+    <!-- <div id="productDeleteModal" class="modal">
+         Inner content 
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Are you sure you want to delete this product?</p>
+            <form method="POST" id="deleteProductForm">
+                 pass product option id 
+                <input type="hidden" name="ProdOptionID" id="ProdOptionID">
+                <button type="button" class="close">Close</button>
+                <button type="submit" id="confirmProductDeletion" name="deleteProduct">Delete</button>
+            </form>
+        </div>
+    </div> -->
+
     <?php
     // get item details from db
     $getItem = "SELECT b.BrandName, b.BrandID, c.CategoryID, c.CategoryName, p.ProductID, po.ProdOptionID, p.ProductName, p.Description, po.Colour, po.isAvailable, p.Price, p.DefaultDisplay, p.Bestseller FROM product_option as po
@@ -104,6 +135,7 @@ WHERE p.ProductID = $itemID";
         echo "<div>
         <form method='POST'>
             <input type='hidden' value='{$displayItem['ProdOptionID']}' name='ProdOptionID'>
+            <input type='hidden' value='{$displayItem['ProductID']}' name='ProductID'>
             <div>
                 <label for='productName'>Product Name</label>
                 <input type='text' placeholder='{$displayItem['ProductName']}' name='productName' value='{$displayItem['ProductName']}'>
@@ -181,7 +213,7 @@ WHERE p.ProductID = $itemID";
                 <input name='update' type='submit' id='updateItem' value='Update Item'>
             </div>
              <div>
-                <input name='delete' type='submit' id='deleteItem' value='Delete Item'>
+                <input name='delete' type='submit' id='deleteItem' value='Delete Item' class='confirmDelete'>
             </div>
             <div>
                 <input name='showImages' type='submit' id='showImages' value='Show Images'>
@@ -226,54 +258,91 @@ WHERE p.ProductID = $itemID";
                     <input type='submit' value='delete' id='deleteImage' name='deleteImage'>
                 </form>
             </div>";
-            }     
-    }
-
-    if (isset($_POST['uploadImg'])) {
-        // Upload image to server and database:
-        $targetDir = "images/products/" . strtolower($_POST['category']) . "/";
-    
-        $file = $_FILES['newImg'];
-        $fileName = basename($file['name']);
-        $targetFile = $targetDir . $fileName;
-    
-        // Check if the image already exists in the database
-        $checkQuery = "SELECT * FROM image WHERE ImageURL = '$targetFile'";
-        $result = $connection->query($checkQuery);
-    
-        if ($result->num_rows > 0) {
-            $fileName = uniqid() . "_" . $fileName; // Append unique identifier
-            $targetFile = $targetDir . $fileName;
-        }
-    
-        // Check that uploaded file matches the allowed types
-        $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-        if (!in_array($file['type'], $allowedTypes)) {
-            die("Invalid file type. Only JPG, JPEG, and PNG are allowed.");
-        }
-    
-        // Set maximum file size (2MB)
-        $maxFileSize = 2 * 1024 * 1024;
-        if ($file['size'] > $maxFileSize) {
-            die("File size exceeds 2MB limit. Please upload a smaller file.");
-        }
-    
-        // Upload image file to the database AFTER it has been uploaded to server
-        if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-            $insert = "INSERT INTO image (ImageURL, ProdOptionID, defaultImg) VALUES ('$targetFile', '$_POST[prodOptionID]', 0)";
-            if ($connection->query($insert)) {
-                echo "<script>alert('Image successfully added.')</script>";
-            } else {
-                echo "<script>alert('Error saving image to the database.')</script> ";
             }
-        } else {
-            die("Failed to move the uploaded file.");
+        }
+
+        if (isset($_POST['uploadImg'])) {
+            // Upload image to server and database:
+            $targetDir = "images/products/" . strtolower($_POST['category']) . "/";
+
+            $file = $_FILES['newImg'];
+            $fileName = basename($file['name']);
+            $targetFile = $targetDir . $fileName;
+
+            // Check if the image already exists in the database
+            $checkQuery = "SELECT * FROM image WHERE ImageURL = '$targetFile'";
+            $result = $connection->query($checkQuery);
+
+            if ($result->num_rows > 0) {
+                $fileName = uniqid() . "_" . $fileName; // Append unique identifier
+                $targetFile = $targetDir . $fileName;
+            }
+
+            // Check that uploaded file matches the allowed types
+            $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+            if (!in_array($file['type'], $allowedTypes)) {
+                die("Invalid file type. Only JPG, JPEG, and PNG are allowed.");
+            }
+
+            // Set maximum file size (2MB)
+            $maxFileSize = 2 * 1024 * 1024;
+            if ($file['size'] > $maxFileSize) {
+                die("File size exceeds 2MB limit. Please upload a smaller file.");
+            }
+
+            // Upload image file to the database AFTER it has been uploaded to server
+            if (move_uploaded_file($file['tmp_name'], $targetFile)) {
+                $insert = "INSERT INTO image (ImageURL, ProdOptionID, defaultImg) VALUES ('$targetFile', '$_POST[prodOptionID]', 0)";
+                if ($connection->query($insert)) {
+                    echo "<script>alert('Image successfully added.')</script>";
+                } else {
+                    echo "<script>alert('Error saving image to the database.')</script> ";
+                }
+            } else {
+                die("Failed to move the uploaded file.");
+            }
         }
     }
-}
 
     ?>
+    
+    
+    <!-- <script>
+        // Get the modal element
+        const productModal = document.getElementById('productDeleteModal');
+        const closeButtons = document.querySelectorAll('.close');
 
+        // Get all "Delete" buttons for products
+        const deleteProductButtons = document.querySelectorAll('#deleteItem');
+
+        // Open the modal and set the ProductID dynamically
+        deleteProductButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent default form submission
+                const productOptionID = this.dataset.ProdOptionID; // Get ProductID from button's data attribute
+                document.getElementById('productID').value = productOptionID; // Set ProductID in modal form
+                productModal.style.display = "block"; // Show the modal
+            });
+        });
+
+        // Close the modal when clicking close buttons
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                productModal.style.display = "none"; // Hide the modal
+            });
+        });
+    </script> -->
+    <script>
+document.querySelectorAll('.confirmDelete').forEach(button => {
+    button.addEventListener('click', function (event) {
+        const userConfirmed = confirm("Are you sure you want to delete this product?");
+        if (!userConfirmed) {
+            // if user cancels, dont submit form
+            event.preventDefault();
+        }
+    });
+});
+     </script>
 </body>
 
 </html>

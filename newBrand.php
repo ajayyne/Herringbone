@@ -1,13 +1,12 @@
 <?php
 session_start();
 include 'connection.php';
-// $adminID;
-// $userType;
-// if($adminID == '' || empty($adminID) || $userType == '' || empty($userType) || $userType != 'Admin'){
-//     header("Location: Home.php");
-// }else{
-
-// }
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    header("Location: Home.php");
+}
+if($_SESSION['userType'] != $user['admin'] || empty($_SESSION['userType']) || $_SESSION['userType'] === null){
+    header("Location: Home.php");
+}
 ?>
 
 
@@ -71,7 +70,10 @@ include 'connection.php';
             $insert = "INSERT INTO brands (BrandName, brandImage, brandDescription) VALUES ('$brandName', '$targetFile', '$brandDescription')";
 
             if ($connection->query($insert)) {
-                echo "Brand successfully added.";
+                echo"<script>
+                alert('Brand Successfully Added');
+                window.location.href = 'AdminBrands.php';
+            </script>";
             } else {
                 echo "Error saving brand to database: " . $connection->error;
             }

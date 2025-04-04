@@ -9,20 +9,24 @@ body {
     overflow-x: hidden;
 }
 
-.radius{
+.radius {
     border-radius: 10px;
 }
-.text-center{
+
+.text-center {
     text-align: center;
 }
-main{
+
+main {
     padding: 1rem;
 }
-a{
+
+a {
     color: black;
     text-decoration: none;
 }
-.flex{
+
+.flex {
     display: flex;
 }
 
@@ -30,13 +34,14 @@ a{
 
 
 /* admin panel */
-.admin-links{
+.admin-links {
     height: fit-content;
     display: flex;
     flex-direction: column;
     padding: 3rem 0rem 1rem 0rem;
 }
-.link-box{
+
+.link-box {
     padding: 2rem;
     border: 2px solid slategray;
     margin-bottom: 2rem;
@@ -45,21 +50,25 @@ a{
 
 
 /* admin products */
-.product-tile{
+.product-tile {
     align-items: center;
 }
-.product-tile div:first-child{
+
+.product-tile div:first-child {
     align-items: center;
     justify-content: center;
 }
-.product-tile img{
+
+.product-tile img {
     width: 10%;
     height: 10%;
 }
-.product-tile p{
+
+.product-tile p {
     font-size: 0.8rem;
 }
-.desktop-searchbar{
+
+.desktop-searchbar {
     display: none;
 }
 
@@ -67,22 +76,52 @@ a{
 
 
 /* edit products */
-.item-imgs img{
+.item-imgs img {
     width: 2rem;
 }
 
 
+
+/* delete modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Keeps it fixed in the viewport */
+    top: 50%; /* Centers vertically */
+    left: 50%; /* Centers horizontally */
+    transform: translate(-50%, -50%); /* Moves it back to center */
+    z-index: 1000; /* Ensures it stays above other elements */
+    background-color: white; /* Adds a background */
+    width: 300px; /* Set a width */
+    padding: 20px; /* Padding inside modal */
+    border: 1px solid #ccc; /* Optional border */
+    border-radius: 8px; /* Optional rounding */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
+
+/* Inner modal styling */
+.inner-modal {
+    text-align: center; /* Center the text inside */
+}
+
+span .close {
+    cursor: pointer; /* Makes the close icon clickable */
+    float: right;
+    font-size: 20px;
+}
+span .close:hover, span .close:focus {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+
 /* desktop */
 @media screen and (min-width: 992px) {
 
-    .desktop-searchbar{
+    .desktop-searchbar {
         display: block;
     }
-    .mobile-searchbar{
+
+    .mobile-searchbar {
         display: none;
     }
 }
-
-
-
-

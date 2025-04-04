@@ -1,14 +1,47 @@
 <?php
-    session_start();
-    include 'connection.php';
-    // $adminID;
-    // $userType;
-    // if($adminID == '' || empty($adminID) || $userType == '' || empty($userType) || $userType != 'Admin'){
-    //     header("Location: Home.php");
-    // }else{
+session_start();
+include 'connection.php';
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    header("Location: Home.php");
+}
+if($_SESSION['userType'] != $user['admin'] || empty($_SESSION['userType']) || $_SESSION['userType'] === null){
+    header("Location: Home.php");
+}
 
-    // }
-     ?> 
+//  if update button is pressed - WORKING, add "Update Brand Name?"
+if (isset($_POST['updateBrand'])) {
+    $update = "UPDATE brands SET BrandName = '$_POST[BrandName]' WHERE BrandID = '$_POST[BrandID]'";
+    $runUpdate = mysqli_query($connection, $update);
+    if ($runUpdate) {
+        echo "<script>
+        alert('Brand Successfully Updated');
+        window.location.href = 'AdminBrands.php';
+        </script>";
+    } else {
+        echo '<script>alert("Update Failed")</script>';
+    }
+}
+
+
+
+if (isset($_POST['deleteBrand'])) {
+
+    $brandID = intval($_POST['BrandID']);
+
+    $delete = "DELETE FROM brands WHERE BrandID = $brandID";
+    $runDelete = mysqli_query($connection, $delete);
+
+    if ($runDelete) {
+        echo "<script>
+        alert('Brand Successfully Deleted');
+        window.location.href = 'AdminBrands.php';
+        </script>";
+        exit;
+    } else {
+        echo '<script>alert("Deletion Failed");</script>';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,18 +62,31 @@
 
 <body>
 
-<main>
+    <main>
+        <!-- modal for deleting pop up -->
+        <!-- <div id="deleteModal" class="deleteModal modal">
+            <!- Inner content 
+            <div class="inner-deleteModal inner-modal">
+                <span class="close">X</span>
+                <p>Are you sure you want to delete?</p>
+                <form method="POST" id="deleteForm">
+                    <input type="hidden" name="BrandID" id="brandID">
+                    <button type="button" id="close">Close</button>
+                    <button type="submit" id="confirmDeletion" name="deleteBrand">Delete</button>
+                </form>
+            </div>
+        </div> -->
 
-</main>
-    <h1>All Brands</h1>
+
+        <h1>All Brands</h1>
 
 
-    <?php
-// get all brands from db
-$getBrands = "SELECT * FROM brands";
-$runBrands = mysqli_query($connection, $getBrands);
-while($displayBrands = mysqli_fetch_array($runBrands)){
-    echo "
+        <?php
+        // get all brands from db
+        $getBrands = "SELECT * FROM brands";
+        $runBrands = mysqli_query($connection, $getBrands);
+        while ($displayBrands = mysqli_fetch_array($runBrands)) {
+            echo "
     <div class='flex'>
     <form method='post' id='updatingBrand'>
         <input type='text' value='{$displayBrands['BrandName']}' name='BrandName'></input>
@@ -49,47 +95,30 @@ while($displayBrands = mysqli_fetch_array($runBrands)){
     </form>
 
     <form method='post' id='deletingBrand'>
-        <input type='submit' name='deleteBrand' value='delete'>
+        <input type='submit' name='deleteBrand' value='delete' class='openDeleteModal confirmDelete'>
         <input type='hidden' value='{$displayBrands['BrandID']}' name='BrandID'>
     </form>
     </div>";
-}
-
-
-        //  if update button is pressed - WORKING, add "Update Brand Name?"
-        if (isset($_POST['updateBrand'])){
-            $update = "UPDATE brands SET BrandName = '$_POST[BrandName]' WHERE BrandID = '$_POST[BrandID]'";
-            $runUpdate = mysqli_query($connection, $update);
-            if ($runUpdate) {
-                echo '<script>alert("Brand Name Successfully Updated")</script>';
-                header("Refresh:0");
-            } else {
-                echo '<script>alert("Update Failed")</script>';
-            }
         }
 
-        //   if delete button is pressed - WORKING, add "are you sure you want to delete?"
-        if (isset($_POST['deleteBrand'])){
-            $delete = "DELETE FROM brands WHERE BrandID='$_POST[BrandID]'";
-            $runDelete = mysqli_query($connection, $delete);
-            if ($runDelete) {
-                echo '<script>alert("Brand Successfully Deleted")</script>';
-                header("Refresh:0");
-            } else {
-                echo '<script>alert("Deletion Failed")</script>';
-            }
+        // php for updating and deleting brands - top of document
+        ?>
+
+        <a href="newBrand.php"><button>Add A New Brand</button></a>
+
+    </main>
+    <!-- <script src="deleteModal.js"></script> -->
+     <script>
+document.querySelectorAll('.confirmDelete').forEach(button => {
+    button.addEventListener('click', function (event) {
+        const userConfirmed = confirm("Are you sure you want to delete this brand?");
+        if (!userConfirmed) {
+            // if user cancels, dont submit form
+            event.preventDefault();
         }
-?>
-
-<a href="newBrand.php"><button>Add A New Brand</button></a>
-
-<main>
-
-
-
-
-
-</main>
-
+    });
+});
+     </script>
 </body>
+
 </html>

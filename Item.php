@@ -192,22 +192,23 @@ $basketCount = 1;
                     <div class="splide__list">
 
                         <?php
-                        $getSimilar = "SELECT ProductName, BrandName, Price, ImageURL FROM products AS p
+                        $getSimilar = "SELECT po.ProdOptionID, p.ProductID, p.ProductName, b.BrandName, p.Price, i.ImageURL, c.CategoryID FROM products AS p
                 LEFT JOIN brands as b ON b.BrandID = p.BrandID
                 LEFT JOIN product_option as po ON po.ProductID = p.ProductID
                 LEFT JOIN image as i ON po.ProdOptionID = i.ProdOptionID
+                LEFT JOIN categories as c ON c.CategoryID = p.CategoryID
                 WHERE p.CategoryID = $itemCategory
                 GROUP BY ProductName";
                         $runSimilar = mysqli_query($connection, $getSimilar);
                         while ($displaySimilar = mysqli_fetch_array($runSimilar)) {
                             echo "<div class='splide__slide'>
-                                <div class='bs-item flex flex-col radius'>
+                                <a href='Item.php?id={$displaySimilar['ProdOptionID']}&category={$displaySimilar['CategoryID']}&brand={$displaySimilar['BrandName']}'><div class='bs-item flex flex-col radius'>
                                     <img src='{$displaySimilar['ImageURL']}' alt='{$displaySimilar['ProductName']}'>
                                     <p class='overlay'><em>{$displaySimilar['BrandName']}</em></p>
                                     <div class='bs-desc'>
                                         <p><strong>{$displaySimilar['BrandName']}</strong><br><span class='bestseller-name'>{$displaySimilar['ProductName']}</span><br>£{$displaySimilar['Price']}</p>
                                     </div>
-                                </div>
+                                </div></a>
                             </div>";
                         } ?>
                     </div>

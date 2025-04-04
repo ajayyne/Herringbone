@@ -92,13 +92,13 @@ include 'connection.php' ?>
                 <div class="background-img2 flex flex-col">
                     <div class="cta2">
                         <h1>Home</h1>
-                        <button>Shop Here</button>
+                        <a href="Products.php?category=home%decor"><button>Shop Here</button></a>
                     </div>
                 </div>
                 <div class="background-img3 flex flex-col">
                     <div class="cta2">
                         <h1>Accessories</h1>
-                        <button>Shop Here</button>
+                        <a href="Products.php?category=bags"><button>Shop Here</button></a>
                     </div>
                 </div>
             </div>
@@ -117,22 +117,24 @@ include 'connection.php' ?>
 
                         <!-- PHP HERE TO GRAB PRODUCTS FROM DB -->
                         <?php
-                        $getBestsellers = "SELECT ProductName, BrandName, Price, ImageURL FROM products AS p
+                        $getBestsellers = "SELECT p.ProductID, p.ProductName, b.BrandName, p.Price, i.ImageURL, c.CategoryID FROM products AS p
                     LEFT JOIN brands as b ON b.BrandID = p.BrandID
                     LEFT JOIN product_option as po ON po.ProductID = p.ProductID
+                    LEFT JOIN categories as c ON c.CategoryID = p.CategoryID
                     LEFT JOIN image as i ON po.ProdOptionID = i.ProdOptionID
                     WHERE Bestseller = 1";
 
                         $runBestsellers = mysqli_query($connection, $getBestsellers);
                         while ($displayBestsellers = mysqli_fetch_array($runBestsellers)) {
                             echo "<div class='splide__slide'>
+                                <a href='Item.php?id={$displayBestsellers['ProductID']}&category={$displayBestsellers['CategoryID']}&brand={$displayBestsellers['BrandName']}'>
                                 <div class='bs-item flex flex-col radius'>
                                     <img src='{$displayBestsellers['ImageURL']}'>
                                     <p class='overlay'><em>{$displayBestsellers['BrandName']}</em></p>
                                     <div class='bs-desc'>
                                         <p><strong>{$displayBestsellers['BrandName']}</strong><br><span class='bestseller-name'>{$displayBestsellers['ProductName']}</span><br>£{$displayBestsellers['Price']}</p>
                                     </div>
-                                </div>
+                                </div></a>
                             </div>";
                         } ?>
                     </div>

@@ -1,6 +1,13 @@
 <!-- ensure re-direct is set if admin is not logged in -->
 <?php
-include "connection.php";
+session_start();
+include 'connection.php';
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+    header("Location: Home.php");
+}
+if($_SESSION['userType'] != $user['admin'] || empty($_SESSION['userType']) || $_SESSION['userType'] === null){
+    header("Location: Home.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -136,27 +143,28 @@ include "connection.php";
         // handle image upload for new product AND insert new product to DB
         if (isset($_POST['submitProduct'])) {
 
-                 // insert product to products table:
-                 $productInsert = "INSERT INTO products (CategoryID, BrandID, ProductName, Description, Price, DefaultDisplay, Bestseller) VALUES ($_POST[Category], $_POST[Brand], '$_POST[ProductName]', '$_POST[ProductDescription]', '$_POST[ProductPrice]', $_POST[Default], $_POST[Bestseller])";
-                 $runProductInsert = mysqli_query($connection, $productInsert);
-                 $ProductID = $connection->insert_id;
-     
-                 // insert into product options table
-                 $productOptionInsert = "INSERT INTO product_option (ProductID, Colour, isAvailable) VALUES ($ProductID, '$_POST[Colour]', $_POST[Availability])";
-                 $runProductOptionInsert = mysqli_query($connection, $productOptionInsert);
-                 $prodOptionID = $connection->insert_id;
-                 
-            // set the directory for the uploaded image
+            // insert product to products table:
+            $productInsert = "INSERT INTO products (CategoryID, BrandID, ProductName, Description, Price, DefaultDisplay, Bestseller) VALUES ($_POST[Category], $_POST[Brand], '$_POST[ProductName]', '$_POST[ProductDescription]', '$_POST[ProductPrice]', $_POST[Default], $_POST[Bestseller])";
+            $runProductInsert = mysqli_query($connection, $productInsert);
+            $ProductID = $connection->insert_id;
+
+            // insert into product options table
+            $productOptionInsert = "INSERT INTO product_option (ProductID, Colour, isAvailable) VALUES ($ProductID, '$_POST[Colour]', $_POST[Availability])";
+            $runProductOptionInsert = mysqli_query($connection, $productOptionInsert);
+            $prodOptionID = $connection->insert_id;
+
+            // Set the file directory for the image
             $targetDir = "images/products/" . strtolower($selectedCategory) . "/";
             $file = $_FILES['files'];
             $fileCount = count($file['name']);
 
+            // loop through images -> to assign the first image in loop defaultImg = 1 (true) and the rest 0 (false)
             for ($i = 0; $i < $fileCount; $i++) {
                 $fileName = basename($file['name'][$i]);
                 $fileType = $file['type'][$i];
                 $fileSize = $file['size'][$i];
                 $tmpName = $file['tmp_name'][$i];
-                $targetDir = "images/products/";
+                // specific to the product category
                 $targetFile = $targetDir . $fileName;
 
                 // Check file type
@@ -165,44 +173,40 @@ include "connection.php";
                     die("Invalid file type for $fileName. Only JPG, JPEG, and PNG are allowed.");
                 }
 
-                // set maximum file size (2mb)
+                // Set maximum file size (2MB)
                 $maxFileSize = 2 * 1024 * 1024; // 2 MB
                 if ($fileSize > $maxFileSize) {
                     die("File size exceeds 2MB limit for $fileName.");
                 }
 
-
-                // specify the target file path
-                $fileName = basename($file['name'][$i]);
-                $targetFile = $targetDir . $fileName;
-                // Query the database to check if the file already exists
+                // Query db to check if the file already exists
                 $checkQuery = "SELECT * FROM image WHERE ImageURL = '$targetFile'";
                 $result = $connection->query($checkQuery);
 
+                // adding unique id to images if they already exist - to ensure no overrides
                 if ($result->num_rows > 0) {
-                    $fileName = uniqid() . "_" . $fileName; 
+                    $fileName = uniqid() . "_" . $fileName;
                     $targetFile = $targetDir . $fileName;
                 }
-            
-            // insert into images
-            if (move_uploaded_file($file['tmp_name'][$i], $targetFile)) {
-                   // defaultImg = 1 for the first file,defaultImg = 0 for the rest of the images
-                   if($i === 0){
-                    $defaultImg = 1;
-            }else{
-                $defaultImg = 0;
-            }
-                // Prepare the SQL insert statement
-                $insertImage = "INSERT INTO image (ImageURL, ProdOptionID, defaultImg) VALUES ('$targetFile', $prodOptionID, $defaultImg)";
-                $runInsertImage = mysqli_query($connection, $insertImage);
-            } else {
-                die("Failed to move the uploaded file.");
+
+                // Insert into images table
+                if (move_uploaded_file($file['tmp_name'][$i], $targetFile)) {
+                    // defaultImg = 1 for the first file, defaultImg = 0 for the rest
+                    $defaultImg = ($i === 0) ? 1 : 0;
+
+                    $insertImage = "INSERT INTO image (ImageURL, ProdOptionID, defaultImg) VALUES ('$targetFile', $prodOptionID, $defaultImg)";
+                    $runInsertImage = mysqli_query($connection, $insertImage);
+                } else {
+                    die("Failed to move the uploaded file.");
+                }
+
+
+                echo "<script>
+                alert('Product Successfully Uploaded');
+                window.location.href = 'AdminProducts.php';
+                </script>";
             }
         }
-        
-    }
-
-
         ?>
 
 
