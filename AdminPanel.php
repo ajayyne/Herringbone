@@ -1,11 +1,15 @@
 <?php
 session_start();
 include 'connection.php';
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: Home.php");
+    exit;
 }
-if($_SESSION['userType'] != $user['admin'] || empty($_SESSION['userType']) || $_SESSION['userType'] === null){
+
+if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
     header("Location: Home.php");
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -27,37 +31,6 @@ if($_SESSION['userType'] != $user['admin'] || empty($_SESSION['userType']) || $_
 </head>
 
 <body>
-
-    <?php
-    session_start();
-    include 'connection.php';
-
-    // // check that admin is logged in to allow page access:
-    // if ($adminID != NULL || !empty($adminID)) {
-    //     if ($_SESSION['userType'] == 'Admin') {
-    //         // page content goes here
-    
-    //     echo "
-    //     <main>
-    //         <div class='admin-links'>
-    //             <a href='AdminProducts.php'><div class='link-box radius text-center'>
-    //                 <h1>PRODUCTS</h1>
-    //             </div></a>
-    //             <a href='AdminBrands.php'><div class='link-box radius text-center'>
-    //                 <h1>BRANDS</h1>
-    //             </div></a>
-    //             <a href='AdminOrders.php'><div class='link-box radius text-center'>
-    //                 <h1>MANAGE ORDERS</h1>
-    //             </div></a>
-    //         </div>
-    //     </main>";
-
-    //     }
-    // } else {
-    //     header("Location: Home.php");
-    // }
-    // ?>
-
 
 <main>
             <div class='admin-links'>

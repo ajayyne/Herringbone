@@ -43,25 +43,27 @@ include "connection.php";
 
 
     <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username']);
+    $username = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
+    $password = trim($_POST['password']);
+    $password = htmlspecialchars($password, ENT_QUOTES, 'UTF-8');
 
-        // check that user exists
-        $checkQuery = "SELECT * FROM adminpanel WHERE userName = '{$username}' AND userPassword = '{$password}'";
-        $runQuery = mysqli_query($connection, $checkQuery);
-        if (mysqli_num_rows($runQuery) < 1) {
-            echo "Invalid Username or Password";
-        } else if (mysqli_num_rows($runQuery) === 1) {
-            // Store user data in the session
-            $_SESSION['loggedin'] = true;
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['userType'] = $user['admin'];
-            header("Location: AdminPanel.php"); 
-            exit;
-        }
-
+    // check that user exists with case-sensitive comparison (using BINARY)
+    $checkQuery = "SELECT * FROM adminpanel WHERE BINARY userName = '{$username}' AND BINARY userPassword = '{$password}'";
+    $runQuery = mysqli_query($connection, $checkQuery);
+    if (mysqli_num_rows($runQuery) < 1) {
+        echo "Invalid Username or Password";
+    } else if (mysqli_num_rows($runQuery) === 1) {
+        // Store user data in the session
+        $user = mysqli_fetch_assoc($runQuery);
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $user['userName'];
+        $_SESSION['ID'] = $user['adminID'];
+        header("Location: AdminPanel.php"); 
+        exit;
     }
+}
 
     ?>
 </body>

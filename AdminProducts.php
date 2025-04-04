@@ -1,11 +1,15 @@
 <?php
 session_start();
 include 'connection.php';
-if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("Location: Home.php");
+    exit;
 }
-if($_SESSION['userType'] != $user['admin'] || empty($_SESSION['userType']) || $_SESSION['userType'] === null){
+
+if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
     header("Location: Home.php");
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -33,14 +37,8 @@ if($_SESSION['userType'] != $user['admin'] || empty($_SESSION['userType']) || $_
         <a href="NewProduct.php"><button>Add New Product</button></a>
 
         <?php
-        session_start();
-        include 'connection.php';
-        // // check that admin is logged in to allow page access:
-        // if ($adminID != NULL || !empty($adminID)) {
-        //     if ($_SESSION['userType'] == 'Admin') {
-        //         // page content goes here
-        
-
+       
+       
 
         // mobile search
         echo " <div class='search-cont flex mobile-searchbar'>
