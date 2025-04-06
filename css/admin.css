@@ -8,9 +8,29 @@ body {
     height: 100vh;
     overflow-x: hidden;
 }
+@font-face {
+    font-family: "quicksand";
+    src: url(../fonts/Quicksand-VariableFont_wght.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+button{
+    border: none;
+}
+/*COLOURS*/
+:root {
+    --light-blue: #CDD4D9;
+    --medium-blue: #A7BAC8;
+    --dark-blue: #838E97;
+    --darkest-blue: #5c616c;
+    --shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+    --button: rgb(140, 140, 206);
+    --background: rgb(9, 9, 72);
+    --buttonActive: rgb(111, 111, 165);
+}
 
 .radius {
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .text-center {
@@ -113,6 +133,72 @@ color: black;
 text-decoration: none;
 cursor: pointer;
 }
+
+
+
+/* LOG IN PAGE */
+.login h1{
+    font-size: 1.3rem;
+    font-family: 'quicksand';
+    margin-bottom: 2rem;
+}
+.login-page{
+    background-color: var(--dark-blue);
+    justify-content: center;
+    align-items: center;
+}
+.login{
+    border: 2px solid var(--darkest-blue);
+    padding: 2rem;
+    background-color: var(--background);
+    box-shadow: var(--shadow);
+    flex-direction: column;
+    color: white;
+    font-family: 'quicksand';
+}
+.login-input{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login-btn{
+    box-shadow: var(--shadow);
+    background-color: var(--button);
+    color: white;
+    width: 100%;
+}
+.login-btn:active, .login-btn:focus, .login-btn:hover{
+    background-color: var(--buttonActive);
+}
+.login-input input{
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 0.2rem 0.2rem 0.2rem 0.5rem;
+}
+.login-input label{
+    color: transparent;
+}
+.login-input input:focus, .login-input input:active{
+    outline: none;
+}
+.login-icon{
+    position: relative;
+}
+.fa-lock, .fa-user{
+    position: absolute;
+    right: 10px;
+    top: 9px;
+    font-size: 0.9rem;
+}
+.login-error{
+    font-size: 0.8rem;
+}
+/* END */
+
+
+
+
+
 
 /* desktop */
 @media screen and (min-width: 992px) {

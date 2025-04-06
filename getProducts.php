@@ -17,7 +17,7 @@ $getProducts = "SELECT * FROM products as p
     LEFT JOIN image as i ON i.ProdOptionID = po.ProdOptionID
     LEFT JOIN brands as b ON p.BrandID = b.BrandID
     LEFT JOIN categories as c ON p.CategoryID = c.CategoryID
-    WHERE po.isAvailable = 1"; 
+    WHERE 1 = 1"; 
 
 if($search != ''){
     $getProducts .= " AND (b.BrandName LIKE '%" . $search . "%' OR p.ProductName LIKE '%" . $search . "%')";

@@ -27,22 +27,30 @@ include "connection.php";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/admin.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/504c189bcb.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 
-<body>
-    <form method="POST">
-        <label>Username:</label>
-        <input type="text" name="username" required>
-        <br>
-        <label>Password:</label>
-        <input type="password" name="password" required>
-        <br>
-        <button type="submit">Login</button>
-    </form>
+<body class="login-page flex">
+    <form method="POST" class="login radius flex">
+    <h1 class="text-center">ADMIN LOGIN</h1>
+        <div class="login-input flex">
+            <label>Username:</label>
+            <div class="login-icon">
+                <input class="radius" type="text" name="username" placeholder="Username" required>
+                <i class="fa-solid fa-user" style="color: #5c576b;"></i>
+            </div>
+        </div>
 
-
-    <?php
+        <div class="login-input flex">
+            <label>Password:</label>
+            <div class="login-icon">
+                <input class="radius" type="password" name="password" placeholder="Password" required>
+                <i class="fa-solid fa-lock" style="color: #5c576b;"></i>
+            </div>
+        </div>
+        <br>
+        <?php
    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $username = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
@@ -53,7 +61,7 @@ include "connection.php";
     $checkQuery = "SELECT * FROM adminpanel WHERE BINARY userName = '{$username}' AND BINARY userPassword = '{$password}'";
     $runQuery = mysqli_query($connection, $checkQuery);
     if (mysqli_num_rows($runQuery) < 1) {
-        echo "Invalid Username or Password";
+        echo "<p class='login-error'>*Invalid Username or Password<p>";
     } else if (mysqli_num_rows($runQuery) === 1) {
         // Store user data in the session
         $user = mysqli_fetch_assoc($runQuery);
@@ -66,6 +74,12 @@ include "connection.php";
 }
 
     ?>
+        <button type="submit" class="login-btn radius">Login</button>
+    </form>
+
+
+
+   
 </body>
 
 </html>
