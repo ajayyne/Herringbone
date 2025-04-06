@@ -133,12 +133,14 @@ $basketCount = 1;
                     <div class='color-display flex'>";
 
             $productID = $displayItem['ProductID'];
-            $getColours = "SELECT po.Colour, po.ProdOptionID from product_option as po
+            $getColours = "SELECT po.Colour, po.ProdOptionID, b.BrandName from product_option as po
+            LEFT JOIN products as p ON po.ProductID = p.ProductID
+            LEFT JOIN brands as b ON p.BrandID = b.BrandID
                     WHERE po.ProductID = $productID";
             $runColours = mysqli_query($connection, $getColours);
             while ($displayColours = mysqli_fetch_assoc($runColours)) {
                 if ($displayColours['Colour'] != '' || $displayColours['Colour'] != NULL) {
-                    echo "<a href='Item.php?id={$displayColours['ProdOptionID']}&category=" . $itemCategory . "'><p>{$displayColours['Colour']}</p></a>";
+                    echo "<a href='Item.php?id={$displayColours['ProdOptionID']}&category=" . $itemCategory . "&brand={$displayColours['BrandName']}'><p>{$displayColours['Colour']}</p></a>";
                 }
             }
 

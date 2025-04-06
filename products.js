@@ -25,10 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (mobileSearch && mobileIcon) {
         mobileIcon.addEventListener("click", function (event) {
-            let search2 = mobileSearch.value;
+            let search1 = mobileSearch.value;
             event.preventDefault();
             clearFilters();
-            loadProducts(search2);
+            loadProducts(search1);
         });
     
         mobileSearch.addEventListener("keyup", function (event) {

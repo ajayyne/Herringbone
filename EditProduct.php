@@ -17,13 +17,15 @@ $itemID = $_GET['ProductID'];
 
 // update product - WORKING
 if (isset($_POST['update'])) {
+    $description = $connection->real_escape_string($_POST['Description']);
+
     $update = "UPDATE products AS p
     INNER JOIN product_option AS po ON p.ProductID = po.ProductID
     INNER JOIN brands AS b ON b.BrandID = p.BrandID
     INNER JOIN categories AS c ON c.CategoryID = p.CategoryID
     SET 
-        p.ProductName = '$_POST[productName]',
-        p.Description = '$_POST[Description]',
+        p.ProductName = '$_POST[productName]', 
+        p.Description = '{$description}',
         po.Colour = '$_POST[Colour]',
         po.isAvailable = '$_POST[Availability]',
         p.DefaultDisplay = '$_POST[Default]',
@@ -44,46 +46,89 @@ if (isset($_POST['update'])) {
 // delete product - WORKING
 // delete from products, product_option, and image tables
 if (isset($_POST['delete'])) {
-    $delete = "DELETE FROM product_option WHERE ProdOptionID ='$_POST[ProdOptionID]'";
-    $runDelete = mysqli_query($connection, $delete);
+ 
+        // echo "<script>alert('{$_POST['ProdOptionID']}')</script>";
+        //  echo "<script>alert('{$_POST['ProductID']}')</script>";
+        
+        $delete = "DELETE FROM product_option WHERE ProdOptionID ='{$_POST['ProdOptionID']}'";
+        $runDelete = mysqli_query($connection, $delete);
+        // if (!$runDelete) {
+        //     echo "<script>alert(Error in product_option query)</script>";
+        // }
+    
+        $deleteProduct = "DELETE FROM products WHERE ProductID = '{$_POST['ProductID']}'";
+        $runDeleteProduct = mysqli_query($connection, $deleteProduct);
+        // if (!$runDeleteProduct) {
+        //     echo "<script>alert(Error in products query)</script>";
+        // }
+    
+        $deleteImages = "DELETE FROM image WHERE ProdOptionID = '{$_POST['ProdOptionID']}'";
+        $runDeleteImages = mysqli_query($connection, $deleteImages);
 
-    $deleteProduct = "DELETE FROM products WHERE ProductID = '$_POST[ProductID]'";
-    $runDeleteProduct =  mysqli_query($connection, $deleteProduct);
-
-    $deleteImages = "DELETE FROM image WHERE ProdOptionID = '$_POST[ProdOptionID]'";
-    $runDeleteImages = mysqli_query($connection, $deleteImages);
-    if ($runDeleteProduct && $runDelete && $runDeleteImages) {
-        // using js allows alert to appear before page re-direct
-        echo"<script>
-            alert('Product Successfully Deleted');
-            window.location.href = 'AdminProducts.php';
-        </script>";
-    } else {
-        echo '<script>alert("Deletion Failed")</script>';
-    }
+        // get all image file paths in db that match the prod option ID -> to delete them from server
+        $getAllImages = "SELECT * FROM image WHERE ProdOptionID = '$_POST[ProdOptionID]'";
+        $runGetAllImages = mysqli_query($connection, $getAllImages);
+        // this holds an array with imageID, imageURl, and ProdOptionID
+        $allImages = [];
+        while ($images = mysqli_fetch_assoc($runGetAllImages)) {
+            // populating the above array - each row will be in the array
+            $allImages[] = $images; 
+        }
+        
+        foreach ($allImages as $image) {
+            //  ImageURL from the returned rows in DB
+            $ImgfilePath = $image['ImageURL']; 
+            if (file_exists($ImgfilePath)) { 
+                if (unlink($ImgfilePath)) { 
+                    echo "<script>alert('Image {$ImgfilePath} deleted successfully')</script>";
+                } else {
+                    echo "<script>alert('Error deleting Image {$ImgfilePath}')</script>";
+                }
+            } else {
+                echo "<script>alert('Image {$ImgfilePath} does not exist')</script>";
+            }
+        }
+        
+        // if (!$runDeleteImages) {
+        //     echo "<script>alert(Error in this query)</script>";
+        // }
+    
+        if ($runDeleteProduct && $runDelete && $runDeleteImages) {
+            echo "<script>
+                alert('Product Successfully Deleted');
+                window.location.href = 'AdminProducts.php';
+            </script>";
+        } else {
+            echo '<script>alert("Deletion Failed")</script>';
+        }
 }
 
 // deleting images - WORKING
 if (isset($_POST['deleteImage'])) {
 
+    // if (!is_writable($filepath)) {
+    //     echo "<script>alert('File is not writable. Check permissions.')</script>";
+    // }
+
     // delete from server (file directory)
     $filepath = $_POST['hidden2'];
-    if (file_exists($file_path)) {
+    // echo "<script>alert('{$filepath}')</script>";
+    if (file_exists($filepath)) {
         // Delete the file
-        if (unlink($file_path)) {
-            echo "Image deleted from server successfully.";
+        if (unlink($filepath)) {
+            echo "<script>alert(Image deleted from server successfully.)</script>";
         } else {
-            echo "Error deleting the Image.";
+            echo "<script>alert(Error deleting the Image.)</script>";
         }
     } else {
-        echo "The Image does not exist.";
+        echo "<script>alert(The Image does not exist.)</script>";
     }
 
     // delete from database
     $deleteimg = "DELETE FROM image WHERE ImageID = $_POST[hidden]";
     $runDeleteImg = mysqli_query($connection, $deleteimg);
     if ($runDeleteImg) {
-        echo '<script>alert("Image Successfully Deleted")</script>';
+        echo '<script>alert("Image Successfully Deleted from Database.")</script>';
         header("Refresh:0");
     } else {
         echo '<script>alert("Deletion Failed")</script>';
@@ -296,7 +341,17 @@ WHERE p.ProductID = $itemID";
 
             // Upload image file to the database AFTER it has been uploaded to server
             if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-                $insert = "INSERT INTO image (ImageURL, ProdOptionID, defaultImg) VALUES ('$targetFile', '$_POST[prodOptionID]', 0)";
+
+                // query db to find out if there is already an image associated with the product option
+                $checkDbImages = "SELECT * FROM image WHERE prodOptionID = $displayItem[ProdOptionID] AND defaultImg = 1";
+                $runCheck = mysqli_query($connection, $checkDbImages);
+                if (mysqli_num_rows($runCheck) > 0) {
+                    $defaultImg = 0;
+                }else{
+                    $defaultImg = 1;
+                }
+
+                $insert = "INSERT INTO image (ImageURL, ProdOptionID, defaultImg) VALUES ('$targetFile', '$_POST[prodOptionID]', $defaultImg)";
                 if ($connection->query($insert)) {
                     echo "<script>alert('Image successfully added.')</script>";
                 } else {
@@ -309,8 +364,8 @@ WHERE p.ProductID = $itemID";
     }
 
     ?>
-    
-    
+
+
     <!-- <script>
         // Get the modal element
         const productModal = document.getElementById('productDeleteModal');
@@ -337,16 +392,16 @@ WHERE p.ProductID = $itemID";
         });
     </script> -->
     <script>
-document.querySelectorAll('.confirmDelete').forEach(button => {
-    button.addEventListener('click', function (event) {
-        const userConfirmed = confirm("Are you sure you want to delete this product?");
-        if (!userConfirmed) {
-            // if user cancels, dont submit form
-            event.preventDefault();
-        }
-    });
-});
-     </script>
+        document.querySelectorAll('.confirmDelete').forEach(button => {
+            button.addEventListener('click', function (event) {
+                const userConfirmed = confirm("Are you sure you want to delete this product?");
+                if (!userConfirmed) {
+                    // if user cancels, dont submit form
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -55,23 +55,21 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
                 </div>
                 <?php
                 // get brands and categories for drop downs
-                $getList = "SELECT c.CategoryName, c.CategoryID, b.BrandName, b.BrandID, po.isAvailable, p.Bestseller, p.DefaultDisplay FROM Categories as c
-                LEFT JOIN products as p ON p.CategoryID = c.CategoryID
-                LEFT JOIN product_option as po ON p.ProductID = po.ProductID
-                LEFT JOIN brands as b ON p.BrandID = b.BrandID";
-                $runList = mysqli_query($connection, $getList);
-                $List = mysqli_fetch_array($runList);
-
+                // $getList = "SELECT c.CategoryName, c.CategoryID, b.BrandName, b.BrandID, po.isAvailable, p.Bestseller, p.DefaultDisplay FROM Categories as c
+                // LEFT JOIN products as p ON p.CategoryID = c.CategoryID
+                // LEFT JOIN product_option as po ON p.ProductID = po.ProductID
+                // LEFT JOIN brands as b ON p.BrandID = b.BrandID";
+                // $runList = mysqli_query($connection, $getList);
+                // $List = mysqli_fetch_array($runList);
+                
 
                 echo "<div>
                 <label for='Brand'>Brand</label>
-                <select type='text' placeholder='{$List['BrandName']}' name='Brand' value='{$List['BrandID']}'>";
+                <select type='text' name='Brand'>";
                 $getBrands = "SELECT * FROM brands";
                 $runBrands = mysqli_query($connection, $getBrands);
                 while ($displayBrands = mysqli_fetch_assoc($runBrands)) {
-                    // Check if this brand is currently selected
-                    $selected = ($displayBrands['BrandID'] == $List['BrandID']) ? 'selected' : '';
-                    echo "<option value='{$displayBrands['BrandID']}' $selected>{$displayBrands['BrandName']}</option>";
+                    echo "<option value='{$displayBrands['BrandID']}'>{$displayBrands['BrandName']}</option>";
                 }
                 echo "
                 </select>
@@ -79,20 +77,11 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
 
                 <div>
                 <label for='Category'>Category</label>
-                <select type='text' placeholder='{$List['CategoryName']}' name='Category' value='{$List['CategoryID']}'>";
+                <select type='text' name='Category'>";
                 $getCategories = "SELECT * FROM categories";
                 $runCategories = mysqli_query($connection, $getCategories);
-                $selectedCategory = '';
-
                 while ($displayCategories = mysqli_fetch_assoc($runCategories)) {
-                    // Check if this category is the selected one
-                    if ($displayCategories['CategoryID'] == $List['CategoryID']) {
-                        // Save the selected CategoryName for later use
-                        $selectedCategory = $displayCategories['CategoryName'];
-                        echo "<option value='{$displayCategories['CategoryID']}' selected>{$displayCategories['CategoryName']}</option>";
-                    } else {
-                        echo "<option value='{$displayCategories['CategoryID']}'>{$displayCategories['CategoryName']}</option>";
-                    }
+                    echo "<option value='{$displayCategories['CategoryID']}'>{$displayCategories['CategoryName']}</option>";
                 }
                 echo "
             </select>
@@ -101,36 +90,24 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
               <div>
                 <label for='Availability'>Is this product Available?</label>
                 <input type='checkbox' id='Available0' name='Availability' value='0'";
-                if ($List['isAvailable'] == 0)
-                    echo 'checked>';
                 echo "<label for='Availale0'>No</label>
                 <input type='checkbox' id='Available1' name='Availability' value='1'";
-                if ($List['isAvailable'] == 1)
-                    echo 'checked>';
                 echo "<label for='Available1'>Yes</label>
             </div>
             
             <div>
                 <label for='Default'>Display as Default?</label>
                 <input type='checkbox' id='Default0' name='Default' value='0'";
-                if ($List['DefaultDisplay'] == 0)
-                    echo 'checked>';
                 echo "<label for='Default0'>No</label>
                 <input type='checkbox' id='Default1' name='Default' value='1'";
-                if ($List['DefaultDisplay'] == 1)
-                    echo 'checked>';
                 echo "<label for='Default1'>Yes</label>
             </div>
             
             <div>
                 <label for='Bestseller'>Bestseller?</label>
                 <input type='checkbox' id='Bestseller0' name='Bestseller' value='0'";
-                if ($List['Bestseller'] == 0)
-                    echo 'checked>';
                 echo "<label for='Bestseller0'>No</label>
                 <input type='checkbox' id='Bestseller1' name='Bestseller' value='1'";
-                if ($List['Bestseller'] == 1)
-                    echo 'checked>';
                 echo "<label for='Bestseller1'>Yes</label>
             </div>";
 
@@ -146,9 +123,10 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
         <?php
         // handle image upload for new product AND insert new product to DB
         if (isset($_POST['submitProduct'])) {
+            $description = $connection->real_escape_string($_POST['ProductDescription']);
 
             // insert product to products table:
-            $productInsert = "INSERT INTO products (CategoryID, BrandID, ProductName, Description, Price, DefaultDisplay, Bestseller) VALUES ($_POST[Category], $_POST[Brand], '$_POST[ProductName]', '$_POST[ProductDescription]', '$_POST[ProductPrice]', $_POST[Default], $_POST[Bestseller])";
+            $productInsert = "INSERT INTO products (CategoryID, BrandID, ProductName, Description, Price, DefaultDisplay, Bestseller) VALUES ($_POST[Category], $_POST[Brand], '$_POST[ProductName]', '{$description}', '$_POST[ProductPrice]', $_POST[Default], $_POST[Bestseller])";
             $runProductInsert = mysqli_query($connection, $productInsert);
             $ProductID = $connection->insert_id;
 
@@ -157,8 +135,13 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
             $runProductOptionInsert = mysqli_query($connection, $productOptionInsert);
             $prodOptionID = $connection->insert_id;
 
+            // query to find category name that matches the selected category ID from form post
+            $getCategoryName = "SELECT c.CategoryID, c.CategoryName FROM categories as c WHERE c.CategoryID = '{$_POST['Category']}'";
+            $runGetCategoryName = mysqli_query($connection, $getCategoryName);
+            $categoryInfo = mysqli_fetch_assoc($runGetCategoryName);
+
             // Set the file directory for the image
-            $targetDir = "images/products/" . strtolower($selectedCategory) . "/";
+            $targetDir = "images/products/" . strtolower($categoryInfo['CategoryName']) . "/";
             $file = $_FILES['files'];
             $fileCount = count($file['name']);
 
