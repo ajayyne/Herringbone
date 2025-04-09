@@ -20,7 +20,7 @@ main{
     font-weight: normal;
     font-style:login normal;
 }
-button{
+button, .button{
     border: none;
     background-color: var(--button);
     padding: 0.2rem 0.4rem 0.2rem 0.4rem;
@@ -36,7 +36,7 @@ button{
     --darkest-blue: #5c616c;
     --shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
     --button: rgb(140, 140, 206);
-    --background: rgb(48, 48, 128);
+    --background: rgba(48, 55, 128, 0.804);
     --buttonActive: rgb(111, 111, 165);
 }
 
@@ -234,19 +234,106 @@ select {
     transform: scale(0.8);
 }
 
-
 /* end */
-
-
-
 /* END */
 
 
 /* edit products */
-.item-imgs img {
-    width: 2rem;
+.edit-background{
+    background-color: var(--background);
+    padding: 2rem;
+    margin-top: 2rem;
+}
+.prod-title label{
+    color: black;
+    font-size: 1.5rem;
+}
+.prod-title input{
+    padding: 0.5rem !important;
+    border-radius: 10px;
+    border: none;
+}
+.edit-prod-flex{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.4rem;
+}
+.edit-cont{
+    padding: 1.5rem;
+    color: white;
+    margin-bottom: 2rem;
+    border-radius: 5px 5px 0px 0px;
+}
+.edit-cont input, .edit-cont textarea, .edit-cont select{
+    padding: 0.2rem;
+    border-radius: 10px;
+}
+.checks-cont{
+    font-size: 1.2rem;
+    /* margin-bottom: 2rem; */
+}
+.checks{
+    margin-bottom: 0.7rem;
+}
+.update-delete-btns{
+    justify-content: end;
+}
+.button{
+    padding-right: 0.6rem !important;
+    padding-left: 0.6rem !important;
+    font-size: 1.2rem;
+}
+.update-delete-btns div:first-child{
+    margin-right: 1rem;
+}
+#imageUpload{
+    margin-right: 2rem;
+    margin-left: 1rem;
+}
+.image-uploadBtn{
+    width: 18rem;
+    margin-left: 1rem;
+    margin-top: 0.2rem;
+}
+.edit-cont label{
+    font-weight: bold;
 }
 
+#showImages{
+    margin-top: 1rem;
+}
+.prod-imgs{
+    flex-wrap: wrap;
+    align-items: center;
+}
+.item-imgs{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+.item-imgs img {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 0.3rem;
+}
+.edit-imgs-cont{
+    width: 100%;
+    background-color: var(--background);
+    margin-top: -6rem;
+    color: white;
+}
+.descriptionInput{
+    padding:1rem;
+}
+.new-imgcont{
+    margin-bottom: 2rem;
+}
+.new-imgcont p{
+    padding: 1rem 1rem 0rem 1rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
 
 
 /* delete modal */
@@ -434,50 +521,56 @@ cursor: pointer;
    
     /* END */
 
-    /* FILTER AND SEARCH */
-  
-    /* FILTERS
-    #filterButton {
-        margin-left: 2rem;
-    }
-    .filter-btn-container{
-        all: unset;
-    }
-    .filters-mob{
-       width: unset !important;
-    }
-    .filters{
-        margin-top: -3rem;
-    }
 
-    .filter-cont {
-        padding: 0rem;
-        width: 15rem;
-        height: 55rem;
-        background-color: transparent;
-        border-right: 2px solid var(--medium-blue);
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin-top: 120px;
-        justify-content: start !important;
-        align-items: start;
-        z-index: 1;
-        overflow-y: scroll;
-    }
-    ::-webkit-scrollbar { display: none; }
+    /* edit products */
+.edit-prod-flex{
+    width: 20rem;
+}
+.edit-cont{
+    padding: 3rem 5rem 3rem 5rem;
+    margin-bottom: 2rem;
+    border-radius: 5px 5px 0px 0px;
+}
 
-    #filters {
-        transform: scale(0.8);
-        overflow-y: scroll;
-    }
 
-    #applyFilters,
-    #clearFilters {
-        width: 100%;
-        padding: 0.2rem;
-    } */
+.edit-cont label{
+    font-weight: bold;
+}
 
+.prod-imgs{
+    flex-wrap: wrap;
+    align-items: center;
+}
+.item-imgs{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+.item-imgs img {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 0.3rem;
+}
+
+.edit-background{
+  display: flex;
+  justify-content: space-evenly;
+}
+.checks{
+    margin-bottom: 1.5rem;
+}
+.checks label{
+    text-decoration: underline;
+}
+.edit-buttons{
+    margin-top: 6rem;
+}
+.button{
+    font-size: 1rem;
+}
+.image-uploadBtn{
+    width: 10rem;
+    margin-left: -8rem;
+}
 }

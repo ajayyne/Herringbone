@@ -178,7 +178,7 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
                         // wrap each item in an a tag
 
                         const link = document.createElement('a');
-                        link.setAttribute('href', 'EditProduct.php?ProductID=' + product.productID);
+                        link.setAttribute('href', 'EditProduct.php?ProdOptionID=' + product.prodOptionID);
 
 
                         const productDiv = document.createElement('div');

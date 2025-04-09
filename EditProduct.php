@@ -13,7 +13,7 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
 }
 
 // get item id
-$itemID = $_GET['ProductID'];
+$itemID = $_GET['ProdOptionID'];
 
 // update product - WORKING
 if (isset($_POST['update'])) {
@@ -46,61 +46,61 @@ if (isset($_POST['update'])) {
 // delete product - WORKING
 // delete from products, product_option, and image tables
 if (isset($_POST['delete'])) {
- 
-        // echo "<script>alert('{$_POST['ProdOptionID']}')</script>";
-        //  echo "<script>alert('{$_POST['ProductID']}')</script>";
-        
-        $delete = "DELETE FROM product_option WHERE ProdOptionID ='{$_POST['ProdOptionID']}'";
-        $runDelete = mysqli_query($connection, $delete);
-        // if (!$runDelete) {
-        //     echo "<script>alert(Error in product_option query)</script>";
-        // }
-    
-        $deleteProduct = "DELETE FROM products WHERE ProductID = '{$_POST['ProductID']}'";
-        $runDeleteProduct = mysqli_query($connection, $deleteProduct);
-        // if (!$runDeleteProduct) {
-        //     echo "<script>alert(Error in products query)</script>";
-        // }
-    
-        $deleteImages = "DELETE FROM image WHERE ProdOptionID = '{$_POST['ProdOptionID']}'";
-        $runDeleteImages = mysqli_query($connection, $deleteImages);
 
-        // get all image file paths in db that match the prod option ID -> to delete them from server
-        $getAllImages = "SELECT * FROM image WHERE ProdOptionID = '$_POST[ProdOptionID]'";
-        $runGetAllImages = mysqli_query($connection, $getAllImages);
-        // this holds an array with imageID, imageURl, and ProdOptionID
-        $allImages = [];
-        while ($images = mysqli_fetch_assoc($runGetAllImages)) {
-            // populating the above array - each row will be in the array
-            $allImages[] = $images; 
-        }
-        
-        foreach ($allImages as $image) {
-            //  ImageURL from the returned rows in DB
-            $ImgfilePath = $image['ImageURL']; 
-            if (file_exists($ImgfilePath)) { 
-                if (unlink($ImgfilePath)) { 
-                    echo "<script>alert('Image {$ImgfilePath} deleted successfully')</script>";
-                } else {
-                    echo "<script>alert('Error deleting Image {$ImgfilePath}')</script>";
-                }
+    // echo "<script>alert('{$_POST['ProdOptionID']}')</script>";
+    //  echo "<script>alert('{$_POST['ProductID']}')</script>";
+
+    $delete = "DELETE FROM product_option WHERE ProdOptionID ='{$_POST['ProdOptionID']}'";
+    $runDelete = mysqli_query($connection, $delete);
+    // if (!$runDelete) {
+    //     echo "<script>alert(Error in product_option query)</script>";
+    // }
+
+    $deleteProduct = "DELETE FROM products WHERE ProductID = '{$_POST['ProductID']}'";
+    $runDeleteProduct = mysqli_query($connection, $deleteProduct);
+    // if (!$runDeleteProduct) {
+    //     echo "<script>alert(Error in products query)</script>";
+    // }
+
+    $deleteImages = "DELETE FROM image WHERE ProdOptionID = '{$_POST['ProdOptionID']}'";
+    $runDeleteImages = mysqli_query($connection, $deleteImages);
+
+    // get all image file paths in db that match the prod option ID -> to delete them from server
+    $getAllImages = "SELECT * FROM image WHERE ProdOptionID = '$_POST[ProdOptionID]'";
+    $runGetAllImages = mysqli_query($connection, $getAllImages);
+    // this holds an array with imageID, imageURl, and ProdOptionID
+    $allImages = [];
+    while ($images = mysqli_fetch_assoc($runGetAllImages)) {
+        // populating the above array - each row will be in the array
+        $allImages[] = $images;
+    }
+
+    foreach ($allImages as $image) {
+        //  ImageURL from the returned rows in DB
+        $ImgfilePath = $image['ImageURL'];
+        if (file_exists($ImgfilePath)) {
+            if (unlink($ImgfilePath)) {
+                echo "<script>alert('Image {$ImgfilePath} deleted successfully')</script>";
             } else {
-                echo "<script>alert('Image {$ImgfilePath} does not exist')</script>";
+                echo "<script>alert('Error deleting Image {$ImgfilePath}')</script>";
             }
+        } else {
+            echo "<script>alert('Image {$ImgfilePath} does not exist')</script>";
         }
-        
-        // if (!$runDeleteImages) {
-        //     echo "<script>alert(Error in this query)</script>";
-        // }
-    
-        if ($runDeleteProduct && $runDelete && $runDeleteImages) {
-            echo "<script>
+    }
+
+    // if (!$runDeleteImages) {
+    //     echo "<script>alert(Error in this query)</script>";
+    // }
+
+    if ($runDeleteProduct && $runDelete && $runDeleteImages) {
+        echo "<script>
                 alert('Product Successfully Deleted');
                 window.location.href = 'AdminProducts.php';
             </script>";
-        } else {
-            echo '<script>alert("Deletion Failed")</script>';
-        }
+    } else {
+        echo '<script>alert("Deletion Failed")</script>';
+    }
 }
 
 // deleting images - WORKING
@@ -178,65 +178,22 @@ if (isset($_POST['deleteImage'])) {
 LEFT JOIN products as p ON po.ProductID = p.ProductID
 LEFT JOIN categories as c ON c.CategoryID = p.CategoryID
 LEFT JOIN brands as b ON b.BrandID = p.BrandID
-WHERE p.ProductID = $itemID";
+WHERE po.ProdOptionID = $itemID";
     $runItem = mysqli_query($connection, $getItem);
     while ($displayItem = mysqli_fetch_assoc($runItem)) {
         echo "<div>
-        <form method='POST'>
+        <form method='POST' class='edit-cont'>
             <input type='hidden' value='{$displayItem['ProdOptionID']}' name='ProdOptionID'>
             <input type='hidden' value='{$displayItem['ProductID']}' name='ProductID'>
-            <div>
+            <div class='edit-prod-flex prod-title'>
                 <label for='productName'>Product Name</label>
                 <input type='text' placeholder='{$displayItem['ProductName']}' name='productName' value='{$displayItem['ProductName']}'>
             </div>
-            <div>
-                <label for='description'>Product Description</label>
-                <input type='text' placeholder='{$displayItem['Description']}' name='Description' value='{$displayItem['Description']}'>
-            </div>
-            <div>
-                <label for='colour'>Colour</label>
-                <input type='text' placeholder='{$displayItem['Colour']}' name='Colour' value='{$displayItem['Colour']}'>
-            </div>
-            <div>
-                <label for='Availability'>Is this product Available?</label>
-                <input type='checkbox' id='Available0' name='Availability' value='0'";
-        if ($displayItem['isAvailable'] == 0)
-            echo 'checked>';
-        echo "<label for='Availale0'>No</label>
-                <input type='checkbox' id='Available1' name='Availability' value='1'";
-        if ($displayItem['isAvailable'] == 1)
-            echo 'checked>';
-        echo "<label for='Available1'>Yes</label>
-            </div>
-            <div>
-                <label for='Price'>Price</label>
-                <input type='text' placeholder='{$displayItem['Price']}' name='Price' value='{$displayItem['Price']}'>
-            </div>
-            <div>
-                <label for='Default'>Display as Default?</label>
-                <input type='checkbox' id='Default0' name='Default' value='0'";
-        if ($displayItem['DefaultDisplay'] == 0)
-            echo 'checked>';
-        echo "<label for='Default0'>No</label>
-                <input type='checkbox' id='Default1' name='Default' value='1'";
-        if ($displayItem['DefaultDisplay'] == 1)
-            echo 'checked>';
-        echo "<label for='Default1'>Yes</label>
-            </div>
-            <div>
-                <label for='Bestseller'>Bestseller?</label>
-                <input type='checkbox' id='Bestseller0' name='Bestseller' value='0'";
-        if ($displayItem['Bestseller'] == 0)
-            echo 'checked>';
-        echo "<label for='Bestseller0'>No</label>
-                <input type='checkbox' id='Bestseller1' name='Bestseller' value='1'";
-        if ($displayItem['Bestseller'] == 1)
-            echo 'checked>';
-        echo "<label for='Bestseller1'>Yes</label>
-            </div>
-            <div>
-                <label for='Category'>Category</label>
-                <select type='text' placeholder='{$displayItem['CategoryName']}' name='Category' value='{$displayItem['CategoryID']}'>";
+            <div class='edit-background radius'>
+            <div class='edit-section1'>
+             <div class='edit-prod-flex'>
+                    <label for='Category'>Category</label>
+                    <select type='text' placeholder='{$displayItem['CategoryName']}' name='Category' value='{$displayItem['CategoryID']}'>";
         $getCategories = "SELECT * FROM categories";
         $runCategories = mysqli_query($connection, $getCategories);
         while ($displayCategories = mysqli_fetch_assoc($runCategories)) {
@@ -244,11 +201,11 @@ WHERE p.ProductID = $itemID";
             echo "<option value='{$displayCategories['CategoryID']}' $selected>{$displayCategories['CategoryName']}</option>";
         }
         echo "
-            </select>
-            </div>
-            <div>
-                <label for='Brand'>Brand</label>
-                <select type='text' placeholder='{$displayItem['BrandName']}' name='Brand' value='{$displayItem['BrandID']}'>";
+                </select>
+                </div>
+                 <div class='edit-prod-flex'>
+                    <label for='Brand'>Brand</label>
+                    <select type='text' placeholder='{$displayItem['BrandName']}' name='Brand' value='{$displayItem['BrandID']}'>";
         $getBrands = "SELECT * FROM brands";
         $runBrands = mysqli_query($connection, $getBrands);
         while ($displayBrands = mysqli_fetch_assoc($runBrands)) {
@@ -256,21 +213,94 @@ WHERE p.ProductID = $itemID";
             echo "<option value='{$displayBrands['BrandID']}' $selected>{$displayBrands['BrandName']}</option>";
         }
         echo "
-             </select>
+                </select>
+                </div>
+               
+                <div  class='edit-prod-flex'>
+                    <label for='colour'>Colour</label>
+                    <input type='text' placeholder='{$displayItem['Colour']}' name='Colour' value='{$displayItem['Colour']}'>
+                </div>
+               <div class='edit-prod-flex'>
+                    <label for='Price'>Price</label>
+                    <input type='text' placeholder='{$displayItem['Price']}' name='Price' value='{$displayItem['Price']}'>
+                </div>
+                 <div class='edit-prod-flex'>
+                    <label for='description'>Product Description</label>
+                    <textarea type='text' placeholder='{$displayItem['Description']}' rows='4' name='Description' value='{$displayItem['Description']}'></textarea>
+                </div>
+                </div>
+                <br>
+                <br>
+                <div class='edit-section2'>
+                <div class='checks-cont'>
+                <div class='edit-prod-flex checks'>
+                    <label for='Availability'>Is this product Available?</label>
+                    <div>
+                    <input type='checkbox' id='Available0' name='Availability' value='0'";
+        if ($displayItem['isAvailable'] == 0)
+            echo 'checked>';
+        echo "<label for='Availale0'>No</label>
+                    <input type='checkbox' id='Available1' name='Availability' value='1'";
+        if ($displayItem['isAvailable'] == 1)
+            echo 'checked>';
+        echo "<label for='Available1'>Yes</label>
+            </div>
+                </div>
+                
+                <div class='edit-prod-flex checks'>
+                
+                    <label for='Default'>Display as Default?</label>
+                    <div>
+                    <input type='checkbox' id='Default0' name='Default' value='0'";
+        if ($displayItem['DefaultDisplay'] == 0)
+            echo 'checked>';
+        echo "<label for='Default0'>No</label>
+                    <input type='checkbox' id='Default1' name='Default' value='1'";
+        if ($displayItem['DefaultDisplay'] == 1)
+            echo 'checked>';
+        echo "<label for='Default1'>Yes</label>
+            </div>
+                </div>
+                <div class='edit-prod-flex checks'>
+                    <label for='Bestseller'>Bestseller?</label>
+                    <div>
+                    <input type='checkbox' id='Bestseller0' name='Bestseller' value='0'";
+        if ($displayItem['Bestseller'] == 0)
+            echo 'checked>';
+        echo "<label for='Bestseller0'>No</label>
+                    <input type='checkbox' id='Bestseller1' name='Bestseller' value='1'";
+        if ($displayItem['Bestseller'] == 1)
+            echo 'checked>';
+        echo "<label for='Bestseller1'>Yes</label>
             </div>
             <div>
-                <input name='update' type='submit' id='updateItem' value='Update Item'>
+                </div>
+                </div>
+                </div>
+               
+               
+                <div class='edit-buttons'>
+                    <div class='flex update-delete-btns'>
+                        <div>
+                            <input name='update' type='submit' id='updateItem' value='Update Item' class='button'>
+                        </div>
+                        <div>
+                            <input name='delete' type='submit' id='deleteItem' value='Delete Item' class='confirmDelete button'>
+                        </div>
+                    </div>
+                    <div class='flex update-delete-btns'>
+                        <input name='showImages' type='submit' id='showImages' value='Show Images' class='button'>
+                    </div>
+                </div>
+
+
             </div>
-             <div>
-                <input name='delete' type='submit' id='deleteItem' value='Delete Item' class='confirmDelete'>
-            </div>
-            <div>
-                <input name='showImages' type='submit' id='showImages' value='Show Images'>
-            </div>
-        </form>
-    </div>
-    <br>
-    <br>
+                
+            </form>
+        </div>
+        <br>
+        <br>
+       
     ";
 
         // images: upload
@@ -279,13 +309,16 @@ WHERE p.ProductID = $itemID";
 
             // upload new image
             echo "
+            <div class='edit-cont radius'>
+            <div class='edit-imgs-cont radius'>
             <div>
-                <form method='post' enctype='multipart/form-data'>
+                <form method='post' enctype='multipart/form-data' class='new-imgcont'>
+                <p>Upload New Images</p>
                 <label for='imageUpload'>
                     <input type='hidden' name='category' value='{$displayItem['CategoryName']}'>
                     <input type='hidden' name='prodOptionID' value='{$displayItem['ProdOptionID']}'>
                     <input type='file' accept='.jpg, .jpeg, .png' name='newImg' id='imageUpload'>
-                    <input type='submit' name='uploadImg' value='Upload Image'>
+                    <input type='submit' name='uploadImg' value='Upload Image' class='button image-uploadBtn'>
                 </form>
             </div>";
 
@@ -297,17 +330,22 @@ WHERE p.ProductID = $itemID";
             $runImage = mysqli_query($connection, $getImages);
 
 
-
+            echo "<div class='flex prod-imgs'>";
             while ($images = mysqli_fetch_assoc($runImage)) {
-                echo "<div class='item-imgs'>
+                echo "
+                <div class='item-imgs'>
                 <img src='{$images['ImageURL']}'>
                 <form method='POST'>
                     <input type='hidden' name='hidden' value='{$images['ImageID']}'>
                     <input type='hidden' name='hidden2' value='{$images['ImageURL']}'>
-                    <input type='submit' value='delete' id='deleteImage' name='deleteImage'>
+                    <input type='submit' value='delete' id='deleteImage' name='deleteImage' class='button'>
+                     
                 </form>
+             
             </div>";
             }
+            echo "  </div>
+            </div>";
         }
 
         if (isset($_POST['uploadImg'])) {
@@ -330,7 +368,7 @@ WHERE p.ProductID = $itemID";
             // Check that uploaded file matches the allowed types
             $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
             if (!in_array($file['type'], $allowedTypes)) {
-                die("Invalid file type. Only JPG, JPEG, and PNG are allowed.");
+                echo"<script>alert('Invalid file type. Only JPG, JPEG, and PNG are allowed.')</script>";
             }
 
             // Set maximum file size (2MB)
@@ -347,7 +385,7 @@ WHERE p.ProductID = $itemID";
                 $runCheck = mysqli_query($connection, $checkDbImages);
                 if (mysqli_num_rows($runCheck) > 0) {
                     $defaultImg = 0;
-                }else{
+                } else {
                     $defaultImg = 1;
                 }
 
