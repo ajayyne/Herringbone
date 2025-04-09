@@ -1,4 +1,4 @@
-<?php
+<body?php
 session_start();
 include 'connection.php';
 
@@ -32,9 +32,11 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
     <script src="https://kit.fontawesome.com/504c189bcb.js" crossorigin="anonymous"></script>
 </head>
 
-<body></body>
+<body class="background">
 
-    <main>
+    <div class="new-brand">
+        <h1>New Brand</h1>
+    </div>
 
     <main>
     <form method='post' enctype='multipart/form-data'>
@@ -87,7 +89,7 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
     }
     ?>
     </main>
-
+</body>
  <!-- limits the number of images allowed to upload -->
  <script>
          $(function(){

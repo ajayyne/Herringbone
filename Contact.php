@@ -64,12 +64,12 @@
     </div>
 
     <!-- banner img -->
-     <div class="contact-banner flex">
+     <!-- <div class="contact-banner flex">
         <div class="visit-banner">
             <h2>Visit Us</h2>
             <p>Located next to the Crown Hotel on the High Street, we're at the heart of Peebles. Pop in for a visit to say hello, browse our gifts or enjoy a lovely coffee upstairs.</p>
         </div>
-     </div>
+     </div> -->
 
     <main>
         <div class="flex flex-col contact-desktop">

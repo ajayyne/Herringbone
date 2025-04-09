@@ -32,19 +32,27 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
 
 <body>
 
-<main>
+    <main class="background">
+        <div class="flex panel-contents">
             <div class='admin-links'>
-                <a href='AdminProducts.php'><div class='link-box radius text-center'>
-                    <h1>PRODUCTS</h1>
-                </div></a>
-                <a href='AdminBrands.php'><div class='link-box radius text-center'>
-                    <h1>BRANDS</h1>
-                </div></a>
-                <a href='AdminOrders.php'><div class='link-box radius text-center'>
-                    <h1>MANAGE ORDERS</h1>
-                </div></a>
+                <a href='AdminProducts.php'>
+                    <div class='link-box radius text-center'>
+                        <h1>PRODUCTS</h1>
+                    </div>
+                </a>
+                <a href='AdminBrands.php'>
+                    <div class='link-box radius text-center'>
+                        <h1>BRANDS</h1>
+                    </div>
+                </a>
+                <a href='AdminOrders.php'>
+                    <div class='link-box radius text-center'>
+                        <h1>MANAGE ORDERS</h1>
+                    </div>
+                </a>
             </div>
-        </main>
+        </div>
+    </main>
 </body>
 
 </html>

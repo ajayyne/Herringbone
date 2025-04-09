@@ -66,7 +66,7 @@ if (isset($_POST['deleteBrand'])) {
 
 <body>
 
-    <main>
+    <main class="background">
         <!-- modal for deleting pop up -->
         <!-- <div id="deleteModal" class="deleteModal modal">
             <!- Inner content 
@@ -82,8 +82,14 @@ if (isset($_POST['deleteBrand'])) {
         </div> -->
 
 
-        <h1>All Brands</h1>
+        <div class="flex admin-page-title">
+            <h1>All Brands</h1>
+            <a href="newBrand.php"><button class="new-btn">Add A New Brand</button></a>
+        </div>
 
+        <div class="brands-cont">
+
+        <table>
 
         <?php
         // get all brands from db
@@ -91,7 +97,8 @@ if (isset($_POST['deleteBrand'])) {
         $runBrands = mysqli_query($connection, $getBrands);
         while ($displayBrands = mysqli_fetch_array($runBrands)) {
             echo "
-    <div class='flex'>
+            <div>
+    <div class='flex brand'>
     <form method='post' id='updatingBrand'>
         <input type='text' value='{$displayBrands['BrandName']}' name='BrandName'></input>
         <input type='hidden' value='{$displayBrands['BrandID']}' name='BrandID'>
@@ -102,27 +109,29 @@ if (isset($_POST['deleteBrand'])) {
         <input type='submit' name='deleteBrand' value='delete' class='openDeleteModal confirmDelete'>
         <input type='hidden' value='{$displayBrands['BrandID']}' name='BrandID'>
     </form>
+    </div>
     </div>";
         }
 
         // php for updating and deleting brands - top of document
         ?>
-
-        <a href="newBrand.php"><button>Add A New Brand</button></a>
+        </table>
+</div>
+        
 
     </main>
     <!-- <script src="deleteModal.js"></script> -->
-     <script>
-document.querySelectorAll('.confirmDelete').forEach(button => {
-    button.addEventListener('click', function (event) {
-        const userConfirmed = confirm("Are you sure you want to delete this brand?");
-        if (!userConfirmed) {
-            // if user cancels, dont submit form
-            event.preventDefault();
-        }
-    });
-});
-     </script>
+    <script>
+        document.querySelectorAll('.confirmDelete').forEach(button => {
+            button.addEventListener('click', function (event) {
+                const userConfirmed = confirm("Are you sure you want to delete this brand?");
+                if (!userConfirmed) {
+                    // if user cancels, dont submit form
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -34,12 +34,14 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
 <body>
     <main>
 
-        <a href="NewProduct.php"><button>Add New Product</button></a>
+        <div class="admin-page-title">
+            <h1>All Products</h1>
+            <a href="NewProduct.php"><button class="new-btn">Add New Product</button></a>
+        </div>
 
-        
         <?php
-       
-       
+
+
 
         // mobile search
         echo " <div class='search-cont flex mobile-searchbar'>
@@ -52,59 +54,69 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
                         <input type='text' id='deskSearch' class='radius' name='search'>
                         <i class='fa-solid fa-magnifying-glass searchIcon' id='searchIcon'></i>
                     </div>";
-                    
+
         echo "
+
+         <div class='filter-main'>
+            <div class='filter-cont flex'>
+                <div class='filter-btn-container'>
+                    <input type='checkbox' id='toggleCheckbox' style='display: none;'>
+                    <label for='toggleCheckbox' id='filterButton'>
+                        FILTERS
+                        <img src='images/icons/arrow-down.png' class='arrow-down' id='arrow'>
+                    </label>
+                </div>
+
         <div class='filters-mob'>
                     <div class='filters flex flex-even' id='filters'>
-                        <div class='filtersColours flex flex-col'>
+                        <div class='filtersColours flex'>
                             <div>
                                 <p><em>COLOUR</em></p>
                             </div>
-                            <div class='colours flex flex-col'>";
-                          
-                                //get all current colours, brands and prices stored in database
-                                $getColours = "SELECT Colour FROM product_option";
-                                //render out colours where colour column has a value
-                                $runColours = mysqli_query($connection, $getColours);
-                                //create counter to make unique id for each input below
-                                $idCounter = 0;
-                                while ($displayColours = mysqli_fetch_assoc($runColours)) {
-                                    if ($displayColours['Colour'] != '') {
-                                        echo "<div class='flex colour'>
+                            <div class='colours flex'>";
+
+        //get all current colours, brands and prices stored in database
+        $getColours = "SELECT Colour FROM product_option";
+        //render out colours where colour column has a value
+        $runColours = mysqli_query($connection, $getColours);
+        //create counter to make unique id for each input below
+        $idCounter = 0;
+        while ($displayColours = mysqli_fetch_assoc($runColours)) {
+            if ($displayColours['Colour'] != '') {
+                echo "<div class='flex colour'>
                                             <input type='checkbox' class='radio colourCheckbox' value='{$displayColours['Colour']}' id='chkColour" . $idCounter . "'>
                                             <p>{$displayColours['Colour']}</p>
                                         </div>";
-                                    }
-                                        $idCounter++;
-                                }
-                                    echo "}
-                                }
+            }
+            $idCounter++;
+        }
+        echo "
                                 
                             </div>
                         </div>
-                        <div class='filtersBrands flex flex-col'>
+                        <div class='filtersBrands flex'>
                             <div>
                                 <p><em>BRAND</em></p>
                             </div>
-                            <div class='brands flex flex-col'>";
-                                
-                                $getBrands = "SELECT BrandName FROM brands";
-                                $runBrands = mysqli_query($connection, $getBrands);
-                                $idCounter = 0;
-                                while ($displayBrands = mysqli_fetch_assoc($runBrands)) {
-                                    echo "<div class='flex flex colour'>
+                            <div class='brands flex'>";
+
+        $getBrands = "SELECT BrandName FROM brands";
+        $runBrands = mysqli_query($connection, $getBrands);
+        $idCounter = 0;
+        while ($displayBrands = mysqli_fetch_assoc($runBrands)) {
+            echo "<div class='flex flex colour'>
                                     <input type='checkbox' class='radio brandCheckbox' value='{$displayBrands['BrandName']}' id='chkBrand" . $idCounter . "'>
                                     <p>{$displayBrands['BrandName']}</p>
                                 </div>";
-                                $idCounter++;
-                                }
-                                  
-                                    echo "
-                                }
+            $idCounter++;
+        }
+
+        echo "
+                                
                              
                             </div>
                         </div>
-                        <div class='filtersColours flex flex-col'>
+                        <div class='filtersColours flex'>
                             <div>
                                 <p><em>PRICE</em></p>
                             </div>
@@ -131,15 +143,12 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
                             <button id='applyFilters' onclick='applyFilters()'>Apply Filters</button>
                         </div>
                     </div>
-                </div>";
+                </div>
+                 </div>
+        </div>";
 
         echo "<div id='prod-container'></div>";
-
-
         ?>
-
-
-
 
     </main>
     <script src="products.js"></script>
@@ -186,14 +195,15 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
                         const nameElement = document.createElement('h6');
                         nameElement.innerText = product.Name;
                         productDiv.appendChild(nameElement);
+                        
 
                         const priceHolder = document.createElement('div');
                         priceHolder.classList.add('price-holder');
 
-                        const brandElement = document.createElement('p');
-                        brandElement.innerText = product.Brand;
-                        priceHolder.appendChild(brandElement);
-                        brandElement.classList.add('product-brand');
+                        // const brandElement = document.createElement('p');
+                        // brandElement.innerText = product.Brand;
+                        // priceHolder.appendChild(brandElement);
+                        // brandElement.classList.add('product-brand');
 
 
 
@@ -228,5 +238,5 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
             loadProducts('', paramValue);
         }
     </script>
-
+<script src="filters.js"></script>
 </body>
