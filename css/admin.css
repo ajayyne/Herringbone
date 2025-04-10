@@ -35,8 +35,8 @@ button, .button{
     --dark-blue: #838E97;
     --darkest-blue: #5c616c;
     --shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
-    --button: rgb(140, 140, 206);
-    --background: rgba(48, 55, 128, 0.804);
+    --button: rgb(132, 132, 225);
+    --background: rgba(91, 95, 137, 0.804);
     --buttonActive: rgb(111, 111, 165);
 }
 
@@ -191,7 +191,8 @@ select {
     align-items: start;
 }
 .filters{
-    width: 40%;
+    margin-left: -2rem;
+    width: 80%;
     margin-top: -3rem;
 }
 .filtersColours, .filtersBrands{
@@ -232,6 +233,9 @@ select {
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
     transform: scale(0.8);
+}
+.new-btn{
+    font-size: 0.8rem;
 }
 
 /* end */
@@ -276,16 +280,25 @@ select {
     margin-bottom: 0.7rem;
 }
 .update-delete-btns{
-    justify-content: end;
+    justify-content: space-between;
+}
+
+.update-delete-btns input{
+    width: 100%;
+}
+.confirmUpdate, .confirmDelete{
+    margin-top: 2rem;
+    font-size: 1rem !important;
+    width: 7rem !important;
+    background-color: transparent;
+    border: 2px solid var(--button);
 }
 .button{
     padding-right: 0.6rem !important;
     padding-left: 0.6rem !important;
     font-size: 1.2rem;
 }
-.update-delete-btns div:first-child{
-    margin-right: 1rem;
-}
+
 #imageUpload{
     margin-right: 2rem;
     margin-left: 1rem;
@@ -572,5 +585,9 @@ cursor: pointer;
 .image-uploadBtn{
     width: 10rem;
     margin-left: -8rem;
+}
+.confirmUpdate, .confirmDelete{
+    margin-top: 0rem;
+    width: 9.5rem !important;
 }
 }

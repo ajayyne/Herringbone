@@ -216,10 +216,19 @@ WHERE po.ProdOptionID = $itemID";
                 </select>
                 </div>
                
-                <div  class='edit-prod-flex'>
-                    <label for='colour'>Colour</label>
-                    <input type='text' placeholder='{$displayItem['Colour']}' name='Colour' value='{$displayItem['Colour']}'>
-                </div>
+              <div class='edit-prod-flex'>
+                <label for='colour'>Colour</label>
+                <select name='Colour' id='colour'>";
+                    $availableColors = ['Beige', 'Black', 'Blue', 'Brown', 'Crimson', 'Dark Blue', 'Dark Green', 'Forest Green', 'Gold', 'Gray', 'Green', 'Hot Pink', 'Ivory', 'Lavender', 'Light Blue', 'Light Pink', 'Lime Green', 'Navy', 'Orange', 'Pink', 'Plum', 
+                'Purple', 'Red', 'Salmon', 'Silver', 'Tan', 'Taupe', 'Teal', 'White', 'Yellow'];
+                    
+                // loop through array, mark the item selected where the db matches the colour in the array
+                    foreach ($availableColors as $color) {
+                    $selected = ($color === $displayItem['Colour']) ? 'selected' : ''; 
+                    echo "<option value='$color' $selected>$color</option>";
+                    }
+        echo "</select>
+            </div>
                <div class='edit-prod-flex'>
                     <label for='Price'>Price</label>
                     <input type='text' placeholder='{$displayItem['Price']}' name='Price' value='{$displayItem['Price']}'>
@@ -282,7 +291,7 @@ WHERE po.ProdOptionID = $itemID";
                 <div class='edit-buttons'>
                     <div class='flex update-delete-btns'>
                         <div>
-                            <input name='update' type='submit' id='updateItem' value='Update Item' class='button'>
+                            <input name='update' type='submit' id='updateItem' value='Update Item' class='button confirmUpdate'>
                         </div>
                         <div>
                             <input name='delete' type='submit' id='deleteItem' value='Delete Item' class='confirmDelete button'>
@@ -368,7 +377,7 @@ WHERE po.ProdOptionID = $itemID";
             // Check that uploaded file matches the allowed types
             $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
             if (!in_array($file['type'], $allowedTypes)) {
-                echo"<script>alert('Invalid file type. Only JPG, JPEG, and PNG are allowed.')</script>";
+                echo "<script>alert('Invalid file type. Only JPG, JPEG, and PNG are allowed.')</script>";
             }
 
             // Set maximum file size (2MB)
