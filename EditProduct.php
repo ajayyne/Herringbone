@@ -235,7 +235,7 @@ WHERE po.ProdOptionID = $itemID";
                 </div>
                  <div class='edit-prod-flex'>
                     <label for='description'>Product Description</label>
-                    <textarea type='text' placeholder='{$displayItem['Description']}' rows='4' name='Description' value='{$displayItem['Description']}'></textarea>
+                    <textarea rows='4' name='Description'>"; echo htmlspecialchars($displayItem['Description']); echo "</textarea>
                 </div>
                 </div>
                 <br>

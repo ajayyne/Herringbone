@@ -35,35 +35,68 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
 
 <body>
     <main>
+        <h1>New Product</h1>
         <div>
-            <form method="POST" enctype='multipart/form-data'>
-                <div>
+            <form method="POST" enctype='multipart/form-data' class="edit-background edit-cont">
+                <div class="edit-prod-flex">
                     <label for="ProductName">Title</label>
                     <input type='text' name='ProductName' placeholder='Product Name' required>
                 </div>
-                <div>
+                <div class="edit-prod-flex">
                     <label for="ProductDescription">Description</label>
                     <input type='text' name='ProductDescription' placeholder='A description of the product' required>
                 </div>
-                <div>
+                <div class="edit-prod-flex">
                     <label for="Price">Price</label>
                     <input type='text' name='ProductPrice' placeholder='£00.00' required>
                 </div>
-                <div>
+                <div class="edit-prod-flex">
                     <label for="Colour">Colour</label>
-                    <input type='text' name='Colour' placeholder='Red'>
+                    <select name="Colour" id="Colour">
+                        <?php
+                        $availableColors = [
+                            'Beige',
+                            'Black',
+                            'Blue',
+                            'Brown',
+                            'Crimson',
+                            'Dark Blue',
+                            'Dark Green',
+                            'Forest Green',
+                            'Gold',
+                            'Gray',
+                            'Green',
+                            'Hot Pink',
+                            'Ivory',
+                            'Lavender',
+                            'Light Blue',
+                            'Light Pink',
+                            'Lime Green',
+                            'Navy',
+                            'Orange',
+                            'Pink',
+                            'Plum',
+                            'Purple',
+                            'Red',
+                            'Salmon',
+                            'Silver',
+                            'Tan',
+                            'Taupe',
+                            'Teal',
+                            'White',
+                            'Yellow'
+                        ];
+                        foreach ($availableColors as $color) {
+
+                            $selected = ($color === $displayItem['Colour']) ? 'selected' : '';
+                            echo "<option value='$color' $selected>$color</option>";
+                        }
+                        ?>
+                    </select>
                 </div>
                 <?php
-                // get brands and categories for drop downs
-                // $getList = "SELECT c.CategoryName, c.CategoryID, b.BrandName, b.BrandID, po.isAvailable, p.Bestseller, p.DefaultDisplay FROM Categories as c
-                // LEFT JOIN products as p ON p.CategoryID = c.CategoryID
-                // LEFT JOIN product_option as po ON p.ProductID = po.ProductID
-                // LEFT JOIN brands as b ON p.BrandID = b.BrandID";
-                // $runList = mysqli_query($connection, $getList);
-                // $List = mysqli_fetch_array($runList);
-                
 
-                echo "<div>
+                echo "<div class='edit-prod-flex'>
                 <label for='Brand'>Brand</label>
                 <select type='text' name='Brand'>";
                 $getBrands = "SELECT * FROM brands";
@@ -75,7 +108,7 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
                 </select>
                 </div>
 
-                <div>
+                <div class='edit-prod-flex'>
                 <label for='Category'>Category</label>
                 <select type='text' name='Category'>";
                 $getCategories = "SELECT * FROM categories";
@@ -87,36 +120,43 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
             </select>
             </div>
             
-              <div>
+              <div class='edit-prod-flex first-check'>
                 <label for='Availability'>Is this product Available?</label>
-                <input type='checkbox' id='Available0' name='Availability' value='0'";
+                <div class='checks'>
+                    <input type='checkbox' id='Available0' name='Availability' value='0'";
                 echo "<label for='Availale0'>No</label>
-                <input type='checkbox' id='Available1' name='Availability' value='1'";
+                    <input type='checkbox' id='Available1' name='Availability' value='1'";
                 echo "<label for='Available1'>Yes</label>
+                </div>
             </div>
             
-            <div>
+            <div class='edit-prod-flex'>
                 <label for='Default'>Display as Default?</label>
-                <input type='checkbox' id='Default0' name='Default' value='0'";
+                <div class='checks'>
+                    <input type='checkbox' id='Default0' name='Default' value='0'";
                 echo "<label for='Default0'>No</label>
-                <input type='checkbox' id='Default1' name='Default' value='1'";
+                    <input type='checkbox' id='Default1' name='Default' value='1'";
                 echo "<label for='Default1'>Yes</label>
+                </div>
             </div>
             
-            <div>
+            <div class='edit-prod-flex'>
                 <label for='Bestseller'>Bestseller?</label>
-                <input type='checkbox' id='Bestseller0' name='Bestseller' value='0'";
+                <div class='checks'>
+                    <input type='checkbox' id='Bestseller0' name='Bestseller' value='0'";
                 echo "<label for='Bestseller0'>No</label>
-                <input type='checkbox' id='Bestseller1' name='Bestseller' value='1'";
+                    <input type='checkbox' id='Bestseller1' name='Bestseller' value='1'";
                 echo "<label for='Bestseller1'>Yes</label>
+                </div>
             </div>";
 
 
                 ?>
 
                 <br>
-                <input type='file' required multiple accept='.jpg, .jpeg, .png' name='files[]' id='imageUpload'>
-                <input type='submit' name='submitProduct' value="Add Product">
+                <input type='file' required multiple accept='.jpg, .jpeg, .png' name='files[]' id='imageUpload'
+                    class="new-prod-img">
+                <input type='submit' name='submitProduct' value="Add Product" class="button new-prod-btn">
             </form>
         </div>
 
@@ -125,20 +165,14 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
         if (isset($_POST['submitProduct'])) {
             $description = $connection->real_escape_string($_POST['ProductDescription']);
 
-            // insert product to products table:
-            $productInsert = "INSERT INTO products (CategoryID, BrandID, ProductName, Description, Price, DefaultDisplay, Bestseller) VALUES ($_POST[Category], $_POST[Brand], '$_POST[ProductName]', '{$description}', '$_POST[ProductPrice]', $_POST[Default], $_POST[Bestseller])";
-            $runProductInsert = mysqli_query($connection, $productInsert);
-            $ProductID = $connection->insert_id;
-
-            // insert into product options table
-            $productOptionInsert = "INSERT INTO product_option (ProductID, Colour, isAvailable) VALUES ($ProductID, '$_POST[Colour]', $_POST[Availability])";
-            $runProductOptionInsert = mysqli_query($connection, $productOptionInsert);
-            $prodOptionID = $connection->insert_id;
 
             // query to find category name that matches the selected category ID from form post
             $getCategoryName = "SELECT c.CategoryID, c.CategoryName FROM categories as c WHERE c.CategoryID = '{$_POST['Category']}'";
             $runGetCategoryName = mysqli_query($connection, $getCategoryName);
             $categoryInfo = mysqli_fetch_assoc($runGetCategoryName);
+
+            // Set the target directory properly
+            $targetDir = "images/products/" . strtolower($categoryInfo['CategoryName']) . "/";
 
             // Set the file directory for the image
             $targetDir = "images/products/" . strtolower($categoryInfo['CategoryName']) . "/";
@@ -181,6 +215,21 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
                     // defaultImg = 1 for the first file, defaultImg = 0 for the rest
                     $defaultImg = ($i === 0) ? 1 : 0;
 
+                    // insert product to products table:
+                    $productInsert = "INSERT INTO products (CategoryID, BrandID, ProductName, Description, Price, DefaultDisplay, Bestseller) VALUES ($_POST[Category], $_POST[Brand], '$_POST[ProductName]', '{$description}', '$_POST[ProductPrice]', $_POST[Default], $_POST[Bestseller])";
+                    $runProductInsert = mysqli_query($connection, $productInsert);
+                    $ProductID = $connection->insert_id;
+
+                    // insert into product options table
+                    $productOptionInsert = "INSERT INTO product_option (ProductID, Colour, isAvailable) VALUES ($ProductID, '$_POST[Colour]', $_POST[Availability])";
+                    $runProductOptionInsert = mysqli_query($connection, $productOptionInsert);
+                    $prodOptionID = $connection->insert_id;
+
+                    // // query to find category name that matches the selected category ID from form post
+                    // $getCategoryName = "SELECT c.CategoryID, c.CategoryName FROM categories as c WHERE c.CategoryID = '{$_POST['Category']}'";
+                    // $runGetCategoryName = mysqli_query($connection, $getCategoryName);
+                    // $categoryInfo = mysqli_fetch_assoc($runGetCategoryName);
+        
                     $insertImage = "INSERT INTO image (ImageURL, ProdOptionID, defaultImg) VALUES ('$targetFile', $prodOptionID, $defaultImg)";
                     $runInsertImage = mysqli_query($connection, $insertImage);
                 } else {

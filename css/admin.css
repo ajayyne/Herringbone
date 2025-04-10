@@ -238,7 +238,6 @@ select {
     font-size: 0.8rem;
 }
 
-/* end */
 /* END */
 
 
@@ -247,6 +246,7 @@ select {
     background-color: var(--background);
     padding: 2rem;
     margin-top: 2rem;
+    color: white;
 }
 .prod-title label{
     color: black;
@@ -266,18 +266,25 @@ select {
     padding: 1.5rem;
     color: white;
     margin-bottom: 2rem;
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 5px;
 }
 .edit-cont input, .edit-cont textarea, .edit-cont select{
     padding: 0.2rem;
     border-radius: 10px;
 }
-.checks-cont{
-    font-size: 1.2rem;
-    /* margin-bottom: 2rem; */
+.edit-cont input:active, .edit-cont textarea:active, .edit-cont select:active{
+    border: 2px solid var(--button);
+    outline: none;
+}
+.edit-cont input:focus, .edit-cont textarea:focus, .edit-cont select:focus{
+    outline: none;
+    border: 2px solid var(--button);
 }
 .checks{
     margin-bottom: 0.7rem;
+}
+.first-check{
+    margin-top: 2rem;
 }
 .update-delete-btns{
     justify-content: space-between;
@@ -302,6 +309,10 @@ select {
 #imageUpload{
     margin-right: 2rem;
     margin-left: 1rem;
+}
+.new-prod-img{
+    margin-left: 0rem !important;
+    margin-bottom: 1rem;
 }
 .image-uploadBtn{
     width: 18rem;
@@ -347,6 +358,9 @@ select {
     font-size: 1.3rem;
     font-weight: bold;
 }
+.new-prod-btn{
+    width: 100%;
+}
 
 
 /* delete modal */
@@ -380,6 +394,7 @@ color: black;
 text-decoration: none;
 cursor: pointer;
 }
+
 
 
 
