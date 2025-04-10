@@ -56,8 +56,8 @@ if (isset($_POST['delete'])) {
     //     echo "<script>alert(Error in product_option query)</script>";
     // }
 
-    $deleteProduct = "DELETE FROM products WHERE ProductID = '{$_POST['ProductID']}'";
-    $runDeleteProduct = mysqli_query($connection, $deleteProduct);
+    // $deleteProduct = "DELETE FROM products WHERE ProductID = '{$_POST['ProductID']}'";
+    // $runDeleteProduct = mysqli_query($connection, $deleteProduct);
     // if (!$runDeleteProduct) {
     //     echo "<script>alert(Error in products query)</script>";
     // }
@@ -93,7 +93,7 @@ if (isset($_POST['delete'])) {
     //     echo "<script>alert(Error in this query)</script>";
     // }
 
-    if ($runDeleteProduct && $runDelete && $runDeleteImages) {
+    if ($runDelete && $runDeleteImages) {
         echo "<script>
                 alert('Product Successfully Deleted');
                 window.location.href = 'AdminProducts.php';
@@ -185,8 +185,11 @@ WHERE po.ProdOptionID = $itemID";
         <form method='POST' class='edit-cont'>
             <input type='hidden' value='{$displayItem['ProdOptionID']}' name='ProdOptionID'>
             <input type='hidden' value='{$displayItem['ProductID']}' name='ProductID'>
-            <div class='edit-prod-flex prod-title'>
-                <label for='productName'>Product Name</label>
+            <div class='prod-title'>
+                    <div class='flex variant-btn'>
+                        <label for='productName'>Product Name</label>
+                        <button><a href='addVariant.php?productID={$displayItem['ProductID']}&categoryName={$displayItem['CategoryName']}'>Add Variant</a></button>
+                    </div>
                 <input type='text' placeholder='{$displayItem['ProductName']}' name='productName' value='{$displayItem['ProductName']}'>
             </div>
             <div class='edit-background radius'>
@@ -219,7 +222,7 @@ WHERE po.ProdOptionID = $itemID";
               <div class='edit-prod-flex'>
                 <label for='colour'>Colour</label>
                 <select name='Colour' id='colour'>";
-                    $availableColors = ['Beige', 'Black', 'Blue', 'Brown', 'Crimson', 'Dark Blue', 'Dark Green', 'Forest Green', 'Gold', 'Gray', 'Green', 'Hot Pink', 'Ivory', 'Lavender', 'Light Blue', 'Light Pink', 'Lime Green', 'Navy', 'Orange', 'Pink', 'Plum', 
+                    $availableColors = ['', 'Beige', 'Black', 'Blue', 'Brown', 'Crimson', 'Dark Blue', 'Dark Green', 'Forest Green', 'Gold', 'Gray', 'Green', 'Hot Pink', 'Ivory', 'Lavender', 'Light Blue', 'Light Pink', 'Lime Green', 'Navy', 'Orange', 'Pink', 'Plum', 
                 'Purple', 'Red', 'Salmon', 'Silver', 'Tan', 'Taupe', 'Teal', 'White', 'Yellow'];
                     
                 // loop through array, mark the item selected where the db matches the colour in the array
@@ -231,7 +234,7 @@ WHERE po.ProdOptionID = $itemID";
             </div>
                <div class='edit-prod-flex'>
                     <label for='Price'>Price</label>
-                    <input type='text' placeholder='{$displayItem['Price']}' name='Price' value='{$displayItem['Price']}'>
+                    <input type='number' step='0.01' placeholder='{$displayItem['Price']}' name='Price' value='{$displayItem['Price']}'>
                 </div>
                  <div class='edit-prod-flex'>
                     <label for='description'>Product Description</label>

@@ -248,6 +248,9 @@ select {
     margin-top: 2rem;
     color: white;
 }
+.prod-title{
+    width: 100%;
+}
 .prod-title label{
     color: black;
     font-size: 1.5rem;
@@ -256,6 +259,7 @@ select {
     padding: 0.5rem !important;
     border-radius: 10px;
     border: none;
+    width: 20rem;
 }
 .edit-prod-flex{
     display: flex;
@@ -264,7 +268,6 @@ select {
 }
 .edit-cont{
     padding: 1.5rem;
-    color: white;
     margin-bottom: 2rem;
     border-radius: 5px;
 }
@@ -304,6 +307,14 @@ select {
     padding-right: 0.6rem !important;
     padding-left: 0.6rem !important;
     font-size: 1.2rem;
+}
+.variant-btn{
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+.variant-btn a{
+    color: white;
+    font-weight: bold;
 }
 
 #imageUpload{
@@ -604,5 +615,17 @@ cursor: pointer;
 .confirmUpdate, .confirmDelete{
     margin-top: 0rem;
     width: 9.5rem !important;
+}
+.variant-btn{
+    width: 100% !important;
+}
+.variant-btn button{
+    width: 15rem;
+}
+.edit-section2{
+    margin-left: 6.5rem;
+}
+.new-prod-btn{
+    margin-top: 1.5rem;
 }
 }

@@ -8,7 +8,11 @@ class Product {
         public $productID;
         public $category;
         public $prodOptionID;
+        public $availability;
     
+        function setAvailability($availability){
+            $this -> availability = $availability;
+        }
         function setProdOption($prodOptionID){
             $this -> prodOptionID = $prodOptionID;
         }
@@ -35,6 +39,10 @@ class Product {
         }
         
 
+
+        function getAvailability(){
+            return $this -> availability;
+        }
         function getProdOption(){
             return $this -> prodOptionID;
         }

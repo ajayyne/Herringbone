@@ -332,7 +332,9 @@ function loadProducts(search = '', category = '', colour = '', brand = '', price
      if (productList.length > 0) {
 
          productList.forEach((product) => {
+            
 
+            if(product.availability == 1){
              // wrap each item in an a tag
          
              const link = document.createElement('a');
@@ -376,6 +378,7 @@ function loadProducts(search = '', category = '', colour = '', brand = '', price
              productDiv.appendChild(cartButton);
 
              container.appendChild(productDiv);
+            }
          });
      } else {
          container.innerHTML = '<p>No products found.</p>';

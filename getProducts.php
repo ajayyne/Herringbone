@@ -39,7 +39,7 @@ if ($price != '')
 }
 
 //ensure only the first default image shows when products are printed
-$getProducts .= " AND i.defaultImg = 1 LIMIT 0, 25";
+$getProducts .= " AND i.defaultImg = 1 ORDER BY p.ProductName ASC LIMIT 0, 25";
 
 $runProducts = mysqli_query($connection, $getProducts);
 
@@ -58,6 +58,7 @@ while ($displayProducts = mysqli_fetch_assoc($runProducts)) {
     $product->setDescription($displayProducts['Description']);
     $product->setImage($displayProducts['ImageURL']);
     $product->setBrand($displayProducts['BrandName']);
+    $product->setAvailability($displayProducts['isAvailable']);
 
     $products[$counter] = $product;
     $counter++;
