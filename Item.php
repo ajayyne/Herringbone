@@ -59,7 +59,7 @@ $basketCount = 1;
                 </div>
             </div>
             <div class="desk-nav">
-                <img src="images/icons/logo.jpg" class="logo">
+               
                 <ul>
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>

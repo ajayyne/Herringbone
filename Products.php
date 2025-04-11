@@ -62,7 +62,7 @@ $basketCount = 1;
                 </div>
             </div>
             <div class="desk-nav">
-                <img src="images/icons/logo.jpg" class="logo">
+
                 <ul>
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
@@ -214,19 +214,10 @@ $basketCount = 1;
         </div>
 
 
-    
-        <!-- header of product page -->
-        <div class="product-div flex">
-            <div class="flex-center radius">
-                <div class="product-div-info">
-                    <h1>LOCALLY SOURCED</h1>
-                    </br>
-                    <p>Herringbone takes pride in sourcing local Scottish products, some which are handmade by talented
-                        makers.<br>Herringbone takes pride in sourcing local Scottish products, some which are handmade
-                        by talented makers.</p>
-                </div>
-                <img src="images/bag.png">
-            </div>
+
+
+        <div id="info-container">
+
         </div>
 
         <div class="prod-display" id="prod-container">
@@ -304,107 +295,187 @@ $basketCount = 1;
     <script src="navigation.js"></script>
     <script src="filters.js"></script>
     <script>
-      AOS.init({
-    offset: 100, 
-    easing: 'ease-in-out',
-    once: true 
-});
+        AOS.init({
+            offset: 100,
+            easing: 'ease-in-out',
+            once: true
+        });
     </script>
     <script>
-        
-// Function to load products based on parameters
-function loadProducts(search = '', category = '', colour = '', brand = '', price = '') {
- 
- let requestUrl = generateGetproductsURL(search, category, colour, brand, price);
 
- // AJAX request to fetch products
- const xmlhttp = new XMLHttpRequest();
- xmlhttp.onload = function () {
-     const productList = JSON.parse(this.responseText);
+        // Function to load products based on parameters
+        function loadProducts(search = '', category = '', colour = '', brand = '', price = '') {
 
-     //get products container from HTML
-     const container = document.getElementById('prod-container');
+            let requestUrl = generateGetproductsURL(search, category, colour, brand, price);
 
-     // Clear the container - clears each time so that duplicate products are not shown
-     container.innerHTML = '';
-
-     // Populate container with product items
-     if (productList.length > 0) {
-
-         productList.forEach((product) => {
-            
-
-            if(product.availability == 1){
-             // wrap each item in an a tag
-         
-             const link = document.createElement('a');
-             link.setAttribute('href', 'Item.php?id=' + product.prodOptionID + '&category=' + product.Category + '&brand=' + product.Brand);
+            // AJAX request to fetch products
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onload = function () {
+                const productList = JSON.parse(this.responseText);
 
 
-             const productDiv = document.createElement('div');
-             productDiv.classList.add('product', 'radius');
-             productDiv.appendChild(link);
-
-             const imgElement = document.createElement('img');
-             imgElement.setAttribute('src', product.Image);
-             imgElement.setAttribute('alt', product.Name);
-             imgElement.classList.add('radius');
-             productDiv.appendChild(imgElement);
-             link.appendChild(imgElement);
-
-             const nameElement = document.createElement('h6');
-             nameElement.innerText = product.Name;
-             productDiv.appendChild(nameElement);
-
-             const priceHolder = document.createElement('div');
-             priceHolder.classList.add('price-holder');
-
-             const brandElement = document.createElement('p');
-             brandElement.innerText = product.Brand;
-             priceHolder.appendChild(brandElement);
-             brandElement.classList.add('product-brand');
 
 
-             const priceElement = document.createElement('p');
-             priceElement.innerText = '£' + product.Price;
-             priceElement.classList.add('price');
-             priceHolder.appendChild(priceElement);
 
-             productDiv.appendChild(priceHolder);
+                // <div class="product-div flex">
+                //     <div class="flex-center radius">
+                //         <div class="product-div-info">
+                //             <h1>UNIQUELY SCOTTISH</h1>
+                //             </br>
+                //             <p>We stock a wide selection of authentic Scottish gifts that celebrate the rich culture and heritage of the region. From traditional Scottish tartan bags to exquisite artisan jewelry and home decor, every item tells a story of Scotland's vibrant traditions. Whether you’re seeking the perfect souvenir or a special gift, we offer a delightful experience that truly embodies the spirit of Scotland.</p>
+                //         </div>
+                //         <img src="images/bag.png">
+                //     </div>
+                // </div>
 
-             const cartButton = document.createElement('button');
-             cartButton.innerText = "ADD TO CART";
-             cartButton.classList.add('cart-btn');
-             productDiv.appendChild(cartButton);
+                const infoCont = document.getElementById('info-container');
+                infoCont.innerHTML = '';
 
-             container.appendChild(productDiv);
-            }
-         });
-     } else {
-         container.innerHTML = '<p>No products found.</p>';
-     }
- };
+                infoCont.classList.add('product-div', 'flex')
+                const innerInfo = document.createElement('div');
+                innerInfo.classList.add('radius', 'flex-center');
+                infoCont.appendChild(innerInfo);
+                const Info = document.createElement('div');
+                Info.classList.add('product-div-info');
+                innerInfo.appendChild(Info);
 
- //error message
- xmlhttp.onerror = function () {
-     console.error("Failed to load products.");
- };
+                const infoImage = document.createElement('img');
+                innerInfo.appendChild(infoImage);
 
- xmlhttp.open("GET", requestUrl, true);
- xmlhttp.send();
-}
-// search query string for 'category', if it doesnt exist -> call loadProducts with no params
-const url = window.location.href;
-const urlObj = new URL(url);
-const params = new URLSearchParams(urlObj.search);
-const paramValue = params.get('category');
+                if (category) {
+                    let descriptionText = "<h1>" + category + "</h1><p>";
 
-console.log(paramValue);
-if(paramValue === null){
-    loadProducts();
-}else{
-    loadProducts('', paramValue);
-}
+                    switch (category) {
+                        case "Bags":
+                            descriptionText += "Explore our stylish bag collection, featuring designs that effortlessly blend functionality and fashion. Whether you're seeking a chic tote for everyday errands or a sleek backpack for your adventures, our curated selection has something for everyone. Crafted from high-quality materials, each bag is designed to enhance your style while providing ample space and organization for all your essentials.";
+                            break;
+                        case "Candles":
+                            descriptionText += "Discover our enchanting candle collection, where each hand-poured creation is designed to transform your space with warmth and light. From soothing lavender to invigorating citrus, our diverse range of scents caters to every mood and occasion. Explore beautifully crafted candles in elegant containers that not only elevate your decor but also make the perfect gift for any candle lover.";
+                            break;
+                        case "Cards":
+                            descriptionText += "Browse our delightful collection of cards, perfect for every occasion and sentiment. From heartfelt greetings to whimsical designs, each card is crafted with care to help you express your thoughts in a meaningful way. Whether you're celebrating a birthday, sending love, or offering thanks, our unique selection ensures you’ll find the ideal card to make every message special.";
+                            break;
+                        case "Scarves":
+                            descriptionText += "Explore our luxurious scarf collection, where elegance meets versatility in every piece. From cozy knits for chilly days to lightweight wraps for layering, our diverse range of colors and patterns allows you to express your unique style effortlessly. Perfect for any occasion, these scarves are the ultimate accessory to enhance your outfit while providing warmth and comfort.";
+                            break;
+                        case "Art Prints":
+                            descriptionText += "Immerse yourself in our stunning collection of art prints, designed to inspire and elevate your living space. Featuring a variety of styles, from modern abstracts to timeless classics, each print is carefully curated to bring vibrant colors and captivating imagery to your walls. Transform your home or office with these beautiful pieces that add a touch of creativity and personality to any environment.";
+                            break;
+                        case "Home Decor":
+                            descriptionText += "Discover our exquisite home décor collection, where style meets comfort to elevate any living space. From elegant wall art and plush textiles to unique decorative accents, each piece is thoughtfully curated to add personality and charm to your home. Transform your environment with our diverse assortment and let your style shine through every detail.";
+                            break;
+                        case "Jewellery":
+                            descriptionText += "Browse our exquisite jewelry collection, where timeless elegance meets contemporary design. From delicate necklaces to statement earrings, each piece is crafted with precision and care, ensuring a perfect fit for any occasion. Whether you're treating yourself or searching for the ideal gift, our stunning selection offers something special to elevate every outfit and celebrate personal style.";
+                            break;
+                        default:
+                            break;
+                    }
+
+
+                    + "</p>";
+
+                    "";
+                    Info.innerHTML = descriptionText;
+
+                    infoImage.src = "images/categoryimg/" + category + ".png";
+
+
+
+
+                } else {
+                    Info.innerHTML = "<h1>Uniquely Scottish</h1><p>We stock a wide selection of authentic Scottish gifts that celebrate the rich culture and heritage of the region. From traditional Scottish tartan bags to exquisite artisan jewelry and home decor, every item tells a story of Scotland's vibrant traditions. Whether you’re seeking the perfect souvenir or a special gift, we offer a delightful experience that truly embodies the spirit of Scotland.</p>";
+                    infoImage.src = "images/categoryimg/Bags.png";
+                }
+
+
+
+
+
+
+
+                //get products container from HTML
+                const container = document.getElementById('prod-container');
+
+                // Clear the container - clears each time so that duplicate products are not shown
+                container.innerHTML = '';
+
+                // Populate container with product items
+                if (productList.length > 0) {
+
+                    productList.forEach((product) => {
+
+
+                        if (product.availability == 1) {
+                            // wrap each item in an a tag
+
+                            const link = document.createElement('a');
+                            link.setAttribute('href', 'Item.php?id=' + product.prodOptionID + '&category=' + product.Category + '&brand=' + product.Brand);
+
+
+                            const productDiv = document.createElement('div');
+                            productDiv.classList.add('product', 'radius');
+                            productDiv.appendChild(link);
+
+                            const imgElement = document.createElement('img');
+                            imgElement.setAttribute('src', product.Image);
+                            imgElement.setAttribute('alt', product.Name);
+                            imgElement.classList.add('radius');
+                            productDiv.appendChild(imgElement);
+                            link.appendChild(imgElement);
+
+                            const nameElement = document.createElement('h6');
+                            nameElement.innerText = product.Name;
+                            productDiv.appendChild(nameElement);
+
+                            const priceHolder = document.createElement('div');
+                            priceHolder.classList.add('price-holder');
+
+                            const brandElement = document.createElement('p');
+                            brandElement.innerText = product.Brand;
+                            priceHolder.appendChild(brandElement);
+                            brandElement.classList.add('product-brand');
+
+
+                            const priceElement = document.createElement('p');
+                            priceElement.innerText = '£' + product.Price;
+                            priceElement.classList.add('price');
+                            priceHolder.appendChild(priceElement);
+
+                            productDiv.appendChild(priceHolder);
+
+                            const cartButton = document.createElement('button');
+                            cartButton.innerText = "ADD TO CART";
+                            cartButton.classList.add('cart-btn');
+                            productDiv.appendChild(cartButton);
+
+                            container.appendChild(productDiv);
+                        }
+                    });
+                } else {
+                    container.innerHTML = '<p>No products found.</p>';
+                }
+            };
+
+            //error message
+            xmlhttp.onerror = function () {
+                console.error("Failed to load products.");
+            };
+
+            xmlhttp.open("GET", requestUrl, true);
+            xmlhttp.send();
+        }
+        // search query string for 'category', if it doesnt exist -> call loadProducts with no params
+        const url = window.location.href;
+        const urlObj = new URL(url);
+        const params = new URLSearchParams(urlObj.search);
+        const paramValue = params.get('category');
+
+        console.log(paramValue);
+        if (paramValue === null) {
+            loadProducts();
+        } else {
+            loadProducts('', paramValue);
+        }
     </script>
 </body>
 

@@ -713,4 +713,14 @@ cursor: pointer;
 .new-prod-btn{
     margin-top: 1.5rem;
 }
+#prod-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    margin-left: 4rem;
+}
+.product{
+    width: 45%;
+    margin-right: 1rem;
+}
 }

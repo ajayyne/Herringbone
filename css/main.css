@@ -120,7 +120,8 @@ a:hover {
     display: block;
     width: 0;
     height: 2px;
-    background-color: rgb(72, 72, 72);
+    outline: none;
+    border: none;
     transition: width 0.3s ease-in-out;
     position: absolute;
     bottom: -2px;
@@ -252,6 +253,13 @@ header h1 {
 
 .navigation li {
     margin-left: -2rem;
+
+}
+.navigation a, .desk-nav a{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.desk-nav a:hover{
+    color: white;
 }
 
 a {
