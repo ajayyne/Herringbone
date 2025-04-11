@@ -1203,7 +1203,8 @@ select {
     padding-bottom: 1rem;
 }
 #slider1 .item-img{
-    height: fit-content !important;
+    /* height: fit-content !important; */
+    aspect-ratio: 1 / 1;
 }
 #slider1 .item-img img {
     width: 100%;

@@ -343,7 +343,7 @@ $basketCount = 1;
                 innerInfo.appendChild(infoImage);
 
                 if (category) {
-                    let descriptionText = "<h1>" + category + "</h1><p>";
+                    let descriptionText = "<h1>" + category + "</h1><br><p>";
 
                     switch (category) {
                         case "Bags":
@@ -379,18 +379,10 @@ $basketCount = 1;
 
                     infoImage.src = "images/categoryimg/" + category + ".png";
 
-
-
-
                 } else {
-                    Info.innerHTML = "<h1>Uniquely Scottish</h1><p>We stock a wide selection of authentic Scottish gifts that celebrate the rich culture and heritage of the region. From traditional Scottish tartan bags to exquisite artisan jewelry and home decor, every item tells a story of Scotland's vibrant traditions. Whether you’re seeking the perfect souvenir or a special gift, we offer a delightful experience that truly embodies the spirit of Scotland.</p>";
-                    infoImage.src = "images/categoryimg/Bags.png";
+                    Info.innerHTML = "<h1>Uniquely Scottish</h1><br><p>We stock a wide selection of authentic Scottish gifts that celebrate the rich culture and heritage of the region. From traditional Scottish tartan bags to exquisite artisan jewelry and home decor, every item tells a story of Scotland's vibrant traditions. Whether you’re seeking the perfect souvenir or a special gift, we offer a delightful experience that truly embodies the spirit of Scotland.</p>";
+                    infoImage.src = "images/categoryimg/default.jpg";
                 }
-
-
-
-
-
 
 
                 //get products container from HTML
