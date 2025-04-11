@@ -15,6 +15,13 @@ if (empty($_SESSION['ID']) || $_SESSION['ID'] === null) {
 $productID = $_GET['productID'];
 $categoryName = $_GET['categoryName'];
 
+// get admin ID
+$userID = $_SESSION['ID'];
+// get username from this
+$getusername = "SELECT userName FROM adminpanel WHERE adminID = $userID";
+$runusername = mysqli_query($connection, $getusername);
+$username = mysqli_fetch_array($runusername);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +51,31 @@ $categoryName = $_GET['categoryName'];
  ?>
 
 <body>
+<div class="navbar">
+        <button class="hamburger" id="hamburger">
+            &#9776;
+        </button>
+
+        <div class="user flex">
+            <i class="fa-solid fa-user user-icon" style="color: #ffffff;"></i>
+            <?php echo "<p class='user-display'>Hi,  {$username['userName']}</p>"; ?>
+        </div>
+
+    </div>
+    <nav class="sidebar" id="sidebar">
+        <button class="close-btn" id="close-btn">&times;</button>
+        <ul>
+            <li><a href="AdminPanel.php">Home</a></li>
+            <li><a href="AdminProducts.php">All Products</a></li>
+            <li><a href="AdminBrands.php">Brands</a></li>
+            <li><a href="AdminOrders.php">Manage Orders</a></li>
+            <br>
+            <div class="flex logout">
+                <i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i>
+                <li><a href="logout.php" id="logout">Log Out</a></li>
+            </div>
+        </ul>
+    </nav>
     <main class="edit-cont">
         <h1>New Variant</h1>
         <div>
@@ -198,6 +230,7 @@ $categoryName = $_GET['categoryName'];
 
 
     </main>
+    <script src="AdminNav.js"></script>
 </body>
 
 </html>

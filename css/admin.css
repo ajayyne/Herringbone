@@ -9,7 +9,7 @@ body {
     background-color: var(--light-blue);
     height: 100vh;
     overflow-x: hidden;
-    padding: 1rem;
+    /* padding: 1rem; */
 }
 main{
     padding: 1rem;
@@ -514,6 +514,91 @@ cursor: pointer;
 }
 /* END */
 
+
+
+/* NAVIGATION */
+.navbar {
+    background-color: var(--background);
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logout{
+    padding-left: 1.5rem;
+    justify-content: start;
+    align-items: center;
+}
+.fa-right-from-bracket{
+    transform: rotate(180deg);
+}
+.user-display{
+    all:unset;
+}
+.user{
+    justify-content: flex-start;
+    align-items: start;
+    color: white;
+    margin-right: 2rem;
+}
+.user-icon{
+    all: unset;
+    margin: 0.2rem 1rem 0rem 0rem;
+}
+.hamburger {
+    background: none;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    /* hide nav bar at first */
+    left: -250px; 
+    width: 250px;
+    height: 100%;
+    background-color: var(--background);
+    transition: left 0.3s ease; 
+    z-index: 1000;
+    overflow-y: auto;
+    padding-top: 5rem;
+    box-shadow: var(--shadow); 
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 1.5rem;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block; 
+}
+
+/* slide the nav into view */
+.sidebar.active {
+    left: 0; 
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    color: white;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
 
 
 
