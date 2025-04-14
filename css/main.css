@@ -486,10 +486,6 @@ footer h6 {
     display: none;
 }
 
-.splide {
-    width: 80% !important;
-}
-
 #splide01 {
     margin: 5rem 0rem 5rem 0rem;
     width: 80%;
@@ -510,8 +506,12 @@ footer h6 {
     height: 12rem;
 }
 
-.splide {
+#splide01 .splide {
     width: 90% !important;
+}
+
+.splide{
+    width: 90%;
 }
 
 #splide01 {
@@ -680,16 +680,7 @@ footer h6 {
     font-size: 0.8rem;
     font-weight: bold;
 }
-/*
-.cafe-text em:hover,
-.cafe-text em:active {
-    text-decoration: underline;
-}
-.cafe-text p{
-    width: 30rem;
-    font-size: 0.7rem;
-    padding: 0rem 4rem 0rem 4rem;
-} */
+
 
 /*END*/
 
@@ -1167,6 +1158,7 @@ select {
     background-color: var(--dark-blue);
     color: white;
     width: 100%;
+    margin-top: 0.8rem;
     padding: 0.3rem 0rem 0.3rem 0rem;
 }
 .item-btn button:hover,
@@ -1179,7 +1171,6 @@ select {
 }
 #slider1 li{
     opacity: 1 !important;
-    padding: 0rem;
 }
 #slider1 .item-list{
     width: 100%;
@@ -1359,8 +1350,6 @@ select {
     font-size: 1.5rem;
 }
 
-
-
 /* BASKET / SHOPPING CART PROCESS */
 .basket-counter{
     text-align: center;
@@ -1374,6 +1363,35 @@ select {
     font-size: 0.8rem;
 }
 
+/*CAFE PAGE*/
+.cafe-page{
+    padding-top: 8rem;
+}
+
+.menu-title h1{
+    margin-bottom: 2rem;
+}
+.menu-border{
+    color: transparent;
+    width: 20rem;
+    border-bottom: 2px solid black;
+    z-index: 0;
+    margin-top: 3rem;
+}
+.menu-title h2{
+    z-index: 999;
+    margin-top: -1.2rem;
+    background-color: white;
+    padding: 0rem 1rem 0rem 1rem;
+}
+.cafe-imgs{
+    justify-content: space-evenly;
+    margin-bottom: 2rem;
+}
+.cafe-imgs img{
+    width: 25rem;
+    aspect-ratio: 3/2;
+}
 
 
 @media screen and (min-width: 481px) {
@@ -1902,8 +1920,10 @@ select {
     height: 18rem;
     border-radius: 0px 8px 8px 0px;
 }
+.splide{
+    width: 60%;
 }
-
+}
 
 @media screen and (min-width: 1200px){
 

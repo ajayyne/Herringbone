@@ -45,6 +45,7 @@ include 'connection.php' ?>
                     <li><a href="Home.php">Home</a></li>
                     <li><a href="Products.php">Shop</a></li>
                     <li><a href="Gallery.html">Gallery</a></li>
+                    <li><a href="cafe.html">Cafe</a></li>
                     <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
@@ -58,7 +59,9 @@ include 'connection.php' ?>
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
                     <li><a href="Gallery.html">GALLERY</a></li>
+                    <li><a href="cafe.html">CAFE</a></li>
                     <li><a href="Contact.php">CONTACT US</a></li>
+                   
                 </ul>
                 <div class="icons icons-desk flex flex-even">
                     <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
@@ -93,7 +96,7 @@ include 'connection.php' ?>
                 <div class="background-img2 flex flex-col">
                     <div class="cta2">
                         <h1>Home</h1>
-                        <a href="Products.php?category=home%decor"><button>Shop Here</button></a>
+                        <a href="Products.php?category=home%20decor"><button>Shop Here</button></a>
                     </div>
                 </div>
                 <div class="background-img3 flex flex-col">

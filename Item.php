@@ -44,6 +44,7 @@ $basketCount = 1;
                     <li><a href="Home.php">Home</a></li>
                     <li><a href="Products.php">Shop</a></li>
                     <li><a href="Gallery.html">Gallery</a></li>
+                    <li><a href="cafe.html">Cafe</a></li>
                     <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
@@ -59,15 +60,16 @@ $basketCount = 1;
                 </div>
             </div>
             <div class="desk-nav">
-               
+
                 <ul>
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
                     <li><a href="Gallery.html">GALLERY</a></li>
+                    <li><a href="cafe.html">CAFE</a></li>
                     <li><a href="Contact.php">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
-                <div class="items-icons">
+                    <div class="items-icons">
                         <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
                         <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                         <!-- <div class="basket-counter"><p>2</p></div> -->
@@ -121,7 +123,14 @@ $basketCount = 1;
                     </div>
                 </div>
                     <div class='item-content'>
+                       <button class='favorite-btn' data-id='{$displayItem}['ProdOptionID']'>
+                             <span class='favorite-icon'>❤️</span> Add to Favorites
+                        </button>
                     <h1>{$displayItem['ProductName']}</h1>
+                    
+                     
+
+
                     <h2>{$displayItem['BrandName']}</h2>
                     <div id='description-wrapper'>
                         <p id='description'>{$displayItem['Description']}</p>
@@ -292,11 +301,11 @@ $basketCount = 1;
         }
     </script>
     <script>
-      AOS.init({
-    offset: 100, 
-    easing: 'ease-in-out',
-    once: true 
-});
+        AOS.init({
+            offset: 100,
+            easing: 'ease-in-out',
+            once: true
+        });
     </script>
     <script src="navigation.js"></script>
     <!-- product images slider -->
@@ -316,6 +325,7 @@ $basketCount = 1;
             }).mount();
         });
     </script>
+    <script src="favorites.js"></script>
     <!-- recomennded slider -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {

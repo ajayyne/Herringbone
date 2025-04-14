@@ -41,6 +41,7 @@ $basketCount = 1;
                     <li><a href="Home.php">Home</a></li>
                     <li><a href="Products.php">Shop</a></li>
                     <li><a href="Gallery.html">Gallery</a></li>
+                    <li><a href="cafe.html">Cafe</a></li>
                     <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
@@ -67,6 +68,7 @@ $basketCount = 1;
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
                     <li><a href="Gallery.html">GALLERY</a></li>
+                    <li><a href="cafe.html">CAFE</a></li>
                     <li><a href="Contact.php">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
@@ -314,20 +316,6 @@ $basketCount = 1;
                 const productList = JSON.parse(this.responseText);
 
 
-
-
-
-                // <div class="product-div flex">
-                //     <div class="flex-center radius">
-                //         <div class="product-div-info">
-                //             <h1>UNIQUELY SCOTTISH</h1>
-                //             </br>
-                //             <p>We stock a wide selection of authentic Scottish gifts that celebrate the rich culture and heritage of the region. From traditional Scottish tartan bags to exquisite artisan jewelry and home decor, every item tells a story of Scotland's vibrant traditions. Whether you’re seeking the perfect souvenir or a special gift, we offer a delightful experience that truly embodies the spirit of Scotland.</p>
-                //         </div>
-                //         <img src="images/bag.png">
-                //     </div>
-                // </div>
-
                 const infoCont = document.getElementById('info-container');
                 infoCont.innerHTML = '';
 
@@ -341,30 +329,30 @@ $basketCount = 1;
 
                 const infoImage = document.createElement('img');
                 innerInfo.appendChild(infoImage);
-
+          
                 if (category) {
                     let descriptionText = "<h1>" + category + "</h1><br><p>";
-
-                    switch (category) {
-                        case "Bags":
+                   
+                    switch (category.toLowerCase()) {
+                        case "bags":
                             descriptionText += "Explore our stylish bag collection, featuring designs that effortlessly blend functionality and fashion. Whether you're seeking a chic tote for everyday errands or a sleek backpack for your adventures, our curated selection has something for everyone. Crafted from high-quality materials, each bag is designed to enhance your style while providing ample space and organization for all your essentials.";
                             break;
-                        case "Candles":
+                        case "candles":
                             descriptionText += "Discover our enchanting candle collection, where each hand-poured creation is designed to transform your space with warmth and light. From soothing lavender to invigorating citrus, our diverse range of scents caters to every mood and occasion. Explore beautifully crafted candles in elegant containers that not only elevate your decor but also make the perfect gift for any candle lover.";
                             break;
-                        case "Cards":
+                        case "cards":
                             descriptionText += "Browse our delightful collection of cards, perfect for every occasion and sentiment. From heartfelt greetings to whimsical designs, each card is crafted with care to help you express your thoughts in a meaningful way. Whether you're celebrating a birthday, sending love, or offering thanks, our unique selection ensures you’ll find the ideal card to make every message special.";
                             break;
-                        case "Scarves":
+                        case "scarves":
                             descriptionText += "Explore our luxurious scarf collection, where elegance meets versatility in every piece. From cozy knits for chilly days to lightweight wraps for layering, our diverse range of colors and patterns allows you to express your unique style effortlessly. Perfect for any occasion, these scarves are the ultimate accessory to enhance your outfit while providing warmth and comfort.";
                             break;
-                        case "Art Prints":
+                        case "art prints":
                             descriptionText += "Immerse yourself in our stunning collection of art prints, designed to inspire and elevate your living space. Featuring a variety of styles, from modern abstracts to timeless classics, each print is carefully curated to bring vibrant colors and captivating imagery to your walls. Transform your home or office with these beautiful pieces that add a touch of creativity and personality to any environment.";
                             break;
-                        case "Home Decor":
+                        case "home decor":
                             descriptionText += "Discover our exquisite home décor collection, where style meets comfort to elevate any living space. From elegant wall art and plush textiles to unique decorative accents, each piece is thoughtfully curated to add personality and charm to your home. Transform your environment with our diverse assortment and let your style shine through every detail.";
                             break;
-                        case "Jewellery":
+                        case "jewellery":
                             descriptionText += "Browse our exquisite jewelry collection, where timeless elegance meets contemporary design. From delicate necklaces to statement earrings, each piece is crafted with precision and care, ensuring a perfect fit for any occasion. Whether you're treating yourself or searching for the ideal gift, our stunning selection offers something special to elevate every outfit and celebrate personal style.";
                             break;
                         default:
