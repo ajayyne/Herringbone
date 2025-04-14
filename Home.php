@@ -18,8 +18,9 @@ include 'connection.php' ?>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/504c189bcb.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="css/main.css" rel="stylesheet">
@@ -117,7 +118,7 @@ include 'connection.php' ?>
 
                         <!-- PHP HERE TO GRAB PRODUCTS FROM DB -->
                         <?php
-                        $getBestsellers = "SELECT p.ProductID, p.ProductName, b.BrandName, p.Price, i.ImageURL, c.CategoryID FROM products AS p
+                        $getBestsellers = "SELECT p.ProductID, p.ProductName, po.ProdOptionID, b.BrandName, p.Price, i.ImageURL, c.CategoryID FROM products AS p
                     LEFT JOIN brands as b ON b.BrandID = p.BrandID
                     LEFT JOIN product_option as po ON po.ProductID = p.ProductID
                     LEFT JOIN categories as c ON c.CategoryID = p.CategoryID
@@ -127,7 +128,7 @@ include 'connection.php' ?>
                         $runBestsellers = mysqli_query($connection, $getBestsellers);
                         while ($displayBestsellers = mysqli_fetch_array($runBestsellers)) {
                             echo "<div class='splide__slide'>
-                                <a href='Item.php?id={$displayBestsellers['ProductID']}&category={$displayBestsellers['CategoryID']}&brand={$displayBestsellers['BrandName']}'>
+                                <a href='Item.php?id={$displayBestsellers['ProdOptionID']}&category={$displayBestsellers['CategoryID']}&brand={$displayBestsellers['BrandName']}'>
                                 <div class='bs-item flex flex-col radius'>
                                     <img src='{$displayBestsellers['ImageURL']}'>
                                     <p class='overlay'><em>{$displayBestsellers['BrandName']}</em></p>
@@ -143,7 +144,7 @@ include 'connection.php' ?>
         </section>
         </div>
 
-        <div class="new flex flex-col">
+        <div class="new flex flex-col" data-aos="fade-up" data-aos-duration="500">
             <div class="new-img-cont flex flex-col">
                 <div class="flex harris-imgs">
                     <img src="images/products/candles/harris_seilebost.jpg">
@@ -156,7 +157,7 @@ include 'connection.php' ?>
                 </div>
             </div>
 
-            <div class="new-info align">
+            <div class="new-info align" >
                 <h1><strong>New In Store</strong></h1>
                 <p>Introducing our new range from Essence of Harris<br>The original Hebridean Soy Wax Candle Company. They hand pour all of their own luxuriously scented candles and diffusers on the beautiful Isle of Harris. </p>
             </div>
@@ -272,36 +273,6 @@ include 'connection.php' ?>
         </div>
     </footer>
     <script src="navigation.js"></script>
-    <!-- initialize carousel slider -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var splide = new Splide('.splide', {
-                perPage: 4,
-                loop: true,
-                gap: '1.5rem',
-
-                breakpoints: {
-                    800: {
-                        perPage: 3,
-                        gap: '.7rem',
-                        height: '6rem',
-                    },
-                    640: {
-                        perPage: 2,
-                        gap: '.7rem',
-                        height: '6rem',
-                    },
-                    480: {
-                        perPage: 1,
-                        gap: '.7rem',
-                        height: '6rem',
-                    },
-                },
-            });
-
-            splide.mount();
-        });
-    </script>
     <script>
       AOS.init({
     offset: 100, 
@@ -325,6 +296,34 @@ include 'connection.php' ?>
                 }
             });
         }
+    </script>
+      <script>
+         document.addEventListener('DOMContentLoaded', function () {
+        var splide = new Splide('.splide', {
+            perPage: 4,
+            loop: true,
+            gap: '1.5rem',
+            breakpoints: {
+                800: {
+                    perPage: 3,
+                    gap: '.7rem',
+                    height: '6rem',
+                },
+                640: {
+                    perPage: 2,
+                    gap: '.7rem',
+                    height: '6rem',
+                },
+                480: {
+                    perPage: 1,
+                    gap: '.7rem',
+                    height: '6rem',
+                },
+            },
+        });
+
+        splide.mount();
+    });
     </script>
 </body>
 
