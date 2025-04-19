@@ -70,7 +70,7 @@ $basketCount = 1;
                 </ul>
                 <div class="icons icons-desk flex flex-even">
                     <div class="items-icons">
-                        <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
+                        <a href="Favorites.php"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
                         <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                         <!-- <div class="basket-counter"><p>2</p></div> -->
                         <?php
@@ -123,7 +123,7 @@ $basketCount = 1;
                     </div>
                 </div>
                     <div class='item-content'>
-                       <button class='favorite-btn' data-id='{$displayItem}['ProdOptionID']'>
+                       <button class='favorite-btn' data-id='{$displayItem['ProdOptionID']}'>
                              <span class='favorite-icon'>❤️</span> Add to Favorites
                         </button>
                     <h1>{$displayItem['ProductName']}</h1>
@@ -256,7 +256,7 @@ $basketCount = 1;
                     <a>
                         <p>Cookies Policy</p>
                     </a>
-                    <a>
+                    <a href="Privacy.php">
                         <p>Privacy Policy</p>
                     </a>
                     <a>

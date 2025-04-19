@@ -5,7 +5,7 @@ include "connection.php";
 if (isset($_COOKIE['favorites'])) {
    // echo $_COOKIE['favorites'];
     $favoritesCookie = json_decode($_COOKIE['favorites'], true);
-    echo('x:' . $_COOKIE['favorites'] . 'end');
+    echo('favorites:' . $_COOKIE['favorites']);
 } else {
     // If there's no cookie set, return an empty array
     $favoritesCookie = [];
@@ -57,6 +57,16 @@ function getFavoriteProducts($favIds) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Favorites</title>
+    <link rel="icon" type="image/x-icon" href="images/icons/favicon.png">
+    <meta name="description"
+        content="Explore your favourite products.">
+    <meta name="author" content="Amber Degner-Budd">
+    <meta name="keywords"
+        content="Gift shop, Cafe, Scottish gifts, Handmade, Locally sourced, Scottish makers, Local makers">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/504c189bcb.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -65,12 +75,9 @@ function getFavoriteProducts($favIds) {
         <?php 
         foreach ($favoriteItems as $product) {
             echo "<div class='product-item'>
-                <h3>{$product['ProductName']}</h3>
-                <p>Brand:{$product['BrandName']}</p>
-                <p>Price:{$product['Price']}</p>
-                <button class='favorite-btn' data-id='{$product['ProductID']}'>
-                    <span class='heart-icon'>❤️</span> Add to Favorites
-                </button>
+                    <h3>{$product['ProductName']}</h3>
+                    <p>Brand:{$product['BrandName']}</p>
+                    <p>Price:{$product['Price']}</p>
                 </div>";
         }
         ?>

@@ -113,6 +113,27 @@ a {
 a:hover {
     cursor: pointer;
 }
+.privacy-policy{
+    padding: 7rem 2rem 2rem 2rem;
+}
+.privacy-policy h1, .privacy-policy h2, .privacy-policy h3{
+    font-family: sans-serif;
+}
+.privacy-policy ul, .privacy-policy ol{
+    list-style-type: disc;
+    list-style-position: outside; 
+    margin: 1em 0; 
+    padding-left: 40px; 
+}
+.privacy-policy p{
+    width: 20rem;
+}
+.privacy-policy ul{
+    width: 20rem;
+    margin-bottom: 5rem;
+    height: fit-content;
+}
+
 
 
 .desk-nav a::after {
@@ -279,7 +300,7 @@ ul {
 li {
     text-align: left;
     font-family: sans-serif;
-    font-weight: 500;
+    /* font-weight: 500; */
     border-radius: 10px;
     padding: 0.5rem 0.8rem;
     background-position: right;
@@ -1395,6 +1416,12 @@ select {
 
 
 @media screen and (min-width: 481px) {
+    .privacy-policy p{
+        width: 30rem;
+    }
+    .privacy-policy ul{
+        width: 30rem;
+    }
     .bs-item img {
         filter: unset;
         height: 12rem;
@@ -1436,6 +1463,12 @@ select {
     
 }
 @media screen and (min-width: 650px) {
+    .privacy-policy p{
+        width: 45rem;
+    }
+    .privacy-policy ul{
+        width: 45rem;
+    }
    .ft-info, .ft-info2{
     justify-content: space-evenly;
    }
@@ -1921,7 +1954,13 @@ select {
     border-radius: 0px 8px 8px 0px;
 }
 .splide{
-    width: 60%;
+    width: 90%;
+}
+.privacy-policy p{
+    width: 60rem;
+}
+.privacy-policy ul{
+    width: 60rem;
 }
 }
 
