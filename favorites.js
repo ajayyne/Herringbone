@@ -1,49 +1,73 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // get fave buttons from item page
+    // Get all favorite buttons from the item page
     const favoriteButtons = document.querySelectorAll('.favorite-btn');
-    
-    // loop through fave buttons and get the unique ID (product option id)
-    // send the product option id into the AddToFavorites funciton
+
+    // on page load, update the heart icon to reflect if item is in the faves array or not
+    const favorites = getFavorites();
     favoriteButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        const itemId = button.getAttribute('data-id');
+        const icon = button.querySelector('i');
+
+        if (favorites.includes(itemId)) {
+            icon.classList.remove('fa-regular');
+            icon.classList.add('fa-solid');
+        } else {
+            icon.classList.remove('fa-solid');
+            icon.classList.add('fa-regular');
+        }
+    });
+
+    // for each heart icon, call function to toggle adding and removing from faves array
+    favoriteButtons.forEach(button => {
+        button.addEventListener('click', function () {
             const itemId = this.getAttribute('data-id');
-            addToFavorites(itemId);
+            addToFavorites(itemId, this);
         });
     });
 
-    // adding an item to favorites:
-    function addToFavorites(itemId) {
-        // get the user favorites (else: empty array)
-        const favorites = getFavorites();
+    // Adding and removing items from the faves array
+    function addToFavorites(itemId, button) {
+        let favorites = getFavorites();
+        // heart icon
+        const icon = button.querySelector('i');
+        // looks for the item ID within the array
+        const index = favorites.indexOf(itemId);
 
-        // if item is not already in the favorites array, add it
-        if (!favorites.includes(itemId)) {
+        alert(itemId);
+        //favorites.push('999');
+
+        if (index === -1) {
+            // Add to favorites by pushing itemID to faves array
             favorites.push(itemId);
-            // let the user know the item has been added to their faves
-            setFavorites(favorites);
             alert('Item added to favorites!');
+            icon.classList.remove('fa-regular');
+            icon.classList.add('fa-solid');
         } else {
-            alert('Item is already in favorites!');
+            // Remove from favorites by removing itemID from faves array
+            favorites.splice(index, 1);
+            alert('Item removed from favorites!');
+            icon.classList.remove('fa-solid');
+            icon.classList.add('fa-regular');
         }
+
+        setFavorites(favorites);
     }
 
-    // implement cookies to store the favorites array
+    // get the fave items from the faves array
     function getFavorites() {
-        // create cookie 
+        alert(document.cookie);
         const cookies = document.cookie.split('; ');
         const faveCookie = cookies.find(cookie => cookie.startsWith('favorites='));
         if (faveCookie) {
-            // break up the string and return an array
             return JSON.parse(decodeURIComponent(faveCookie.split('=')[1]));
         }
-        // if theres no favourites found, return the empty array
-        return []; 
+        return [];
     }
 
+    // save the faves array to a cookie
     function setFavorites(favorites) {
-        // cookie will expire in 30 days
         alert(JSON.stringify(favorites));
-        const expires = new Date(Date.now() + 30*24*60*60*1000).toUTCString();
+        const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString(); // 30 days
         document.cookie = `favorites=${encodeURIComponent(JSON.stringify(favorites))}; expires=${expires}; path=/`;
     }
 });

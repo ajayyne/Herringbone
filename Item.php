@@ -93,7 +93,7 @@ $basketCount = 1;
 
         <?php
         // statement to get all data for product with matching ID
-        $getItem = "SELECT p.ProductID, p.ProductName, p.Description, p.Price, b.BrandName, i.ImageURL, po.Colour FROM product_option as po
+        $getItem = "SELECT p.ProductID, p.ProductName, p.Description, p.Price, b.BrandName, i.ImageURL, po.Colour, po.ProdOptionID FROM product_option as po
         LEFT JOIN products as p ON po.ProductID = p.ProductID 
         LEFT JOIN image as i ON i.ProdOptionID = po.ProdOptionID 
         LEFT JOIN brands as b ON p.BrandID = b.BrandID 
@@ -123,10 +123,12 @@ $basketCount = 1;
                     </div>
                 </div>
                     <div class='item-content'>
-                       <button class='favorite-btn' data-id='{$displayItem['ProdOptionID']}'>
-                             <span class='favorite-icon'>❤️</span> Add to Favorites
-                        </button>
-                    <h1>{$displayItem['ProductName']}</h1>
+                        <div class='flex hello'>
+                            <h1>{$displayItem['ProductName']}</h1>
+                            <div class='favorite-btn flex' data-id='{$displayItem['ProdOptionID']}'>
+                                <i class='fa-regular fa-heart favorite-icon'></i>
+                            </div>
+                        </div>
                     
                      
 
