@@ -1182,10 +1182,11 @@ select {
 .item-btn button{
     background-color: var(--dark-blue);
     color: white;
-    width: 100%;
-    margin-top: 0.8rem;
+    width: 22rem;
+    margin: 0.8rem 0rem 3rem -7.5rem;
     padding: 0.3rem 0rem 0.3rem 0rem;
 }
+
 .item-btn button:hover,
 .item-btn button:active,
 .item-btn button:focus{
@@ -1534,6 +1535,9 @@ select {
 .total-container a{
     color: white;
 }
+.total-container button:hover{
+background-color: var(--medium-blue);
+}
 .cart-information{
     padding: 2rem 1rem 1rem 1rem;
 }
@@ -1541,6 +1545,42 @@ select {
     font-weight: bolder;
     border-bottom: 1px solid black;
     padding-bottom: 0.2rem;
+}
+
+/* CHECKOUT PAGE */
+.checkout{
+    padding: 9rem 1rem 2rem 1rem;
+}
+.cart-form{
+    border: 1px solid var(--darkest-blue);
+    padding: 2rem 1rem 2rem 1rem;
+    margin-bottom: 3rem;
+    box-shadow: var(--shadow);
+    transform: scale(0.9);
+}
+.cart-form h1{
+    transform: scale(0.9);
+    color: black;
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid black;
+}
+.payment-redirect{
+    font-family: 'Aboreto';
+    margin-top: 3rem;
+    font-weight: bold;
+    background-color: var(--darkest-blue);
+    color: white;
+    outline: none;
+    border: none;
+    box-shadow: var(--shadow);
+}
+.payment-redirect:hover{
+    outline: none;
+    border: none;
+    background-color: var(--medium-blue);
 }
 
 
@@ -2010,7 +2050,8 @@ select {
     height: 1.2rem;
 }
 .item-btn button{
-    margin-top: 2rem;
+    width: 35rem;
+    margin: 2rem 0rem 0rem -5rem;
 }
 
 .item-content p{
