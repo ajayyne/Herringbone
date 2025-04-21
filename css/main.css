@@ -56,6 +56,7 @@ button {
     padding: 0.1rem 1rem 0.1rem 1rem;
     border: none;
     box-shadow: var(--shadow);
+    font-family: 'Aboreto';
 }
 
 
@@ -1470,6 +1471,76 @@ select {
 }
 .favorite-text p{
     margin-bottom: 0rem;
+}
+
+/* CART */
+.cart-cont{
+    padding: 9rem 1.5rem 0rem 1.5rem;
+}
+
+.cart-item{
+    background-color: var(--light-blue);
+    color: black;
+    margin-bottom: 1.5rem;
+    height: unset;
+    width: unset;
+}
+.cart-item img{
+    width: 7rem;
+    height: auto;
+    border-radius: 8px 0px 0px 8px;
+}
+.cart-item-text{
+    margin-top: 0.8rem;
+    padding: 0rem 0rem 0rem 1.2rem;
+    font-size: 0.8rem;
+}
+.cart-price{
+    width: 40%;
+}
+.cart-total{
+    margin: 2rem 0rem 3rem 0rem;
+    padding: 2rem 1rem 1rem 1rem;
+    background-color: rgba(225, 225, 225, 0.904);
+}
+.cart-total h6{
+    width: 15rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid black;
+}
+.total-info{
+    margin-top: 2rem;
+    width: 75%;
+    text-align: left;
+}
+.subtotal, .delivery, .cartTotal{
+    width: 100% !important;
+    border-bottom: 1px solid black;
+}
+.cartTotal{
+    font-weight: 800 !important;
+    margin-top: 3rem;
+}
+.total-container img{
+    margin-top: 3rem;
+    width: 10rem;
+}
+.total-container button{
+    width: 75%;
+    margin: 1.5rem 0rem 1rem 0rem;
+    background-color: var(--darkest-blue);
+    padding: 0.2rem;
+}
+.total-container a{
+    color: white;
+}
+.cart-information{
+    padding: 2rem 1rem 1rem 1rem;
+}
+.cart-information h6{
+    font-weight: bolder;
+    border-bottom: 1px solid black;
+    padding-bottom: 0.2rem;
 }
 
 
