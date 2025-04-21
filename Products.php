@@ -1,8 +1,7 @@
 <?php
 session_start();
 include "connection.php";
-// number will be changing when more items added
-$basketCount = 1;
+include 'basketCount.php';
 ?>
 
 <!DOCTYPE html>
@@ -424,8 +423,9 @@ $basketCount = 1;
                             productDiv.appendChild(priceHolder);
 
                             const cartButton = document.createElement('button');
-                            cartButton.innerText = "ADD TO CART";
+                            cartButton.innerText = "ADD TO BASKET";
                             cartButton.classList.add('cart-btn');
+                            cartButton.setAttribute('data-id', product.prodOptionID);
                             productDiv.appendChild(cartButton);
 
                             container.appendChild(productDiv);
@@ -457,6 +457,7 @@ $basketCount = 1;
             loadProducts('', paramValue);
         }
     </script>
+    <script src="cart.js"></script>
 </body>
 
 </html>

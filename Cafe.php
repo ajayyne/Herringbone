@@ -1,3 +1,7 @@
+<?php
+include 'basketCount.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +11,7 @@
     <title>Herringbone</title>
     <link rel="icon" type="image/x-icon" href="images/icons/favicon.png">
     <meta name="description"
-        content="Herringbone is an independantly owned gift shop and cafe located in Peebleshire, stocking handmade and locally sourced unique gifts...">
+        content="The No.56 cafe serves delicious savoury lunches and sweet treat, along with barista made coffee from Forth Coffee Roasters.">
     <meta name="author" content="Amber Degner-Budd">
     <meta name="keywords"
         content="Gift shop, Cafe, Scottish gifts, Handmade, Locally sourced, Scottish makers, Local makers">
@@ -19,6 +23,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 </head>
+
 
 <body>
     <div class="head">
@@ -45,7 +50,7 @@
                     <div class="items-icons">
                         <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
                         <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
-                        <div class="basket-counter"><p>2</p></div>
+                     
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
@@ -66,7 +71,7 @@
                     <div class="items-icons">
                         <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
                         <a><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
-                        <div class="basket-counter"><p>2</p></div>
+                     
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
@@ -82,61 +87,28 @@
         </div>
     </div>
 
-    <main>
-        <div class="container gallery">
-            <div class="row">
-                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 img-container">
-                    <img src="images/gallery/coffee.png" alt="Forth Bridge Roasters Coffee" class="img-fluid" onclick="openImageModal(this)">
-                </div>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-9 mb-4 img-container">
-                    <img src="images/gallery/interior.jpg" alt="No.56 Cafe" class="img-fluid"
-                        onclick="openImageModal(this)">
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-12 col-sm-6 col-md-8 col-lg-6 mb-4 img-container">
-                    <img src="images/gallery/window.jpg" alt="Herringbone window display" class="img-fluid" onclick="openImageModal(this)">
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 img-container">
-                    <img src="images/gallery/saws.jpg" alt="Painted Saws in Herringbone shop window" class="img-fluid" onclick="openImageModal(this)">
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 img-container">
-                    <img src="images/gallery/exterior2.jpg" alt="Herringbone shop exterior" class="img-fluid"
-                        onclick="openImageModal(this)">
-                </div>
+    <main class="cafe-page">
+
+        <div class="cafe-imgs flex-center">
+            <img src="images/gallery/coffee2.png">
+            <img src="images/gallery/interior2.jpg">
+            <img src="images/gallery/lemonpie2.jpg">
+        </div>
+
+        <div class="flex flex-col menu-title">
+            <h1>The No.56 Cafe</h1>
+            <p class="align">
+                Welcome to The No.56 Cafe. We serve delicious lunches, sweet treats and a variety of teas and coffees.<br>Our signature coffee is brewed by our talented Baristas using beans from Forth Roasters in Fife.
+                <br> We are a dog friendly cafe and welcome you to bring your dogs along for a treat!
                 
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 img-container">
-                    <img src="images/gallery/exterior.jpg" alt="Herringbone shop exterior" class="img-fluid"
-                        onclick="openImageModal(this)">
-                </div>
-               
-                <div class="col-12 col-sm-6 col-md-2 col-lg-8 mb-4 img-container">
-                    <img src="images/gallery/interior2.jpg" alt="No.56 cafe" class="img-fluid"
-                        onclick="openImageModal(this)">
-                </div>
-                <div class="col-12 col-sm-6 col-md-2 col-lg-8 mb-4 img-container">
-                    <img src="images/gallery/cow.jpg" alt="Interior shop featuring Highland Cow decor" class="img-fluid"
-                        onclick="openImageModal(this)">
-                </div>
-            </div>
+            </p>
+            <span class="menu-border">.</span>
+            <h2>Our Menu</h2>
         </div>
-        </div>
-        <!-- modal to show full size images -->
-        <div id="imageModal" class="modal">
-            <span class="close" onclick="closeImageModal()">&times;</span>
-            <img class="modal-content" id="modalImage">
-        </div>
-
-
     </main>
 
-
-
-
-
-
-
+    
 
 
 
@@ -195,30 +167,7 @@
             <p>Herringbone 2025 ©</p>
         </div>
     </footer>
-    <script>
-        document.getElementById('toggle').addEventListener('click', function () {
-            const border = document.querySelector('.header');
-            border.classList.toggle('shrink'); // Add or remove the 'shrink' class
-        });
-    </script>
     <script src="navigation.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Function to open the modal and display the clicked image
-        function openImageModal(image) {
-            const modal = document.getElementById("imageModal");
-            const modalImage = document.getElementById("modalImage");
-
-            modal.style.display = "flex"; // Show the modal
-            modalImage.src = image.src; // Set the modal image source to the clicked image's source
-        }
-
-        // Function to close the modal
-        function closeImageModal() {
-            const modal = document.getElementById("imageModal");
-            modal.style.display = "none"; // Hide the modal
-        }
-    </script>
 </body>
 
 </html>

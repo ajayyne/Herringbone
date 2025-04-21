@@ -1241,6 +1241,10 @@ select {
     box-shadow: var(--shadow);
     padding-top: 1rem;
 }
+.cart-form{
+    padding: unset;
+    margin: unset;
+}
 
 /* brand section */
 .brand-sect{

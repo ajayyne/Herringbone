@@ -1,7 +1,9 @@
 <!-- php include -->
 <?php
 session_start();
-include 'connection.php' ?>
+include 'connection.php';
+include 'basketCount.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,10 +53,10 @@ include 'connection.php' ?>
                     <div class="items-icons">
                         <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
                         <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
-                        <div class="basket-counter"><p>2</p></div>
+                       
                         <?php
                         // if basket is not empty - display this
-                        echo "<div class='basket-counter'><p></p></div>";
+                        echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
                         ?>
                     </div>
                 </div>
@@ -72,10 +74,10 @@ include 'connection.php' ?>
                     <div class="items-icons">
                         <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
                         <a><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
-                        <div class="basket-counter"><p>2</p></div>
+                
                         <?php
                         // if basket is not empty - display this
-                        echo "<div class='basket-counter'><p></p></div>";
+                        echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
                         ?>
                     </div>
                 </div>

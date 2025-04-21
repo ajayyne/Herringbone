@@ -1,9 +1,10 @@
 <?php
 include "connection.php";
+include 'basketCount.php';
 // Prevent caching of the favorites page
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: 0");
-$basketCount = 1;
+
 
 // Fetch favorites from cookie and decode json
 if (isset($_COOKIE['favorites'])) {
@@ -94,7 +95,7 @@ function getFavoriteProducts($favIds) {
                     <div class="items-icons">
                         <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
                         <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
-                        <div class="basket-counter"><p>2</p></div>
+                     
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
@@ -115,7 +116,7 @@ function getFavoriteProducts($favIds) {
                     <div class="items-icons">
                         <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
                         <a><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
-                        <div class="basket-counter"><p>2</p></div>
+          
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";

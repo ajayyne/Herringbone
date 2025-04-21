@@ -1,7 +1,8 @@
 <?php
 session_start();
 include 'connection.php';
-// Prevent caching of the favorites page
+include 'basketCount.php';
+// Prevent caching of the cart page
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: 0");
 
@@ -14,15 +15,23 @@ if (isset($_COOKIE['cart'])) {
     $cartCookie = [];
 }
 
-// Fetch the favorite products
-$cartItems = getCartItems($cartCookie);
+// // Fetch the cart items
+// $cartItems = getCartItems($cartCookie);
 
-// Ensure $favorites is an array to avoid warnings
+// count how many times the same item appears:
+$cartQuantities = array_count_values($cartCookie);
+// only get the unique ID's from the array
+$uniqueCartIds = array_keys($cartQuantities); 
+$cartItems = getCartItems($uniqueCartIds);
+
 if (!is_array($cartCookie)) {
     $cartItems = []; // Fallback to an empty array
 }
 
-// Get the favorite item details from DB
+
+
+
+// Get the cart item details from DB
 function getCartItems($cartIds) {
     global $connection;
 
@@ -98,10 +107,10 @@ function getCartItems($cartIds) {
                     <div class="items-icons">
                         <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
                         <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
-                        <div class="basket-counter"><p>2</p></div>
+                   
                         <?php
                         // if basket is not empty - display this
-                        echo "<div class='basket-counter'><p>1</p></div>";
+                        echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
                         ?>
                     </div>
                 </div>
@@ -119,10 +128,10 @@ function getCartItems($cartIds) {
                     <div class="items-icons">
                         <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
                         <a><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
-                        <div class="basket-counter"><p>2</p></div>
+                   
                         <?php
                         // if basket is not empty - display this
-                        echo "<div class='basket-counter'><p>1</p></div>";
+                        echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
                         ?>
                     </div>
                 </div>
@@ -140,25 +149,31 @@ function getCartItems($cartIds) {
     <?php
     $total = 0;
         foreach ($cartItems as $item) {
-            // get price for each item and add to a total
-            // convert to float (decimal)
-            $price = floatval($item['Price']); 
-            $total += $price;
+            $id = $item['ProdOptionID'];
+            // get the quantity of the item (how many times it appears in the array)
+            $qty = $cartQuantities[$id];
+            $price = floatval($item['Price']);
+            // subtotal for each item
+            $subtotal = $price * $qty;
+            // total for all items in cart
+            $total += $subtotal;
+           
+    
 
 
             echo "<div class='product-item'>
-                    <img src='{$item['ImageURL']}'>
+                    <img src='{$item['ImageURL']}' alt='Product Image'>
                     <h6>{$item['ProductName']}</h6>
-                    <p>£{$item['Price']}</p>
+                    <p>Price: £{$item['Price']}</p>
+                    <p>Quantity: {$qty}</p>
+                    <p>Subtotal: £" . number_format($subtotal, 2) . "</p>
                 </div>";
-        }
-
-
+                }
 
 
         echo "<div class='cart-total'>
-                <strong>Total: " . number_format($total, 2) . "</strong>
-              </div>";
+        <strong>Total: £" . number_format($total, 2) . "</strong>
+      </div>";
         ?>
 
 

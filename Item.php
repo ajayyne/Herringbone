@@ -1,10 +1,10 @@
 <?php
 session_start();
 include 'connection.php';
+include 'basketCount.php';
 $prodOptionID = $_GET['id'];
 $itemCategory = $_GET['category'];
 $brandName = $_GET['brand'];
-$basketCount = 1;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +51,7 @@ $basketCount = 1;
                     <div class="items-icons">
                         <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
                         <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
-                        <div class="basket-counter"><p>2</p></div>
+                    
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
@@ -72,7 +72,7 @@ $basketCount = 1;
                     <div class="items-icons">
                         <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
                         <a><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
-                        <div class="basket-counter"><p>2</p></div>
+                       
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
@@ -161,14 +161,15 @@ $basketCount = 1;
                             <p>£{$displayItem['Price']}</p>
                         </div>
                         <div>
-                        <form>
+                        <form class='cart-form'>
                             <label for='quantity' class='quant-label'>Quantity</label>
                             <input name='quantity' type='number' required min='1' max='5'>
-                        
-                        </div>
-                    </div>
+                       
                     <div class='item-btn'>
                         <button class='itemCartButton' data-id='$displayItem[ProdOptionID]'>ADD TO BASKET</button>
+                        </div>
+                        </form>
+                     </div>
                     </div>
                 </div>
             </div>";
