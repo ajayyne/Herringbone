@@ -50,15 +50,21 @@ include 'basketCount.php';
                     <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
-                    <div class="items-icons">
-                        <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
+                    <div class="search-cont flex">
+                        <input type="text" id="search" class="radius" name="search">
+                        <i class="fa-solid fa-magnifying-glass mobileSearch" id="mobileSearch"></i>
+                    </div>
+
+                    <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
+                    <div class="basket-icon">
                         <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
-                       
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
                         ?>
                     </div>
+
+
                 </div>
             </div>
             <div class="desk-nav">
@@ -71,15 +77,20 @@ include 'basketCount.php';
                     <li><a href="Contact.php">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
-                    <div class="items-icons">
-                        <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
-                        <a><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
-                
+                    <div class="search-cont flex">
+                        <input type="text" id="deskSearch" class="radius" name="search">
+                        <i class="fa-solid fa-magnifying-glass searchIcon" id="searchIcon"></i>
+                    </div>
+
+                    <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
+                    <div class="basket-icon">
+                        <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
                         ?>
                     </div>
+
                 </div>
             </div>
         </header>
