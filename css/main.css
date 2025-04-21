@@ -189,6 +189,9 @@ a {
 .items-icons .fa-heart{
     margin-right: 2rem;
 }
+.items-icons a{
+    margin-top: -0.25rem !important;
+}
 
 .logo{
     border-radius: 50px;
@@ -1269,8 +1272,8 @@ select {
     font-size: 1.5rem;
     cursor: pointer;
 }
-.hello{
-    align-items: start;
+.favorite-icon{
+    align-items: end;
     justify-content: space-between;
 }
 
@@ -1420,6 +1423,49 @@ select {
 .cafe-imgs img{
     width: 25rem;
     aspect-ratio: 3/2;
+}
+
+/* FAVORITES PAGE */
+.favorites{
+    padding: 8rem 0rem 0rem 0rem;
+}
+.favorites h1{
+    text-align: center;
+}
+.product-grid{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 3rem;
+}
+.product-item{
+    cursor: pointer;
+    background-color: var(--darkest-blue);
+    color: white;
+    width: 12rem;
+    height: 15.5rem;
+}
+.product-item img{
+    width: 100%;
+    height: 10rem;
+    border-radius: 8px 8px 0px 0px;
+}
+.product-item i{
+    font-size: 1rem;
+}
+.favorite-title{
+    margin-top: 0.5rem;
+    justify-content: space-between;
+    width: 100%;
+}
+.favorite-text{
+    justify-content: space-between !important;
+    align-items: start;
+    height: 5rem;
+    padding: 0rem 0.5rem 0rem 0.5rem;
+}
+.favorite-text p{
+    margin-bottom: 0rem;
 }
 
 
@@ -1898,6 +1944,9 @@ select {
 
 .item-img{
     height: 25rem;
+}
+.favorite-icon{
+    align-items: start;
 }
 /* brand section */
 .brand-sect{

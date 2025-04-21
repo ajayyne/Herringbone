@@ -1,11 +1,60 @@
 <?php
 session_start();
 include 'connection.php';
-$prodOptionID = $_GET['prodOptionID'];
+// Prevent caching of the favorites page
+header("Cache-Control: no-cache, must-revalidate");
+header("Expires: 0");
+
+
+// Fetch cart from cookie and decode json
+if (isset($_COOKIE['cart'])) {
+    $cartCookie = json_decode($_COOKIE['cart'], true);
+} else {
+    // If there's no cookie set, return an empty array
+    $cartCookie = [];
+}
+
+// Fetch the favorite products
+$cartItems = getCartItems($cartCookie);
+
+// Ensure $favorites is an array to avoid warnings
+if (!is_array($cartCookie)) {
+    $cartItems = []; // Fallback to an empty array
+}
+
+// Get the favorite item details from DB
+function getCartItems($cartIds) {
+    global $connection;
+
+    // If there are no favorites, return an empty array
+    if (empty($cartIds)) {
+        return [];
+    }
+
+    // Sanitize and prepare the favorite IDs
+    $CartIds = implode(',', array_map('intval', $cartIds));
+    $getCart = "SELECT * FROM product_option as po
+    LEFT JOIN image as i ON i.ProdOptionID = po.ProdOptionID
+        LEFT JOIN Products as p ON po.ProductID = p.ProductID
+        WHERE po.ProdOptionID IN ($CartIds)";
+        
+    
+
+    // Execute the query and add error checking
+    $cartItems = mysqli_query($connection, $getCart);
+    if (!$cartItems) {
+        echo "SQL Error: " . mysqli_error($connection);
+        return []; // Return an empty array on error
+    }
+
+    // Fetch all results and return them
+    return mysqli_fetch_all($cartItems, MYSQLI_ASSOC);
+}
+
+
 ?>
 
 <!DOCTYPE html>
-< lang="en">
 
     <head>
         <meta charset="UTF-8">
@@ -42,11 +91,19 @@ $prodOptionID = $_GET['prodOptionID'];
                     <li><a href="Home.php">Home</a></li>
                     <li><a href="Products.php">Shop</a></li>
                     <li><a href="Gallery.html">Gallery</a></li>
+                    <li><a href="cafe.html">Cafe</a></li>
                     <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
-                    <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
-                    <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                    <div class="items-icons">
+                        <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
+                        <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                        <div class="basket-counter"><p>2</p></div>
+                        <?php
+                        // if basket is not empty - display this
+                        echo "<div class='basket-counter'><p>1</p></div>";
+                        ?>
+                    </div>
                 </div>
             </div>
             <div class="desk-nav">
@@ -55,11 +112,19 @@ $prodOptionID = $_GET['prodOptionID'];
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
                     <li><a href="Gallery.html">GALLERY</a></li>
+                    <li><a href="cafe.html">CAFE</a></li>
                     <li><a href="Contact.php">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
-                    <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
-                    <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                    <div class="items-icons">
+                        <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
+                        <a><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
+                        <div class="basket-counter"><p>2</p></div>
+                        <?php
+                        // if basket is not empty - display this
+                        echo "<div class='basket-counter'><p>1</p></div>";
+                        ?>
+                    </div>
                 </div>
             </div>
         </header>
@@ -69,6 +134,32 @@ $prodOptionID = $_GET['prodOptionID'];
             </a>
         </div>
     </div>
+
+
+
+    <?php
+    $total = 0;
+        foreach ($cartItems as $item) {
+            // get price for each item and add to a total
+            // convert to float (decimal)
+            $price = floatval($item['Price']); 
+            $total += $price;
+
+
+            echo "<div class='product-item'>
+                    <img src='{$item['ImageURL']}'>
+                    <h6>{$item['ProductName']}</h6>
+                    <p>£{$item['Price']}</p>
+                </div>";
+        }
+
+
+
+
+        echo "<div class='cart-total'>
+                <strong>Total: " . number_format($total, 2) . "</strong>
+              </div>";
+        ?>
 
 
 
@@ -131,6 +222,7 @@ $prodOptionID = $_GET['prodOptionID'];
             </div>
         </footer>
         <script src="navigation.js"></script>
+        
     </body>
     
 

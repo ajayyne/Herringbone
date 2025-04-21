@@ -50,7 +50,7 @@ $basketCount = 1;
                         <i class="fa-solid fa-magnifying-glass mobileSearch" id="mobileSearch"></i>
                     </div>
 
-                    <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
+                    <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
                     <div class="basket-icon">
                         <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                         <?php
@@ -77,7 +77,7 @@ $basketCount = 1;
                         <i class="fa-solid fa-magnifying-glass searchIcon" id="searchIcon"></i>
                     </div>
 
-                    <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
+                    <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
                     <div class="basket-icon">
                         <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
                         <?php

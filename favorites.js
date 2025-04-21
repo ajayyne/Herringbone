@@ -33,8 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // looks for the item ID within the array
         const index = favorites.indexOf(itemId);
 
-        alert(itemId);
-        //favorites.push('999');
 
         if (index === -1) {
             // Add to favorites by pushing itemID to faves array
@@ -48,6 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Item removed from favorites!');
             icon.classList.remove('fa-solid');
             icon.classList.add('fa-regular');
+            // remove item immediately from favorites page
+            window.location.href = 'Favorites.php';
         }
 
         setFavorites(favorites);
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // get the fave items from the faves array
     function getFavorites() {
-        alert(document.cookie);
+      
         const cookies = document.cookie.split('; ');
         const faveCookie = cookies.find(cookie => cookie.startsWith('favorites='));
         if (faveCookie) {
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // save the faves array to a cookie
     function setFavorites(favorites) {
-        alert(JSON.stringify(favorites));
+       
         const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString(); // 30 days
         document.cookie = `favorites=${encodeURIComponent(JSON.stringify(favorites))}; expires=${expires}; path=/`;
     }

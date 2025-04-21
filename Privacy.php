@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <div class="head">
+<div class="head">
         <header class="header">
             <div class="mobile-nav flex flex-between">
                 <nav>
@@ -39,11 +39,15 @@
                     <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
-
-                    <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
-                   
-
-
+                    <div class="items-icons">
+                        <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
+                        <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                        <div class="basket-counter"><p>2</p></div>
+                        <?php
+                        // if basket is not empty - display this
+                        echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
+                        ?>
+                    </div>
                 </div>
             </div>
             <div class="desk-nav">
@@ -56,11 +60,15 @@
                     <li><a href="Contact.php">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
-                   
-
-                    <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
-                   
-
+                    <div class="items-icons">
+                        <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
+                        <a><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
+                        <div class="basket-counter"><p>2</p></div>
+                        <?php
+                        // if basket is not empty - display this
+                        echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
+                        ?>
+                    </div>
                 </div>
             </div>
         </header>

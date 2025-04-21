@@ -27,7 +27,7 @@ $basketCount = 1;
 </head>
 
 <body>
-    <div class="head">
+<div class="head">
         <header class="header">
             <div class="mobile-nav flex flex-between">
                 <nav>
@@ -51,7 +51,7 @@ $basketCount = 1;
                     <div class="items-icons">
                         <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
                         <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
-                        <!-- <div class="basket-counter"><p>2</p></div> -->
+                        <div class="basket-counter"><p>2</p></div>
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
@@ -70,9 +70,9 @@ $basketCount = 1;
                 </ul>
                 <div class="icons icons-desk flex flex-even">
                     <div class="items-icons">
-                        <a href="Favorites.php"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
-                        <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
-                        <!-- <div class="basket-counter"><p>2</p></div> -->
+                        <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
+                        <a><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
+                        <div class="basket-counter"><p>2</p></div>
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
@@ -123,7 +123,7 @@ $basketCount = 1;
                     </div>
                 </div>
                     <div class='item-content'>
-                        <div class='flex hello'>
+                        <div class='flex favorite-icon'>
                             <h1>{$displayItem['ProductName']}</h1>
                             <div class='favorite-btn flex' data-id='{$displayItem['ProdOptionID']}'>
                                 <i class='fa-regular fa-heart favorite-icon'></i>
@@ -161,12 +161,14 @@ $basketCount = 1;
                             <p>£{$displayItem['Price']}</p>
                         </div>
                         <div>
+                        <form>
                             <label for='quantity' class='quant-label'>Quantity</label>
                             <input name='quantity' type='number' required min='1' max='5'>
+                        
                         </div>
                     </div>
                     <div class='item-btn'>
-                        <a href='Basket.php?prodOptionID='{$prodOptionID}'><button>ADD TO BASKET</button></a>
+                        <button class='itemCartButton' data-id='$displayItem[ProdOptionID]'>ADD TO BASKET</button>
                     </div>
                 </div>
             </div>";
@@ -328,6 +330,7 @@ $basketCount = 1;
         });
     </script>
     <script src="favorites.js"></script>
+    <script src="cart.js"></script>
     <!-- recomennded slider -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
