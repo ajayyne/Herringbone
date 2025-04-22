@@ -32,6 +32,7 @@ if (isset($_POST['update'])) {
     SET 
         p.ProductName = '$_POST[productName]', 
         p.Description = '{$description}',
+        p.Price = '$_POST[Price]',
         po.Colour = '$_POST[Colour]',
         po.isAvailable = '$_POST[Availability]',
         p.DefaultDisplay = '$_POST[Default]',
