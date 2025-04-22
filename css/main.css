@@ -1498,6 +1498,7 @@ select {
     margin-top: 0.8rem;
     padding: 0rem 0rem 0rem 1.2rem;
     font-size: 0.8rem;
+    width: 100%;
 }
 .cart-price{
     width: 40%;
