@@ -207,6 +207,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     $delivery = 2.99;
+    $total = 0;
     // loop through each id in the cookie array and calculate prices
     foreach ($cartItems as $item) {
         $id = $item['ProdOptionID'];
@@ -214,14 +215,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $qty = $cartQuantities[$id];
         $price = floatval($item['Price']);
         // subtotal for each item
-        $price = $price * $qty;
+
         // total for all items in cart
-        $total += $price;
-        $orderTotal = $total + $delivery;
+        $total = $total + ($price * $qty);
+    
 
         // building array for each prodoptionid and its price
-        $itemPrices[$item['ProdOptionID'] = $item['Price']];
+        $itemPrices[$id] = $price;
+        echo "<div><p>" . $id . " and " . $price .  "</p></div>";
     }
+    $orderTotal = $total + $delivery;
 
     // // send user info the database
     $insertQuery = "INSERT INTO orders (customerName, customerEmail, Address1, Address2, Town, postCode, County, paymentMade, orderFulfilled, orderTotal)
@@ -241,7 +244,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // accesses the array of prod option id's and prices, and gets the price
             $price = $itemPrices[$prodOptionID];
           // insert the items that were purchased one by one 
-          $insertItemsQuery = "INSERT INTO ordereditems (orderID, prodOptionID, itemPrice, itemQuantity)
+          $insertItemsQuery = "INSERT INTO ordereditems (orderID, ProdOptionID, itemPrice, itemQuantity)
           VALUES ('{$orderID}', '{$prodOptionID}', '{$price}', '{$quantity}')";
           $runInsertItems = mysqli_query($connection, $insertItemsQuery);
         }
@@ -252,7 +255,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
 
 
-    echo '<meta http-equiv="refresh" content="0;url=Payment.php">';
+    // echo '<meta http-equiv="refresh" content="0;url=Payment.php">';
     exit();
 }
 ?>
