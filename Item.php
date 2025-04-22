@@ -161,7 +161,7 @@ $brandName = $_GET['brand'];
                             <p>£{$displayItem['Price']}</p>
                         </div>
                         <div>
-                        <form class='cart-form'>
+                        <form class='basket-form'>
                             <label for='quantity' class='quant-label'>Quantity</label>
                             <input name='quantity' type='number' required min='1' max='5'>
                        

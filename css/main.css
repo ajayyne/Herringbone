@@ -1247,6 +1247,9 @@ select {
     padding: unset;
     margin: unset;
 }
+.basket-form{
+    padding: unset;
+}
 
 /* brand section */
 .brand-sect{
