@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // for quantity form on Item.php -> form should not submit without selected quantity
     //   quantity input should represent how many times the item should be added to the cart array
-      document.querySelectorAll('.cart-form').forEach(form => {
+      document.querySelectorAll('.basket-form').forEach(form => {
         form.addEventListener('submit', function (e) {
             e.preventDefault(); 
 

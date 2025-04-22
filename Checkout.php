@@ -6,6 +6,53 @@ include 'basketCount.php';
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: 0");
 
+
+// Fetch cart from cookie and decode json
+if (isset($_COOKIE['cart'])) {
+    $cartCookie = json_decode($_COOKIE['cart'], true);
+} else {
+    // If there's no cookie set, return an empty array
+    $cartCookie = [];
+}
+
+// count how many times the same item appears:
+$cartQuantities = array_count_values($cartCookie);
+// only get the unique ID's from the array
+$uniqueCartIds = array_keys($cartQuantities);
+$cartItems = getCartItems($uniqueCartIds);
+
+if (!is_array($cartCookie)) {
+    $cartItems = []; // Fallback to an empty array
+}
+
+// Get the cart item details from DB
+function getCartItems($cartIds)
+{
+    global $connection;
+
+    // If there are no favorites, return an empty array
+    if (empty($cartIds)) {
+        return [];
+    }
+
+    // Sanitize and prepare the favorite IDs
+    $CartIds = implode(',', array_map('intval', $cartIds));
+    $getCart = "SELECT * FROM product_option as po
+    LEFT JOIN image as i ON i.ProdOptionID = po.ProdOptionID
+        LEFT JOIN Products as p ON po.ProductID = p.ProductID
+        WHERE po.ProdOptionID IN ($CartIds)";
+
+    // Execute the query and add error checking
+    $cartItems = mysqli_query($connection, $getCart);
+    if (!$cartItems) {
+        echo "SQL Error: " . mysqli_error($connection);
+        return []; // Return an empty array on error
+    }
+
+    // Fetch all results and return them
+    return mysqli_fetch_all($cartItems, MYSQLI_ASSOC);
+}
+
 ?>
 <!DOCTYPE html>
 
@@ -143,6 +190,68 @@ header("Expires: 0");
 <?php
 // redirect user on form submission -> to payment page
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $customerName = htmlspecialchars($_POST['name']);
+    $customerEmail = htmlspecialchars($_POST['email']);
+    $address1 = htmlspecialchars($_POST['address1']);
+    $address2 = htmlspecialchars($_POST['address2']);
+    $town = htmlspecialchars($_POST['town']);
+    $postCode = htmlspecialchars($_POST['postcode']);
+    $county = htmlspecialchars($_POST['county']);
+    $paymentMade = 0;
+    $orderFulfilled = 0;
+
+    // array to access prices
+    $itemPrices = array();
+
+
+
+    $delivery = 2.99;
+    // loop through each id in the cookie array and calculate prices
+    foreach ($cartItems as $item) {
+        $id = $item['ProdOptionID'];
+        // get the quantity of the item (how many times it appears in the array)
+        $qty = $cartQuantities[$id];
+        $price = floatval($item['Price']);
+        // subtotal for each item
+        $price = $price * $qty;
+        // total for all items in cart
+        $total += $price;
+        $orderTotal = $total + $delivery;
+
+        // building array for each prodoptionid and its price
+        $itemPrices[$item['ProdOptionID'] = $item['Price']];
+    }
+
+    // // send user info the database
+    $insertQuery = "INSERT INTO orders (customerName, customerEmail, Address1, Address2, Town, postCode, County, paymentMade, orderFulfilled, orderTotal)
+    VALUES ('{$customerName}', '{$customerEmail}', '{$address1}', '{$address2}', '{$town}', '{$postCode}', '{$county}', '{$paymentMade}', '{$orderFulfilled}', '{$orderTotal}')";
+    $runInsert = mysqli_query($connection, $insertQuery);
+
+    if($runInsert){
+        $orderID = mysqli_insert_id($connection);
+        // cartQuantities holds an array like this: [82 => 3, 81 => 2] with the prodOptionID and the quantity
+        // creatinh array that holds ONLY the keys (unique prodOptionIDS)
+        $prodOptionIDS = array_keys($cartQuantities);
+        // for each key (prodOptionID) -> get the value based on the prodOptionID ($quantity)
+        foreach($prodOptionIDS as $prodOptionID){
+
+            // accesses the array of prod option id's and quantities, and gets the quantity
+            $quantity = $cartQuantities[$prodOptionID];
+            // accesses the array of prod option id's and prices, and gets the price
+            $price = $itemPrices[$prodOptionID];
+          // insert the items that were purchased one by one 
+          $insertItemsQuery = "INSERT INTO ordereditems (orderID, prodOptionID, itemPrice, itemQuantity)
+          VALUES ('{$orderID}', '{$prodOptionID}', '{$price}', '{$quantity}')";
+          $runInsertItems = mysqli_query($connection, $insertItemsQuery);
+        }
+
+    }else{
+        echo "<script>alert('error making insert')</script>";
+    }
+    
+
+
     echo '<meta http-equiv="refresh" content="0;url=Payment.php">';
     exit();
 }
