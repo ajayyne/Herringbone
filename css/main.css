@@ -1587,6 +1587,13 @@ background-color: var(--medium-blue);
     border: none;
     background-color: var(--medium-blue);
 }
+.deleteCartItem{
+    padding: 1rem 2rem 1rem 1rem;
+    font-weight: bold;
+}
+.empty-cart{
+    padding: 10rem;
+}
 
 
 /* PAYMENT.PHP */

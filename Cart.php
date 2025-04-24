@@ -147,26 +147,28 @@ function getCartItems($cartIds)
     </div>
 
 
-
     <?php
 
-    echo "<div class='cart-cont'>
+    // if cookie is not empty -> echo out cart page
+    if ($cartCookie && !empty($cartCookie)) {
+
+        echo "<div class='cart-cont'>
         <div class='cart-items'>";
 
-    $total = 0;
-    $delivery = 2.99;
-    foreach ($cartItems as $item) {
-        $id = $item['ProdOptionID'];
-        // get the quantity of the item (how many times it appears in the array)
-        $qty = $cartQuantities[$id];
-        $price = floatval($item['Price']);
-        // subtotal for each item
-        $subtotal = $price * $qty;
-        // total for all items in cart
-        $total += $subtotal;
-        $cartTotal = $total + $delivery;
+        $total = 0;
+        $delivery = 2.99;
+        foreach ($cartItems as $item) {
+            $id = $item['ProdOptionID'];
+            // get the quantity of the item (how many times it appears in the array)
+            $qty = $cartQuantities[$id];
+            $price = floatval($item['Price']);
+            // subtotal for each item
+            $subtotal = $price * $qty;
+            // total for all items in cart
+            $total += $subtotal;
+            $cartTotal = $total + $delivery;
 
-        echo "<div class='product-item cart-item flex radius'>
+            echo "<div class='product-item cart-item flex radius'>
                     <img src='{$item['ImageURL']}' alt='Product Image'>
                     <div class='cart-item-text'>
                         <h6>{$item['ProductName']}</h6>
@@ -176,11 +178,13 @@ function getCartItems($cartIds)
                         </div>
                         <p>Subtotal: <strong>£" . number_format($subtotal, 2) . "</strong></p>
                     </div>
+                    <span class='deleteCartItem' data-item-id='{$item['ProdOptionID']}'>X</span>
                 </div>";
-    }
+        }
 
 
-    echo "
+
+        echo "
         </div>
       
 
@@ -193,23 +197,30 @@ function getCartItems($cartIds)
                 </div>
                 <img src='images/cards.jpg'>
                 <button><a href='Checkout.php'>Proceed To Checkout</a></button>
-            </div>";
-    ?>
+            </div>
 
-
-
-<div class="cart-information">
+            <div class='cart-information'>
     <h6>Delivery</h6>
     <p>We offer standard delivery within 3–5 business days for all in-stock items. Expedited shipping options are available at checkout for an additional fee.</p>
 </div>
 
-<div class="cart-information">
+<div class='cart-information'>
     <h6>Returns & Refunds</h6>
     <p>We accept returns within 30 days of purchase, provided the item is unused and in its original packaging. To initiate a return, please contact our customer service team with your order details. Refunds will be processed to the original payment method once the item is received and inspected. Please note that return shipping costs are the responsibility of the customer unless the item is defective or incorrect.</p>
-</div>
+</div>";
+    } else {
+        echo "
+        <div class='cart-cont flex flex-center'>
+            <p class='empty-cart'><strong>Looks Like your cart is empty...</strong></p>
+        </div>";
+    }
+    ?>
 
 
-</>
+
+
+
+
 
     <footer>
         <div class="flex-center">
@@ -267,6 +278,7 @@ function getCartItems($cartIds)
         </div>
     </footer>
     <script src="navigation.js"></script>
+    <script src="cart.js"></script>
 
 </body>
 

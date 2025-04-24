@@ -2,11 +2,11 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-      // for quantity form on Item.php -> form should not submit without selected quantity
+    // for quantity form on Item.php -> form should not submit without selected quantity
     //   quantity input should represent how many times the item should be added to the cart array
-      document.querySelectorAll('.basket-form').forEach(form => {
+    document.querySelectorAll('.basket-form').forEach(form => {
         form.addEventListener('submit', function (e) {
-            e.preventDefault(); 
+            e.preventDefault();
 
             // get the quantity input
             const quantityInput = this.querySelector('input[name="quantity"]');
@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Add the product to the cart array Xquantity amount (x2)
             for (let i = 0; i < quantity; i++) {
-                addToCart(productId); 
+                addToCart(productId);
             }
 
             // updates the basket icon counter
-            updateBasketCounter(); 
+            updateBasketCounter();
 
             alert(`Added ${quantity} of item ${productId} to your cart!`);
         });
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // // Get all cart buttons on item page
     // const cartButtons = document.querySelectorAll('.itemCartButton');
-  
+
     // // when clicked, add item to the cart
     // cartButtons.forEach(button => {
     //     button.addEventListener('click', function () {
@@ -74,11 +74,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateBasketCounter() {
         // get the current array
-        const cart = getCart(); 
+        const cart = getCart();
         // get the count of id's within (e.g = 2)
         const count = cart.length;
         const counter = document.querySelector('.basket-counter p');
-    
+
         if (counter) {
             // insert the number of items in the array, into the p tag
             counter.textContent = count;
@@ -92,4 +92,24 @@ document.addEventListener('DOMContentLoaded', function () {
         document.cookie = `cart=${encodeURIComponent(JSON.stringify(cart))}; expires=${expires}; path=/`;
     }
 
+
+
+    // handle deleting items from the cart / checkout
+    document.querySelectorAll('.deleteCartItem').forEach(function (button) {
+        button.addEventListener('click', function () {
+            // get correct item using ProdOptionID (data-item-id)
+            const itemId = button.getAttribute('data-item-id');
+            removeItemFromCookie(itemId);
+            location.reload();
+        });
+    });
+
+    // remove item from the cart cookie
+    // Remove item using itemId (not ProdOptionID)
+    function removeItemFromCookie(itemId) {
+        let cart = getCart();
+        // Remove the item with the exact itemId
+        cart = cart.filter(item => item !== itemId);  // Use itemId directly since it's just an ID
+        setCart(cart);  // Update the cookie with the new cart
+    }
 });
