@@ -37,26 +37,19 @@ include 'basketCount.php';
                 <ul class="navigation flex flex-col" id="myList">
                     <li><a href="Home.php">Home</a></li>
                     <li><a href="Products.php">Shop</a></li>
-                    <li><a href="Gallery.html">Gallery</a></li>
-                    <li><a href="cafe.html">Cafe</a></li>
+                    <li><a href="Gallery.php">Gallery</a></li>
+                    <li><a href="cafe.php">Cafe</a></li>
                     <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
-                    <div class="search-cont flex">
-                        <input type="text" id="search" class="radius" name="search">
-                        <i class="fa-solid fa-magnifying-glass mobileSearch" id="mobileSearch"></i>
-                    </div>
-
+                    <div class="items-icons">
                     <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
-                    <div class="basket-icon">
-                        <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                    <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
                         ?>
                     </div>
-
-
                 </div>
             </div>
             <div class="desk-nav">
@@ -64,25 +57,19 @@ include 'basketCount.php';
                 <ul>
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
-                    <li><a href="Gallery.html">GALLERY</a></li>
-                    <li><a href="cafe.html">CAFE</a></li>
+                    <li><a href="Gallery.php">GALLERY</a></li>
+                    <li><a href="cafe.php">CAFE</a></li>
                     <li><a href="Contact.php">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
-                    <div class="search-cont flex">
-                        <input type="text" id="deskSearch" class="radius" name="search">
-                        <i class="fa-solid fa-magnifying-glass searchIcon" id="searchIcon"></i>
-                    </div>
-
+                    <div class="items-icons">
                     <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
-                    <div class="basket-icon">
-                        <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                    <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
                         ?>
                     </div>
-
                 </div>
             </div>
         </header>

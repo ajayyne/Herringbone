@@ -21,7 +21,7 @@ include 'basketCount.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/504c189bcb.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -29,7 +29,7 @@ include 'basketCount.php';
 </head>
 
 <body>
-<div class="head">
+    <div class="head">
         <header class="header">
             <div class="mobile-nav flex flex-between">
                 <nav>
@@ -45,26 +45,20 @@ include 'basketCount.php';
                 <ul class="navigation flex flex-col" id="myList">
                     <li><a href="Home.php">Home</a></li>
                     <li><a href="Products.php">Shop</a></li>
-                    <li><a href="Gallery.html">Gallery</a></li>
-                    <li><a href="cafe.html">Cafe</a></li>
+                    <li><a href="Gallery.php">Gallery</a></li>
+                    <li><a href="cafe.php">Cafe</a></li>
                     <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
-                    <div class="search-cont flex">
-                        <input type="text" id="search" class="radius" name="search">
-                        <i class="fa-solid fa-magnifying-glass mobileSearch" id="mobileSearch"></i>
-                    </div>
-
-                    <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
-                    <div class="basket-icon">
-                        <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                    <div class="items-icons">
+                        <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart"
+                                style="color: #ffffff;"></i></a>
+                        <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
                         ?>
                     </div>
-
-
                 </div>
             </div>
             <div class="desk-nav">
@@ -72,25 +66,20 @@ include 'basketCount.php';
                 <ul>
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
-                    <li><a href="Gallery.html">GALLERY</a></li>
-                    <li><a href="cafe.html">CAFE</a></li>
+                    <li><a href="Gallery.php">GALLERY</a></li>
+                    <li><a href="cafe.php">CAFE</a></li>
                     <li><a href="Contact.php">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
-                    <div class="search-cont flex">
-                        <input type="text" id="deskSearch" class="radius" name="search">
-                        <i class="fa-solid fa-magnifying-glass searchIcon" id="searchIcon"></i>
-                    </div>
-
-                    <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
-                    <div class="basket-icon">
-                        <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                    <div class="items-icons">
+                        <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart"
+                                style="color: #ffffff;"></i></a>
+                        <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
                         ?>
                     </div>
-
                 </div>
             </div>
         </header>
@@ -179,16 +168,18 @@ include 'basketCount.php';
                     <img src="images/products/candles/harris_seilebost.jpg">
                     <img src="images/products/candles/harris_losgaintir.jpg">
                     <img src="images/products/candles/harris_horgabost.jpg" class="harris-hidden">
-                    
+
                 </div>
                 <div>
                     <img src="images/brands/harris2.jpg" class="harris">
                 </div>
             </div>
 
-            <div class="new-info align" >
+            <div class="new-info align">
                 <h1><strong>New In Store</strong></h1>
-                <p>Introducing our new range from Essence of Harris<br>The original Hebridean Soy Wax Candle Company. They hand pour all of their own luxuriously scented candles and diffusers on the beautiful Isle of Harris. </p>
+                <p>Introducing our new range from Essence of Harris<br>The original Hebridean Soy Wax Candle Company.
+                    They hand pour all of their own luxuriously scented candles and diffusers on the beautiful Isle of
+                    Harris. </p>
             </div>
         </div>
 
@@ -212,27 +203,32 @@ include 'basketCount.php';
         <!-- FAQ's -->
 
         <!-- img on the left -->
-         <div class="faq flex flex-col">
+        <div class="faq flex flex-col">
             <img src="images/gallery/exterior2.jpg" alt="Herringbone window display and outdoor seating" class="radius">
             <!-- accordion on the right -->
             <div class="accordion-cont flex flex-col">
                 <div>
-                <div class="acc-border">
-                    <div class="align faq-title">
-                        <h2>FAQ's</h2>
-                    </div>
-                    
+                    <div class="acc-border">
+                        <div class="align faq-title">
+                            <h2>FAQ's</h2>
+                        </div>
+
                         <button class="accordion">Are you dog friendly?</button>
                         <div class="panel" data-aos="flip-up" data-aos-duration="1000">
-                            <p>Yes! We allow dogs in our shop downstairs, and the No.56 cafe upstairs. We love to welcome dogs into our space while you enjoy browsing, or a coffee upstairs.</p>
+                            <p>Yes! We allow dogs in our shop downstairs, and the No.56 cafe upstairs. We love to
+                                welcome dogs into our space while you enjoy browsing, or a coffee upstairs.</p>
                         </div>
-                        <button class="accordion" data-aos="flip-up" data-aos-duration="1000">Are all of your products Scottish?</button>
+                        <button class="accordion" data-aos="flip-up" data-aos-duration="1000">Are all of your products
+                            Scottish?</button>
                         <div class="panel">
-                            <p>We try our very best to support local artists and makers. We stock some of Scotlands most well known brands such as Islander and Heathergems. </p>
+                            <p>We try our very best to support local artists and makers. We stock some of Scotlands most
+                                well known brands such as Islander and Heathergems. </p>
                         </div>
-                        <button class="accordion" data-aos="flip-up" data-aos-duration="1000">Do you offer vegetarian or vegan options?</button>
+                        <button class="accordion" data-aos="flip-up" data-aos-duration="1000">Do you offer vegetarian or
+                            vegan options?</button>
                         <div class="panel">
-                            <p>Our cafe offers a wide selection of treats for vegetarians and vegans. We also have various alternative milks available.</p>
+                            <p>Our cafe offers a wide selection of treats for vegetarians and vegans. We also have
+                                various alternative milks available.</p>
                         </div>
                     </div>
                 </div>
@@ -241,10 +237,11 @@ include 'basketCount.php';
 
 
 
-        
+
 
     </main>
 
+  
 
     <footer>
         <div class="flex-center">
@@ -301,13 +298,21 @@ include 'basketCount.php';
             <p>Herringbone 2025 ©</p>
         </div>
     </footer>
+
+
+    <div id="cookie-popup">
+  <p>This site uses cookies to enhance your experience! View our <a href="CookiePolicy.php">Cookie Policy</a> to learn more.</p>
+  <button id="cookie-accept">Got it!</button>
+</div>
+
+
     <script src="navigation.js"></script>
     <script>
-      AOS.init({
-    offset: 100, 
-    easing: 'ease-in-out',
-    once: true 
-});
+        AOS.init({
+            offset: 100,
+            easing: 'ease-in-out',
+            once: true
+        });
     </script>
     <!-- script for accordion -->
     <script>
@@ -326,33 +331,59 @@ include 'basketCount.php';
             });
         }
     </script>
-      <script>
-         document.addEventListener('DOMContentLoaded', function () {
-        var splide = new Splide('.splide', {
-            perPage: 4,
-            loop: true,
-            gap: '1.5rem',
-            breakpoints: {
-                800: {
-                    perPage: 3,
-                    gap: '.7rem',
-                    height: '6rem',
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var splide = new Splide('.splide', {
+                perPage: 4,
+                loop: true,
+                gap: '1.5rem',
+                breakpoints: {
+                    800: {
+                        perPage: 3,
+                        gap: '.7rem',
+                        height: '6rem',
+                    },
+                    640: {
+                        perPage: 2,
+                        gap: '.7rem',
+                        height: '6rem',
+                    },
+                    480: {
+                        perPage: 1,
+                        gap: '.7rem',
+                        height: '6rem',
+                    },
                 },
-                640: {
-                    perPage: 2,
-                    gap: '.7rem',
-                    height: '6rem',
-                },
-                480: {
-                    perPage: 1,
-                    gap: '.7rem',
-                    height: '6rem',
-                },
-            },
-        });
+            });
 
-        splide.mount();
+            splide.mount();
+        });
+    </script>
+    <!-- cookie pop up -->
+    <script>
+ document.addEventListener('DOMContentLoaded', function () {
+    // get div and accept button
+    const popup = document.getElementById('cookie-popup');
+    const button = document.getElementById('cookie-accept');
+
+    // store acceptance in local storage 
+    const accepted = localStorage.getItem('cookieAccepted');
+    console.log('cookieAccepted:', accepted);
+
+    // base visibility of cookie pop up on acceptance or not
+    if (!accepted) {
+      console.log('No consent yet — showing popup');
+      popup.classList.add('visible');
+    } else {
+      console.log('Consent already given — popup will remain hidden');
+    }
+
+    button.addEventListener('click', () => {
+      console.log('Saving cookie consent');
+      localStorage.setItem('cookieAccepted', 'true');
+      popup.classList.remove('visible');
     });
+  });
     </script>
 </body>
 

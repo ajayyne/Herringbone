@@ -37,13 +37,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (index === -1) {
             // Add to favorites by pushing itemID to faves array
             favorites.push(itemId);
-            alert('Item added to favorites!');
             icon.classList.remove('fa-regular');
             icon.classList.add('fa-solid');
         } else {
             // Remove from favorites by removing itemID from faves array
             favorites.splice(index, 1);
-            alert('Item removed from favorites!');
             icon.classList.remove('fa-solid');
             icon.classList.add('fa-regular');
             // remove item immediately from favorites page

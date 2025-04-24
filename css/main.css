@@ -1476,6 +1476,10 @@ select {
 .favorite-text p{
     margin-bottom: 0rem;
 }
+.empty-faves{
+    width: 100%;
+    padding: 8rem 0rem 8rem 0rem;
+}
 
 /* CART */
 .cart-cont{
@@ -1612,6 +1616,49 @@ background-color: var(--medium-blue);
     background-color: var(--medium-blue);
 }
 
+/* COOKIE */
+#cookie-popup {
+    text-align: center;
+    visibility: hidden; 
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: var(--light-blue);
+    color: black;
+    padding: 15px 20px;
+    border-radius: 10px;
+    z-index: 9999;
+    max-width: 800px;
+    margin: auto;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #cookie-popup.visible {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  #cookie-popup button {
+    background: var(--darkest-blue);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: center;
+  }
+  #cookie-popup button:hover{
+    background-color: var(--dark-blue);
+  }
+
+
+ 
 
 
 @media screen and (min-width: 481px) {
@@ -1662,6 +1709,9 @@ background-color: var(--medium-blue);
     
 }
 @media screen and (min-width: 650px) {
+  
+    
+    
     .privacy-policy p{
         width: 45rem;
     }
@@ -1785,6 +1835,7 @@ background-color: var(--medium-blue);
         display: block;
         width: 100%;
         text-align: center;
+    
     }
 
     .desk-nav ul {
@@ -2165,6 +2216,7 @@ background-color: var(--medium-blue);
 .privacy-policy ul{
     width: 60rem;
 }
+
 }
 
 @media screen and (min-width: 1200px){

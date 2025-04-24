@@ -43,8 +43,8 @@ $orderID= $_GET['id'];
                 <ul class="navigation flex flex-col" id="myList">
                     <li><a href="Home.php">Home</a></li>
                     <li><a href="Products.php">Shop</a></li>
-                    <li><a href="Gallery.html">Gallery</a></li>
-                    <li><a href="cafe.html">Cafe</a></li>
+                    <li><a href="Gallery.php">Gallery</a></li>
+                    <li><a href="cafe.php">Cafe</a></li>
                     <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
@@ -64,8 +64,8 @@ $orderID= $_GET['id'];
                 <ul>
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
-                    <li><a href="Gallery.html">GALLERY</a></li>
-                    <li><a href="cafe.html">CAFE</a></li>
+                    <li><a href="Gallery.php">GALLERY</a></li>
+                    <li><a href="cafe.php">CAFE</a></li>
                     <li><a href="Contact.php">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">

@@ -87,14 +87,14 @@ function getFavoriteProducts($favIds) {
                 <ul class="navigation flex flex-col" id="myList">
                     <li><a href="Home.php">Home</a></li>
                     <li><a href="Products.php">Shop</a></li>
-                    <li><a href="Gallery.html">Gallery</a></li>
-                    <li><a href="cafe.html">Cafe</a></li>
+                    <li><a href="Gallery.php">Gallery</a></li>
+                    <li><a href="cafe.php">Cafe</a></li>
                     <li><a href="Contact.php">Contact Us</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
                     <div class="items-icons">
-                        <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
-                        <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                    <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
+                    <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
                      
                         <?php
                         // if basket is not empty - display this
@@ -108,14 +108,14 @@ function getFavoriteProducts($favIds) {
                 <ul>
                     <li><a href="Home.php">HOME</a></li>
                     <li><a href="Products.php">SHOP</a></li>
-                    <li><a href="Gallery.html">GALLERY</a></li>
-                    <li><a href="cafe.html">CAFE</a></li>
+                    <li><a href="Gallery.php">GALLERY</a></li>
+                    <li><a href="cafe.php">CAFE</a></li>
                     <li><a href="Contact.php">CONTACT US</a></li>
                 </ul>
                 <div class="icons icons-desk flex flex-even">
                     <div class="items-icons">
                         <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
-                        <a><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
+                        <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
           
                         <?php
                         // if basket is not empty - display this
@@ -137,8 +137,9 @@ function getFavoriteProducts($favIds) {
 
     <main class="favorites">
     <h1>Your Favorites</h1>
-    <div class="product-grid">
+    <div class="product-grid align">
         <?php 
+        if($favoritesCookie && !empty($favoritesCookie)){
         foreach ($favoriteItems as $product) {
             echo "
             <a href='Item.php?id={$product['ProdOptionID']}&category={$product['CategoryID']}&brand={$product['BrandName']}'>
@@ -156,6 +157,9 @@ function getFavoriteProducts($favIds) {
             </div>
             </a>";
         }
+    }else{
+        echo "<p class='empty-faves'>Looks like your favorites are empty...</p>";
+    }
         ?>
     </div>
     </main>

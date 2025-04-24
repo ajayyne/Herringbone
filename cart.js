@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // updates the basket icon counter
             updateBasketCounter();
 
-            alert(`Added ${quantity} of item ${productId} to your cart!`);
+          
         });
     });
 
