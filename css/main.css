@@ -1571,7 +1571,7 @@ background-color: var(--medium-blue);
     padding-bottom: 0.5rem;
     border-bottom: 1px solid black;
 }
-.payment-redirect{
+.payment-redirect, .complete-payment{
     font-family: 'Aboreto';
     margin-top: 3rem;
     font-weight: bold;
@@ -1580,12 +1580,31 @@ background-color: var(--medium-blue);
     outline: none;
     border: none;
     box-shadow: var(--shadow);
+    padding: 0.5rem;
 }
-.payment-redirect:hover{
+.payment-redirect:hover, .complete-payment{
     outline: none;
     border: none;
     background-color: var(--medium-blue);
 }
+
+
+/* PAYMENT.PHP */
+.payment{
+    padding: 8rem 1rem 2rem 1rem;
+}
+
+.payment form div{
+    align-items: start;
+}
+.complete-payment{
+    background-color: var(--darkest-blue);
+}
+.complete-payment:hover{
+    border: none;
+    background-color: var(--medium-blue);
+}
+
 
 
 @media screen and (min-width: 481px) {

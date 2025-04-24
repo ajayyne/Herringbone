@@ -151,7 +151,8 @@ include 'basketCount.php';
                     LEFT JOIN product_option as po ON po.ProductID = p.ProductID
                     LEFT JOIN categories as c ON c.CategoryID = p.CategoryID
                     LEFT JOIN image as i ON po.ProdOptionID = i.ProdOptionID
-                    WHERE Bestseller = 1";
+                    WHERE Bestseller = 1
+                    GROUP BY p.ProductID";
 
                         $runBestsellers = mysqli_query($connection, $getBestsellers);
                         while ($displayBestsellers = mysqli_fetch_array($runBestsellers)) {

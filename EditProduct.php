@@ -59,9 +59,9 @@ if (isset($_POST['delete'])) {
 
     $delete = "DELETE FROM product_option WHERE ProdOptionID ='{$_POST['ProdOptionID']}'";
     $runDelete = mysqli_query($connection, $delete);
-    // if (!$runDelete) {
-    //     echo "<script>alert(Error in product_option query)</script>";
-    // }
+    if (!$runDelete) {
+        echo "<script>alert(Error, cannot delete product.)</script>";
+    }
 
     // $deleteProduct = "DELETE FROM products WHERE ProductID = '{$_POST['ProductID']}'";
     // $runDeleteProduct = mysqli_query($connection, $deleteProduct);
