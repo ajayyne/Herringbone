@@ -1,4 +1,4 @@
 <?php
-$connection = mysqli_connect('localhost', 'Herringbone2', 'Peebles123#', 'herringbone')
+$connection = mysqli_connect('localhost', 'herringbone2', 'Peebles123#', 'herringbone2')
 or die('cannot connect');
 ?>

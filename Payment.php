@@ -3,6 +3,10 @@ session_start();
 include 'connection.php';
 include 'basketCount.php';
 $orderID= $_GET['id'];
+
+if(empty($orderID) || $orderID = null || $orderID = ""){
+    header("Location: Home.php");
+}
 ?>
 
 

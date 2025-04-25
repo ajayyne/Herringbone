@@ -25,6 +25,10 @@ if (!is_array($cartCookie)) {
     $cartItems = []; // Fallback to an empty array
 }
 
+if(empty($cartCookie)){
+    header("Location: Home.php");
+}
+
 // Get the cart item details from DB
 function getCartItems($cartIds)
 {
