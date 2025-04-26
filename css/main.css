@@ -1097,6 +1097,7 @@ select {
     transition: background-color 0.3s ease, color 0.3s ease;
     background-color: var(--dark-blue);
     color: white;
+    border: 2px solid transparent;
 }
 .cart-btn:hover, .cart-btn:focus, .cart-btn:active{
     background-color: white;
@@ -1247,9 +1248,16 @@ select {
     padding: unset;
     margin: unset;
 }
+.cart-form label, .payment-form label{
+    margin-bottom: 0rem;
+    margin-top: 1.5rem;
+    text-align: left;
+    width: 15rem;
+}
 .basket-form{
     padding: unset;
 }
+
 
 /* brand section */
 .brand-sect{
@@ -1557,22 +1565,22 @@ background-color: var(--medium-blue);
 
 /* CHECKOUT PAGE */
 .checkout{
-    padding: 9rem 1rem 2rem 1rem;
+    padding: 6rem 1rem 2rem 1rem;
 }
 .cart-form{
     border: 1px solid var(--darkest-blue);
     padding: 2rem 1rem 2rem 1rem;
-    margin-bottom: 3rem;
+    
     box-shadow: var(--shadow);
     transform: scale(0.9);
 }
-.cart-form h1{
+.cart-form h1, .payment-form h1{
     transform: scale(0.9);
     color: black;
     font-size: 1.3rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
     font-weight: bold;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.8rem;
     border-bottom: 1px solid black;
 }
 .payment-redirect, .complete-payment{
@@ -1591,6 +1599,9 @@ background-color: var(--medium-blue);
     border: none;
     background-color: var(--medium-blue);
 }
+.complete-payment{
+    margin-bottom: 1rem;
+}
 .deleteCartItem{
     padding: 1rem 2rem 1rem 1rem;
     font-weight: bold;
@@ -1607,6 +1618,13 @@ background-color: var(--medium-blue);
 
 .payment form div{
     align-items: start;
+}
+.payment-form{
+    border: 1.5px solid var(--darkest-blue);
+    box-shadow: var(--shadow);
+}
+.payment-form{
+    width: 80%;
 }
 .complete-payment{
     background-color: var(--darkest-blue);
@@ -1706,11 +1724,19 @@ background-color: var(--medium-blue);
         background-color: var(--dark-blue);
         width: 100%;
     }
-    
 }
 @media screen and (min-width: 650px) {
+    .payment-form{
+        transform: scale(0.8);
+        width: 30rem;
+        padding: 2rem;
+    }
   
-    
+    .cart-form-responsive{
+        display: flex;
+        justify-content: space-evenly;
+       
+    }
     
     .privacy-policy p{
         width: 45rem;
@@ -1827,6 +1853,9 @@ background-color: var(--medium-blue);
 
 /*LAPTOP*/
 @media screen and (min-width: 992px) {
+    .cart-form label{
+        width: 25rem;
+    }
     header {
         padding: 0.3rem 0rem 0.3rem 0rem;
     }
@@ -1835,7 +1864,6 @@ background-color: var(--medium-blue);
         display: block;
         width: 100%;
         text-align: center;
-    
     }
 
     .desk-nav ul {

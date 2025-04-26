@@ -24,7 +24,6 @@ $cartItems = getCartItems($uniqueCartIds);
 if (!is_array($cartCookie)) {
     $cartItems = []; // Fallback to an empty array
 }
-
 if(empty($cartCookie)){
     header("Location: Home.php");
 }
@@ -141,39 +140,44 @@ function getCartItems($cartIds)
 
     
 <main class="checkout">
-
 <form class="cart-form radius" method="post">
-    <h1 class="align">Delivery & Billing Address</h1>
-<div class="flex flex-col">
-        <label for="name">* Full Name</label>
-        <input type="text" name="name" required>
+<h1 class="align">Delivery & Billing Address</h1>
+<div class="cart-form-responsive">
+    <div class="flex flex-col">
+        <div class="flex flex-col">
+            <label for="name">* Full Name</label>
+            <input type="text" name="name" required>
+        </div>
+        <div class="flex flex-col">
+            <label for="email">* Email Address</label>
+            <input type="email" name="email" required>
+        </div>
+        <div class="flex flex-col">
+            <label for="address1">* Address Line 1</label>
+            <input type="text" name="address1" required>
+        </div>
+        <div class="flex flex-col">
+            <label for="address2">Address Line 2</label>
+            <input type="text" name="address2">
+        </div>
     </div>
     <div class="flex flex-col">
-        <label for="email">* Email Address</label>
-        <input type="email" name="email" required>
+        <div class="flex flex-col">
+            <label for="town">* Town</label>
+            <input type="text" name="town" required>
+        </div>
+        <div class="flex flex-col">
+            <label for="postcode">* Post Code</label>
+            <input type="text" name="postcode" required>
+        </div>
+        <div class="flex flex-col">
+            <label for="county">* County</label>
+            <input type="text" name="county" required>
+        </div>
+        <div class="align">
+            <input type="submit" value="PROCEED TO PAYMENT" class="payment-redirect"></input>
+        </div>
     </div>
-    <div class="flex flex-col">
-        <label for="address1">* Address Line 1</label>
-        <input type="text" name="address1" required>
-    </div>
-    <div class="flex flex-col">
-        <label for="address2">Address Line 2</label>
-        <input type="text" name="address2">
-    </div>
-    <div class="flex flex-col">
-        <label for="town">* Town</label>
-        <input type="text" name="town" required>
-    </div>
-    <div class="flex flex-col">
-        <label for="postcode">* Post Code</label>
-        <input type="text" name="postcode" required>
-    </div>
-    <div class="flex flex-col">
-        <label for="county">* County</label>
-        <input type="text" name="county" required>
-    </div>
-    <div class="align">
-        <input type="submit" value="PROCEED TO PAYMENT" class="payment-redirect"></input>
     </div>
 </form>
 

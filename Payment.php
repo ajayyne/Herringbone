@@ -3,6 +3,7 @@ session_start();
 include 'connection.php';
 include 'basketCount.php';
 $orderID= $_GET['id'];
+echo "<script>alert($orderID)</script>";
 
 if(empty($orderID) || $orderID = null || $orderID = ""){
     header("Location: Home.php");
@@ -95,8 +96,10 @@ if(empty($orderID) || $orderID = null || $orderID = ""){
 
 
     <main class="payment">
-        <div>
-            <form method="post" class="payment-form flex flex-col">
+        <div class="flex flex-center">
+            <form method="post" class="payment-form flex flex-col radius">
+
+            <h1 class="align">Payment Details</h1>
                 <div class="flex flex-col">
                     <label for="cardName">Card Holder Name:</label>
                     <input type="text" name="cardName" required placeholder="John Doe">
@@ -119,15 +122,15 @@ if(empty($orderID) || $orderID = null || $orderID = ""){
                 </div>
             </form>
         </div>
-
-        <!-- have 2 forms, one for visa, one for mastercard.
-         user clicks tab (visa) drop down div to show visa input with visa logo
-         have an if statemtnt that says if this form has been posted -> process payment, OR if that form has been posted -> process payment -->
     </main>
 
     <?php
 
     if(isset($_POST['mastercard'])){
+        // make sure the orderID is in scope (this was an issue so putting it inside the if statement solved the problem)
+        if (isset($_GET['id'])) {
+        $orderID = intval($_GET['id']);
+        echo "UPDATE orders SET paymentMade = 1 WHERE orderID = $orderID";
         // sql insert payment into the orders table 
         // 1=true which means payment has been made
         $paymentInsert = "UPDATE orders SET paymentMade = 1
@@ -139,7 +142,7 @@ if(empty($orderID) || $orderID = null || $orderID = ""){
         }else{
             echo "<script>alert('not working')</script>";
         }
-    }
+    }}
     ?>
 
 
