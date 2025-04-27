@@ -181,15 +181,17 @@ function getCartItems($cartIds)
     </div>
 </form>
 
-<div class="cart-information">
-    <h6>Delivery</h6>
-    <p>We offer standard delivery within 3–5 business days for all in-stock items. Expedited shipping options are available at checkout for an additional fee.</p>
-</div>
+<div class='cart-info-cont'>
+                <div class='cart-information'>
+                    <h6>Delivery</h6>
+                    <p>We offer standard delivery within 3–5 business days for all in-stock items. Expedited shipping options are available at checkout for an additional fee.</p>
+                </div>
 
-<div class="cart-information">
-    <h6>Returns & Refunds</h6>
-    <p>We accept returns within 30 days of purchase, provided the item is unused and in its original packaging. To initiate a return, please contact our customer service team with your order details. Refunds will be processed to the original payment method once the item is received and inspected. Please note that return shipping costs are the responsibility of the customer unless the item is defective or incorrect.</p>
-</div>
+                <div class='cart-information'>
+                    <h6>Returns & Refunds</h6>
+                    <p>We accept returns within 30 days of purchase, provided the item is unused and in its original packaging. To initiate a return, please contact our customer service team with your order details. Refunds will be processed to the original payment method once the item is received and inspected. Please note that return shipping costs are the responsibility of the customer unless the item is defective or incorrect.</p>
+                </div>
+            </div>
 
 <!-- handle form -->
 <?php

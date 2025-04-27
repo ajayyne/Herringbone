@@ -100,6 +100,8 @@ if(empty($orderID) || $orderID = null || $orderID = ""){
             <form method="post" class="payment-form flex flex-col radius">
 
             <h1 class="align">Payment Details</h1>
+            <div class="flex card-desk-flex">
+            <div class="apply-margin">
                 <div class="flex flex-col">
                     <label for="cardName">Card Holder Name:</label>
                     <input type="text" name="cardName" required placeholder="John Doe">
@@ -109,14 +111,18 @@ if(empty($orderID) || $orderID = null || $orderID = ""){
                     <input id="card" type="text" pattern="\d{4} \d{4} \d{4} \d{4}" maxlength="19" inputmode="numeric"
                         placeholder="1234 5678 9012 3456" required>
                 </div>
+            </div>
+            <div>
                 <div class="flex flex-col">
                     <label for="expiry">Expiry Date:</label>
-                    <input type="text" name="expiry" required placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/\d{2}" maxlength="5" inputmode="numeric">
+                    <input type="text" name="expiry" required placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/\d{2}" maxlength="5" inputmode="numeric" class="expiry">
                 </div>
                 <div class="flex flex-col">
                     <label for="expiry">Security Code:</label>
-                    <input type="text" name="expiry" required placeholder="123"  maxlength="3" inputmode="numeric">
+                    <input type="text" name="expiry" required placeholder="123"  maxlength="3" inputmode="numeric" class="security">
                 </div>
+            </div>
+            </div>
                 <div>
                     <input type="submit" value="COMPLETE PAYMENT" class="complete-payment" name="mastercard">
                 </div>

@@ -165,7 +165,10 @@ function getCartItems($cartIds)
             $total += $subtotal;
             $cartTotal = $total + $delivery;
 
-            echo "<div class='product-item cart-item flex radius'>
+            echo "
+            <div class='cart-contents'>
+            <div>
+            <div class='product-item cart-item flex radius'>
                     <img src='{$item['ImageURL']}' alt='Product Image'>
                     <div class='cart-item-text'>
                         <h6>{$item['ProductName']}</h6>
@@ -176,35 +179,40 @@ function getCartItems($cartIds)
                         <p>Subtotal: <strong>£" . number_format($subtotal, 2) . "</strong></p>
                     </div>
                     <span class='deleteCartItem' data-item-id='{$item['ProdOptionID']}'>X</span>
-                </div>";
+                </div>
+            </div>";
         }
 
 
 
         echo "
-        </div>
+        
       
 
-            <div class='total-container cart-total radius flex flex-col'>
-                <h6 class='align'><strong>ORDER SUMMARY</strong></h6>
-                <div class='total-info'>
-                    <p class='subtotal'><strong>Subtotal: £" . number_format($total, 2) . "</strong></p>
-                    <p class='delivery'><strong>Delivery: £" . number_format($delivery, 2) . "</strong></p>
-                    <p class='cartTotal'><strong>TOTAL:</strong> £" . number_format($cartTotal, 2) . "</p>
+                <div class='total-container cart-total radius flex flex-col'>
+                    <h6 class='align'><strong>ORDER SUMMARY</strong></h6>
+                    <div class='total-info'>
+                        <p class='subtotal'><strong>Subtotal: £" . number_format($total, 2) . "</strong></p>
+                        <p class='delivery'><strong>Delivery: £" . number_format($delivery, 2) . "</strong></p>
+                        <p class='cartTotal'><strong>TOTAL:</strong> £" . number_format($cartTotal, 2) . "</p>
+                    </div>
+                    <img src='images/cards.jpg'>
+                    <button><a href='Checkout.php'>Proceed To Checkout</a></button>
                 </div>
-                <img src='images/cards.jpg'>
-                <button><a href='Checkout.php'>Proceed To Checkout</a></button>
             </div>
+            
 
-            <div class='cart-information'>
-    <h6>Delivery</h6>
-    <p>We offer standard delivery within 3–5 business days for all in-stock items. Expedited shipping options are available at checkout for an additional fee.</p>
-</div>
+            <div class='cart-info-cont'>
+                <div class='cart-information'>
+                    <h6>Delivery</h6>
+                    <p>We offer standard delivery within 3–5 business days for all in-stock items. Expedited shipping options are available at checkout for an additional fee.</p>
+                </div>
 
-<div class='cart-information'>
-    <h6>Returns & Refunds</h6>
-    <p>We accept returns within 30 days of purchase, provided the item is unused and in its original packaging. To initiate a return, please contact our customer service team with your order details. Refunds will be processed to the original payment method once the item is received and inspected. Please note that return shipping costs are the responsibility of the customer unless the item is defective or incorrect.</p>
-</div>";
+                <div class='cart-information'>
+                    <h6>Returns & Refunds</h6>
+                    <p>We accept returns within 30 days of purchase, provided the item is unused and in its original packaging. To initiate a return, please contact our customer service team with your order details. Refunds will be processed to the original payment method once the item is received and inspected. Please note that return shipping costs are the responsibility of the customer unless the item is defective or incorrect.</p>
+                </div>
+            </div>";
     } else {
         echo "
         <div class='cart-cont flex flex-center'>
