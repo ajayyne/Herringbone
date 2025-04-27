@@ -57,17 +57,11 @@ if (isset($_POST['delete'])) {
     // echo "<script>alert('{$_POST['ProdOptionID']}')</script>";
     //  echo "<script>alert('{$_POST['ProductID']}')</script>";
 
-    $delete = "DELETE FROM product_option WHERE ProdOptionID ='{$_POST['ProdOptionID']}'";
+    $delete = "DELETE FROM products WHERE ProductID ='{$_POST['ProductID']}'";
     $runDelete = mysqli_query($connection, $delete);
     if (!$runDelete) {
         echo "<script>alert(Error, cannot delete product.)</script>";
     }
-
-    // $deleteProduct = "DELETE FROM products WHERE ProductID = '{$_POST['ProductID']}'";
-    // $runDeleteProduct = mysqli_query($connection, $deleteProduct);
-    // if (!$runDeleteProduct) {
-    //     echo "<script>alert(Error in products query)</script>";
-    // }
 
     $deleteImages = "DELETE FROM image WHERE ProdOptionID = '{$_POST['ProdOptionID']}'";
     $runDeleteImages = mysqli_query($connection, $deleteImages);
@@ -219,7 +213,9 @@ WHERE po.ProdOptionID = $itemID";
             <div class='prod-title'>
                     <div class='flex variant-btn'>
                         <label for='productName'>Product Name</label>
+                        <div>
                         <button><a href='addVariant.php?productID={$displayItem['ProductID']}&categoryName={$displayItem['CategoryName']}'>Add Variant</a></button>
+                        </div>
                     </div>
                 <input type='text' placeholder='{$displayItem['ProductName']}' name='productName' value='{$displayItem['ProductName']}'>
             </div>

@@ -158,7 +158,7 @@ function getFavoriteProducts($favIds) {
             </a>";
         }
     }else{
-        echo "<p class='empty-faves'>Looks like your favorites are empty...</p>";
+        echo "<p class='empty-faves'><strong>Looks like your favorites are empty...</strong></p>";
     }
         ?>
     </div>

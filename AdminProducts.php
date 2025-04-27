@@ -68,7 +68,10 @@ $username = mysqli_fetch_array($runusername);
 
         <div class="admin-page-title">
             <h1>All Products</h1>
+         
             <a href="NewProduct.php"><button class="new-btn">Add New Product</button></a>
+           
+
         </div>
 
         <?php

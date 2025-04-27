@@ -134,6 +134,7 @@ a {
     margin-bottom: 0.5rem;
 }
 .product img{
+    height: 5rem;
     width: 5rem;
     border-radius: 5px 0px 0px 5px;
 }
@@ -722,5 +723,11 @@ cursor: pointer;
 .product{
     width: 45%;
     margin-right: 1rem;
+}
+.new-btn{
+    font-size: 1.2rem;
+}
+.confirmUpdate:hover, .confirmDelete:hover{
+    background-color: var(--button);
 }
 }

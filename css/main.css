@@ -1834,7 +1834,7 @@ background-color: var(--medium-blue);
 }
 .product-div div:first-child{
     width: 100%;
-    background-color: var(--medium-blue);
+    background-color: var(--dark-blue);
     color: white;
 }
 .product-div-info{
@@ -2257,7 +2257,6 @@ background-color: var(--medium-blue);
 }
 .product-div div:first-child{
     width: 100%;
-    background-color: var(--medium-blue);
     color: white;
 }
 .product-div-info{

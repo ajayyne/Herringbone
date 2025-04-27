@@ -216,7 +216,7 @@ function getCartItems($cartIds)
     } else {
         echo "
         <div class='cart-cont flex flex-center'>
-            <p class='empty-cart'><strong>Looks Like your cart is empty...</strong></p>
+            <p class='empty-cart'><strong>Looks Like your basket is empty...</strong></p>
         </div>";
     }
     ?>
