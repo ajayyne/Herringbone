@@ -1110,6 +1110,11 @@ select {
 
 
 /* ITEM PAGE */
+.item-btn #unavailable{
+    margin-top: 5rem;
+    cursor: unset;
+    background-color: gray;
+}
 .item-main{
     padding: 8rem 1.3rem 1.3rem 1.3rem;
 }

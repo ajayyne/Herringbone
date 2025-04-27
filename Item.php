@@ -91,7 +91,7 @@ $brandName = $_GET['brand'];
 
         <?php
         // statement to get all data for product with matching ID
-        $getItem = "SELECT p.ProductID, p.ProductName, p.Description, p.Price, b.BrandName, i.ImageURL, po.Colour, po.ProdOptionID FROM product_option as po
+        $getItem = "SELECT p.ProductID, p.ProductName, p.Description, p.Price, b.BrandName, i.ImageURL, po.Colour, po.ProdOptionID, po.isAvailable FROM product_option as po
         LEFT JOIN products as p ON po.ProductID = p.ProductID 
         LEFT JOIN image as i ON i.ProdOptionID = po.ProdOptionID 
         LEFT JOIN brands as b ON p.BrandID = b.BrandID 
@@ -159,13 +159,24 @@ $brandName = $_GET['brand'];
                             <p>£{$displayItem['Price']}</p>
                         </div>
                         <div>
-                        <form class='basket-form'>
-                            <label for='quantity' class='quant-label'>Quantity</label>
-                            <input name='quantity' type='number' required min='1' max='5'>
+                        <form class='basket-form'>";
+                        
+                        if($displayItem['isAvailable'] != 1){
+                            echo "";
+                        }else{
+                            echo "<label for='quantity' class='quant-label'>Quantity</label>
+                            <input name='quantity' type='number' required min='1' max='5'>";
+                        }
                        
-                    <div class='item-btn'>
-                        <button class='itemCartButton' data-id='$displayItem[ProdOptionID]'>ADD TO BASKET</button>
-                        </div>
+                    echo "<div class='item-btn'>";
+
+                        if($displayItem['isAvailable'] != 1){
+                            echo "<button id='unavailable'>ITEM UNAVAILABLE</button>";
+                        }  else{
+                        echo "<button class='itemCartButton' data-id='$displayItem[ProdOptionID]'>ADD TO BASKET</button>";
+                        }
+
+                        echo "</div>
                         </form>
                      </div>
                     </div>
