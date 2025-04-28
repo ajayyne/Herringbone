@@ -99,19 +99,7 @@ if (isset($_POST['deleteBrand'])) {
         </ul>
     </nav>
     <main class="background">
-        <!-- modal for deleting pop up -->
-        <!-- <div id="deleteModal" class="deleteModal modal">
-            <!- Inner content 
-            <div class="inner-deleteModal inner-modal">
-                <span class="close">X</span>
-                <p>Are you sure you want to delete?</p>
-                <form method="POST" id="deleteForm">
-                    <input type="hidden" name="BrandID" id="brandID">
-                    <button type="button" id="close">Close</button>
-                    <button type="submit" id="confirmDeletion" name="deleteBrand">Delete</button>
-                </form>
-            </div>
-        </div> -->
+       
 
 
         <div class="flex admin-page-title">
@@ -132,13 +120,15 @@ if (isset($_POST['deleteBrand'])) {
             <div>
     <div class='flex brand'>
     <form method='post' id='updatingBrand'>
-        <input type='text' value='{$displayBrands['BrandName']}' name='BrandName'></input>
+        <input type='text' value='{$displayBrands['BrandName']}' name='BrandName' class='brandDropdown'></input>
         <input type='hidden' value='{$displayBrands['BrandID']}' name='BrandID'>
-        <input type='submit' name='updateBrand' value='update'>
+        <div class='brand-buttons flex'>
+        <input type='submit' name='updateBrand' value='Update Brand' class='confirmUpdate brandUpdate radius'>
     </form>
 
     <form method='post' id='deletingBrand'>
-        <input type='submit' name='deleteBrand' value='delete' class='openDeleteModal confirmDelete'>
+        <input type='submit' name='deleteBrand' value='Delete Brand' class='openDeleteModal confirmDelete radius brandDelete'>
+        </div>
         <input type='hidden' value='{$displayBrands['BrandID']}' name='BrandID'>
     </form>
     </div>

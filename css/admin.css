@@ -57,6 +57,11 @@ a {
 .flex {
     display: flex;
 }
+.flex-col{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
 
 
@@ -293,7 +298,6 @@ select {
 .update-delete-btns{
     justify-content: space-between;
 }
-
 .update-delete-btns input{
     width: 100%;
 }
@@ -304,6 +308,24 @@ select {
     background-color: transparent;
     border: 2px solid var(--button);
 }
+.brandUpdate, .brandDelete{
+    width: 45% !important;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    color: rgb(67, 27, 23);
+}
+.brandDelete{
+    background-color: var(--button);
+    color: white;
+}
+input[name='BrandName']{
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid var(--darkest-blue);
+    font-size: 1.5rem;
+}
+
 .button{
     padding-right: 0.6rem !important;
     padding-left: 0.6rem !important;
@@ -511,8 +533,17 @@ cursor: pointer;
     margin-top: 3rem;
 }
 .brand{
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
+    flex-direction: column;
 }
+.brand input{
+    padding: 0.5rem;
+    outline: none;
+}
+.brand-buttons{
+    justify-content: space-evenly;
+}
+
 /* END */
 
 
@@ -609,11 +640,58 @@ table tr{
 }
 table td{
     border: 1px solid black;
+    padding: 0.2rem;
 }
 table th{
    
     padding-right: 2rem;
     border: 1px solid black;
+}
+.order-container{
+    position: absolute;
+    border: 2px solid red;
+    width: 100%;
+}
+.order-heading{
+    margin: 10rem 0rem 5rem 0rem;
+    background-color: white;
+    padding: 1rem;
+    font-size: 1.2rem;
+    width: 15rem;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.orderTable{
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    position: absolute;
+}
+.OT1{
+    margin-top: 25rem;
+}
+.OT2{
+    margin-top: 45rem;
+}
+
+.orderVisible{
+    display: block;
+    max-height: 500px;
+    opacity: 1;
+}
+#completeOrder{
+    background-color: var(--button);
+    border: none;
+    padding: 0.5rem;
+    color: white;
+    font-weight: bold;
+}
+#completeOrder:hover, #compelteOrder:focus{
+    background-color: var(--buttonActive);
 }
 
 
