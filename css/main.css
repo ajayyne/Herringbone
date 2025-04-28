@@ -1873,6 +1873,7 @@ background-color: var(--medium-blue);
     }
     .total-container button{
         font-size: 0.8rem;
+        width: 30rem;
         padding: 0.4rem;
     }
     .payment-form{

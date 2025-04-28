@@ -76,12 +76,35 @@ $username = mysqli_fetch_array($runusername);
         echo "hello";
     }
 
+    echo "<table>
+                <tr>
+                    <th>Customer Name:</th>
+                    <th>Address:</th>
+                    <th>Items Ordered:</th>
+                    <th>Payment Recieved:</th>
+                    <th>Order Fulfilled:</th>
+                </tr>
+                ";
     // get orders that have yet to be completed
-    $getOrders = "SELECT * FROM orders WHERE orderFulfilled = 0";
+    $getOrders = "SELECT * FROM orders as o 
+    LEFT JOIN ordereditems as oi ON oi.orderID = o.orderID
+    LEFT JOIN product_option as po ON po.ProdOptionID = oi.ProdOptionID
+    LEFT JOIN products as p ON p.ProductID = po.ProductID
+    WHERE o.orderFulfilled = 0";
     $runOrders = mysqli_query($connection, $getOrders);
     while($uncompleted = mysqli_fetch_array($runOrders)){
-        echo "yay";
+        echo "
+                <tr>
+                <td>{$uncompleted['customerName']}</td>
+                 <td>{$uncompleted['Address1']}, {$uncompleted['Address2']}, {$uncompleted['Town']}, {$uncompleted['postCode']}, {$uncompleted['County']}</td>
+                 <td>{$uncompleted['ProductName']}</td>
+                 <td>{$uncompleted['Color']}</td>
+                 <td>{$uncompleted}['totalItemPrice']</td>
+                </tr>";
     }
+
+    echo "
+              </table>";
     ?>
 
 

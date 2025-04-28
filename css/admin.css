@@ -600,7 +600,21 @@ cursor: pointer;
     font-size: 2rem;
     cursor: pointer;
 }
-
+table{
+    border: 1px solid black;
+    font-size: 0.65rem;
+}
+table tr{
+    border: 1px solid black;
+}
+table td{
+    border: 1px solid black;
+}
+table th{
+   
+    padding-right: 2rem;
+    border: 1px solid black;
+}
 
 
 /* desktop */

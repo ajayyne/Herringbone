@@ -46,7 +46,9 @@ function getCartItems($cartIds)
     $getCart = "SELECT * FROM product_option as po
     LEFT JOIN image as i ON i.ProdOptionID = po.ProdOptionID
         LEFT JOIN Products as p ON po.ProductID = p.ProductID
-        WHERE po.ProdOptionID IN ($CartIds)";
+        WHERE po.ProdOptionID IN ($CartIds)
+        GROUP BY po.ProdOptionID";
+        // grouping by = only 1 item will show even when there are multiple images attached
 
 
 
