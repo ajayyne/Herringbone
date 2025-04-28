@@ -647,42 +647,41 @@ table th{
     padding-right: 2rem;
     border: 1px solid black;
 }
-.order-container{
-    position: absolute;
-    border: 2px solid red;
+.order-container {
     width: 100%;
+    height: 100vh;
+    border: 2px solid red;
 }
-.order-heading{
-    margin: 10rem 0rem 5rem 0rem;
+
+.order-heading {
+    margin: 2rem 0;
     background-color: white;
     padding: 1rem;
     font-size: 1.2rem;
     width: 15rem;
     text-align: center;
-    position: relative;
     cursor: pointer;
 }
 
-.orderTable{
-    display: none;
-    max-height: 0;
+/* Start hidden but allow height transition */
+.order-wrapper {
     overflow: hidden;
+    max-height: 0;
     opacity: 0;
-    transition: max-height 0.4s ease, opacity 0.4s ease;
-    position: absolute;
-}
-.OT1{
-    margin-top: 25rem;
-}
-.OT2{
-    margin-top: 45rem;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
 }
 
-.orderVisible{
-    display: block;
-    max-height: 500px;
+/* Visible state */
+.order-wrapper.visible {
+    max-height: 2000px; /* Large enough for table content */
     opacity: 1;
 }
+
+.orderTable {
+    width: 100%;
+    margin-top: 1rem;
+}
+
 #completeOrder{
     background-color: var(--button);
     border: none;

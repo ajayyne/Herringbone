@@ -40,7 +40,7 @@ $username = mysqli_fetch_array($runusername);
 
 
 <body class="orders">
-<div class="navbar">
+    <div class="navbar">
         <button class="hamburger" id="hamburger">
             &#9776;
         </button>
@@ -70,14 +70,16 @@ $username = mysqli_fetch_array($runusername);
     <div class="order-container flex flex-col">
 
 
-    <div class="flex flex-col">
-    <h1 class="order-heading radius">Uncompleted Orders</h1>
+        <div class="flex flex-col">
+            <h1 class="order-heading radius">Uncompleted Orders</h1>
 
 
-<?php
-    
+            <?php
 
-    echo "<table class='orderTable OT1'>
+
+            echo "
+            <div class='order-wrapper'>
+            <table class='orderTable OT1'>
                 <tr>
                     <th>Customer Name:</th>
                     <th>Address:</th>
@@ -87,101 +89,114 @@ $username = mysqli_fetch_array($runusername);
                     <th>Order Fulfilled:</th>
                 </tr>
                 ";
-            
-    // get orders that have yet to be completed
-    $getOrders = "SELECT * FROM orders as o 
+
+            // get orders that have yet to be completed
+            $getOrders = "SELECT * FROM orders as o 
     LEFT JOIN ordereditems as oi ON oi.orderID = o.orderID
     LEFT JOIN product_option as po ON po.ProdOptionID = oi.ProdOptionID
     LEFT JOIN products as p ON p.ProductID = po.ProductID
     WHERE o.orderFulfilled = 0";
-    $runOrders = mysqli_query($connection, $getOrders);
-    while($uncompleted = mysqli_fetch_array($runOrders)){
-        echo "
-                <tr>
-                <td>{$uncompleted['customerName']}</td>
-                 <td>{$uncompleted['Address1']}, {$uncompleted['Address2']}, {$uncompleted['Town']}, {$uncompleted['postCode']}, {$uncompleted['County']}</td>
-                 <td>{$uncompleted['ProductName']} x{$uncompleted['itemQuantity']} ({$uncompleted['Colour']})</td>
-                 <td>{$uncompleted['orderTotal']}</td>
-                 <td>{$uncompleted['paymentMade']}</td>
-                 <form method='post' id='orderForm'>
-                 <input type='hidden' value='{$uncompleted['orderID']}' name='orderID'>
-                 <td><input type='submit' id='completeOrder' name='complete' value='Mark as Completed' class='radius'></td>
-                 </form>
-                </tr>";
-    }
-
-    echo "</table>
+            $runOrders = mysqli_query($connection, $getOrders);
+            if ($runOrders && mysqli_num_rows($runOrders) > 0) {
+                while ($uncompleted = mysqli_fetch_array($runOrders)) {
+                    echo "
+                    <tr>
+                        <td>{$uncompleted['customerName']}</td>
+                        <td>{$uncompleted['Address1']}, {$uncompleted['Address2']}, {$uncompleted['Town']}, {$uncompleted['postCode']}, {$uncompleted['County']}</td>
+                        <td>{$uncompleted['ProductName']} x{$uncompleted['itemQuantity']} ({$uncompleted['Colour']})</td>
+                        <td>{$uncompleted['orderTotal']}</td>
+                        <td>{$uncompleted['paymentMade']}</td>
+                        <td>
+                            <form method='post' id='orderForm'>
+                                <input type='hidden' value='{$uncompleted['orderID']}' name='orderID'>
+                                <input type='submit' id='completeOrder' name='complete' value='Mark as Completed' class='radius'>
+                            </form>
+                        </td>
+                    </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='6'>No uncompleted orders found.</td></tr>";
+            }
+            echo "</table>
+            </div>
     </div>";
 
-    
-
-    if (isset($_POST['complete'])) {
-        $complete = "UPDATE orders SET orderFulfilled = 1 WHERE orderID = $_POST[orderID]";
-        $runComplete = mysqli_query($connection, $complete);
-        if($runComplete){
-            echo "<script>alert('order fulfilled')</script>";
-        }
-    }
-    ?>
-    
-
-    <div class="flex flex-col">
-    <h1 class="order-heading radius">Completed Orders</h1>
 
 
-    <?php
-echo "<table class='orderTable OT2'>";
-    // get orders that are already completed
-    $getCompletedOrders = "SELECT * FROM orders WHERE orderFulfilled = 1";
-    $runCompletedOrders = mysqli_query($connection, $getCompletedOrders);
-    while($completed = mysqli_fetch_array($runCompletedOrders)){
-        echo "  <tr>
-                    <th>Customer Name:</th>
-                    <th>Address:</th>
-                    <th>Items Ordered:</th>
-                    <th>Total Order Price:</th>
-                    <th>Payment Recieved:</th>
-                    <th>Order Fulfilled:</th>
-                </tr>";
+            if (isset($_POST['complete'])) {
+                $complete = "UPDATE orders SET orderFulfilled = 1 WHERE orderID = $_POST[orderID]";
+                $runComplete = mysqli_query($connection, $complete);
+                if ($runComplete) {
+                    echo "<script>alert('order fulfilled')</script>";
+                }
+            }
+            ?>
 
-             // get orders that have yet to be completed
-    $getCompleted = "SELECT * FROM orders as o 
+
+            <div class="flex flex-col">
+                <h1 class="order-heading radius">Completed Orders</h1>
+
+
+                <?php
+                echo "
+<div class='order-wrapper'>
+    <table class='orderTable OT2'>
+        <tr>
+            <th>Customer Name:</th>
+            <th>Address:</th>
+            <th>Items Ordered:</th>
+            <th>Total Order Price:</th>
+            <th>Payment Recieved:</th>
+            <th>Order Fulfilled:</th>
+        </tr>";
+
+                // Query all completed orders with item info
+                $getCompleted = "SELECT * FROM orders as o 
     LEFT JOIN ordereditems as oi ON oi.orderID = o.orderID
     LEFT JOIN product_option as po ON po.ProdOptionID = oi.ProdOptionID
     LEFT JOIN products as p ON p.ProductID = po.ProductID
-    WHERE o.orderFulfilled = 1";
-    $runCompleted = mysqli_query($connection, $getCompleted);
-    while($completedOrders = mysqli_fetch_array($runCompleted)){
-        echo "
-                <tr>
-                <td>{$completedOrders['customerName']}</td>
-                 <td>{$completedOrders['Address1']}, {$completedOrders['Address2']}, {$completedOrders['Town']}, {$completedOrders['postCode']}, {$completedOrders['County']}</td>
-                 <td>{$completedOrders['ProductName']} x{$completedOrders['itemQuantity']} ({$completedOrders['Colour']})</td>
-                 <td>{$completedOrders['orderTotal']}</td>
-                 <td>{$completedOrders['paymentMade']}</td>
-                 <td>Yes</td>
-                </tr>";
-    }
-  
-}
-echo "</form>";
-?>
-</div>
-</div>
+    WHERE o.orderFulfilled = 1
+    ORDER BY o.orderID DESC";
+
+                $runCompleted = mysqli_query($connection, $getCompleted);
+
+                if ($runCompleted && mysqli_num_rows($runCompleted) > 0) {
+                    while ($completedOrders = mysqli_fetch_array($runCompleted)) {
+                        echo "
+        <tr>
+            <td>{$completedOrders['customerName']}</td>
+            <td>{$completedOrders['Address1']}, {$completedOrders['Address2']}, {$completedOrders['Town']}, {$completedOrders['postCode']}, {$completedOrders['County']}</td>
+            <td>{$completedOrders['ProductName']} x{$completedOrders['itemQuantity']} ({$completedOrders['Colour']})</td>
+            <td>{$completedOrders['orderTotal']}</td>
+            <td>{$completedOrders['paymentMade']}</td>
+            <td>Yes</td>
+        </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='6'>No completed orders found.</td></tr>";
+                }
+
+                echo "
+    </table>
+</div>";
+                ?>
+
+            </div>
+        </div>
 
 
-    
-    <script src="AdminNav.js"></script>
-    <script>
-    const orders = document.querySelectorAll('.order-heading');
-    const orderTables = document.querySelectorAll('.orderTable');
 
-    orders.forEach((order, index) => {
-        order.addEventListener('click', () => {
-            orderTables[index].classList.toggle('orderVisible');
-        });
-    });
-    </script>
-    </body>
+        <script src="AdminNav.js"></script>
+        <script>
+            const headings = document.querySelectorAll('.order-heading');
+            const wrappers = document.querySelectorAll('.order-wrapper');
+
+            headings.forEach((heading, index) => {
+                heading.addEventListener('click', () => {
+                    wrappers[index].classList.toggle('visible');
+                });
+            });
+        </script>
+</body>
+
 </html>
-
