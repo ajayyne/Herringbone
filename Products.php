@@ -406,6 +406,7 @@ include 'basketCount.php';
 
                             const nameElement = document.createElement('h6');
                             nameElement.innerText = product.Name;
+                            nameElement.classList.add('truncate');
                             productDiv.appendChild(nameElement);
 
                             const priceHolder = document.createElement('div');

@@ -1008,7 +1008,9 @@ select {
     transform: scale(0.8);
     color: white;
     font-family: 'Aboreto';
+    cursor: pointer !important;
 }
+
 .category-mob:focus, .category-mob:active{
     box-shadow: var(--shadow);
     background-color: var(--dark-blue);
@@ -1104,6 +1106,13 @@ select {
     border: 2px solid var(--dark-blue);
     color: var(--darkest-blue);
 }
+.product h6.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; /* or set a specific width */
+    display: block;
+  }
 
 /*END*/
 
@@ -2139,6 +2148,8 @@ background-color: var(--medium-blue);
         margin-top: 3rem;
         margin-left: 2rem;
         width: 7rem;
+        max-height: 400px; 
+        overflow-y: auto; 
     }
     .categories-desk p{
         font-style: italic;

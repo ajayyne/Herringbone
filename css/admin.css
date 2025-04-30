@@ -241,7 +241,7 @@ select {
     transform: scale(0.8);
 }
 .new-btn{
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 /* END */
@@ -280,6 +280,8 @@ select {
 .edit-cont input, .edit-cont textarea, .edit-cont select{
     padding: 0.2rem;
     border-radius: 10px;
+    border: 2px solid var(--dark-blue);
+    outline: none;
 }
 .edit-cont input:active, .edit-cont textarea:active, .edit-cont select:active{
     border: 2px solid var(--button);
@@ -297,6 +299,12 @@ select {
 }
 .update-delete-btns{
     justify-content: space-between;
+}
+#updateItem, #deleteItem{
+    border: 2px solid var(--button);
+}
+#deleteItem{
+    background-color: var(--button);
 }
 .update-delete-btns input{
     width: 100%;
@@ -343,10 +351,12 @@ input[name='BrandName']{
 #imageUpload{
     margin-right: 2rem;
     margin-left: 1rem;
+    border: none !important;
 }
 .new-prod-img{
     margin-left: 0rem !important;
     margin-bottom: 1rem;
+    border: none !important;
 }
 .image-uploadBtn{
     width: 18rem;
@@ -359,6 +369,7 @@ input[name='BrandName']{
 
 #showImages{
     margin-top: 1rem;
+    border: none !important;
 }
 .prod-imgs{
     flex-wrap: wrap;
@@ -394,6 +405,7 @@ input[name='BrandName']{
 }
 .new-prod-btn{
     width: 100%;
+    border: none !important;
 }
 
 
@@ -631,55 +643,10 @@ cursor: pointer;
     font-size: 2rem;
     cursor: pointer;
 }
-table{
-    border: 1px solid black;
-    font-size: 0.65rem;
-}
-table tr{
-    border: 1px solid black;
-}
-table td{
-    border: 1px solid black;
-    padding: 0.2rem;
-}
-table th{
-   
-    padding-right: 2rem;
-    border: 1px solid black;
-}
-.order-container {
-    width: 100%;
-    height: 100vh;
-    border: 2px solid red;
-}
 
-.order-heading {
-    margin: 2rem 0;
-    background-color: white;
-    padding: 1rem;
-    font-size: 1.2rem;
-    width: 15rem;
-    text-align: center;
-    cursor: pointer;
-}
+.orders-container{
+    padding: 2rem;
 
-/* Start hidden but allow height transition */
-.order-wrapper {
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    transition: max-height 0.5s ease, opacity 0.5s ease;
-}
-
-/* Visible state */
-.order-wrapper.visible {
-    max-height: 2000px; /* Large enough for table content */
-    opacity: 1;
-}
-
-.orderTable {
-    width: 100%;
-    margin-top: 1rem;
 }
 
 #completeOrder{
@@ -692,6 +659,53 @@ table th{
 #completeOrder:hover, #compelteOrder:focus{
     background-color: var(--buttonActive);
 }
+
+
+.tab-container {
+    display: flex;
+    color: white;
+  }
+
+  .tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: var(--buttonActive);
+    border: 1px solid #ccc;
+    border-bottom: none;
+    margin-right: 5px;
+    border-radius: 5px 5px 0 0;
+  }
+
+  .tab.active {
+    background-color: var(--button);
+    font-weight: bold;
+  }
+
+  .table-container {
+    background-color: var(--button);
+    color: white;
+    border: 1px solid #1f1616;
+    border-radius: 0px 10px 10px 10px;
+    padding: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    border-bottom: 1px solid #ffffff;
+    text-align: left;
+  }
+
+  .hidden {
+    display: none;
+  }
 
 
 /* desktop */
@@ -820,5 +834,22 @@ table th{
 }
 .confirmUpdate:hover, .confirmDelete:hover{
     background-color: var(--button);
+}
+.order-container{
+    flex-direction: row !important;
+    align-items: start !important;
+    justify-content: center;
+}
+.order-container .flex-col{
+    width: 50%;
+}
+.order-wrapper{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+table{
+    font-size: 0.8rem;
 }
 }

@@ -111,10 +111,15 @@ $brandName = $_GET['brand'];
             WHERE po.ProdOptionID = $prodOptionID";
             $runimages = mysqli_query($connection, $imageQuery);
             while ($displayImages = mysqli_fetch_assoc($runimages)) {
-                // echo "<div class='item-img'>
-                echo "<li class='splide__slide item-img'>
+                    echo "<li class='splide__slide item-img'>
                         <img src='{$displayImages['ImageURL']}' alt='{$displayImages['ProductName']}'>
                     </li>";
+                
+            }
+            if (!empty($displayImages['ImageURL'])) {
+                echo "<li class='splide__slide item-img'>
+                    <img src='{$displayImages['ImageURL']}' alt='{$displayImages['ProductName']}'>
+                </li>";
             }
 
             echo "      </ul>
@@ -127,9 +132,6 @@ $brandName = $_GET['brand'];
                                 <i class='fa-regular fa-heart favorite-icon'></i>
                             </div>
                         </div>
-                    
-                     
-
 
                     <h2>{$displayItem['BrandName']}</h2>
                     <div id='description-wrapper'>
@@ -161,9 +163,7 @@ $brandName = $_GET['brand'];
                         <div>
                         <form class='basket-form'>";
                         
-                        if($displayItem['isAvailable'] != 1){
-                            echo "";
-                        }else{
+                        if($displayItem['isAvailable'] = 1){
                             echo "<label for='quantity' class='quant-label'>Quantity</label>
                             <input name='quantity' type='number' required min='1' max='5'>";
                         }
@@ -217,13 +217,28 @@ $brandName = $_GET['brand'];
                     <div class="splide__list">
 
                         <?php
-                        $getSimilar = "SELECT po.ProdOptionID, p.ProductID, p.ProductName, b.BrandName, p.Price, i.ImageURL, c.CategoryID FROM products AS p
-                LEFT JOIN brands as b ON b.BrandID = p.BrandID
-                LEFT JOIN product_option as po ON po.ProductID = p.ProductID
-                LEFT JOIN image as i ON po.ProdOptionID = i.ProdOptionID
-                LEFT JOIN categories as c ON c.CategoryID = p.CategoryID
+                $getSimilar = "
+                SELECT 
+                    p.ProductID, 
+                    p.ProductName, 
+                    p.Price, 
+                    b.BrandName, 
+                    po.ProdOptionID, 
+                    c.CategoryID,
+                    (
+                        SELECT i.ImageURL 
+                        FROM image i 
+                        WHERE i.ProdOptionID = po.ProdOptionID AND i.defaultImg = 1
+                        LIMIT 1
+                    ) AS ImageURL
+                FROM products AS p
+                JOIN brands AS b ON b.BrandID = p.BrandID
+                JOIN product_option AS po ON po.ProductID = p.ProductID
+                JOIN categories AS c ON c.CategoryID = p.CategoryID
                 WHERE p.CategoryID = $itemCategory
-                GROUP BY ProductName";
+                GROUP BY p.ProductID
+                LIMIT 10;
+                ";
                         $runSimilar = mysqli_query($connection, $getSimilar);
                         while ($displaySimilar = mysqli_fetch_array($runSimilar)) {
                             echo "<div class='splide__slide'>
@@ -307,10 +322,10 @@ $brandName = $_GET['brand'];
 
             if (wrapper.classList.contains("expand")) {
                 wrapper.classList.remove("expand");
-                toggleBtn.innerText = "Show More...";
+                toggleBtn.innerText = "See More...";
             } else {
                 wrapper.classList.add("expand");
-                toggleBtn.innerText = "Show Less...";
+                toggleBtn.innerText = "See Less...";
             }
         }
     </script>

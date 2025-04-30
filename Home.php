@@ -3,6 +3,9 @@
 session_start();
 include 'connection.php';
 include 'basketCount.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -128,6 +131,7 @@ include 'basketCount.php';
         <h2 class="bestseller-title">EXPLORE OUR BESTSELLERS</h2>
 
 
+
         <div class="splide-cont flex-center">
             <section class="splide" aria-label="Carousel">
                 <div class="splide__track">
@@ -139,23 +143,32 @@ include 'basketCount.php';
                     LEFT JOIN brands as b ON b.BrandID = p.BrandID
                     LEFT JOIN product_option as po ON po.ProductID = p.ProductID
                     LEFT JOIN categories as c ON c.CategoryID = p.CategoryID
-                    LEFT JOIN image as i ON po.ProdOptionID = i.ProdOptionID
+                    LEFT JOIN image as i ON po.ProdOptionID = i.ProdOptionID AND i.defaultImg = 1
                     WHERE Bestseller = 1
                     GROUP BY p.ProductID";
 
                         $runBestsellers = mysqli_query($connection, $getBestsellers);
-                        while ($displayBestsellers = mysqli_fetch_array($runBestsellers)) {
-                            echo "<div class='splide__slide'>
-                                <a href='Item.php?id={$displayBestsellers['ProdOptionID']}&category={$displayBestsellers['CategoryID']}&brand={$displayBestsellers['BrandName']}'>
-                                <div class='bs-item flex flex-col radius'>
-                                    <img src='{$displayBestsellers['ImageURL']}'>
-                                    <p class='overlay'><em>{$displayBestsellers['BrandName']}</em></p>
-                                    <div class='bs-desc'>
-                                        <p><strong>{$displayBestsellers['BrandName']}</strong><br><span class='bestseller-name'>{$displayBestsellers['ProductName']}</span><br>£{$displayBestsellers['Price']}</p>
-                                    </div>
-                                </div></a>
-                            </div>";
-                        } ?>
+
+                        if (!$runBestsellers) {
+                            die("Query failed: " . mysqli_error($connection));
+                        } else {
+
+                            while ($displayBestsellers = mysqli_fetch_array($runBestsellers)) {
+                                echo "<div class='splide__slide'>
+            <a href='Item.php?id={$displayBestsellers['ProdOptionID']}&category={$displayBestsellers['CategoryID']}&brand={$displayBestsellers['BrandName']}'>
+            <div class='bs-item flex flex-col radius'>
+            <img src='{$displayBestsellers['ImageURL']}'>
+            <p class='overlay'><em>{$displayBestsellers['BrandName']}</em></p>
+            <div class='bs-desc'>
+                <p><strong>{$displayBestsellers['BrandName']}</strong><br>
+                   <span class='bestseller-name'>{$displayBestsellers['ProductName']}</span><br>
+                   £{$displayBestsellers['Price']}</p>
+                    </div>
+                </div></a>
+            </div>";
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
         </div>
@@ -241,7 +254,7 @@ include 'basketCount.php';
 
     </main>
 
-  
+
 
     <footer>
         <div class="flex-center">
@@ -301,9 +314,10 @@ include 'basketCount.php';
 
 
     <div id="cookie-popup">
-  <p>This site uses cookies to enhance your experience! View our <a href="CookiePolicy.php">Cookie Policy</a> to learn more.</p>
-  <button id="cookie-accept">Got it!</button>
-</div>
+        <p>This site uses cookies to enhance your experience! View our <a href="CookiePolicy.php">Cookie Policy</a> to
+            learn more.</p>
+        <button id="cookie-accept">Got it!</button>
+    </div>
 
 
     <script src="navigation.js"></script>
@@ -361,29 +375,29 @@ include 'basketCount.php';
     </script>
     <!-- cookie pop up -->
     <script>
- document.addEventListener('DOMContentLoaded', function () {
-    // get div and accept button
-    const popup = document.getElementById('cookie-popup');
-    const button = document.getElementById('cookie-accept');
+        document.addEventListener('DOMContentLoaded', function () {
+            // get div and accept button
+            const popup = document.getElementById('cookie-popup');
+            const button = document.getElementById('cookie-accept');
 
-    // store acceptance in local storage 
-    const accepted = localStorage.getItem('cookieAccepted');
-    console.log('cookieAccepted:', accepted);
+            // store acceptance in local storage 
+            const accepted = localStorage.getItem('cookieAccepted');
+            console.log('cookieAccepted:', accepted);
 
-    // base visibility of cookie pop up on acceptance or not
-    if (!accepted) {
-      console.log('No consent yet — showing popup');
-      popup.classList.add('visible');
-    } else {
-      console.log('Consent already given — popup will remain hidden');
-    }
+            // base visibility of cookie pop up on acceptance or not
+            if (!accepted) {
+                console.log('No consent yet — showing popup');
+                popup.classList.add('visible');
+            } else {
+                console.log('Consent already given — popup will remain hidden');
+            }
 
-    button.addEventListener('click', () => {
-      console.log('Saving cookie consent');
-      localStorage.setItem('cookieAccepted', 'true');
-      popup.classList.remove('visible');
-    });
-  });
+            button.addEventListener('click', () => {
+                console.log('Saving cookie consent');
+                localStorage.setItem('cookieAccepted', 'true');
+                popup.classList.remove('visible');
+            });
+        });
     </script>
 </body>
 

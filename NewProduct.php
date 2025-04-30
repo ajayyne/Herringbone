@@ -41,7 +41,7 @@ $username = mysqli_fetch_array($runusername);
 
 
 <body>
-<div class="navbar">
+    <div class="navbar">
         <button class="hamburger" id="hamburger">
             &#9776;
         </button>
@@ -210,21 +210,29 @@ $username = mysqli_fetch_array($runusername);
             $runGetCategoryName = mysqli_query($connection, $getCategoryName);
             $categoryInfo = mysqli_fetch_assoc($runGetCategoryName);
 
-    
             // Set the file directory for the image
             $targetDir = "images/products/" . strtolower($categoryInfo['CategoryName']) . "/";
+
+            // Check if the directory exists, and if not, create it
+            if (!file_exists($targetDir)) {
+                // Create the directory with appropriate permissions (0777 or a more restrictive mode)
+                if (!mkdir($targetDir, 0777, true)) {
+                    die("Failed to create directory: $targetDir");
+                }
+            }
+
             $file = $_FILES['files'];
             $fileCount = count($file['name']);
 
-               // insert product to products table:
-               $productInsert = "INSERT INTO products (CategoryID, BrandID, ProductName, Description, Price, DefaultDisplay, Bestseller) VALUES ($_POST[Category], $_POST[Brand], '$_POST[ProductName]', '{$description}', '$_POST[ProductPrice]', $_POST[Default], $_POST[Bestseller])";
-               $runProductInsert = mysqli_query($connection, $productInsert);
-               $ProductID = $connection->insert_id;
+            // insert product to products table:
+            $productInsert = "INSERT INTO products (CategoryID, BrandID, ProductName, Description, Price, DefaultDisplay, Bestseller) VALUES ($_POST[Category], $_POST[Brand], '$_POST[ProductName]', '{$description}', '$_POST[ProductPrice]', $_POST[Default], $_POST[Bestseller])";
+            $runProductInsert = mysqli_query($connection, $productInsert);
+            $ProductID = $connection->insert_id;
 
-               // insert into product options table
-               $productOptionInsert = "INSERT INTO product_option (ProductID, Colour, isAvailable) VALUES ($ProductID, '$_POST[Colour]', $_POST[Availability])";
-               $runProductOptionInsert = mysqli_query($connection, $productOptionInsert);
-               $prodOptionID = $connection->insert_id;
+            // insert into product options table
+            $productOptionInsert = "INSERT INTO product_option (ProductID, Colour, isAvailable) VALUES ($ProductID, '$_POST[Colour]', $_POST[Availability])";
+            $runProductOptionInsert = mysqli_query($connection, $productOptionInsert);
+            $prodOptionID = $connection->insert_id;
 
             // loop through images -> to assign the first image in loop defaultImg = 1 (true) and the rest 0 (false)
             for ($i = 0; $i < $fileCount; $i++) {
@@ -262,13 +270,12 @@ $username = mysqli_fetch_array($runusername);
                     // defaultImg = 1 for the first file, defaultImg = 0 for the rest
                     $defaultImg = ($i === 0) ? 1 : 0;
 
-                 
-        
                     $insertImage = "INSERT INTO image (ImageURL, ProdOptionID, defaultImg) VALUES ('$targetFile', $prodOptionID, $defaultImg)";
                     $runInsertImage = mysqli_query($connection, $insertImage);
                 } else {
                     die("Failed to move the uploaded file.");
                 }
+
 
 
                 echo "<script>
