@@ -95,7 +95,7 @@ error_reporting(E_ALL);
 
     <main>
         <div class="banner flex flex-center" alt="Herringbone Cafe">
-            <h1 data-aos="fade-in" data-aos-duration="2000">HERRINGBONE</br><span data-aos-duration="4000">GIFTS &
+            <h1 data-aos="fade-in" data-aos-duration="1000">HERRINGBONE</br><span data-aos-duration="4000">GIFTS &
                     CAFE</span></h1>
         </div>
 
@@ -119,7 +119,7 @@ error_reporting(E_ALL);
                 <div class="background-img3 flex flex-col">
                     <div class="cta2">
                         <h1>Accessories</h1>
-                        <a href="Products.php?category=bags"><button>Shop Here</button></a>
+                        <a href="Products.php?category=Accessories"><button>Shop Here</button></a>
                     </div>
                 </div>
             </div>
@@ -227,17 +227,17 @@ error_reporting(E_ALL);
                         </div>
 
                         <button class="accordion">Are you dog friendly?</button>
-                        <div class="panel" data-aos="flip-up" data-aos-duration="1000">
+                        <div class="panel">
                             <p>Yes! We allow dogs in our shop downstairs, and the No.56 cafe upstairs. We love to
                                 welcome dogs into our space while you enjoy browsing, or a coffee upstairs.</p>
                         </div>
-                        <button class="accordion" data-aos="flip-up" data-aos-duration="1000">Are all of your products
+                        <button class="accordion" >Are all of your products
                             Scottish?</button>
                         <div class="panel">
                             <p>We try our very best to support local artists and makers. We stock some of Scotlands most
                                 well known brands such as Islander and Heathergems. </p>
                         </div>
-                        <button class="accordion" data-aos="flip-up" data-aos-duration="1000">Do you offer vegetarian or
+                        <button class="accordion">Do you offer vegetarian or
                             vegan options?</button>
                         <div class="panel">
                             <p>Our cafe offers a wide selection of treats for vegetarians and vegans. We also have

@@ -646,7 +646,6 @@ cursor: pointer;
 
 .orders-container{
     padding: 2rem;
-
 }
 
 #completeOrder{
@@ -669,7 +668,7 @@ cursor: pointer;
   .tab {
     padding: 10px 20px;
     cursor: pointer;
-    background-color: var(--buttonActive);
+    background-color: var(--medium-blue);
     border: 1px solid #ccc;
     border-bottom: none;
     margin-right: 5px;
@@ -677,12 +676,12 @@ cursor: pointer;
   }
 
   .tab.active {
-    background-color: var(--button);
+    background-color: var(--background);
     font-weight: bold;
   }
 
   .table-container {
-    background-color: var(--button);
+    background-color: var(--background);
     color: white;
     border: 1px solid #1f1616;
     border-radius: 0px 10px 10px 10px;
@@ -851,5 +850,8 @@ cursor: pointer;
 }
 table{
     font-size: 0.8rem;
+}
+#filters {
+    flex-direction: row !important;
 }
 }

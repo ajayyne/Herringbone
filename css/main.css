@@ -405,6 +405,9 @@ footer h6 {
     color: rgb(22, 21, 21);
     font-weight: normal;
 }
+.cta button:hover, .cta2 button:hover, .cta3 button:hover{
+    background-color: var(--medium-blue);
+}
 .cta{
  padding: 1.5rem;
  color: white;
@@ -889,6 +892,10 @@ form .send:focus {
     align-items: start;
     margin-top: 1rem;
 }
+.filtersColours{
+    margin-top: 0rem !important;
+}
+
 
 .colour {
     align-items: start;
@@ -1128,7 +1135,7 @@ select {
     padding: 8rem 1.3rem 1.3rem 1.3rem;
 }
 .item-cont{
-    padding: 1.5rem;
+    padding: 1.5rem 1.5rem 0rem 1.5rem;
 }
 
 .item-content h1{
@@ -1277,7 +1284,6 @@ select {
 .brand-sect{
     background-color: var(--dark-blue);
     color: white;
-    margin-top: 1rem;
     margin-bottom: 2rem;
 }
 .brand-sect div:first-child{
@@ -1841,7 +1847,7 @@ background-color: var(--medium-blue);
     /* margin-left: 15rem; */
     padding: 0rem 3rem 0rem 3rem;
     margin-top: 4rem;
-    margin-bottom: 3rem;
+    margin-bottom: 0rem !important;
     display: block;
 }
 .product-div div:first-child{
@@ -2048,7 +2054,7 @@ background-color: var(--medium-blue);
     flex-direction: column-reverse;
 }
 .new-info{
-    padding: 3rem 1rem 3rem 1rem;
+    padding: 0rem 1rem 3rem 1rem;
 }
 .new-info p{
     padding: 0rem 10rem 0rem 10rem;
@@ -2151,6 +2157,23 @@ background-color: var(--medium-blue);
         max-height: 400px; 
         overflow-y: auto; 
     }
+    .category {
+        cursor: pointer;
+        font-style: italic;
+        font-size: smaller;
+    }
+    .category:hover{
+        font-weight: bold !important;
+    }
+    
+    .subcategory {
+        padding-left: 20px;
+        font-weight: normal !important;
+    }
+    
+    .subcategory-group {
+        margin-top: 5px;
+    }
     .categories-desk p{
         font-style: italic;
         font-size: smaller;
@@ -2194,10 +2217,7 @@ background-color: var(--medium-blue);
     width: 100%;
     height: fit-content;
 }
-.item-content{
-    /* margin-top: 3rem;
-    margin-left: 4rem */
-}
+
 .item-content{
     width: 60%;
     padding-left: 5rem;
@@ -2297,6 +2317,11 @@ background-color: var(--medium-blue);
 }
 .privacy-policy ul{
     width: 60rem;
+}
+.filtersColours em{
+    padding: unset;
+    margin: unset;
+    margin-bottom: 2rem;
 }
 
 }

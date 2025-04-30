@@ -147,7 +147,7 @@ $brandName = $_GET['brand'];
             $getColours = "SELECT po.Colour, po.ProdOptionID, b.BrandName from product_option as po
             LEFT JOIN products as p ON po.ProductID = p.ProductID
             LEFT JOIN brands as b ON p.BrandID = b.BrandID
-                    WHERE po.ProductID = $productID";
+            WHERE po.ProductID = $productID";
             $runColours = mysqli_query($connection, $getColours);
             while ($displayColours = mysqli_fetch_assoc($runColours)) {
                 if ($displayColours['Colour'] != '' || $displayColours['Colour'] != NULL) {

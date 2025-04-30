@@ -22,8 +22,10 @@ $getProducts = "SELECT * FROM products as p
 if($search != ''){
     $getProducts .= " AND (b.BrandName LIKE '%" . $search . "%' OR p.ProductName LIKE '%" . $search . "%')";
 }
-if ($category != '') {
-    $getProducts .= " AND FIND_IN_SET(CategoryName, '" . $category . "')";
+if ($category === "Accessories") {
+    $getProducts .= " AND c.CategoryName IN ('Scarves', 'Jewellery', 'Bags')";
+} elseif ($category != '') {
+    $getProducts .= " AND FIND_IN_SET(c.CategoryName, '" . $category . "')";
 }
 if ($colour != '') {
     // Appending the condition for colour
@@ -37,6 +39,7 @@ if ($price != '')
 {
     $getProducts .=  " AND price <= '" . $price . "'";
 }
+
 
 //ensure only the first default image shows when products are printed
 $getProducts .= " AND i.defaultImg = 1 ORDER BY c.CategoryName ASC LIMIT 0, 25";

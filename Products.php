@@ -49,9 +49,10 @@ include 'basketCount.php';
                         <i class="fa-solid fa-magnifying-glass mobileSearch" id="mobileSearch"></i>
                     </div>
 
-                    <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
+                    <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart"
+                            style="color: #ffffff;"></i></a>
                     <div class="basket-icon">
-                    
+
                         <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
                         <?php
                         // if basket is not empty - display this
@@ -77,9 +78,10 @@ include 'basketCount.php';
                         <i class="fa-solid fa-magnifying-glass searchIcon" id="searchIcon"></i>
                     </div>
 
-                    <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
+                    <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart"
+                            style="color: #ffffff;"></i></a>
                     <div class="basket-icon">
-                    
+
                         <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
                         <?php
                         // if basket is not empty - display this
@@ -128,11 +130,12 @@ include 'basketCount.php';
                         <div class="filtersColours flex flex-col">
                             <div>
                                 <p><em>COLOUR</em></p>
+                                <br>
                             </div>
                             <div class="colours flex flex-col">
                                 <?php
                                 //get all current colours, brands and prices stored in database
-                                $getColours = "SELECT Colour FROM product_option";
+                                $getColours = "SELECT Colour FROM product_option GROUP BY Colour  ORDER BY Colour ASC";
                                 //render out colours where colour column has a value
                                 $runColours = mysqli_query($connection, $getColours);
                                 //create counter to make unique id for each input below
@@ -171,6 +174,7 @@ include 'basketCount.php';
                         <div class="filtersColours flex flex-col">
                             <div>
                                 <p><em>PRICE</em></p>
+                                <br>
                             </div>
                             <div class="colours flex flex-even">
                                 <div class="flex colour">
@@ -199,17 +203,40 @@ include 'basketCount.php';
 
 
 
-
                 <div class="categories-desk">
                     <a href="products.php">
                         <p class="category">All Products</p>
                     </a>
-                    <!-- CATEGORIES - IMPORT FROM PHP -->
+
                     <?php
+                    $accessoryCategories = ['Scarves', 'Jewellery', 'Bags'];
                     $getCategories = "SELECT CategoryName FROM categories";
                     $runCategories = mysqli_query($connection, $getCategories);
-                    while ($listCategories = mysqli_fetch_assoc($runCategories)) {
-                        echo "<p class='category'>{$listCategories['CategoryName']}</p>";
+
+                    $accessoryOutput = '';
+                    $mainOutput = '';
+
+                    while ($row = mysqli_fetch_assoc($runCategories)) {
+                        $name = $row['CategoryName'];
+                        if (in_array($name, $accessoryCategories)) {
+                            $accessoryOutput .= "<p class='category subcategory'>{$name}</p>";
+                        } else {
+                            $mainOutput .= "<p class='category'>{$name}</p>";
+                        }
+                    }
+
+                    // Output main categories
+                    echo "<p>{$mainOutput}</p>";
+
+                    // Output accessories with toggle
+                    if (!empty($accessoryOutput)) {
+                        echo "
+        <div class='category accessories-toggle' onclick='toggleAccessories()'>
+            Accessories
+        </div>
+        <div id='accessory-list' class='subcategory-group' style='display: none;''>
+            <p>{$accessoryOutput}</p>
+        </div>";
                     }
                     ?>
                 </div>
@@ -330,10 +357,10 @@ include 'basketCount.php';
 
                 const infoImage = document.createElement('img');
                 innerInfo.appendChild(infoImage);
-          
+
                 if (category) {
                     let descriptionText = "<h1>" + category + "</h1><br><p>";
-                   
+
                     switch (category.toLowerCase()) {
                         case "bags":
                             descriptionText += "Explore our stylish bag collection, featuring designs that effortlessly blend functionality and fashion. Whether you're seeking a chic tote for everyday errands or a sleek backpack for your adventures, our curated selection has something for everyone. Crafted from high-quality materials, each bag is designed to enhance your style while providing ample space and organization for all your essentials.";
@@ -356,8 +383,17 @@ include 'basketCount.php';
                         case "jewellery":
                             descriptionText += "Browse our exquisite jewelry collection, where timeless elegance meets contemporary design. From delicate necklaces to statement earrings, each piece is crafted with precision and care, ensuring a perfect fit for any occasion. Whether you're treating yourself or searching for the ideal gift, our stunning selection offers something special to elevate every outfit and celebrate personal style.";
                             break;
+                        case "accessories":
+                        descriptionText += "Featuring stylish scarves, handmade Scottish jewellery, and stunning Harris Tweed bags to complement any look. Whether you're after a statement piece or a subtle touch, our accessories add the perfect finishing detail to your outfit and elevate your every day look.";
+                        break;
+                        case "glassware":
+                            descriptionText += "Discover our elegant collection of glassware, thoughtfully crafted to bring style and sophistication to every occasion. From everyday tumblers to stunning wine glasses and decorative pieces, each item blends timeless design with quality craftsmanship. Perfect for entertaining or gifting, our glassware adds a touch of class to any home.";
+                        break;
+                        case "kids":
+                            descriptionText += "Explore our fun and colorful kids' collection, filled with playful designs and practical essentials made just for little ones. From cozy clothing and adorable accessories to toys and décor, everything is crafted with comfort, safety, and joy in mind. Perfect for everyday adventures and special moments alike!";
+                        break;
                         default:
-                            break;
+                        break;
                     }
 
 
@@ -461,6 +497,12 @@ include 'basketCount.php';
         }
     </script>
     <script src="cart.js"></script>
+    <script>
+        function toggleAccessories() {
+            const list = document.getElementById("accessory-list");
+            list.style.display = list.style.display === "none" ? "block" : "none";
+        }
+    </script>
 </body>
 
 </html>

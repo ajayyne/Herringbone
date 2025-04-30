@@ -34,11 +34,11 @@ function getFavoriteProducts($favIds) {
     // prepare statement to get favorites
     $FaveIds = implode(',', array_map('intval', $favIds));
     $getFavorites = "SELECT * FROM product_option as po
-    LEFT JOIN image as i ON i.ProdOptionID = po.ProdOptionID
+    LEFT JOIN image as i ON i.ProdOptionID = po.ProdOptionID AND i.defaultImg = 1
         LEFT JOIN products as p ON po.ProductID = p.ProductID
         LEFT JOIN brands as b ON b.BrandID = p.BrandID
         LEFT JOIN categories as c ON p.CategoryID = c.CategoryID
-        WHERE po.ProdOptionID IN ($FaveIds)";
+        WHERE po.ProdOptionID IN ($FaveIds) ";
         
     $favoriteItems = mysqli_query($connection, $getFavorites);
     if (!$favoriteItems) {

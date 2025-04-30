@@ -111,7 +111,7 @@ $username = mysqli_fetch_array($runusername);
                             <div class='colours flex'>";
 
         //get all current colours, brands and prices stored in database
-        $getColours = "SELECT Colour FROM product_option";
+        $getColours = "SELECT Colour FROM product_option GROUP BY Colour ORDER BY Colour ASC";
         //render out colours where colour column has a value
         $runColours = mysqli_query($connection, $getColours);
         //create counter to make unique id for each input below
@@ -273,6 +273,33 @@ $username = mysqli_fetch_array($runusername);
             loadProducts('', paramValue);
         }
     </script>
-<script src="filters.js"></script>
+<script>
+    const button = document.getElementById('filterButton');
+const filters = document.getElementById('filters');
+
+button.addEventListener('click', function() {
+    // Check if the filter div is visible
+    if (filters.style.maxHeight === "0px" || filters.style.maxHeight === "") {
+        // Make the filter div visible
+        filters.style.display = "flex";
+        // Set overflow to visible to show content 
+        filters.style.overflow = "visible"; 
+        filters.style.maxHeight = filters.scrollHeight + 'px'; 
+    } else {
+        // Set overflow to hidden before collapsing
+        filters.style.overflow = "hidden"; 
+        // Set to 0 to close
+        filters.style.maxHeight = "0px"; 
+
+        // Wait for the transition to end before hiding completely
+        filters.addEventListener('transitionend', function onTransitionEnd() {
+            filters.style.display = "none"; 
+            filters.removeEventListener('transitionend', onTransitionEnd); 
+        });
+    }
+});
+
+</script>
 <script src="AdminNav.js"></script>
+
 </body>
