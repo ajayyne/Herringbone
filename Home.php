@@ -100,7 +100,7 @@ error_reporting(E_ALL);
         </div>
 
         <!-- call to actions -->
-        <div class="flex flex-col cta-container">
+        <div class="flex flex-col cta-container" data-aos="fade-up">
             <div>
                 <div class="background-img1 flex flex-col">
                     <div class="cta">
@@ -206,7 +206,7 @@ error_reporting(E_ALL);
                 <h3>No. 56 Cafe</h3>
                 <p>A dog friendly cafe serving up delicious savouries, sweets and fresh barista made coffee from Fife's
                     Forth Roasters</p>
-                <a>
+                <a href="Cafe.php">
                     <p><em>View Our Menu</em></p>
                 </a>
             </div>
