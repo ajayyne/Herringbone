@@ -157,7 +157,7 @@ error_reporting(E_ALL);
                                 echo "<div class='splide__slide'>
             <a href='Item.php?id={$displayBestsellers['ProdOptionID']}&category={$displayBestsellers['CategoryID']}&brand={$displayBestsellers['BrandName']}'>
             <div class='bs-item flex flex-col radius'>
-            <img src='{$displayBestsellers['ImageURL']}'>
+            <img src='{$displayBestsellers['ImageURL']}' alt='{$displayBestsellers['ProductName']}'>
             <p class='overlay'><em>{$displayBestsellers['BrandName']}</em></p>
             <div class='bs-desc'>
                 <p><strong>{$displayBestsellers['BrandName']}</strong><br>
@@ -178,13 +178,13 @@ error_reporting(E_ALL);
         <div class="new flex flex-col" data-aos="fade-up" data-aos-duration="500">
             <div class="new-img-cont flex flex-col">
                 <div class="flex harris-imgs">
-                    <img src="images/products/candles/harris_seilebost.jpg">
-                    <img src="images/products/candles/harris_losgaintir.jpg">
-                    <img src="images/products/candles/harris_horgabost.jpg" class="harris-hidden">
+                    <img src="images/products/candles/harris_seilebost.jpg" alt="Essence of Harris Seilebost">
+                    <img src="images/products/candles/harris_losgaintir.jpg" alt="Essence of Harris Losgaintir">
+                    <img src="images/products/candles/harris_horgabost.jpg" class="harris-hidden" alt="Essence of Harris Horgabost">
 
                 </div>
                 <div>
-                    <img src="images/brands/harris2.jpg" class="harris">
+                    <img src="images/brands/harris2.jpg" class="harris" alt="Essence of Harris">
                 </div>
             </div>
 
@@ -258,7 +258,7 @@ error_reporting(E_ALL);
 
     <footer>
         <div class="flex-center">
-            <img src="images/cards.jpg" class="cards">
+            <img src="images/cards.jpg" class="cards" alt="Cart Payments Accepted: Visa, Mastercard, American Express, PayPal">
         </div>
 
         <div class="footer-flex">

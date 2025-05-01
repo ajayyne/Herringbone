@@ -89,9 +89,9 @@ include 'basketCount.php';
     <main class="cafe-page">
 
         <div class="cafe-imgs flex-center">
-            <img src="images/gallery/coffee2.png">
-            <img src="images/gallery/interior2.jpg">
-            <img src="images/gallery/lemonpie2.jpg">
+            <img src="images/gallery/coffee2.png" alt="Forth Roast Coffee Cup">
+            <img src="images/gallery/interior2.jpg" alt="No 56 Cafe">
+            <img src="images/gallery/lemonpie2.jpg" alt="Lemon Merangue pies">
         </div>
 
         <div class="flex flex-col menu-title">
@@ -112,7 +112,7 @@ include 'basketCount.php';
 
     <footer>
         <div class="flex-center">
-            <img src="images/cards.jpg" class="cards">
+            <img src="images/cards.jpg" class="cards" alt="Cart Payments Accepted: Visa, Mastercard, American Express, Paypal">
         </div>
 
         <div class="footer-flex">

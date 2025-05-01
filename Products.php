@@ -122,7 +122,7 @@ include 'basketCount.php';
                     <input type="checkbox" id="toggleCheckbox" style="display: none;">
                     <label for="toggleCheckbox" id="filterButton">
                         FILTERS
-                        <img src="images/icons/arrow-down.png" class="arrow-down" id="arrow">
+                        <img src="images/icons/arrow-down.png" class="arrow-down" id="arrow" alt="arrow down">
                     </label>
                 </div>
                 <div class="filters-mob">
@@ -260,7 +260,7 @@ include 'basketCount.php';
 
     <footer class="products-footer">
         <div class="flex-center">
-            <img src="images/cards.jpg" class="cards">
+            <img src="images/cards.jpg" class="cards" alt="Cart Payments Accepted: Visa, Mastercard, American Express, PayPal">
         </div>
 
         <div class="footer-flex">
@@ -403,6 +403,7 @@ include 'basketCount.php';
                     Info.innerHTML = descriptionText;
 
                     infoImage.src = "images/categoryimg/" + category + ".png";
+                    infoImage.alt = category;
 
                 } else {
                     Info.innerHTML = "<h1>Uniquely Scottish</h1><br><p>We stock a wide selection of authentic Scottish gifts that celebrate the rich culture and heritage of the region. From traditional Scottish tartan bags to exquisite artisan jewelry and home decor, every item tells a story of Scotland's vibrant traditions. Whether you’re seeking the perfect souvenir or a special gift, we offer a delightful experience that truly embodies the spirit of Scotland.</p>";

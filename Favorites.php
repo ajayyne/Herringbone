@@ -144,7 +144,7 @@ function getFavoriteProducts($favIds) {
             echo "
             <a href='Item.php?id={$product['ProdOptionID']}&category={$product['CategoryID']}&brand={$product['BrandName']}'>
             <div class='product-item radius'>
-                <img src='{$product['ImageURL']}'>
+                <img src='{$product['ImageURL']}' alt='Product Image'>
                 <div class='flex flex-col favorite-text'>
                     <div class='flex favorite-title'>
                         <h6><strong>{$product['ProductName']}</strong></h6>

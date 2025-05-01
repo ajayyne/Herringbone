@@ -275,7 +275,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <footer>
         <div class="flex-center">
-            <img src="images/cards.jpg" class="cards">
+            <img src="images/cards.jpg" class="cards" alt="Cart Payments Accepted: Visa, Mastercard, American Express, PayPal">
         </div>
 
         <div class="footer-flex">

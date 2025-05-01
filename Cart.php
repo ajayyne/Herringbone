@@ -198,7 +198,7 @@ function getCartItems($cartIds)
                         <p class='delivery'><strong>Delivery: £" . number_format($delivery, 2) . "</strong></p>
                         <p class='cartTotal'><strong>TOTAL:</strong> £" . number_format($cartTotal, 2) . "</p>
                     </div>
-                    <img src='images/cards.jpg'>
+                    <img src='images/cards.jpg' alt='Cart Payments Accepted: Visa, Mastercard, American Express, PayPal'>
                     <button><a href='Checkout.php'>Proceed To Checkout</a></button>
                 </div>
             </div>
@@ -231,7 +231,7 @@ function getCartItems($cartIds)
 
     <footer>
         <div class="flex-center">
-            <img src="images/cards.jpg" class="cards">
+            <img src="images/cards.jpg" class="cards" alt="Cart Payments Accepted: Visa, Mastercard, American Express, PayPal">
         </div>
 
         <div class="footer-flex">

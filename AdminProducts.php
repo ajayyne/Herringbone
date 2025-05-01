@@ -98,7 +98,7 @@ $username = mysqli_fetch_array($runusername);
                     <input type='checkbox' id='toggleCheckbox' style='display: none;'>
                     <label for='toggleCheckbox' id='filterButton'>
                         FILTERS
-                        <img src='images/icons/arrow-down.png' class='arrow-down' id='arrow'>
+                        <img src='images/icons/arrow-down.png' class='arrow-down' id='arrow' alt='arrow down'>
                     </label>
                 </div>
 

@@ -373,7 +373,7 @@ WHERE po.ProdOptionID = $itemID";
             while ($images = mysqli_fetch_assoc($runImage)) {
                 echo "
                 <div class='item-imgs'>
-                <img src='{$images['ImageURL']}'>
+                <img src='{$images['ImageURL']}' alt='{$displayItem['ProductName']}'>
                 <form method='POST'>
                     <input type='hidden' name='hidden' value='{$images['ImageID']}'>
                     <input type='hidden' name='hidden2' value='{$images['ImageURL']}'>
