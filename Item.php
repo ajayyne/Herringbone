@@ -182,6 +182,9 @@ $brandName = $_GET['brand'];
                     </div>
                 </div>
             </div>";
+        }else{
+            echo"
+                <p class='empty-item align'><strong>Sorry, this item is no longer available.</strong></p>";
         }
         ?>
 
