@@ -40,7 +40,8 @@ $username = mysqli_fetch_array($runusername);
 </head>
 
 <body class="background">
-<div class="navbar">
+    <div class="newBrand-main"></div>
+    <div class="navbar">
         <button class="hamburger" id="hamburger">
             &#9776;
         </button>
@@ -66,74 +67,79 @@ $username = mysqli_fetch_array($runusername);
         </ul>
     </nav>
 
+    <div class="newBrand-Cont">
     <div class="new-brand">
         <h1>New Brand</h1>
     </div>
 
-    <main>
-    <form method='post' enctype='multipart/form-data'>
-        <input type='text' name='BrandName' placeholder='Brand name' required>
-        <input type='text' name='BrandDescription' placeholder='A description of the brand' required>
-        <input type='file' required accept='.jpg, .jpeg, .png' name='BrandImage' id='imageUpload'>
-        <input type='submit' name='upload'>
-    </form>
+    <div>
+        <div>
 
-    <?php
-    if (isset($_POST['upload'])) {
-        // set the directory for the uploaded image
-        $targetDir = "images/brands/";
-        $file = $_FILES['BrandImage'];
-        $brandName = $connection->real_escape_string($_POST['BrandName']);
-        $brandDescription = $connection->real_escape_string($_POST['BrandDescription']);
+        <form method='post' enctype='multipart/form-data' class="newBrand-form">
+            <input type='text' name='BrandName' placeholder='Brand name' required class="newBrand-name">
+            <textarea type='text' name='BrandDescription' placeholder='A description of the brand' required></textarea>
+            <input type='file' required accept='.jpg, .jpeg, .png' name='BrandImage' id='imageUpload' class="newBrand-imgupload">
+            <input type='submit' name='upload' class="newBrand-button" value="ADD NEW BRAND">
+        </form>
 
-        // check that uploaded file matches the allowed types
-        $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-        if (!in_array($file['type'], $allowedTypes)) {
-            die("Invalid file type. Only JPG, JPEG, and PNG are allowed.");
-        }
+        <?php
+        if (isset($_POST['upload'])) {
+            // set the directory for the uploaded image
+            $targetDir = "images/brands/";
+            $file = $_FILES['BrandImage'];
+            $brandName = $connection->real_escape_string($_POST['BrandName']);
+            $brandDescription = $connection->real_escape_string($_POST['BrandDescription']);
 
-        // set maximum file size (2mb)
-        $maxFileSize = 2 * 1024 * 1024; 
-        if ($file['size'] > $maxFileSize) {
-            die("File size exceeds 2MB limit, please upload a smaller file.");
-        }
+            // check that uploaded file matches the allowed types
+            $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+            if (!in_array($file['type'], $allowedTypes)) {
+                die("Invalid file type. Only JPG, JPEG, and PNG are allowed.");
+            }
 
-        // specify the target file path
-        $fileName = basename($file['name']);
-        $targetFile = $targetDir . $fileName;
+            // set maximum file size (2mb)
+            $maxFileSize = 2 * 1024 * 1024;
+            if ($file['size'] > $maxFileSize) {
+                die("File size exceeds 2MB limit, please upload a smaller file.");
+            }
 
-        // upload image file to the database after it has been uploaded to server
-        if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-            // Prepare the SQL insert statement
-            $insert = "INSERT INTO brands (BrandName, brandImage, brandDescription) VALUES ('$brandName', '$targetFile', '$brandDescription')";
+            // specify the target file path
+            $fileName = basename($file['name']);
+            $targetFile = $targetDir . $fileName;
 
-            if ($connection->query($insert)) {
-                echo"<script>
+            // upload image file to the database after it has been uploaded to server
+            if (move_uploaded_file($file['tmp_name'], $targetFile)) {
+                // Prepare the SQL insert statement
+                $insert = "INSERT INTO brands (BrandName, brandImage, brandDescription) VALUES ('$brandName', '$targetFile', '$brandDescription')";
+
+                if ($connection->query($insert)) {
+                    echo "<script>
                 alert('Brand Successfully Added');
                 window.location.href = 'AdminBrands.php';
             </script>";
+                } else {
+                    echo "Error saving brand to database: " . $connection->error;
+                }
             } else {
-                echo "Error saving brand to database: " . $connection->error;
+                die("Failed to move the uploaded file.");
             }
-        } else {
-            die("Failed to move the uploaded file.");
         }
-    }
-    ?>
-    </main>
+        ?>
+</div>
+</div>
+</div>
+<!-- limits the number of images allowed to upload -->
+<script>
+    $(function () {
+        $("input[type = 'submit']").click(function () {
+            var $fileUpload = $("input[type='file']");
+            if (parseInt($fileUpload.get(0).files.length) > 1) {
+                alert("You are only allowed to upload a maximum of 1 file");
+            }
+        });
+    });
+</script>
+<script src="AdminNav.js"></script>
 </body>
- <!-- limits the number of images allowed to upload -->
- <script>
-         $(function(){
-            $("input[type = 'submit']").click(function(){
-               var $fileUpload = $("input[type='file']");
-               if (parseInt($fileUpload.get(0).files.length) > 1){
-                  alert("You are only allowed to upload a maximum of 1 file");
-               }
-            });
-         });
-      </script>
-      <script src="AdminNav.js"></script>
-</>
+
 
 </html>

@@ -98,7 +98,7 @@ if (isset($_POST['deleteBrand'])) {
             </div>
         </ul>
     </nav>
-    <main class="background">
+    <main class="background brands-main">
        
 
 
