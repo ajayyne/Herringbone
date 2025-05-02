@@ -861,19 +861,22 @@ td {
    
 }
 @media screen and (min-width: 650px) {
-    .brands-main, .newBrand-main {
+    .brands-main, .newBrand-Cont {
         padding: 2rem 8rem 0rem 8rem;
     }
 
     .new-btn {
         font-size: 1.2rem;
     }
-
+   
 }
 
 
 /* desktop */
 @media screen and (min-width: 992px) {
+    .brands-main, .newBrand-Cont {
+        padding: 2rem 20rem 0rem 20rem;
+    }
 
     .desktop-searchbar {
         display: block;

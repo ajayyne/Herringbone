@@ -139,7 +139,7 @@ function getFavoriteProducts($favIds) {
     <h1>Your Favorites</h1>
     <div class="product-grid align">
         <?php 
-        if($favoritesCookie && !empty($favoritesCookie)){
+        if(!empty($favoriteItems)){
         foreach ($favoriteItems as $product) {
             echo "
             <a href='Item.php?id={$product['ProdOptionID']}&category={$product['CategoryID']}&brand={$product['BrandName']}'>

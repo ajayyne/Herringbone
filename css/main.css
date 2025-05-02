@@ -1462,10 +1462,14 @@ select {
 
 /* FAVORITES PAGE */
 .favorites{
-    padding: 8rem 0rem 0rem 0rem;
+    padding: 4.2rem 0rem 0rem 0rem;
 }
 .favorites h1{
+    font-size: 1.8rem;
     text-align: center;
+    background-color: var(--dark-blue);
+    padding: 0.5rem;
+    color: white;
 }
 .product-grid{
     display: flex;
@@ -1698,6 +1702,17 @@ background-color: var(--medium-blue);
     padding: 0rem 2rem 0rem 2rem;
   }
 
+  /* confirmation page */
+  .confirmation-page{
+    padding: 14rem 2rem 14rem 2rem;
+  }
+  .confirmation{
+    background-color: var(--darkest-blue);
+    color: white;
+    padding: 3rem;
+    text-align: center;
+    transform: scale(0.8);
+  }
 
 
 @media screen and (min-width: 481px) {
@@ -1747,6 +1762,10 @@ background-color: var(--medium-blue);
     }
 }
 @media screen and (min-width: 650px) {
+    .confirmation{
+        transform: scale(0.7);
+      }
+      
     .payment-form{
         transform: scale(0.8);
         width: 30rem;
@@ -1874,6 +1893,12 @@ background-color: var(--medium-blue);
 
 /*LAPTOP*/
 @media screen and (min-width: 992px) {
+    .confirmation{
+        transform: scale(0.6);
+      }
+      .confirmation p{
+        font-size: 2rem;
+      }
     .cart-contents{
       padding: 0rem 3rem 0rem 3rem;
         display: flex;

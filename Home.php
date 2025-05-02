@@ -237,11 +237,10 @@ error_reporting(E_ALL);
                             <p>We try our very best to support local artists and makers. We stock some of Scotlands most
                                 well known brands such as Islander and Heathergems. </p>
                         </div>
-                        <button class="accordion">Do you offer vegetarian or
-                            vegan options?</button>
+                        <button class="accordion">Do you offer vegetarian/vegan/gluten free options?</button>
                         <div class="panel">
-                            <p>Our cafe offers a wide selection of treats for vegetarians and vegans. We also have
-                                various alternative milks available.</p>
+                            <p>Our cafe offers a wide selection of treats for vegetarians, vegans and those who are gluten free. We also have
+                                various alternative milks available. If you are unsure of anything when ordering, please check with a member of staff.</p>
                         </div>
                     </div>
                 </div>
