@@ -916,7 +916,7 @@ select {
 }
 
 /*filters*/
-.brands{
+.brands, .colours{
     align-items: start;
 }
 
@@ -1914,9 +1914,21 @@ background-color: var(--medium-blue);
 .cta-2 button{
     font-size: 1rem;
 }
+.cafe-imgs img{
+    width: 15rem;
+}
+.menuImg1, .menuImg2{
+    width: 35rem !important;
+}
+.menuImg1{
+    margin-bottom: 0rem;
+}
+}
+
+@media screen and (min-width: 854px){
+    
 .product-div{
     justify-content: end !important;
-    /* margin-left: 15rem; */
     padding: 0rem 3rem 0rem 3rem;
     margin-top: 4rem;
     margin-bottom: 0rem !important;
@@ -1926,6 +1938,7 @@ background-color: var(--medium-blue);
     width: 100%;
     background-color: var(--dark-blue);
     color: white;
+    border-radius: 8px 0px 0px 8px;
 }
 .product-div-info{
     padding: 0rem 3rem 0rem 2rem;
@@ -1942,21 +1955,50 @@ background-color: var(--medium-blue);
     height: 18rem;
     border-radius: 0px 8px 8px 0px;
 }
-.cafe-imgs img{
-    width: 15rem;
-}
-.menuImg1, .menuImg2{
-    width: 35rem !important;
-}
-.menuImg1{
-    margin-bottom: 0rem;
-}
 }
 
 /*LAPTOP*/
 @media screen and (min-width: 992px) {
+        
+    .product-div{
+      
+        justify-content: end !important;
+        padding: 0rem 3rem 0rem 3rem;
+        margin-top: 4rem;
+        margin-bottom: 0rem !important;
+        display: block;
+    }
+    .product-div div:first-child{
+        width: 100%;
+        background-color: var(--dark-blue);
+        color: white;
+        height: 18rem !important;
+    }
+    .product-div-info h1{
+        font-size: 1.2rem !important;
+        margin-top: 1rem;
+    }
+    .product-div img{
+        width: 20rem !important;
+        height: 18rem;
+    }
+
     .confirmation{
         transform: scale(0.6);
+        position: relative;
+      }
+      .confirmation span{
+        position: absolute;
+        border: 2px solid white;
+        border-radius: 50px;
+        padding: 0rem 1.2rem 0.5rem 1.2rem;
+        font-size: 2.5rem;
+        top: 1.5rem;
+        right: 2.5rem;
+      }
+      
+      .confirmation a{
+        color: white;
       }
       .confirmation p{
         font-size: 2rem;
@@ -2090,8 +2132,9 @@ background-color: var(--medium-blue);
 
     .icons-desk {
         width: 18%;
-        right: 1rem;
-        top: 0.5rem;
+        right: 0rem;
+        top: 0.3rem;
+        transform: scale(0.75);
     }
 
     .icons-desk i {
@@ -2218,7 +2261,7 @@ background-color: var(--medium-blue);
     .filter-cont {
         padding: 0rem;
         width: 15rem;
-        height: 55rem;
+        height: 100vh;
         background-color: transparent;
         border-right: 2px solid var(--medium-blue);
         position: fixed;
@@ -2404,7 +2447,7 @@ background-color: var(--medium-blue);
     font-weight: bold;
 }
 .product-div-info p{
-    font-size: small;
+    font-size: 0.8rem;
 }
 .product-div img{
     width: 100%;
@@ -2444,6 +2487,18 @@ background-color: var(--medium-blue);
 }
 
 @media screen and (min-width: 1200px){
+        
+    .product-div img{
+        width: 100% !important;
+    }
+    .product-div-info h1{
+        font-size: 1.8rem;
+    }
+    .product-div-info p{
+        padding: 0rem !important;
+        font-size: 0.9rem;
+    }
+
 
 .icons-desk{
     width: 12%;

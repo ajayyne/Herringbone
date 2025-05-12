@@ -104,7 +104,7 @@ if(empty($orderID) || $orderID = null || $orderID = ""){
             <div class="apply-margin">
                 <div class="flex flex-col">
                     <label for="cardName">Card Holder Name:</label>
-                    <input type="text" name="cardName" required placeholder="John Doe" pattern="[A-Za-z]+" maxlength="40" title="Please only enter letters and ensure the name is 40 characters or less">
+                    <input type="text" name="cardName" required placeholder="John Doe" pattern="[A-Za-z]+ [A-Za-z]+" maxlength="40" title="Please only enter letters and ensure the name is 40 characters or less">
                 </div>
                 <div class="flex flex-col">
                     <label for="cardNumber">Card Number:</label>

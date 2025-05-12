@@ -103,7 +103,7 @@ $username = mysqli_fetch_array($runusername);
                 </div>
 
         <div class='filters-mob'>
-                    <div class='filters flex flex-even' id='filters'>
+                    <div class='filters' id='filters'>
                         <div class='filtersColours flex'>
                             <div>
                                 <p><em>COLOUR</em></p>
@@ -151,32 +151,12 @@ $username = mysqli_fetch_array($runusername);
                              
                             </div>
                         </div>
-                        <div class='filtersColours flex'>
-                            <div>
-                                <p><em>PRICE</em></p>
-                            </div>
-                            <div class='colours flex flex-even'>
-                                <div class='flex colour'>
-                                    <input type='radio' class='radio priceInput' value='20.00' id='userInput'
-                                        name='price'>
-                                    <p>Under £20</p>
-                                </div>
-                                <div class='flex colour'>
-                                    <input type='radio' class='radio priceInput' value='30.00' id='userInput'
-                                        name='price'>
-                                    <p>Under £30</p>
-                                </div>
-                                <div class='flex colour'>
-                                    <input type='radio' class='radio priceInput' value='50.00' id='userInput'
-                                        name='price'>
-                                    <p>Under £50</p>
-                                </div>
-                            </div>
-                        </div>
                         <div class='filterButtons flex flex-even'>
                             <button id='clearFilters'>Clear All</button>
                             <button id='applyFilters' onclick='applyFilters()'>Apply Filters</button>
                         </div>
+                        </div>
+                        
                     </div>
                 </div>
                  </div>

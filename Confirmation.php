@@ -102,7 +102,9 @@ $orderID = $_GET['id'];
         echo "<div class='confirmation radius'>
         <h1>Thank you for your order!</h1><br><p> Your order number is:  <strong>#" . $orderNum['orderNumber'] . "</strong>.</p>
         <p>*Please keep a note of your order number for future reference and proof of purchase.</p>
-        </div>";
+        <span><a href='home.php'>X</a></span>
+        </div>
+        ";
         ?>
     </main>
     

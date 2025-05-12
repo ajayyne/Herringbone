@@ -147,7 +147,7 @@ function getCartItems($cartIds)
     <div class="flex flex-col">
         <div class="flex flex-col">
             <label for="name">* Full Name</label>
-            <input type="text" name="name" required maxlength="40" title="Input is too long, please enter a name 40 characters or less" pattern="[A-Za-z]+">
+            <input type="text" name="name" required  pattern="[A-Za-z]+ [A-Za-z]+" maxlength="40" title="Please enter a valid name with 40 characters or less">
         </div>
         <div class="flex flex-col">
             <label for="email">* Email Address</label>
@@ -173,7 +173,7 @@ function getCartItems($cartIds)
         </div>
         <div class="flex flex-col">
             <label for="county">* County</label>
-            <input type="text" name="county" required pattern="[A-Za-z]+" title="Please enter a valid County" maxlength="35">
+            <input type="text" name="county" required pattern="[A-Za-z]+ [A-Za-z]+" title="Please enter a valid County" maxlength="35">
         </div>
         <div class="align">
             <input type="submit" value="PROCEED TO PAYMENT" class="payment-redirect"></input>

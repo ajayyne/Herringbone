@@ -166,7 +166,7 @@ a {
 
 .filtersColours,
 .filtersBrands {
-    border-bottom: 1px solid black;
+ 
     padding: 0.5rem 0rem 0.5rem 0rem;
     align-items: start;
     margin-top: 1rem;
@@ -216,14 +216,29 @@ select {
 }
 
 .filters {
-    margin-left: -2rem;
-    width: 80%;
+    margin-top: 2rem;
+    margin-left: -4rem;
+    transform: scale(0.8) !important;
+    width: 30rem;
     margin-top: -3rem;
+    justify-content: space-evenly;
+    position: relative;
+    height: 40rem;
+}
+.filterButtons{
+    flex-direction: row-reverse;
+    position: absolute;
+    bottom: -3rem;
+    left: 0.5rem;
+}
+.filterButtons button{
+    width: 12rem;
 }
 
 .filtersColours,
 .filtersBrands {
     flex-direction: column;
+    margin-right: 1.5rem;
 }
 
 .colours,
@@ -253,10 +268,10 @@ select {
 
 
 .filters-mob {
-    width: 100vw !important;
+    margin-top: 2rem;
+    width: 23rem !important;
     display: flex;
     justify-content: start !important;
-
 }
 
 #filters {
@@ -1062,5 +1077,8 @@ td {
         display: flex;
         align-items: start;
     }
+    .filter-cont {
+    margin-left: 2rem;
+}
 
 }
