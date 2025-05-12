@@ -99,19 +99,19 @@ include 'basketCount.php';
                         <div>
                             <em><label for="name">Name</label></em>
                             <br>
-                            <input name="name" type="text" class="form-name" required placeholder="Full Name">
+                            <input name="name" type="text" class="form-name" required placeholder="Full Name" pattern="[A-Za-z]+" title="Only letters are allowed" maxlength="50">
                         </div>
                         <br>
                         <div>
                             <em><label for="email">Email Address</label></em>
                             <br>
-                            <input name="email" type="email" required placeholder="email@example.com" class="form-email">
+                            <input name="email" type="email" required placeholder="email@example.com" class="form-email" maxlength="50">
                         </div>
                         <br>
                         <div>
                             <em><label for="message">Message</label></em>
                             <br>
-                            <textarea name="message" type="text" required class="message" placeholder="Write your message here..."></textarea>
+                            <textarea name="message" type="text" required class="message" placeholder="Write your message here..." maxlength="200"></textarea>
                         </div>
                         <br>
                         <input type="submit" value="SEND" class="send">
@@ -142,9 +142,9 @@ include 'basketCount.php';
 
                 // Send the email
                 if (mail($to, $subject, $email_content, $headers)) {
-                    // echo "<script>alert('Email sent successfully')</script>";
+                    echo "<script>alert('Message sent. Thank you for getting in touch!')</script>";
                 } else {
-                    // echo "<script>alert('Failed to send email')</script>";
+                    echo "<script>alert('Failed to send message. Please try again.')</script>";
                 }
             }
             ?>
@@ -248,6 +248,9 @@ include 'basketCount.php';
         </div>
         <div class="flex flex-center">
             <p>Herringbone 2025 ©</p>
+        </div>
+         <div class="flex flex-center">
+            <p>Designed and Developed by Amber Degner-Budd</p>
         </div>
     </footer>
     <script>

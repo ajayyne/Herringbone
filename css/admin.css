@@ -264,7 +264,7 @@ select {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
-    transform: scale(0.8);
+    transform: scale(0.95);
 }
 
 .new-btn {
@@ -369,9 +369,8 @@ select {
 
 .brandUpdate,
 .brandDelete {
-    width: 45% !important;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin-top: 0rem;
+    width: 2rem !important;
     font-weight: bold;
     color: rgb(67, 27, 23);
 }
@@ -379,6 +378,9 @@ select {
 .brandDelete {
     background-color: var(--button);
     color: white;
+}
+.brandDropdown{
+   height: 3rem;
 }
 
 input[name='BrandName'] {
@@ -638,7 +640,6 @@ span .close:focus {
 /* BRANDS */
 .brands-cont {
     margin-top: 5rem;
-
 }
 
 .all-brands,
@@ -651,16 +652,20 @@ span .close:focus {
 
 .brand {
     margin-bottom: 2rem;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    height: 3rem;
 }
 
 .brand input {
     padding: 0.5rem;
     outline: none;
+    margin-right: 0.5rem;
 }
 
 .brand-buttons {
     justify-content: space-evenly;
+    width: 8rem;
 }
 
 /* END */
@@ -1049,7 +1054,13 @@ td {
     #filters {
         flex-direction: row !important;
     }
-
-
+    .brands-main{
+        padding: 0rem;
+    }
+    .brands-cont{
+        flex-direction: column;
+        display: flex;
+        align-items: start;
+    }
 
 }

@@ -30,7 +30,7 @@ include "connection.php";
         <div class="login-input flex">
             <label>Username:</label>
             <div class="login-icon">
-                <input class="radius" type="text" name="username" placeholder="Username" required>
+                <input class="radius" type="text" name="username" placeholder="Username" required maxlength="20">
                 <i class="fa-solid fa-user" style="color: #5c576b;"></i>
             </div>
         </div>
@@ -38,7 +38,7 @@ include "connection.php";
         <div class="login-input flex">
             <label>Password:</label>
             <div class="login-icon">
-                <input class="radius" type="password" name="password" placeholder="Password" required>
+                <input class="radius" type="password" name="password" placeholder="Password" required maxlength="20">
                 <i class="fa-solid fa-lock" style="color: #5c576b;"></i>
             </div>
         </div>

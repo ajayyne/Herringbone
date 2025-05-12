@@ -171,12 +171,12 @@ include 'basketCount.php';
                                 ?>
                             </div>
                         </div>
-                        <div class="filtersColours flex flex-col">
+                        <div class="filtersColours filtersPrice flex flex-col">
                             <div>
                                 <p><em>PRICE</em></p>
                                 <br>
                             </div>
-                            <div class="colours flex flex-even">
+                            <div class="colours prices flex flex-even">
                                 <div class="flex colour">
                                     <input type="radio" class="radio priceInput" value="20.00" id="userInput"
                                         name="price">

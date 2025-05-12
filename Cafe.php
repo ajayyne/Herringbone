@@ -22,6 +22,8 @@ include 'basketCount.php';
     <script src="https://kit.fontawesome.com/504c189bcb.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
 
@@ -88,21 +90,43 @@ include 'basketCount.php';
 
     <main class="cafe-page">
 
+     <div class="banner cafebanner flex flex-center" alt="Herringbone Cafe">
+            <h1 data-aos="fade-in" data-aos-duration="1000">No.56 Cafe</br><span data-aos-duration="4000">Coffee & Light Bites</span></h1>
+        </div>
+<!-- 
         <div class="cafe-imgs flex-center">
             <img src="images/gallery/coffee2.png" alt="Forth Roast Coffee Cup">
             <img src="images/gallery/interior2.jpg" alt="No 56 Cafe">
             <img src="images/gallery/lemonpie2.jpg" alt="Lemon Merangue pies">
-        </div>
+        </div> -->
 
         <div class="flex flex-col menu-title">
-            <h1>The No.56 Cafe</h1>
-            <p class="align">
-                Welcome to The No.56 Cafe. We serve delicious lunches, sweet treats and a variety of teas and coffees.<br>Our signature coffee is brewed by our talented Baristas using beans from Forth Roasters in Fife.
-                <br> We are a dog friendly cafe and welcome you to bring your dogs along for a treat!
-                
-            </p>
+      
+
             <span class="menu-border">.</span>
             <h2>Our Menu</h2>
+            <p class="align">
+                Welcome to The No.56 Cafe. We serve delicious lunches, sweet treats and a variety of teas and coffees.<br>Our signature coffee is brewed by our talented Baristas using beans from Forth Roasters in Fife.
+                <br> We are a dog friendly cafe and welcome you to bring your dogs along for a treat!    
+            </p>
+            <div class="flex flex-col menu-div">
+            <img src="images/gallery/menu.png" class="menuImg1">
+            <img src="images/gallery/drinks.png" class="menuImg2">
+            </div>
+        </div>
+
+
+        <div class="cafe-gallery flex flex-even">
+            <img src="images/gallery/coffee.png" width="45%">
+            <img src="images/gallery/lemonpie.jpg" width="45%">
+        </div>
+         <div class="cafe-gallery flex flex-even">
+            <img src="images/gallery/cafeinterior.jpg" width="45%">
+            <img src="images/gallery/iced.jpg" width="45%">
+        </div>
+        <div class="cafe-gallery flex flex-even">
+            <img src="images/gallery/salad.jpg" width="45%">
+            <img src="images/gallery/interior.jpg" width="45%">
         </div>
     </main>
 
@@ -166,6 +190,13 @@ include 'basketCount.php';
         </div>
     </footer>
     <script src="navigation.js"></script>
+      <script>
+        AOS.init({
+            offset: 100,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
 </body>
 
 </html>

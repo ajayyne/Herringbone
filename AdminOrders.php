@@ -81,6 +81,7 @@ $username = mysqli_fetch_array($runusername);
           <th>Address</th>
           <th>Items</th>
           <th>Order Total</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -98,14 +99,16 @@ $username = mysqli_fetch_array($runusername);
         if ($runOrders && mysqli_num_rows($runOrders) > 0) {
           while ($uncompleted = mysqli_fetch_array($runOrders)) {
             echo "<tr>
-         <td>{$completedOrders['customerName']}</td>
-          <td>{$completedOrders['Address1']}, {$completedOrders['Address2']}, {$completedOrders['Town']}, {$completedOrders['County']}, {$completedOrders['postCode']}</td>
-          <td>{$completedOrders['ProductName']}, ({$completedOrders['Colour']}), x{$completedOrders['itemQuantity']}</td>
-          <td>{$completedOrders['orderTotal']}</td>
+         <td>{$uncompleted['customerName']}</td>
+          <td>{$uncompleted['Address1']}, {$uncompleted['Address2']}, {$uncompleted['Town']}, {$uncompleted['County']}, {$uncompleted['postCode']}</td>
+          <td>{$uncompleted['ProductName']}, ({$uncompleted['Colour']}), x{$uncompleted['itemQuantity']}</td>
+          <td>{$uncompleted['orderTotal']}</td>
+          <td>
              <form method='post' id='orderForm'>
                 <input type='hidden' value='{$uncompleted['orderID']}' name='orderID'>
                 <input type='submit' id='completeOrder' name='complete' value='Mark as Completed' class='radius'>
              </form>
+             </td>
           </td>
           </tr>";
           }

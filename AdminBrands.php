@@ -118,16 +118,16 @@ if (isset($_POST['deleteBrand'])) {
         while ($displayBrands = mysqli_fetch_array($runBrands)) {
             echo "
             <div>
-    <div class='flex brand'>
+    <div class='brand flex'>
     <form method='post' id='updatingBrand'>
         <input type='text' value='{$displayBrands['BrandName']}' name='BrandName' class='brandDropdown'></input>
         <input type='hidden' value='{$displayBrands['BrandID']}' name='BrandID'>
         <div class='brand-buttons flex'>
-        <input type='submit' name='updateBrand' value='Update Brand' class='confirmUpdate brandUpdate radius'>
+        <input type='submit' name='updateBrand' value='&#10003' class='confirmUpdate brandUpdate radius'>
     </form>
-
+    
     <form method='post' id='deletingBrand'>
-        <input type='submit' name='deleteBrand' value='Delete Brand' class='openDeleteModal confirmDelete radius brandDelete'>
+        <input type='submit' name='deleteBrand' value='X' class='openDeleteModal confirmDelete radius brandDelete'>
         </div>
         <input type='hidden' value='{$displayBrands['BrandID']}' name='BrandID'>
     </form>

@@ -897,6 +897,7 @@ form .send:focus {
 }
 
 
+
 .colour {
     align-items: start;
     width: fit-content;
@@ -918,11 +919,7 @@ select {
 .brands{
     align-items: start;
 }
-#applyFilters,
-#clearFilters {
-    margin-top: 2rem;
-    transform: scale(0.8);
-}
+
 
 #applyFilters {
     border: 2px solid var(--dark-blue);
@@ -980,7 +977,16 @@ select {
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
     transform: scale(0.8);
+    width: 25rem;
+    margin: -4rem 0rem 0rem -1rem;
 }
+    .filterButtons{  
+        margin-top: 1.5rem;
+        justify-content: start !important;
+    }
+    #clearFilters{
+        margin-right: 1rem;
+    }
 
 .categories-desk {
     display: none;
@@ -1386,6 +1392,20 @@ select {
 /*END*/
 
 /* CAFE PAGE */
+.cafe-gallery{
+    padding: 1.5rem;
+
+}
+.menu-div{
+    padding: 1rem;
+}
+.menuImg1{
+    margin-bottom: 2rem;
+}
+.menuImg1, .menuImg2{
+    width: 20rem;
+    border: 1px solid var(--dark-blue);
+}
 .cafe-main{
     padding-top: 10rem;
     text-align: center;
@@ -1394,6 +1414,11 @@ select {
     align-items: center;
     flex-direction: column;
     background-color: var(--medium-blue);
+}
+.cafebanner{
+    background-image: url(../images/cafeheader.jpg);
+    margin-top: -6rem;
+    height: 33rem;
 }
 .cafe-title{
     width: 80%;
@@ -1415,6 +1440,9 @@ select {
 }
 .menu-heading h1{
     font-size: 1.5rem;
+}
+.menu-title p{
+    padding: 3rem 2rem 0rem 2rem;
 }
 
 /* BASKET / SHOPPING CART PROCESS */
@@ -1461,11 +1489,15 @@ select {
 }
 
 /* FAVORITES PAGE */
+.product-item img{
+    width: 10rem !important;
+}
 .favorites{
     padding: 4.2rem 0rem 0rem 0rem;
 }
 .favorites h1{
-    font-size: 1.8rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
     text-align: center;
     background-color: var(--dark-blue);
     padding: 0.5rem;
@@ -1474,35 +1506,47 @@ select {
 .product-grid{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 1.5rem;
     padding: 3rem;
 }
+
 .product-item{
     cursor: pointer;
-    background-color: var(--darkest-blue);
+    background-color: var(--dark-blue);
     color: white;
-    width: 100%;
-    height: 15.5rem;
-    
+    width: 15rem;
+    height: 18.5rem;
 }
+
 .product-item img{
-    width: 100%;
-    height: 10rem;
+    width: 15rem !important;
+    height: 13rem;
     border-radius: 8px 8px 0px 0px;
 }
 .product-item i{
-    font-size: 1rem;
+    font-size: 1.2rem;
+    padding-right: 0.2rem;
 }
 .favorite-title{
     margin-top: 0.5rem;
     justify-content: space-between;
     width: 100%;
 }
+.favorite-title h6 {
+    font-size: larger;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 15ch; /* Adjusts based on character width */
+}
+
 .favorite-text{
     justify-content: space-between !important;
     align-items: start;
+    text-align: left;
     height: 5rem;
-    padding: 0rem 0.5rem 0rem 0.5rem;
+    padding: 0.5rem 0.7rem 0.5rem 0.5rem;
 }
 .favorite-text p{
     margin-bottom: 0rem;
@@ -1765,8 +1809,12 @@ background-color: var(--medium-blue);
         background-color: var(--dark-blue);
         width: 100%;
     }
+   
 }
 @media screen and (min-width: 650px) {
+    .menuImg1, .menuImg2{
+    width: 20rem !important;
+}
     .confirmation{
         transform: scale(0.7);
       }
@@ -1896,6 +1944,12 @@ background-color: var(--medium-blue);
 }
 .cafe-imgs img{
     width: 15rem;
+}
+.menuImg1, .menuImg2{
+    width: 35rem !important;
+}
+.menuImg1{
+    margin-bottom: 0rem;
 }
 }
 
@@ -2142,11 +2196,20 @@ background-color: var(--medium-blue);
     #filterButton {
         margin-left: 2rem;
     }
+    .filterButtons{
+        flex-direction: column;
+        
+        justify-content: space-evenly !important;
+        align-items: start !important;
+        height: 8rem;
+    }
+    
     .filter-btn-container{
         all: unset;
     }
     .filters-mob{
        width: unset !important;
+       overflow-x: scroll;
     }
     .filters{
         margin-top: -3rem;
@@ -2174,12 +2237,18 @@ background-color: var(--medium-blue);
     #filters {
         transform: scale(0.8);
         overflow-y: scroll;
-    }
+        margin: -3rem -1rem -1rem -0.8rem
+}
+.prices{
+    flex-direction: column;
+}
+    
 
     #applyFilters,
     #clearFilters {
-        width: 100%;
+        width: 50%;
         padding: 0.2rem;
+        margin-right: 0rem;
     }
 
     .categories-desk {
@@ -2356,8 +2425,21 @@ background-color: var(--medium-blue);
     margin: unset;
     margin-bottom: 2rem;
 }
+.menu-div{
+    flex-direction: row;
+}
+
 .cafe-imgs img{
     width: 25rem;
+}
+.favorites h1{
+  
+    margin-top: 0rem;
+    font-size: 1.8rem;
+
+}
+  .menuImg1, .menuImg2{
+    width: 30rem !important;
 }
 }
 

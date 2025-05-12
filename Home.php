@@ -202,7 +202,7 @@ error_reporting(E_ALL);
 
 
         <div class="home-cafe" alt="No.56 Cafe">
-            <div class="cafe-text" data-aos="flip-up" data-aos-duration="1000">
+            <div class="cafe-text" data-aos="flip-up" data-aos-duration="300">
                 <h3>No. 56 Cafe</h3>
                 <p>A dog friendly cafe serving up delicious savouries, sweets and fresh barista made coffee from Fife's
                     Forth Roasters</p>

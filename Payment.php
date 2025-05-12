@@ -3,7 +3,7 @@ session_start();
 include 'connection.php';
 include 'basketCount.php';
 $orderID= $_GET['id'];
-echo "<script>alert($orderID)</script>";
+
 
 if(empty($orderID) || $orderID = null || $orderID = ""){
     header("Location: Home.php");
@@ -104,7 +104,7 @@ if(empty($orderID) || $orderID = null || $orderID = ""){
             <div class="apply-margin">
                 <div class="flex flex-col">
                     <label for="cardName">Card Holder Name:</label>
-                    <input type="text" name="cardName" required placeholder="John Doe">
+                    <input type="text" name="cardName" required placeholder="John Doe" pattern="[A-Za-z]+" maxlength="40" title="Please only enter letters and ensure the name is 40 characters or less">
                 </div>
                 <div class="flex flex-col">
                     <label for="cardNumber">Card Number:</label>
@@ -115,11 +115,11 @@ if(empty($orderID) || $orderID = null || $orderID = ""){
             <div>
                 <div class="flex flex-col">
                     <label for="expiry">Expiry Date:</label>
-                    <input type="text" name="expiry" required placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/\d{2}" maxlength="5" inputmode="numeric" class="expiry">
+                    <input type="text" name="expiry" required placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/\d{2}" maxlength="5" inputmode="numeric" class="expiry" title="Please enter a valid date MM/YY">
                 </div>
                 <div class="flex flex-col">
                     <label for="expiry">Security Code:</label>
-                    <input type="text" name="expiry" required placeholder="123"  maxlength="3" inputmode="numeric" class="security">
+                    <input type="text" name="expiry" required placeholder="123"  maxlength="3" inputmode="numeric" class="security" title="Please enter a valid security code with 3 numbers">
                 </div>
             </div>
             </div>
@@ -145,8 +145,6 @@ if(empty($orderID) || $orderID = null || $orderID = ""){
 
         if($runpaymentInsert){
             echo "<meta http-equiv='refresh' content='0;url=Confirmation.php?id=$orderID'>";
-        }else{
-            echo "<script>alert('not working')</script>";
         }
     }}
     ?>

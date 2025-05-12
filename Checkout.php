@@ -147,7 +147,7 @@ function getCartItems($cartIds)
     <div class="flex flex-col">
         <div class="flex flex-col">
             <label for="name">* Full Name</label>
-            <input type="text" name="name" required>
+            <input type="text" name="name" required maxlength="40" title="Input is too long, please enter a name 40 characters or less" pattern="[A-Za-z]+">
         </div>
         <div class="flex flex-col">
             <label for="email">* Email Address</label>
@@ -165,15 +165,15 @@ function getCartItems($cartIds)
     <div class="flex flex-col">
         <div class="flex flex-col">
             <label for="town">* Town</label>
-            <input type="text" name="town" required>
+            <input type="text" name="town" required maxlength="30" pattern="[A-Za-z]+" title="Please enter a valid town">
         </div>
         <div class="flex flex-col">
             <label for="postcode">* Post Code</label>
-            <input type="text" name="postcode" required>
+            <input type="text" name="postcode" required maxlength="8" pattern="[A-Z]{1,2}[0-9][0-9A-Z]?\s?[0-9][A-Z]{2}" title="Enter a valid UK postcode">
         </div>
         <div class="flex flex-col">
             <label for="county">* County</label>
-            <input type="text" name="county" required>
+            <input type="text" name="county" required pattern="[A-Za-z]+" title="Please enter a valid County" maxlength="35">
         </div>
         <div class="align">
             <input type="submit" value="PROCEED TO PAYMENT" class="payment-redirect"></input>
@@ -256,9 +256,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           VALUES ('{$orderID}', '{$prodOptionID}', '{$price}', '{$quantity}')";
           $runInsertItems = mysqli_query($connection, $insertItemsQuery);
         }
-
-    }else{
-        echo "<script>alert('error making insert')</script>";
     }
     
 

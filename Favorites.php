@@ -147,7 +147,7 @@ function getFavoriteProducts($favIds) {
                 <img src='{$product['ImageURL']}' alt='Product Image'>
                 <div class='flex flex-col favorite-text'>
                     <div class='flex favorite-title'>
-                        <h6><strong>{$product['ProductName']}</strong></h6>
+                        <h6>{$product['ProductName']}</h6>
                         <div class='favorite-btn flex' data-id='{$product['ProdOptionID']}'>
                             <i class='fa-regular fa-heart favorite-icon'></i>
                         </div>
