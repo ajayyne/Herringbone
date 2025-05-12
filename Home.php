@@ -56,11 +56,14 @@ error_reporting(E_ALL);
                     <div class="items-icons">
                         <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart"
                                 style="color: #ffffff;"></i></a>
+                                           <div class="basket-icon">
+
                         <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
                         ?>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -77,11 +80,14 @@ error_reporting(E_ALL);
                     <div class="items-icons">
                         <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart"
                                 style="color: #ffffff;"></i></a>
+                                            <div class="basket-icon">
+
                         <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
                         ?>
+                    </div>
                     </div>
                 </div>
             </div>
