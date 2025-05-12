@@ -141,10 +141,10 @@ Please note that if you choose to reject cookies, you may still use our Website 
                     <a>
                         <p>About Us</p>
                     </a>
-                    <a href="CookiePolicy.php">
+                     <a href="CookiePolicy.php" target="_blank">
                         <p>Cookies Policy</p>
                     </a>
-                    <a href="Privacy.php">
+                    <a href="Privacy.php" target="_blank">
                         <p>Privacy Policy</p>
                     </a>
                     <a>

@@ -678,7 +678,7 @@ footer h6 {
 }
 
 .home-cafe {
-    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url(../images/cafe.jpg);
+    background-image: linear-gradient(to left, rgba(17, 16, 16, 0.8), rgba(76, 76, 76, 0)), url(../images/gallery/cafe_edit.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

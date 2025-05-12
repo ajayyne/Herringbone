@@ -217,12 +217,12 @@ include 'basketCount.php';
                             <a>
                                 <p>About Us</p>
                             </a>
-                            <a>
-                                <p>Cookies Policy</p>
-                            </a>
-                            <a>
-                                <p>Privacy Policy</p>
-                            </a>
+                             <a href="CookiePolicy.php" target="_blank">
+                        <p>Cookies Policy</p>
+                    </a>
+                    <a href="Privacy.php" target="_blank">
+                        <p>Privacy Policy</p>
+                    </a>
                             <a>
                                 <p>Delivery & Returns</p>
                             </a>

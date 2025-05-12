@@ -42,7 +42,7 @@ if ($price != '')
 
 
 //ensure only the first default image shows when products are printed
-$getProducts .= " AND i.defaultImg = 1 ORDER BY c.CategoryName ASC LIMIT 0, 25";
+$getProducts .= " AND i.defaultImg = 1 ORDER BY c.CategoryName ASC";
 
 
 $runProducts = mysqli_query($connection, $getProducts);
