@@ -48,7 +48,7 @@ function getCartItems($cartIds)
         LEFT JOIN Products as p ON po.ProductID = p.ProductID
         WHERE po.ProdOptionID IN ($CartIds)
         GROUP BY po.ProdOptionID";
-        // grouping by = only 1 item will show even when there are multiple images attached
+    // grouping by = only 1 item will show even when there are multiple images attached
 
 
 
@@ -108,12 +108,16 @@ function getCartItems($cartIds)
                 </ul>
                 <div class="icons icons-desk flex flex-even">
                     <div class="items-icons">
-                    <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
-                    <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
-                        <?php
-                        // if basket is not empty - display this
-                        echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
-                        ?>
+                        <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart"
+                                style="color: #ffffff;"></i></a>
+                        <div class="basket-icon">
+
+                            <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
+                            <?php
+                            // if basket is not empty - display this
+                            echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -128,12 +132,16 @@ function getCartItems($cartIds)
                 </ul>
                 <div class="icons icons-desk flex flex-even">
                     <div class="items-icons">
-                    <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart" style="color: #ffffff;"></i></a>
-                    <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
-                        <?php
-                        // if basket is not empty - display this
-                        echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
-                        ?>
+                        <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart"
+                                style="color: #ffffff;"></i></a>
+                        <div class="basket-icon">
+
+                            <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
+                            <?php
+                            // if basket is not empty - display this
+                            echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -151,8 +159,10 @@ function getCartItems($cartIds)
     // if cookie is not empty -> echo out cart page
     if ($cartCookie && !empty($cartCookie)) {
 
-        echo "<div class='cart-cont'>
-        <div class='cart-items'>";
+        echo "
+        <div class='cart-flex'>
+            <div class='cart-cont'>
+            <div class='cart-items'>";
 
         $total = 0;
         $delivery = 2.99;
@@ -168,38 +178,41 @@ function getCartItems($cartIds)
             $cartTotal = $total + $delivery;
 
             echo "
-            <div class='cart-contents'>
-            <div>
-            <div class='product-item cart-item flex radius'>
-                    <img src='{$item['ImageURL']}' alt='Product Image'>
-                    <div class='cart-item-text'>
-                        <h6>{$item['ProductName']}</h6>
-                        <div class='flex flex-between cart-price'>
-                            <p>£{$item['Price']}</p>
-                            <p>x {$qty}</p>
+                <div>
+                    <div class='product-item cart-item flex radius'>
+                        <img src='{$item['ImageURL']}' alt='{$item['ProductName']}'>
+                        <div class='cart-item-text'>
+                            <h6>{$item['ProductName']}</h6>
+                            <div class='flex flex-between cart-price'>
+                                <p>£{$item['Price']}</p>
+                                <p>x {$qty}</p>
+                            </div>
+                            <p class='cart-subtotal'>Subtotal: <strong>£" . number_format($subtotal, 2) . "</strong></p>
                         </div>
-                        <p>Subtotal: <strong>£" . number_format($subtotal, 2) . "</strong></p>
-                    </div>
                     <span class='deleteCartItem' data-item-id='{$item['ProdOptionID']}'>X</span>
+                    </div>
                 </div>
-            </div>";
+           ";
         }
 
 
 
-        echo "
-        
-      
-
-                <div class='total-container cart-total radius flex flex-col'>
-                    <h6 class='align'><strong>ORDER SUMMARY</strong></h6>
-                    <div class='total-info'>
-                        <p class='subtotal'><strong>Subtotal: £" . number_format($total, 2) . "</strong></p>
-                        <p class='delivery'><strong>Delivery: £" . number_format($delivery, 2) . "</strong></p>
-                        <p class='cartTotal'><strong>TOTAL:</strong> £" . number_format($cartTotal, 2) . "</p>
+                    echo " </div>
                     </div>
-                    <img src='images/cards.jpg' alt='Cart Payments Accepted: Visa, Mastercard, American Express, PayPal'>
-                    <button><a href='Checkout.php'>Proceed To Checkout</a></button>
+        
+        
+                    <div class='cart-total-padding'>
+                        <div class='total-container cart-total radius flex flex-col'>
+                            <h6 class='align'><strong>ORDER SUMMARY</strong></h6>
+                            <div class='total-info'>
+                                <p class='subtotal'><strong>Subtotal: £" . number_format($total, 2) . "</strong></p>
+                                <p class='delivery'><strong>Delivery: £" . number_format($delivery, 2) . "</strong></p>
+                                <p class='cartTotal'><strong>TOTAL:</strong> £" . number_format($cartTotal, 2) . "</p>
+                            </div>
+                            <img src='images/cards.png' alt='Cart Payments Accepted: Visa, Mastercard, American Express, PayPal'>
+                            <button><a href='Checkout.php'>Proceed To Checkout</a></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -231,7 +244,8 @@ function getCartItems($cartIds)
 
     <footer>
         <div class="flex-center">
-            <img src="images/cards.jpg" class="cards" alt="Cart Payments Accepted: Visa, Mastercard, American Express, PayPal">
+            <img src="images/cards.png" class="cards"
+                alt="Cart Payments Accepted: Visa, Mastercard, American Express, PayPal">
         </div>
 
         <div class="footer-flex">
@@ -251,7 +265,7 @@ function getCartItems($cartIds)
                     <a>
                         <p>About Us</p>
                     </a>
-                     <a href="CookiePolicy.php" target="_blank">
+                    <a href="CookiePolicy.php" target="_blank">
                         <p>Cookies Policy</p>
                     </a>
                     <a href="Privacy.php" target="_blank">

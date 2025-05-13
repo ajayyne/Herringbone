@@ -55,12 +55,14 @@ if(empty($orderID) || $orderID = null || $orderID = ""){
                 <div class="icons icons-desk flex flex-even">
                     <div class="items-icons">
                         <i class="fa-solid fa-heart" style="color: #ffffff;"></i>
-                        <i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i>
+                                               <div class="basket-icon">
 
+                        <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
                         ?>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -77,12 +79,14 @@ if(empty($orderID) || $orderID = null || $orderID = ""){
                     <div class="items-icons">
                         <a href="Favorites.php" class="icon-link"><i class="fa-solid fa-heart"
                                 style="color: #ffffff;"></i></a>
-                        <a><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
+                                                <div class="basket-icon">
 
+                        <a href="Cart.php"><i class="fa-solid fa-basket-shopping" style="color: #ffffff;"></i></a>
                         <?php
                         // if basket is not empty - display this
                         echo "<div class='basket-counter'><p>{$basketCount}</p></div>";
                         ?>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -156,7 +160,7 @@ if(empty($orderID) || $orderID = null || $orderID = ""){
 
     <footer>
         <div class="flex-center">
-            <img src="images/cards.jpg" class="cards" alt="Cart Payments Accepted: Visa, Mastercard, American Express, PayPal">
+            <img src="images/cards.png" class="cards" alt="Cart Payments Accepted: Visa, Mastercard, American Express, PayPal">
         </div>
 
         <div class="footer-flex">

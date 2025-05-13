@@ -142,7 +142,7 @@ include 'basketCount.php';
 
     <footer>
         <div class="flex-center">
-            <img src="images/cards.jpg" class="cards" alt="Cart Payments Accepted: Visa, Mastercard, American Express, Paypal">
+            <img src="images/cards.png" class="cards" alt="Cart Payments Accepted: Visa, Mastercard, American Express, Paypal">
         </div>
 
         <div class="footer-flex">

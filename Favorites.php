@@ -165,7 +165,7 @@ function getFavoriteProducts($favIds) {
     </main>
     <footer>
         <div class="flex-center">
-            <img src="images/cards.jpg" class="cards">
+            <img src="images/cards.png" class="cards">
         </div>
 
         <div class="footer-flex">
