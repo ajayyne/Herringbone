@@ -1566,7 +1566,6 @@ select {
 }
 
 .cart-items{
-    border: 2px solid green;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1701,8 +1700,26 @@ background-color: var(--medium-blue);
 
 
 /* PAYMENT.PHP */
+ .payment-cards img{
+        width: 3.9rem;
+        padding: 0.5rem;
+        border: 1px solid transparent;
+    }
+    .payment-cards{
+        width: 15rem;
+    }
 .payment{
     padding: 8rem 1rem 2rem 1rem;
+}
+.payment-cards img:hover, .payment-cards img:active, .payment-cards img:focus{
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: var(--medium-blue);
+}
+.selected{
+ cursor: pointer;
+    border-radius: 10px;
+    background-color: var(--medium-blue);
 }
 
 .payment form div{
@@ -1766,7 +1783,6 @@ background-color: var(--medium-blue);
 
   .cart-contents, .cart-info-cont{
     padding: 0rem 2rem 0rem 2rem;
-    border: 2px solid green;
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -1972,7 +1988,7 @@ background-color: var(--medium-blue);
     width: 100%;
     background-color: var(--dark-blue);
     color: white;
-    border-radius: 8px 0px 0px 8px;
+    border-radius: 8px;
 }
 .product-div-info{
     padding: 0rem 3rem 0rem 2rem;
@@ -1994,19 +2010,17 @@ background-color: var(--medium-blue);
 /*LAPTOP*/
 @media screen and (min-width: 992px) {
     .cart-flex{
-        border: 2px solid red;
         display: flex;
         justify-content: space-evenly;
-        padding-top: 10rem;
+        padding-top: 6rem;
     }
     .cart-items{
         margin-top: 2rem;
     }
     .cart-cont{
-        padding: 0rem 0rem 0rem 0rem;
+        padding: 0rem;
     }
     .cart-total{
-        border: 2px solid orange;
         width: 25rem !important;
     }
     .cart-total-padding{
@@ -2082,7 +2096,9 @@ background-color: var(--medium-blue);
     .payment-form input{
         width: 18rem;
     }
+   
     .card-desk-flex{
+        display: flex;
         flex-direction: row;
         justify-content: space-evenly;
     }
@@ -2551,6 +2567,7 @@ background-color: var(--medium-blue);
         width: 100% !important;
     }
     .product-div-info h1{
+        margin-top: 2.5rem;
         font-size: 1.8rem;
     }
     .product-div-info p{
@@ -2558,7 +2575,7 @@ background-color: var(--medium-blue);
         font-size: 0.9rem;
     }
     .cart-flex{
-        padding-top: 6.5rem;
+        padding-top: 5rem;
     }
     .cart-items{
         width: 35rem;

@@ -104,7 +104,12 @@ if(empty($orderID) || $orderID = null || $orderID = ""){
             <form method="post" class="payment-form flex flex-col radius">
 
             <h1 class="align">Payment Details</h1>
-            <div class="flex card-desk-flex">
+            <div class="flex-even flex payment-cards">
+                <img src="images/visa.png">
+                <img src="images/mastercard.png">
+                <img src="images/paypal.jpg">
+            </div>
+            <div class=" card-desk-flex">
             <div class="apply-margin">
                 <div class="flex flex-col">
                     <label for="cardName">Card Holder Name:</label>
@@ -226,6 +231,17 @@ if(empty($orderID) || $orderID = null || $orderID = ""){
     <script src="favorites.js"></script>
     <script src="cart.js"></script>
     <script src="navigation.js"></script>
+    <script>
+        const images = document.querySelectorAll('.payment-cards img');
+
+
+images.forEach(image => {
+  image.addEventListener('click', () => {
+    
+    image.classList.toggle('selected');
+  });
+});
+    </script>
 </body>
 
 </html>
