@@ -503,6 +503,16 @@ footer h6 {
     font-size: 1.5rem;
     margin-top: 5rem;
 }
+.bestseller-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4em;
+  max-height: 1.5em;
+  width: 100%;
+}
 
 .bestsellers,
 .slider {
@@ -511,6 +521,37 @@ footer h6 {
 .bs-item{
     color: white;
 }
+
+.aboutUs, .ordering{
+    align-items: center;
+}
+.aboutUs h1, .ordering h1{
+    border-bottom: 1px solid var(--darkest-blue);
+    padding-bottom: 1rem;
+    width: 18rem;
+}
+.aboutUs img, .ordering img{
+    width: 100%;
+    height: 30rem;
+    margin-bottom: 3rem;
+}
+
+.aboutUs p, .ordering p{
+    margin-bottom: 3rem;
+    padding: 1rem 3rem 0rem 3rem;
+}
+
+.ordering button, .aboutUs button{
+    background-color: var(--darkest-blue);
+    color: white;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+    margin-bottom: 3rem;
+}
+.ordering button:hover, .ordering button:active, .ordering button:focus, 
+ .aboutUs button:hover,  .aboutUs button:active,  .aboutUs button:focus{
+    background-color: var(--dark-blue);
+}
+
 
 
 /*SLIDER HOME PAGE SPLIDE*/
@@ -566,6 +607,7 @@ footer h6 {
 .bs-desc p {
     font-size: 0.8rem;
     margin-top: 0.4rem;
+    margin-bottom: 0rem;
 }
 
 .bs-item img {
@@ -577,18 +619,18 @@ footer h6 {
 
  .bs-item .overlay {
    position: absolute;
-    top: 50%; /* Moves overlay to the middle vertically */
+    top: 10%; /* Moves overlay to the middle vertically */
     left: 50%; /* Moves overlay to the middle horizontally */
-    transform: translate(-50%, 750%); /* Adjusts for the element's own dimensions */
+    transform: translate(-50%, 750%); 
     z-index: 999;
     color: white;
     font-weight: bold;
     font-size: 1.3rem;
     text-shadow: var(--shadow);
     font-family: 'Aboreto';
-    text-align: center; /* Centers text horizontally */
-    width: 80%; /* Sets the width of the overlay text */
-    max-width: 25rem; /* Ensures the width doesn't exceed 25rem */
+    text-align: center; 
+    width: 80%; 
+    max-width: 25rem; 
 } 
 .accordion {
     background-color: var(--light-blue);

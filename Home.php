@@ -219,6 +219,32 @@ error_reporting(E_ALL);
         </div>
 
 
+
+        <!-- about us -->
+
+
+        <div class="flex flex-col aboutUs align" data-aos="fade-up">
+            <img src="images/promo1.jpg">
+            <div class="flex flex-col">
+                <h1>About Us</h1>
+                <p>Herringbone opened its doors in April 2021. We are a unique gift shop dedicated to stocking one of a kind Scottish made gifts. Our suppliers are all UK based and some of our products are hand crafted by talented locals.<br><br>
+                The online shop may not feature every product we have in store, browse our gallery to see more!</p>
+                <a href="Gallery.php"><button>View Gallery</button></a>
+            </div>
+        </div>
+
+        <!-- ordering -->
+         <div class="flex flex-col ordering align" data-aos="fade-up">
+            <img src="images/promo2.jpg">
+            <div class="flex flex-col">
+                <h1>How to Order</h1>
+                <p>If you would like to place an order for any item listed on our Shop page, <strong>please get in touch via email and contact us directly.</strong> Orders can be made via email and payment may be taken via bank transfer.</p>
+                <a href="Contact.php"><button>Get In Touch</button></a>
+            </div>
+        </div>
+
+
+
         <!-- FAQ's -->
 
         <!-- img on the left -->
