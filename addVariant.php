@@ -95,7 +95,7 @@ $username = mysqli_fetch_array($runusername);
                     </div>
                     <div class="edit-prod-flex">
                         <label for="Colour">Colour</label>
-                        <select name="Colour" id="Colour">
+                        <select name="Colour" id="Colour" required>
                             <?php
                             $availableColors = [
                                 'Beige',

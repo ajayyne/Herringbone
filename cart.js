@@ -27,8 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // updates the basket icon counter
             updateBasketCounter();
-
-          
         });
     });
 
@@ -38,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check if a cart button was clicked
         if (event.target.matches('.cart-btn')) {
             const itemId = event.target.getAttribute('data-id');
-            console.log(itemId);
+            console.log("Delegated click: Item ID", itemId);
             addToCart(itemId);
         }
     });
@@ -70,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (counter) {
             // insert the number of items in the array, into the p tag
             counter.textContent = count;
-            window.location.reload();
         }
     }
 
