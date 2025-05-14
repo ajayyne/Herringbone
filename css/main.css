@@ -1855,8 +1855,18 @@ background-color: var(--medium-blue);
         background-color: var(--dark-blue);
         width: 100%;
     }
-   
+    .item-btn button{
+    width: 20rem;
+    margin: 2rem 0rem 5rem -7rem;
+    }
+
+     .item-content{
+        width: 80%;
+    } 
 }
+
+   
+
 @media screen and (min-width: 650px) {
     .cart-item{
         width: 30rem;
@@ -1895,10 +1905,7 @@ background-color: var(--medium-blue);
    
 /* ITEM PAGE */
 
-.item-cont{
-    flex-direction: row;
-    height: fit-content;
-}
+
 .item-content{
     height: 24rem;
     width: 90%;
@@ -1917,6 +1924,14 @@ background-color: var(--medium-blue);
     padding-right: 0rem;
     font-size: 0.8rem;
 }
+ .item-btn button{
+    width: 30rem;
+    margin: 2rem 0rem 5rem -5rem;
+    }
+
+     .item-content{
+        width: 95%;
+    } 
 .short-desc {
     all:unset;
 }
@@ -1977,7 +1992,9 @@ background-color: var(--medium-blue);
 }
 }
 
+
 @media screen and (min-width: 854px){
+        
     
 .product-div{
     justify-content: end !important;
@@ -2423,22 +2440,20 @@ background-color: var(--medium-blue);
     }
     
 
-#slider1{
+/* #slider1{
     display: flex;
     justify-content: center;
     align-items: center;
+} */
+
+.itemCartButton{
+    width: 13rem;
 }
 
-
-.item-main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.item-cont{
-    width: 100%;
+  .item-cont{
+    flex-direction: row;
     height: fit-content;
-}
+} 
 
 .item-content{
     width: 60%;
@@ -2456,7 +2471,7 @@ background-color: var(--medium-blue);
     height: 1.2rem;
 }
 .item-btn button{
-    width: 35rem;
+    width: 30rem;
     margin: 2rem 0rem 0rem -5rem;
 }
 
@@ -2464,9 +2479,9 @@ background-color: var(--medium-blue);
     font-size: 1rem;
 }
 
-.item-img{
+/* .item-img{
     height: 25rem;
-}
+} */
 .favorite-icon{
     align-items: start;
 }
@@ -2531,9 +2546,9 @@ background-color: var(--medium-blue);
     height: 18rem;
     border-radius: 0px 8px 8px 0px;
 }
-.splide{
+/* .splide{
     width: 90%;
-}
+} */
 .privacy-policy p{
     width: 60rem;
 }

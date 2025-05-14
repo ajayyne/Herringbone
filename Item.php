@@ -265,8 +265,6 @@ $brandName = $_GET['brand'];
         </div>
         </section>
         </div>
-
-
     </main>
 
     <footer>
