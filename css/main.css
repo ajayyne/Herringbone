@@ -2036,7 +2036,13 @@ background-color: var(--medium-blue);
 
 
 @media screen and (min-width: 854px){
-        
+.aboutUs img, .ordering img{
+    height: 50rem;
+}
+.aboutUs p, .ordering p{
+    padding-right: 7rem;
+    padding-left: 7rem;
+}
     
 .product-div{
     justify-content: end !important;
@@ -2070,6 +2076,27 @@ background-color: var(--medium-blue);
 
 /*LAPTOP*/
 @media screen and (min-width: 992px) {
+
+    .aboutUs{
+        flex-direction: row;
+        margin-top: 6rem;
+    }
+    .ordering{
+        flex-direction: row-reverse;
+        margin-bottom: 6rem;
+    }
+
+    .aboutUs img, .ordering img{
+        width: 50%;
+        /* height: 39rem; */
+        margin-bottom: 0rem;
+    }
+    .aboutUs div, .ordering div{
+        transform: scale(1.2);
+    }
+
+
+
     .cart-flex{
         display: flex;
         justify-content: space-evenly;
