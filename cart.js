@@ -33,24 +33,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    // // Get all cart buttons on item page
-    // const cartButtons = document.querySelectorAll('.itemCartButton');
-
-    // // when clicked, add item to the cart
-    // cartButtons.forEach(button => {
-    //     button.addEventListener('click', function () {
-
-    //         const itemId = this.getAttribute('data-id');
-    //         // addToCart(itemId);
-    //     });
-    // });
-
     // for buttons on products.php - ensures they are targered even if cart.js runs before they are rendered out
     document.addEventListener('click', function (event) {
         // Check if a cart button was clicked
         if (event.target.matches('.cart-btn')) {
             const itemId = event.target.getAttribute('data-id');
-            console.log("Delegated click: Item ID", itemId);
+            console.log(itemId);
             addToCart(itemId);
         }
     });
@@ -82,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (counter) {
             // insert the number of items in the array, into the p tag
             counter.textContent = count;
+            window.location.reload();
         }
     }
 

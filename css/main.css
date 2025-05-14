@@ -184,6 +184,7 @@ a {
     display: flex;
     justify-content: start;
     position: relative;
+    bottom: 0.12rem;
 }
 .items-icons{
     display: flex;
@@ -1454,8 +1455,9 @@ select {
     border-radius: 50px;
     width: 1.2rem;
     height: 1.2rem;
-    background-color: white;
+    background-color: rgba(172, 208, 255, 0.824);
     position: absolute;
+    color: white;
     top: -0.2rem;
     left: 1rem;
     font-size: 0.8rem;
@@ -2209,7 +2211,7 @@ background-color: var(--medium-blue);
         width: 18%;
         right: 0rem;
         top: 0.3rem;
-        transform: scale(0.75);
+        transform: scale(0.85);
     }
 
     .icons-desk i {
